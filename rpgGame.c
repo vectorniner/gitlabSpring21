@@ -256,11 +256,13 @@ int main(int argc, char *argv[])
 				}
 				break;
 			}
-			case 27:
+			case 27: 
 			{
 				while(choice != 99)
 				{
+					printf("hello world\n");
 					puts("you open the door and find ........");
+					
 					scanf("%d",&choice);
 				}
 				break;
