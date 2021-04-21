@@ -91,6 +91,8 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
+					puts("This is the 7th door\n");
+					scanf("%d", &choice);
 
 				}
 				break;
