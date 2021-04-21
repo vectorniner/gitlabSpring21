@@ -35,7 +35,8 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-
+					puts("Hello World");
+					scanf("%d", &choice);
 				}
 				break;
 			}
@@ -79,7 +80,7 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-
+				
 				}
 				break;
 			}
@@ -163,7 +164,8 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-
+					puts("You grab a bowl of oatmeal and head towards the door");
+					scanf("%", &choice);
 				}
 				break;
 			}
