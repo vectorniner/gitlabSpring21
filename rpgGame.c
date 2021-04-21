@@ -250,8 +250,9 @@ int main(int argc, char *argv[])
 			case 26:
 			{
 				while(choice != 99)
-				{
-					puts("you open the door and find ........");
+				{	
+					puts("Hello World from Benjamin L");
+					puts("you open the door and find .........");
 					scanf("%d",&choice);
 				}
 				break;
