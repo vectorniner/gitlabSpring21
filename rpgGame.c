@@ -180,7 +180,9 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-
+					puts("you open the door and find ....");
+					printf("A expansive candlelit cavern; in the center is  a wizen, old wizard shuffling cards at a card table.");
+					scanf("%d",&choice);
 				}
 				break;
 			}
