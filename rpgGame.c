@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 	while(choice != 99)
 	{
 		puts("You find yourself in a dark room and you are not sure how you got here.");
-        	puts("As you look around you see the room has 40 doors, each labeled with a number. You are not sure how such a small room can have 25 doors, sooo magic...");
+        	puts("As you look around you see the room has 40 doors, each labeled with a number. You are not sure how such a small room can have 40 doors, sooo magic...");
         	puts("The room starts filling with water and you must choose a door to open or you will likely drown. you may quit anytime by selecting option 99");
         	puts("What door do you choose?");
         	scanf("%d",&choice);
@@ -35,6 +35,8 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
+					puts("Hello world");
+					scanf("%d",&choice);
 
 				}
 				break;
