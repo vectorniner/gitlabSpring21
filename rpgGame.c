@@ -48,11 +48,12 @@ int main(int argc, char *argv[])
 				}
 				break;
 			}
-			case 3:
+			case 3: //LA 
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
+					puts("you open the door and find a mysterious man saying: 'Wendy, darling, Light of my Life! I'm not gonna hurt ya \n");
+					puts("He looks at you menancingly and starts to run to you with a knife, there are multiple doors behind you which door do you pick? \n you may quit anytime by selecting option:99");
 					scanf("%d",&choice);
 				}
 				break;
