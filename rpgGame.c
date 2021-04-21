@@ -314,7 +314,7 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
+					puts("you open the door and find a penny, chip, and used napkin.");
 					scanf("%d",&choice);
 				}
 				break;
