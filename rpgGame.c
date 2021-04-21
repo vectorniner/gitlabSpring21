@@ -262,7 +262,6 @@ int main(int argc, char *argv[])
 				{
 					printf("hello world\n");
 					puts("you open the door and find ........");
-					
 					scanf("%d",&choice);
 				}
 				break;
