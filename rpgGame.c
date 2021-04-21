@@ -108,6 +108,7 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
+					puts("cl");
 					puts("you open the door and find ........");
 					scanf("%d",&choice);
 				}
