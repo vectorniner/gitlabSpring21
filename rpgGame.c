@@ -45,8 +45,10 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
+					puts("you open the door and find ........ \n");
+					puts("Watch out, look behind you, A Meeseeks is coming towarsds you.\n");
 					scanf("%d",&choice);
+
 				}
 				break;
 			}
