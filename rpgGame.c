@@ -221,10 +221,37 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("hello world");
-					puts("the door is stuck");
+					puts("The room is dark and cold");
+					puts("You look at the empty room with empty Shelves..");
+					puts("You think to yourself, there's nothing of value in here..");
+					puts("What should you do?");
+					puts("1. Move and advance to the next room");
+					puts("2. Examine the room a little more carefully");
+					puts("3. Go back to the last room");
 					scanf("%d", &choice);
 
+					if(choice == 1)
+					{
+						puts("You go towards the door, but the handle is locked..");
+						puts("*Maybe you should examine the room..");
+						break;
+					}
+
+					else if(choice == 2)
+					{
+						puts("You look at the very top of the shelf and find a old brass key");
+						break;
+					}
+					
+					else if(choice = 3)
+					{
+						puts("You back out slowly towards the previous room... but it's locked!");
+					}
+
+					else
+					{
+						puts("Try again");
+					}
 				}
 				break;
 			}
