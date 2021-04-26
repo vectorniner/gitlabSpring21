@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 	while(choice != 99)
 	{
 		puts("You find yourself in a dark room and you are not sure how you got here.");
-        	puts("As you look around you see the room has 40 doors, each labeled with a number. You are not sure how such a small room can have 25 doors, sooo magic...");
+        	puts("As you look around you see the room has 40 doors, each labeled with a number. You are not sure how such a small room can have 40 doors, sooo magic...");
         	puts("The room starts filling with water and you must choose a door to open or you will likely drown. you may quit anytime by selecting option 99");
         	puts("What door do you choose?");
         	scanf("%d",&choice);
@@ -35,6 +35,8 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
+					puts("Hello world");
+					scanf("%d",&choice);
 
 				}
 				break;
@@ -43,8 +45,10 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
+					puts("you open the door and find ........ \n");
+					puts("Watch out, look behind you, A Meeseeks is coming towarsds you.\n");
 					scanf("%d",&choice);
+
 				}
 				break;
 			}
@@ -52,7 +56,8 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
+					puts("you open the door and find a mysterious man saying: 'Wendy, darling, Light of my Life! I'm not gonna hurt ya \n");
+					puts("He looks at you menancingly and starts to run to you with a knife, there are multiple doors behind you which door do you pick? \n you may quit anytime by selecting option:99");
 					scanf("%d",&choice);
 				}
 				break;
@@ -71,6 +76,7 @@ int main(int argc, char *argv[])
 				while(choice != 99)
 				{
 					puts("you open the door and find ........");
+					puts("BOOM! arrow to the knee!");
 					scanf("%d",&choice);
 				}
 				break;
@@ -95,7 +101,13 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
+					puts("The door creaks open and you find yourself in a field of lavendar spider lillies. A gentle breeze gently stirs your hair.\n");
+					puts("While scanning your surroundings, you glance over your shoulder to find that the door you came in with is suddenly gone.\n");
+					puts("Wait. How is the door - /n");
+					puts(" 'Hey! Dingus!! Move aside!!' /n");
+					puts("You feel something whap the side of your shin - recoiling, you see the small source of the gruff voice.\n");
+					puts("Not sure of anything anymore, you move aside for the offending chicken and his cohorts of small capybaras. They seem to be in a sort of military precession.\n");
+					puts("What on earth do you do?\n");
 					scanf("%d",&choice);
 				}
 				break;
@@ -104,6 +116,7 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
+					puts("cl");
 					puts("you open the door and find ........");
 					scanf("%d",&choice);
 				}
@@ -113,6 +126,47 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
+					int i, j, n=10;
+
+    					for(i=n/2; i<=n; i+=2)
+ 					{
+        					for(j=1; j<n-i; j+=2)
+        					{
+            						printf(" ");
+       						}
+
+        					for(j=1; j<=i; j++)
+        					{
+            						printf("*");
+        					}
+
+        					for(j=1; j<=n-i; j++)
+        					{
+            						printf(" ");
+        					}
+	
+        					for(j=1; j<=i; j++)
+        					{
+            						printf("*");
+        					}
+
+        					printf("\n");
+    					}
+
+    					for(i=n; i>=1; i--)
+    					{
+        					for(j=i; j<n; j++)
+        					{
+            						printf(" ");
+        					}
+
+        					for(j=1; j<=(i*2)-1; j++)
+        					{
+            						printf("*");
+        					}
+
+        						printf("\n");
+   					}
 					puts("you open the door and find ........");
 					scanf("%d",&choice);
 				}
@@ -122,7 +176,9 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-
+					puts("you open the door and find ........");
+					puts("A sign that says hello world");
+					scanf("%d",&choice);
 				}
 				break;
 			}
@@ -136,9 +192,37 @@ int main(int argc, char *argv[])
 			}
 			case 13:
 			{
+				// Norville Amao
 				while(choice != 99)
 				{
-					puts("Norville was here");
+					char name[20];
+					int race = 5;
+					puts("CHARACTER CREATION");
+					puts("Enter your name:");
+					scanf(" %s", name);
+
+					while(race == 5){
+						puts("Choose your race");
+						puts("1 - human");
+						puts("2 - elf");
+						puts("3 - ilvyr");
+						puts("4 - ferren");
+						puts("5 - race information");
+						scanf("%d",&race);
+
+						if(race == 5){
+							puts("HUMANS");
+							puts("Known as God's favorite. The most prosperous people.");
+							puts("ELVES");
+							puts("The racial offspring of ilvyrs and humans.");
+							puts("ILVYRS");
+							puts("A race of fallen angels who have succumbed to the sin of pride. Known for their infamous pointed ears and white bird-like wings.");
+							puts("FERREN");
+							puts("Characterized by their towering height. Often mistaken as humans.");
+						}
+					}
+
+					puts("Type 99 to quit.");
 					scanf("%d",&choice);
 				}
 				break;
@@ -180,7 +264,9 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-
+					puts("you open the door and find ....");
+					printf("A expansive candlelit cavern; in the center is  a wizen, old wizard shuffling cards at a card table.");
+					scanf("%d",&choice);
 				}
 				break;
 			}
@@ -189,6 +275,7 @@ int main(int argc, char *argv[])
 				while(choice != 99)
 				{
 					puts("you open the door and find ........");
+					puts("a computer science goblin student !");
 					scanf("%d",&choice);
 				}
 				break;
@@ -225,6 +312,7 @@ int main(int argc, char *argv[])
 				while(choice != 99)
 				{
 					puts("you open the door and find ........");
+					puts("another door blocking the door");
 					scanf("%d",&choice);
 				}
 				break;
@@ -299,7 +387,7 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
+					puts("you open the door and find a cow eating a hot pocket.");
 					scanf("%d",&choice);
 				}
 				break;
@@ -309,7 +397,7 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
+					puts("you open the door and find a penny, chip, and used napkin.");
 					scanf("%d",&choice);
 				}
 				break;
