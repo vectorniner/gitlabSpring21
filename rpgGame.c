@@ -101,7 +101,13 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
+					puts("The door creaks open and you find yourself in a field of lavendar spider lillies. A gentle breeze gently stirs your hair.\n");
+					puts("While scanning your surroundings, you glance over your shoulder to find that the door you came in with is suddenly gone.\n");
+					puts("Wait. How is the door - /n");
+					puts(" 'Hey! Dingus!! Move aside!!' /n");
+					puts("You feel something whap the side of your shin - recoiling, you see the small source of the gruff voice.\n");
+					puts("Not sure of anything anymore, you move aside for the offending chicken and his cohorts of small capybaras. They seem to be in a sort of military precession.\n");
+					puts("What on earth do you do?\n");
 					scanf("%d",&choice);
 				}
 				break;
