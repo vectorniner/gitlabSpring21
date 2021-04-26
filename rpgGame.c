@@ -76,6 +76,7 @@ int main(int argc, char *argv[])
 				while(choice != 99)
 				{
 					puts("you open the door and find ........");
+					puts("BOOM! arrow to the knee!");
 					scanf("%d",&choice);
 				}
 				break;
