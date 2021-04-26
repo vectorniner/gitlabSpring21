@@ -212,10 +212,41 @@ int main(int argc, char *argv[])
 			case 15:
 			{
 				while(choice != 99)
-				{
+                {
+                    puts("Choose a path:\n 1 (yellow)\n 2 (red)\n 3 (green)\n");
+					puts("Exit (99)");
+                    scanf("%d", &choice);
 
-				}
+                    switch(choice)
+                    {
+                        case 1:
+                        {
+                            puts("yellow");
+                            puts("exit (99)");
+                            scanf("%d", &choice);
+
+                            break;
+                        }
+                        case 2:
+                        {
+                            puts("red");
+                            puts("exit (99)");
+                            scanf("%d", &choice);
+
+                            break;
+                        }
+                        case 3:
+                        {
+                            puts("green");
+                            puts("exit (99)");
+                            scanf("%d", &choice);
+
+                            break;
+                        }
+                        break;
+                    }
 				break;
+				}
 			}
 			case 16:
 			{
