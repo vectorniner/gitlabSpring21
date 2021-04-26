@@ -181,7 +181,14 @@ int main(int argc, char *argv[])
 				while(choice != 99)
 				{
 					puts("you open the door and find ........");
-					puts("A sign that says hello world");
+					puts("3 closed doors");
+					printf("The first door is made of rock with cracks that seem to have orange lava flowing from them and fire comming out from the edges");
+					printf("The second door seems to be an ornage rock door with vines covering it and light bleeding from the edges with mist flowing from underneath");
+					printf("The final door seems to be an ordinary old wooden door of a broom closet");
+					printf("Which door will you choose?");
+					printf("1 for the fire door");
+					printf("2 for the mysterious glowing door");
+					printf("3 for the broom closet");
 					scanf("%d",&choice);
 				}
 				break;
