@@ -9,6 +9,7 @@
 #include <time.h>
 #include <stdio.h>
 
+void RollArray(int *arr);//LA
 
 int main(int argc, char *argv[])
 {
@@ -56,9 +57,60 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
+					int choice2;
 					puts("you open the door and find a mysterious man saying: 'Wendy, darling, Light of my Life! I'm not gonna hurt ya \n");
-					puts("He looks at you menancingly and starts to run to you with a knife, there are multiple doors behind you which door do you pick? \n you may quit anytime by selecting option:99");
+					puts("He looks at you menancingly and starts to run to you with a knife, there are multiple doors behind you and the door you came from. \n which door do you pick? \n you may quit anytime by selecting option:99");
 					scanf("%d",&choice);
+					
+					switch(choice)
+					{
+						case 1:
+						{
+							
+
+								char a;
+								
+								srand(time(NULL));
+								
+								int DieArr[6];
+								
+								for (i=0;i<6;i++)
+								{
+									DieArr[i] = 0;
+								}
+								
+								puts("You stumble into a room, and a skeleton behind a counter and holds a die");
+								puts("He asks you with a hollow voice, Hi would you like to roll the dice? [Y]es or [N]o");
+								scanf("%c", &a);
+								
+								if(a=='y')
+								{
+									RollArray(DieArr);
+									
+									for (i=0;i<6;i++)
+									{
+										printf("%d = %d\n", i+1 , DieArr);
+									}
+								}
+								
+
+
+								
+							
+							break;
+						}
+						case 2:
+						{
+							while(choice != 99)
+							{
+								
+							}
+							break;
+						}
+						
+					}
+					
+					
 				}
 				break;
 			}
@@ -524,3 +576,17 @@ int main(int argc, char *argv[])
 	return EXIT_SUCCESS;
 }
 
+void RollArray(int *arr)//LA
+{
+	int i;
+	int y;
+	int *ptr;
+	ptr = arr;
+	
+	for (i=0;i<1;i++)
+	{
+		y= rand()%6;
+		*(arr+y) = *(arr+y)+1;
+		arr=ptr;
+	}
+}
