@@ -488,15 +488,16 @@ int main(int argc, char *argv[])
 				break;
 			}
 
-			case 30:
+			case 30://Markease's room of "why did you do this?"
+		       	{
+			while(choice != 99)
 			{
-				while(choice != 99)
-				{
-					puts("you open the door and find ........");
-					scanf("%d",&choice);
-				}
-				break;
-			}
+				puts("you open the door and find ........");
+				puts("Some guy screaming hello world. You panic and press 99!");
+				scanf("%d",&choice);
+		       	}
+			break;
+																                }
 
 			case 31:
 			{
