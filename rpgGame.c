@@ -74,9 +74,24 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
-					puts("BOOM! arrow to the knee!");
+					puts("you open the door slowly, you hear a click in the distance:");
+					puts("Do you close the door or open it fast? Type 1 for open and 2 for close.");
 					scanf("%d",&choice);
+
+					switch(choice)
+					{
+						case 1:
+						{
+							puts("you get hit with an arrow in the knee!");
+							break;
+						}	
+
+						case 2:
+						{
+							puts("you hear an arrow hit the door");
+							break;
+						}
+					}
 				}
 				break;
 			}
