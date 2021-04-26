@@ -362,7 +362,10 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
+					puts("You have entered a chamber resembling the ruins of an Ancient Egyptian Temple ");
+					puts("The door to your left shows signs of innocence");
+					puts("while the door to your right shows a strange figure resembling an eye");
+					puts("You see a figure flip a coin in the distance");
 					scanf("%d",&choice);
 				}
 				break;
