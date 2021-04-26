@@ -9,12 +9,15 @@
 #include <time.h>
 #include <stdio.h>
 
+int randomString(void);
 
 int main(int argc, char *argv[])
 {
 	int x,y,z,i,h,g,k,choice=0;
 	char name[256];
 	int boxNum=0;
+	
+	srand(time(NULL));
 
 	printf("Please enter your name: "); //Input any number of array inputs
 	scanf("%s",name);
@@ -369,8 +372,28 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find a penny, chip, and used napkin.");
-					scanf("%d",&choice);
+					puts("You are safe from the water, but strange strings start to attack. What do you do?");
+					while(choice != 99)
+					{
+						int randStr;
+						puts("1. Smack the string in the leftmost bit");
+						puts("2. Kick the string in the rightmost bit");
+						puts("99. Exit Room");
+						scanf("%d", &choice);
+						switch(choice)
+						{
+							case 1:
+								randStr = randomString();
+								printf("String %d approaches you and you smack it!\n", randStr);
+								printf("The string is confused and altered to %d \n", randStr);
+								break;
+							case 2:
+								break;
+							default:
+								puts("You can't do that.");
+								break;
+						}
+					}
 				}
 				break;
 			}
@@ -484,3 +507,9 @@ int main(int argc, char *argv[])
 	return EXIT_SUCCESS;
 }
 
+int randomString()
+{
+	char alphabet[] = "abcdefghihjlmkomqrstuv";
+	int randSize = (rand() % 1) + 12;
+	return randSize;
+}
