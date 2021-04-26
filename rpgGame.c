@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 	int x,y,z,i,h,g,k,choice=0;
 	char name[256];
 	int boxNum=0;
-
+	srand(time(NULL));
 	printf("Please enter your name: "); //Input any number of array inputs
 	scanf("%s",name);
 
@@ -69,8 +69,7 @@ int main(int argc, char *argv[])
 							
 
 								char a;
-								
-								srand(time(NULL));
+							
 								
 								int DieArr[6];
 								
