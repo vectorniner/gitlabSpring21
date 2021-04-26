@@ -221,6 +221,9 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
+					puts("hello world");
+					puts("the door is stuck");
+					scanf("%d", &choice);
 
 				}
 				break;
