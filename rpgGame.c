@@ -465,6 +465,7 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
+					printf("Hello World");
 					puts("you open the door and find ........");
 					scanf("%d",&choice);
 				}
