@@ -295,6 +295,9 @@ int main(int argc, char *argv[])
 				while(choice != 99)
 				{
 					puts("you open the door and find ........");
+					puts("You are in a small dark room");
+					puts("You start to hear noises but cannot see what it is");
+					puts("You panic and start running for your life");
 					scanf("%d",&choice);
 				}
 				break;
