@@ -10,7 +10,7 @@
 #include <stdio.h>
 
 void RollArray(int *arr);//LA
-void randomString(char *p);
+char *randomString(char *p);
 
 int main(int argc, char *argv[])
 {
@@ -519,7 +519,7 @@ int main(int argc, char *argv[])
 					{
 						char *ptr;
 						//char randString[10] = "";
-						//ptr = randString;
+						ptr = randString;
 						puts("1. Smack the string in the leftmost bit");
 						puts("2. Kick the string in the rightmost bit");
 						puts("99. Exit Room");
@@ -527,12 +527,14 @@ int main(int argc, char *argv[])
 						switch(choice)
 						{
 							case 1:
-								ptr = randomString();
-								printf("String %p approaches you and you smack it!\n", ptr);
-								printf("The string is confused and altered to %p \n", ptr);
+								randomString(ptr);
+								printf("String %p approaches you and you smack it!\n", &ptr);
+								printf("The string is confused and altered to %p \n", &ptr);
 								break;
 							case 2:
 								break;
+							case 99:
+								break:
 							default:
 								puts("You can't do that.");
 								break;
@@ -668,7 +670,7 @@ void RollArray(int *arr)//LA
 	}
 }
 
-void randomString(char *p)
+char *randomString(char *p)
 {
 	int randLine = rand() % 100;
 	int i;
@@ -680,13 +682,13 @@ void randomString(char *p)
 	}
 	else
 	{
-		char randStr [10];
-		while(fgets(randStr, 10, rfPtr) != NULL)
+		char randStr [12];
+		while(fgets(randStr, 12, rfPtr) != NULL)
 		{
 			if(i == randLine)
 			{
 				fclose(rfPtr);
-				p = randLine;
+				return randStr;
 			}
 			else
 			{
@@ -695,4 +697,5 @@ void randomString(char *p)
 		}
 		fclose(rfPtr);
 	}
+	return 0;
 }
