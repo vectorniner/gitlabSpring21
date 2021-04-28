@@ -25,6 +25,11 @@ int mQuserInput(void); //mquail
 int mQparser(void); //mquail
 char uInput[100]; //mquail
 
+// Talise
+void printMessage(int msg[]);
+void decodeMessage(char alphabet[], int codedMessage[], int *totalGuesses, int *wrong);
+void userFate(int x);
+
 int main(int argc, char *argv[])
 {
 	int x,y,z,i,h,g,k,choice=0;
@@ -165,9 +170,36 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
-					puts("hello world.");
-					scanf("%d", &choice);
+					FILE *wptr;
+                    			wptr = fopen(argv[2], "w");
+                    
+                    			int totalGuesses = 0;
+                    			int wrongGuesses = 0;
+                    			int *totalPtr = &totalGuesses;
+                    			int *wrongPtr = &wrongGuesses;
+                    			char alphabet[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'z', 'y', 'z', '\0'};
+                    			int codedMessage[10] = {8, 5, 12, 12, 15, 23, 15, 18, 12, 4};
+                    			char message[] = "Hello World";
+                    
+                    			puts("You open the door and walk inside the room.");
+                    			puts("The door locks, and the only way out is to decode a message.");
+                    
+                    			printMessage(codedMessage);
+                    			decodeMessage(alphabet, codedMessage, totalPtr, wrongPtr);
+                    
+                    			fprintf(wptr, "Total Guesses: %d \nWrong Guesses: %d \nDecoded Message: %s \n", totalGuesses, wrongGuesses, message);
+                    
+                    			x = (rand() % (3 + 1 - 1) + 1);
+                    			userFate(x);
+                    
+                    			for(i = 0; name[i] != '\0'; i++)
+                    			{
+                        			name[i] = toupper(name[i]);
+                    			}
+                    
+                    			printf("That's all, %s \n", name);
+                    
+                    			scanf("%d", &choice);
 				}
 				break;
 			}
@@ -1199,4 +1231,85 @@ int mQparser(void)
 	return 1;
 
 
+}
+
+// Talise
+void printMessage(int msg[])
+{
+	int i = 0;
+    
+    	printf("Message: ");
+    
+    	while(i < 10)
+    	{
+        	printf("%d ", msg[i]);
+        	i++;
+    	}
+    
+    	printf("\n");
+}
+void decodeMessage(char alphabet[], int codedMessage[], int *totalGuesses, int *wrong)
+{
+	int i, x;
+    	char guess;
+    	char c;
+    
+    	puts("Decode the message: ");
+    
+    	for(i = 0; i < 10; i++)
+    	{
+        	printf("Enter lowercase guess for %d: ", codedMessage[i]);
+        	scanf(" %c", &guess);
+        
+        	x = (codedMessage[i] - 1);
+        	c = alphabet[x];
+        
+        	if(guess == c)
+        	{
+            		(*totalGuesses)++;
+        	}
+        
+        	while(guess != c)
+        	{
+            		printf("Try again. Enter lowercase guess for %d: ", codedMessage[i]);
+            		scanf(" %c", &guess);
+            		(*totalGuesses)++;
+            		(*wrong)++;
+        	}
+    	}
+}
+
+void userFate(int x)
+{
+	int i, score;
+    	double avg = 0.0;
+    	double sum = 0.0;
+    
+    	switch(x)
+    	{
+        	case 1:
+        	{
+            		puts("You are free.");
+            		break;
+        	}
+        	case 2:
+        	{
+            		puts("You decoded the message, but now you must enter 3 test scores: ");
+            		break;
+        	}
+    	}
+    
+    	if(x == 2)
+    	{
+        	for(i = 0; i < 3; i++)
+        	{
+            		printf("Enter score: ");
+            		scanf("%d", &score);
+            		sum += score;
+        	}
+        
+        	avg = sum / 3;
+        
+        	printf("Your test score average is: %.2lf \n", avg);
+    	}
 }
