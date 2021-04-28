@@ -1,15 +1,13 @@
-//Contributors
-//G. Poppe
-//
-
-
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
 #include <time.h>
 #include <stdio.h>
 
-void RollArray(int *arr);//LA
+//void RollArray(int *arr);//LA
+void hopScotchPrint(void);
+void monikacase1(char yellowdecision[]);
+void monikacase2(char reddecision[]);
 
 int main(int argc, char *argv[])
 {
@@ -64,40 +62,40 @@ int main(int argc, char *argv[])
 					
 					switch(choice)
 					{
-						case 1:
-						{
+						// case 1:
+						// {
 							
 
-								char a;
+						// 		char a;
 							
 								
-								int DieArr[6];
+						// 		int DieArr[6];
 								
-								for (i=0;i<6;i++)
-								{
-									DieArr[i] = 0;
-								}
+						// 		for (i=0;i<6;i++)
+						// 		{
+						// 			DieArr[i] = 0;
+						// 		}
 								
-								puts("You stumble into a room, and a skeleton behind a counter and holds a die");
-								puts("He asks you with a hollow voice, Hi would you like to roll the dice? [Y]es or [N]o");
-								scanf("%c", &a);
+						// 		puts("You stumble into a room, and a skeleton behind a counter and holds a die");
+						// 		puts("He asks you with a hollow voice, Hi would you like to roll the dice? [Y]es or [N]o");
+						// 		scanf("%c", &a);
 								
-								if(a=='y')
-								{
-									RollArray(DieArr);
+						// 		if(a=='y')
+						// 		{
+						// 			RollArray(DieArr);
 									
-									for (i=0;i<6;i++)
-									{
-										printf("%d = %d\n", i+1 , DieArr);
-									}
-								}
+						// 			for (i=0;i<6;i++)
+						// 			{
+						// 				printf("%d = %d\n", i+1 , DieArr);
+						// 			}
+						// 		}
 								
 
 
 								
 							
-							break;
-						}
+						// 	break;
+						// }
 						case 2:
 						{
 							while(choice != 99)
@@ -286,41 +284,35 @@ int main(int argc, char *argv[])
 			}
 			case 15:
 			{
-				while(choice != 99)
-                {
-                    puts("Choose a path:\n 1 (yellow)\n 2 (red)\n 3 (green)\n");
-					puts("Exit (99)");
-                    scanf("%d", &choice);
+				while (choice != 99)
+				{
+					char yellowdecision[2];
+					char reddecision[2];
 
-                    switch(choice)
-                    {
-                        case 1:
-                        {
-                            puts("yellow");
-                            puts("exit (99)");
-                            scanf("%d", &choice);
+					puts("Choose a path:\n 1 (yellow)\n 2 (red)\n 3 (green)\n");
+					scanf("%d", &choice);
 
-                            break;
-                        }
-                        case 2:
-                        {
-                            puts("red");
-                            puts("exit (99)");
-                            scanf("%d", &choice);
+					switch (choice)
+					{
+						case 1:
+						{
+							monikacase1(yellowdecision);
+							break;
+						}
+						case 2:
+						{
+							monikacase2(reddecision);
+							break;
+						}
+						case 3:
+						{
+							puts("green");
+							puts("exit (99)");
+							scanf("%d", &choice);
 
-                            break;
-                        }
-                        case 3:
-                        {
-                            puts("green");
-                            puts("exit (99)");
-                            scanf("%d", &choice);
-
-                            break;
-                        }
-                        break;
-                    }
-				break;
+							break;
+						}
+					}
 				}
 			}
 			case 16:
@@ -629,17 +621,158 @@ int main(int argc, char *argv[])
 	return EXIT_SUCCESS;
 }
 
-void RollArray(int *arr)//LA
-{
-	int i;
-	int y;
-	int *ptr;
-	ptr = arr;
+// void RollArray(int *arr)//LA
+// {
+// 	int i;
+// 	int y;
+// 	int *ptr;
+// 	ptr = arr;
 	
-	for (i=0;i<1;i++)
+// 	for (i=0;i<1;i++)
+// 	{
+// 		y= rand()%6;
+// 		*(arr+y) = *(arr+y)+1;
+// 		arr=ptr;
+// 	}
+// }
+
+
+
+void hopScotchPrint()
+{
+	puts("       ______       ");
+	puts("      |   1  |      ");
+	puts(" _____|______|_____ ");
+	puts("|  2  |   3  |  4  |");
+	puts("|_____|______|_____|");
+	puts("      |   5  |      ");
+	puts(" _____|______|_____ ");
+	puts("|  6  |   7  |  8  |");
+	puts("|_____|______|_____|");
+	puts("      |   9  |      ");
+	puts("      |______|      ");
+	puts("      |  10  |      ");
+	puts("      |______|      \n");
+
+	puts("do you want to play with it?\ny or n\n");
+}
+
+void monikacase1(char yellowdecision[])
+{
+	puts("You chose the yellow path, as you walk you see a hop scotch drawn on the floor\n");
+	hopScotchPrint();
+	scanf(" %s", yellowdecision);
+	//prints hopscotch
+
+	if (strcmp(yellowdecision, "y") == 0)
+	//if its equal to each other
+	//0 = true, !0 == false
 	{
-		y= rand()%6;
-		*(arr+y) = *(arr+y)+1;
-		arr=ptr;
+		int jumps = 0;
+		int i = 0;
+		char anotherRoll[2];
+		srand(time(NULL));
+
+		int yellowTries = 0;
+		while (jumps != 6)
+		{
+			yellowTries++;
+			if (yellowTries > 2)
+			{
+				puts("\nYou ran out of attempts, good bye\n");
+				break;
+			}
+			//left off in trying to create limit of attempts but it doesnt work
+			//try to fix when possible
+
+			//create a dice that goes
+			//from 1-6 for the amount of spaces the person jumps
+
+			puts("You stand infront of the first box, and you find a 6 sided die\nnext to the die theres a note that says to roll the die in order to jump.\nDo you want to roll again? (y or n)\n");
+			scanf(" %s", anotherRoll);
+			//while the choices are wrong, do the below
+			//but if its right it will exit and move forward
+
+			if (strcmp(anotherRoll, "y") == 0)
+			{
+				jumps = (rand() % 6) + 1;
+				//printf("Random : %d\n", jumps);
+				//above prints one int
+				if (jumps != 6)
+				{
+					printf("You got %d from the die, it wasnt enough to go to the other side, re-roll.\n", jumps);
+				}
+				else
+				{
+					printf("You got %d, you can pass\n", jumps);
+					break;
+				}
+			}
+		}
 	}
+
+	else if (strcmp(yellowdecision, "n") == 0)
+	{
+		printf("Youre taken back to your previous path\n");
+	}
+}
+
+void monikacase2(char reddecision[])
+{
+	char key[20], usertry[50], pressF[2];
+	FILE *monikaoutput, *Deciphered;
+	monikaoutput = fopen("output.txt", "w");
+	Deciphered = fopen("Deciphered.txt", "r");
+
+	puts("Youve chosen the red road, and you see a blue tunnel. You enter and you\nsee a wall with a code pad on it, its asking if you\nwant to see the prompt to move forward. Do you say yes or no? (y or n)\n");
+	scanf(" %c", reddecision);
+	//create a text thing where we show the user the file and we make them
+	//deciper the code and if its right they will move forward
+	int keepLooping = 1;
+	while (strcmp(reddecision, "y") == 0 && keepLooping == 1)
+	{
+		printf("\nDecipher the following text: \nOnce you have an answer, input it below\n");
+		puts("\n71 97 114 114 101 116 116 66 108 117 80 111 112 112 101\n"); //text file to decipher
+		puts("Need a hint? Ask the key\n");
+		scanf(" %s", usertry);
+		//if yes then we will prompt the text and ask to deciper
+
+		fscanf(Deciphered, " %s", key);
+		if (strcmp(usertry, key) == 0) //check if the same then continue
+		{
+			puts("user try worked\n");
+			puts("You can see your previous attempts in the output.txt file\n");
+			keepLooping = 0;
+		}
+		else
+		{
+			fprintf(monikaoutput, "Failed Attempt: %s\n", usertry);
+		}
+		//im trying to compare user input with a key txt file I have
+		//then print the key file answer and say it was correct
+		//if its correct then it will move forward
+
+		//i was able to compare the user input to contents inside
+		fprintf(monikaoutput, "\n");
+	}
+		rewind(monikaoutput);
+		fclose(monikaoutput);
+
+		if (strcmp(reddecision, "n") == 0)
+		{
+			puts("You said no\n");
+
+			puts("You tried going back to the entrance and fell through a dirt hole and died, press f to pay respects\n");
+			scanf(" %c", pressF);
+
+			if (strcmp(pressF, "f") == 0)
+			{
+				exit(1);
+			}
+			else
+			{
+				puts("fine then, dont pay respects\n");
+				exit(1);
+			}
+		}
 }
