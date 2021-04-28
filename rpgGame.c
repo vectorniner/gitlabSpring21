@@ -89,7 +89,7 @@ int main(int argc, char *argv[])
 									
 									for (i=0;i<6;i++)
 									{
-										printf("%d = %d\n", i+1 , DieArr);
+										//printf("%d = %d\n", i+1 , DieArr);
 									}
 								}
 								
@@ -518,7 +518,8 @@ int main(int argc, char *argv[])
 					while(choice != 99)
 					{
 						char *ptr;
-						char randomString[10] = "";
+						//char randString[10] = "";
+						//ptr = randString;
 						puts("1. Smack the string in the leftmost bit");
 						puts("2. Kick the string in the rightmost bit");
 						puts("99. Exit Room");
@@ -669,7 +670,7 @@ void RollArray(int *arr)//LA
 
 void randomString(char *p)
 {
-	int randLine = (rand() % 0) + 100;
+	int randLine = rand() % 100;
 	int i;
 	FILE *rfPtr;
 
