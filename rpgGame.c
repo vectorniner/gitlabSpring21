@@ -10,6 +10,7 @@
 #include <stdio.h>
 
 void RollArray(int *arr);//LA
+void randomString(char *p);
 
 int main(int argc, char *argv[])
 {
@@ -513,11 +514,33 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find a penny, chip, and used napkin.");
-					scanf("%d",&choice);
+					puts("You are safe from the water, but strange random strings start to attack. What do you do?");
+					while(choice != 99)
+					{
+						char *ptr;
+						char randomString[10] = "";
+						puts("1. Smack the string in the leftmost bit");
+						puts("2. Kick the string in the rightmost bit");
+						puts("99. Exit Room");
+						scanf("%d", &choice);
+						switch(choice)
+						{
+							case 1:
+								ptr = randomString();
+								printf("String %p approaches you and you smack it!\n", ptr);
+								printf("The string is confused and altered to %p \n", ptr);
+								break;
+							case 2:
+								break;
+							default:
+								puts("You can't do that.");
+								break;
+						}
+					}
 				}
 				break;
 			}
+
 			case 33:
 			{
 				while(choice != 99)
@@ -641,5 +664,34 @@ void RollArray(int *arr)//LA
 		y= rand()%6;
 		*(arr+y) = *(arr+y)+1;
 		arr=ptr;
+	}
+}
+
+void randomString(char *p)
+{
+	int randLine = (rand() % 0) + 100;
+	int i;
+	FILE *rfPtr;
+
+	if((rfPtr = fopen("randomStrings.txt", "r")) == NULL)
+	{
+		puts("File could not be opened.");
+	}
+	else
+	{
+		char randStr [10];
+		while(fgets(randStr, 10, rfPtr) != NULL)
+		{
+			if(i == randLine)
+			{
+				fclose(rfPtr);
+				p = randLine;
+			}
+			else
+			{
+				i++;
+			}
+		}
+		fclose(rfPtr);
 	}
 }
