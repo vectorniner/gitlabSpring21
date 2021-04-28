@@ -762,7 +762,7 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
+					puts("you open the door 38 to and found a deadly cake........");
 					scanf("%d",&choice);
 				}
 				break;
