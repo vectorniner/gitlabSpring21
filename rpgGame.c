@@ -25,6 +25,7 @@ int mQuserInput(void); //mquail
 int mQparser(void); //mquail
 char uInput[100]; //mquail
 
+void play(void);//josue
 int main(int argc, char *argv[])
 {
 	int x,y,z,i,h,g,k,choice=0;
@@ -796,8 +797,10 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					printf("Hello World");
 					puts("you open the door and find ........");
+					puts("A gambling machine, and it says, If you average is even, you win, but if your average is odd, you lose");
+					puts("You decide to play");
+					play();
 					scanf("%d",&choice);
 				}
 				break;
@@ -863,6 +866,29 @@ int main(int argc, char *argv[])
 // 		arr=ptr;
 // 	}
 // }
+void play(void)
+{
+	int i;
+	int total = 0;
+	int numbers[4] = {0};
+	int avg;
+	for(i = 0; i < 5; i++)
+	{
+		numbers[i] = rand() % 100;
+		total = total + numbers[i];
+	}
+	avg = total / 5;
+
+	if(avg % 2 == 0)
+	{
+		printf("The number is even you win!!");
+	}
+	else
+	{
+		printf("You lose");
+	}
+	
+}
 
 
 
