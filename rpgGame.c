@@ -25,6 +25,12 @@ int mQuserInput(void); //mquail
 int mQparser(void); //mquail
 char uInput[100]; //mquail
 
+void printIntroduction(void);																			 // Manuel Castaneda
+void printRules(int rollsPerTurn, int pointsToLoose);							 // Manuel Castaneda
+double averageM(int rolls[], int numberOfRolls);										 // Manuel Castaneda
+double sumM(double sums[], int maxSums);														 // Manuel Castaneda
+void printRollResults(int rolls[], int numberOfRolls, int isUser); // Manuel Castaneda
+
 
 void play(void);//josue
 // Talise
@@ -910,14 +916,241 @@ int main(int argc, char *argv[])
 																                }
 
 			case 31:
+		{
+			while (choice != 99)
 			{
-				while(choice != 99)
+				// constants
+				int MAX_SUMS = 30, ROLLS_PER_TURN = 3, POINTS_TO_LOOSE = 30, AI_STOPING_POINT = 10;
+
+				FILE *writer = fopen("Casino.txt", "a"); // the "a" will append to the file
+
+				printIntroduction();
+
+				int showRules = 2;
+				printf("Would you like to read the rules? (1: yes | 2: no) ");
+				scanf(" %d", &showRules);
+
+				// format switch
+				switch (showRules)
 				{
-					puts("you open the door and find a cow eating a hot pocket.");
-					scanf("%d",&choice);
+				case 1:
+					printRules(ROLLS_PER_TURN, POINTS_TO_LOOSE);
+					break;
 				}
-				break;
+
+				srand(time(NULL));
+
+				// arrays of all the averages that each player rolls
+				double userSums[30] = {0};
+				double player2Sums[30] = {0};
+				double player3Sums[30] = {0};
+
+				// pointers for the sums arrays
+				double *userSumPtr = userSums;
+				double *player2SumPtr = player2Sums;
+				double *player3SumPtr = player3Sums;
+
+				// decides when the game should stop (if no one is able to play anymore)
+				int userStillPlaying = 1, player2StillPlaying = 1, player3StillPlaying = 1;
+
+				int iteration = 0;			// increases in each loop, determines how large the dice will get
+				double currentScore[3]; // keeps track of the score for each player
+				while (userStillPlaying == 1 || player2StillPlaying == 1 || player3StillPlaying == 1)
+				{
+					int i; // for loops
+					int userInput;
+					int lowDiceSize, highDiceSize; // the lowest and highest value a dice can get you
+					int rolls[3];									 // holds the values of all the rolls
+					int chooseToRoll;							 // stores the decision of the other players to roll or not
+
+					iteration++;
+					highDiceSize = iteration * 10;
+
+					puts("\n-      -      -      -      -      -      -\n"); // just a divider since there is a lot going on in the console.
+					printf("\nRound %d, Dice size is %d to %d", iteration, 1, highDiceSize);
+
+					if (userStillPlaying)
+					{
+						puts("\n\nYour Turn:");
+						printf("Would you like to roll your three dice? (1: yes | 2: no) ");
+						scanf("%d", &userInput);
+
+						if (userInput == 1)
+						{
+							for (i = 0; i < ROLLS_PER_TURN; i++)
+							{
+								// random number between the highest that the dice can get you and the lowest it can get you
+								rolls[i] = (rand() % highDiceSize) + 1;
+							}
+
+							// stores the average of all three rolls in the sum array
+							*userSumPtr = averageM(rolls, ROLLS_PER_TURN);
+
+							printRollResults(rolls, ROLLS_PER_TURN, 1); // prints out the outcome of all your rolls
+							printf("Average of your rolls: %.1lf\n", *userSumPtr);
+							userSumPtr++; // increases pointer so next time it will add to the next index of the array
+
+							currentScore[0] = sumM(userSums, MAX_SUMS); // takes the sum of all your averages so far
+							printf("Your current score: %.1lf", currentScore[0]);
+
+							if (currentScore[0] > POINTS_TO_LOOSE)
+							{
+								userStillPlaying = 0;
+								printf("\nYou lost. %.1lf is larger than %d...", currentScore[0], POINTS_TO_LOOSE);
+							}
+						}
+						else if (userInput == 2)
+						{
+							userStillPlaying = 0;
+						}
+					}
+
+					if (player2StillPlaying)
+					{
+						puts("\n\nPlayer 2 Turn:");
+						chooseToRoll = 1;
+						// decides to keep rolling
+						if ((POINTS_TO_LOOSE - sumM(player2Sums, MAX_SUMS)) < AI_STOPING_POINT) // if the ai is (stoping point) away from the score limit, they will stop rolling
+						{
+							chooseToRoll = 0;
+							player2StillPlaying = 0;
+							puts("Player 2 chose not to roll anymore.");
+						}
+
+						if (chooseToRoll == 1)
+						{
+							for (i = 0; i < ROLLS_PER_TURN; i++)
+							{
+								// random number between the highest that the dice can get you and the lowest it can get you
+								rolls[i] = (rand() % highDiceSize) + 1;
+							}
+
+							// stores the average of all three rolls in the sum array
+							*player2SumPtr = averageM(rolls, ROLLS_PER_TURN);
+
+							printRollResults(rolls, ROLLS_PER_TURN, 0); // prints out the outcome of all your rolls
+							printf("Player 2 rolls average: %.1lf\n", *player2SumPtr);
+							player2SumPtr++; // increases pointer so next time it will add to the next index of the array
+
+							currentScore[1] = sumM(player2Sums, MAX_SUMS); // takes the sum of all your averages so far
+							printf("Player 2 score: %.1lf", currentScore[1]);
+
+							if (currentScore[1] > POINTS_TO_LOOSE)
+							{
+								player2StillPlaying = 0;
+								printf("\nPlayer 2 is out. %.1lf is larger than %d...", currentScore[1], POINTS_TO_LOOSE);
+							}
+						}
+					}
+
+					if (player3StillPlaying)
+					{
+						puts("\n\nPlayer 3 Turn:");
+						chooseToRoll = 1;
+
+						// decides to keep rolling
+						if ((POINTS_TO_LOOSE - sumM(player3Sums, MAX_SUMS)) < AI_STOPING_POINT) // if the ai is (stoping point) away from the score limit, they will stop rolling
+						{
+							chooseToRoll = 0;
+							player3StillPlaying = 0;
+							puts("Player 3 is choosing not to roll anymore.");
+						}
+
+						if (chooseToRoll == 1)
+						{
+							for (i = 0; i < ROLLS_PER_TURN; i++)
+							{
+								// random number between the highest that the dice can get you and the lowest it can get you
+								rolls[i] = (rand() % highDiceSize) + 1;
+							}
+
+							// stores the average of all three rolls in the sum array
+							*player3SumPtr = averageM(rolls, ROLLS_PER_TURN);
+
+							printRollResults(rolls, ROLLS_PER_TURN, 0); // prints out the outcome of all your rolls
+							printf("Player 3 average rolls is %.1lf\n", *player3SumPtr);
+							player3SumPtr++; // increases pointer so next time it will add to the next index of the array
+
+							currentScore[2] = sumM(player3Sums, MAX_SUMS); // takes the sum of all your averages so far
+							printf("Player 3 score: %.1lf", currentScore[2]);
+
+							if (currentScore[2] > POINTS_TO_LOOSE)
+							{
+								player3StillPlaying = 0;
+								printf("\nPlayer 3 is out. %.1lf is larger than %d...", currentScore[2], POINTS_TO_LOOSE);
+							}
+						}
+					}
+				}
+
+				printf("\n\nUser score: %.1lf\n", currentScore[0]);
+				printf("Player 2 score: %.1lf\n", currentScore[1]);
+				printf("Player 3 score: %.1lf\n", currentScore[2]);
+
+				if (currentScore[0] > POINTS_TO_LOOSE)
+				{
+					currentScore[0] = -1;
+				}
+				if (currentScore[1] > POINTS_TO_LOOSE)
+				{
+					currentScore[1] = -1;
+				}
+				if (currentScore[2] > POINTS_TO_LOOSE)
+				{
+					currentScore[2] = -1;
+				}
+
+				if ((currentScore[0] == -1) && (currentScore[1] == -1) && (currentScore[2] == -1))
+				{
+					puts("\nEveryone lost...");
+					fprintf(writer, "%s lost with everyone\n", name);
+				}
+				else if ((currentScore[0] > currentScore[1]) && (currentScore[0] > currentScore[2]))
+				{
+
+					printf("\nYou won!");
+					fprintf(writer, "%s beat player 1 and 2\n", name);
+				}
+				else if ((currentScore[1] > currentScore[2]) && (currentScore[1] > currentScore[0]))
+				{
+
+					printf("\nPlayer 2 won!");
+					fprintf(writer, "%s lost to player 2\n", name);
+				}
+				else
+				{
+					printf("\nPlayer 3 won!");
+					fprintf(writer, "%s lost to player 3\n", name);
+				}
+				fclose(writer); // close the output file so i can start writing in it again.
+
+				int showRecords = 2;
+				printf("\nGood game. Would you like to see the records of previous games? (1: yes | 2: no) ");
+				scanf(" %d", &showRecords);
+
+				if (showRecords == 1)
+				{
+					FILE *reader = fopen("Casino.txt", "r");
+					char line[50];
+
+					char c;
+
+					c = fgetc(reader);
+					while (c != EOF)
+					{
+						printf("%c", c);
+						c = fgetc(reader);
+					}
+
+					fclose(reader);
+				}
+
+				puts("\nRemember to enter 99 to exit!");
+				scanf("%d", &choice);
 			}
+
+			break;
+		}
 
 			case 32:
 			{
@@ -1520,3 +1753,67 @@ void userFate(int x)
         	printf("Your test score average is: %.2lf \n", avg);
     	}
 }
+void printRollResults(int rolls[], int numberOfRolls, int isUser) // Manuel Castaneda
+{
+	if (isUser)
+	{
+		printf("You rolled: ");
+	}
+	else
+	{
+		printf("they rolled: ");
+	}
+
+	int i;
+	for (i = 0; i < numberOfRolls; i++)
+	{
+		printf("%d  ", rolls[i]);
+	}
+
+	printf("\n");
+}
+
+double averageM(int rolls[], int numberOfRolls) // Manuel Castaneda
+{
+	int i, sum = 0;
+	for (i = 0; i < numberOfRolls; i++)
+	{
+		sum = sum + rolls[i];
+	}
+	return sum / (double)numberOfRolls;
+}
+
+double sumM(double sums[], int maxSums) // Manuel Castaneda
+{
+	int i = 0;
+	double sum = 0;
+
+	for (i = 0; i < maxSums; i++)
+	{
+
+		if (sums[i] == 0)
+		{
+			break;
+		}
+		sum = sum + sums[i];
+	}
+	return sum;
+}
+
+void printIntroduction(void) // Manuel Castaneda
+{
+	puts("\n\nYou walked into a secret casino.");
+	puts("The door closes behind you.");
+	puts("The only way to leave is to play a game Dice Average.");
+}
+
+void printRules(int rollsPerTurn, int pointsToLoose)
+{
+	puts("\nRules:");
+	printf("- Each turn, you and two other players will choose if you wish to roll %d dice.\n", rollsPerTurn);
+	printf("- The average number of the %d dice are added to your score.\n", rollsPerTurn);
+	printf("- Who ever can get their score closest to %d wins. If your score goes above %d then you loose.\n", pointsToLoose, pointsToLoose);
+	puts("- Before each turn, the dice values increase.");
+	puts("- After each turn, you will get an opportunity to roll again or stop rolling.");
+	puts("- If you choose to stop rolling, you can no longer roll for the rest of the game.");
+} // Manuel Castaneda
