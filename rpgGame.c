@@ -657,11 +657,72 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("hello world");
 					puts("you open the door and find ........");
+					puts("Fantasy world with flying dragons, mystery mythic, magic and rescuing princess... Your dream adventure world! Oh look! The little fairy flew and welcomes you.");
+					puts("Would you like to talk to it (yes=1 no=0)?");
 					scanf("%d",&choice);
+
+					if(choice == 1)
+					{
+						puts("You: Hey! How are you? This world seems pretty nic...");
+						puts("Fairy: Shut up and give me ALL you've got!!");
+						puts("You: Wait wha..?");
+						scanf("%c", &name[0]);
+						puts("Fairy: I need a MONEY!(pulls out of a knife).");
+						puts("\nLooks like that wasn't clever choice.");
+						puts("\t\t...YOU DIED....");
+						break;
+					}
+					puts("Are you really going to ignore this cute fairy? Come on~ at least saying hi wouldn't hurt anybody.");
+					puts("Talk to the fairy(yes=1 no=0).");
+					scanf("%d",&choice);
+					if(choice == 1)
+					{
+						puts("You: Hi,I was wonder what were you doing he...");
+						puts("Fairy: Were you trying to ignore me huh? (stabs with a knife)");
+						puts("Well... seems like that fairy would hurt anybody here haha. You Die...");
+						break;
+					}
+					puts("You have safely ranway from that cold blood fairy. Please select your derection to go");
+					puts("1.Mining Mountain  2.Shop  3.Gamble");
+					scanf("%d",&choice);
+					switch(choice)
+					{
+						case 1:
+						{
+							puts("Entering Mining Mountain");
+							puts("Miner: Welcome to Pitcoin mining! You can mine your Pitcoin as many as you want. But the amount will be random. So GL!");	
+							puts("Mine Pitcoin? (yes=1 no=0)");
+							scanf("%d",&choice);
+							if(choice == 0)
+							{
+								puts("Exiting Mining Mountain");
+								break;
+							}
+							else if(choice == 1)
+							{
+								while(choice != -1)
+								{
+									puts("Let's mining!");
+									scanf("%d",&choice);
+								}
+								break;
+
+							}
+							else
+							{
+								puts("Please select again.");
+							}
+						
+						}
+						puts("reselect case");
+						scanf("%d",&choice);
+
+
+					}
 				}
 				break;
+
 			}
 			case 28:
 			{
