@@ -904,5 +904,5 @@ char *randomString(char *p)
 		}
 		fclose(rfPtr);
 	}
-	return 0;
+	return p;
 }
