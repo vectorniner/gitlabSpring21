@@ -518,8 +518,7 @@ int main(int argc, char *argv[])
 					while(choice != 99)
 					{
 						char *ptr;
-						//char randString[10] = "";
-						ptr = randString;
+						char randStr[11] = "";
 						puts("1. Smack the string in the leftmost bit");
 						puts("2. Kick the string in the rightmost bit");
 						puts("99. Exit Room");
@@ -527,14 +526,14 @@ int main(int argc, char *argv[])
 						switch(choice)
 						{
 							case 1:
-								randomString(ptr);
-								printf("String %p approaches you and you smack it!\n", &ptr);
-								printf("The string is confused and altered to %p \n", &ptr);
+								ptr = randomString(randStr);
+								printf("String %s approaches you and you smack it!\n", ptr);
+								printf("The string is confused and altered to %s \n", ptr);
 								break;
 							case 2:
 								break;
 							case 99:
-								break:
+								break;
 							default:
 								puts("You can't do that.");
 								break;
@@ -673,7 +672,7 @@ void RollArray(int *arr)//LA
 char *randomString(char *p)
 {
 	int randLine = rand() % 100;
-	int i;
+	int i = 0;
 	FILE *rfPtr;
 
 	if((rfPtr = fopen("randomStrings.txt", "r")) == NULL)
@@ -682,13 +681,12 @@ char *randomString(char *p)
 	}
 	else
 	{
-		char randStr [12];
-		while(fgets(randStr, 12, rfPtr) != NULL)
+		while(fgets(p, 11, rfPtr) != NULL)
 		{
 			if(i == randLine)
 			{
 				fclose(rfPtr);
-				return randStr;
+				return p;
 			}
 			else
 			{
