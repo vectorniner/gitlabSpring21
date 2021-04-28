@@ -16,6 +16,10 @@ int main(int argc, char *argv[])
 	int x,y,z,i,h,g,k,choice=0;
 	char name[256];
 	int boxNum=0;
+	int sum = 0;
+	int number;
+        int count = 0;
+        float average;
 	srand(time(NULL));
 	printf("Please enter your name: "); //Input any number of array inputs
 	scanf("%s",name);
@@ -46,13 +50,87 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........ \n");
-					puts("Watch out, look behind you, A Meeseeks is coming towarsds you.\n");
-					scanf("%d",&choice);
+					puts("you open the door and find ........ \n"); 
+                                        puts("Watch out, look behind you, A Meeseeks is coming towarsds you.\n"); 
+                                        puts("Hi I'm  Mr.Meeseeks look at me, waving hands around.\n"); 
+                                        puts("Ask him for a request and he will complete it and disapear.\n"); 
+                                        puts("What type of request would you want to make?\n"); 
+                                        puts("1st choice is Meeseeks can take you to Blips\n"); 
+                                        puts("2nd choice is you can join Morty and go on an Adventure\n"); 
+                                        puts("3rd choice is go back through the door you came from\n"); 
+                                        scanf("%d",&choice); 
+                                         
+                                        if(choice == 1) 
+                                        { 
+                                                puts("Hi I'm Mr Meeseeks look at me.\n"); 
+                                                puts("Okay are you ready to go to Blips?\n"); 
+                                                puts("First you need Fleurbos.\n"); 
+                                                puts("Please enter how many games you want to play.\n");                                   
+                                                scanf("%d", &x); 
 
-				}
-				break;
-			}
+						puts("Enter the amount of Fleurbos that you will need for that game, one by one\n");
+						for(y = 0; y < x; ++y)
+						{
+							scanf("%d", &number);
+							sum = sum + number;
+						}
+						average = sum / y;
+                                                
+					       	printf("You will need an average of  %.2f Fleurbos, for your first time at Blips\n",average); 
+
+						return 0;
+                                                } 
+ 
+ 
+         
+                                        if(choice == 2) 
+                                        {
+                                          
+                                       		int a,b,c,d;
+                                      		printf("Hey its Morty, hurry get in, Rick isn't watching, let go on a adventure\n");
+                                       		printf("How old are you by the way?\n");
+                                       		scanf("%d",&c);         
+                                         	// int z = (rand()%10)+1;
+                                         
+                                          	d = c;
+
+                                                for(a = 1; a <= c; a++)
+                                                {       
+                                                        for(b = 1; b < d; b++)
+                                                        
+                                                                printf(" ");
+                                                        d--;
+                                                        
+                                                        for(b = 1; b <= 2 * a -1; b++)
+                                                        
+                                                                printf("*");
+
+                                                                printf("\n");
+                                                        
+                                                }
+						puts(" \n ");
+						puts("Woooaaahhh get ready for Hyper Drive \n");
+                                          return 0;
+                                         }
+
+
+
+
+                                        if(choice == 3)
+                                        {
+                                                puts("You have exited that room");
+                                        }
+                                        else
+                                        {
+                                                puts("Incorrect input, please selecte from the following choices, 1, 2, or 3.\n");
+                                        }
+
+                                        return 0;
+                                }
+                                break;
+
+                        }
+
 			case 3:
 			{
 				while(choice != 99)
@@ -349,7 +427,7 @@ int main(int argc, char *argv[])
 						break;
 					}
 					
-					else if(choice = 3)
+					else if(choice == 3)
 					{
 						puts("You back out slowly towards the previous room... but it's locked!");
 					}
@@ -643,3 +721,19 @@ void RollArray(int *arr)//LA
 		arr=ptr;
 	}
 }
+/*void upperCase(char name)//Berenis
+{
+        int i,a,c;
+
+        for(int i = 0; i <256; i++)
+        {
+                name[i] = toupper(name[i]);
+        }
+        printf("%s\n", name);
+
+        return 0;
+
+
+
+}
+*/
