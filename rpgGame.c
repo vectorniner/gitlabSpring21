@@ -833,7 +833,33 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
+					int choice26 = 0;
+					printf("you open the door and find a small room with a door on the other side and a desk with three USB drives equally spread apart, one gree, one blue, one red.\n");
+					printf("You walk over to the desk and see a message above each USB...\n\n");
+
+					do{
+						printf("1) Inspect the Green USB.\n");
+						printf("2) Inspect the Blue USB.\n");
+						printf("3) Inspect the Red USB.\n");
+						printf("4) Walk up to the door on the other side of the room.\n");
+						printf("5) Leave the room and fall into the bottomless pit.\n");
+						printf("Enter choice 1-4: ");
+						scanf("%d", &choice26);
+
+						switch(choice26)
+						{
+							case 1: printf("\nYou are now viewing the green USB\n\n");
+								break;
+							case 2: printf("\nYou are now viewing the blue USB\n\n");
+								break;
+							case 3: printf("\nYou are now viewing the red USB\n\n");
+								break;
+							case 4: printf("You walj over to the door and see a keypad lock on the door.\n\n");
+								break;
+						}
+					}while(choice26 != 5);
+
+					printf("\nChoose another room 1-40 or type 99 to exit the program.\n");
 					scanf("%d",&choice);
 				}
 				break;
