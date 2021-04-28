@@ -16,6 +16,7 @@
 void hopScotchPrint(void);
 void monikacase1(char yellowdecision[]);
 void monikacase2(char reddecision[]);
+char *randomString(char *p);
 
 void mQhelpPrompt(void); //mquail
 void mQhelpMenu(void); //mquail
@@ -708,11 +709,35 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find a penny, chip, and used napkin.");
-					scanf("%d",&choice);
+					puts("You are safe from the water, but strange random strings start to attack. What do you do?");
+					while(choice != 99)
+					{
+						char *ptr;
+						char randStr[11] = "";
+						puts("1. Smack the string in the leftmost bit");
+						puts("2. Kick the string in the rightmost bit");
+						puts("99. Exit Room");
+						scanf("%d", &choice);
+						switch(choice)
+						{
+							case 1:
+								ptr = randomString(randStr);
+								printf("String %s approaches you and you smack it!\n", ptr);
+								printf("The string is confused and altered to %s \n", ptr);
+								break;
+							case 2:
+								break;
+							case 99:
+								break;
+							default:
+								puts("You can't do that.");
+								break;
+						}
+					}
 				}
 				break;
 			}
+
 			case 33:
 			{
 				while(choice != 99)
@@ -980,6 +1005,35 @@ void monikacase2(char reddecision[])
 		}
 }
 
+
+char *randomString(char *p)
+{
+	int randLine = rand() % 100;
+	int i = 0;
+	FILE *rfPtr;
+
+	if((rfPtr = fopen("randomStrings.txt", "r")) == NULL)
+	{
+		puts("File could not be opened.");
+	}
+	else
+	{
+		while(fgets(p, 11, rfPtr) != NULL)
+		{
+			if(i == randLine)
+			{
+				fclose(rfPtr);
+				return p;
+			}
+			else
+			{
+				i++;
+			}
+		}
+		fclose(rfPtr);
+	}
+	return p;
+}
 void mQhelpPrompt(void)
 {
 	puts("-----------------------------------------------------------------------------------------");
@@ -1143,5 +1197,6 @@ int mQparser(void)
 	}
 
 	return 1;
+
 
 }
