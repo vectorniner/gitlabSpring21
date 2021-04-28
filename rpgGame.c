@@ -25,12 +25,22 @@ int mQuserInput(void); //mquail
 int mQparser(void); //mquail
 char uInput[100]; //mquail
 
+
 void play(void);//josue
+// Talise
+void printMessage(int msg[]);
+void decodeMessage(char alphabet[], int codedMessage[], int *totalGuesses, int *wrong);
+void userFate(int x);
+
+
 int main(int argc, char *argv[])
 {
 	int x,y,z,i,h,g,k,choice=0;
 	char name[256];
 	int boxNum=0;
+	int sum = 0;
+        int number;
+        float average;
 	srand(time(NULL));
 	printf("Please enter your name: "); //Input any number of array inputs
 	scanf("%s",name);
@@ -49,12 +59,86 @@ int main(int argc, char *argv[])
 		{
 			case 1:
 			{
+				int counter = 0;
 				while(choice != 99)
 				{
-					puts("Hello world");
-					scanf("%d",&choice);
+					puts("You open the door and found a lot of people jumping around");
+          				puts("You are almost certain that you have found a hidden civilization");
+          				puts("At this point it seems like you have three options");
+          				puts("Every option you choose has a hidden value related to it..");
+          				puts("Choose wisely to earn enough points to win this game!!");
+          				puts("1. Talk to the poeple and figure out why is everyone jumping!!");
+          				puts("2. Walk further down and explore the place");
+          				puts("3. Go back into the door you came from and drown");
+          				scanf("%d",&choice);
+          				if (choice == 1)
+          				{
+            					puts("You talk to one of the elders and find out that a monster has threatened the city and everyone is panicking");
+            					counter++;
+            					counter++;
 
+            					puts("The monster is a big red dragon that came upon the city to burn its lands");
+            					printf("Once again.. You have 3 options.\n1. You can fight with them\n2. You can run away\n3. You can have a random option be chosen for you.\n");
+            					scanf("%d",&choice);
+            					//switch statement
+            					switch(choice)
+            					{
+              						case 1:
+              						{
+                						puts("GREAT!! You chose to fight!");
+                						counter++;
+                						counter++;
+                						counter++;
+                						break;
+              						}
+              						case 2:
+              						{
+                						puts("WOAH! You chose to be a coward! You do not deserve to play anymore.. GG");
+                						counter--;
+                						break;
+              						}
+              						case 3:
+              						{
+                					//random
+      						 		choice = rand()%2 + 1;
+                						if (choice == 1)
+                						{
+                  							puts("GREAT!! You chose to fight!");
+                  							counter++;
+                  							counter++;
+                  							counter++;
+                  							break;
+                						}
+                						if (choice == 2)
+                						{
+                  							puts("WOAH! You chose to be a coward! You do not deserve to play anymore.. GG");
+                  							counter--;
+                  							break;
+								}
+                						break;
+              						}
+            					}
+            					break;
+          				}
+          				else if (choice == 2)
+          				{
+            					puts("You walk further down the street and you get amazed by how beautiful the city is");
+            					puts("To be continued...");
+            					counter++;
+            					break;
+          				}
+          				else if (choice == 3)
+          				{
+            					puts("You opened the door and the water killed you");
+            					counter++;
+            					break;
+          				}
+          				else
+          				{
+            					puts("Wrong choice!!!");
+          				}
 				}
+ 				printf("Counter = %d. \n \n", counter);
 				break;
 			}
 			case 2:
@@ -62,13 +146,89 @@ int main(int argc, char *argv[])
 				while(choice != 99)
 				{
 					puts("you open the door and find ........ \n");
-					puts("Watch out, look behind you, A Meeseeks is coming towarsds you.\n");
-					scanf("%d",&choice);
+                                        puts("Watch out, look behind you, A Meeseeks is coming towarsds you.\n");
+                                        puts("Hi I'm  Mr.Meeseeks look at me, waving hands around.\n");
+                                        puts("Ask him for a request and he will complete it and disapear.\n");
+                                        puts("What type of request would you want to make?\n");
+                                        puts("1st choice is Meeseeks can take you to Blips\n");
+                                        puts("2nd choice is you can join Morty and go on an Adventure\n");
+                                        puts("3rd choice is go back through the door you came from\n");
+                                        scanf("%d",&choice);
 
-				}
-				break;
-			}
-			case 3:
+                                        if(choice == 1)
+                                        {
+                                                puts("Hi I'm Mr Meeseeks look at me.\n");
+                                                puts("Okay are you ready to go to Blips?\n");
+                                                puts("First you need Fleurbos.\n");
+                                                puts("Please enter how many games you want to play.\n");
+                                                scanf("%d", &x);
+
+                                                puts("Enter the amount of Fleurbos that you will need for that game, one by one\n");
+                                                for(y = 0; y < x; ++y)
+                                                {
+                                                        scanf("%d", &number);
+                                                        sum = sum + number;
+                                                }
+                                                average = sum / y;
+
+                                                printf("You will need an average of  %.2f Fleurbos, for your first time at Blips\n",average);
+
+                                                return 0;
+                                                }
+
+
+
+                                        if(choice == 2)
+                                        {
+
+                                                int a,b,c,d;
+                                                printf("Hey its Morty, hurry get in, Rick isn't watching, let go on a adventure\n");
+                                                printf("How old are you by the way?\n");
+                                                scanf("%d",&c);
+                                                // int z = (rand()%10)+1;
+
+                                                d = c;
+
+                                                for(a = 1; a <= c; a++)
+                                                {
+                                                        for(b = 1; b < d; b++)
+
+                                                                printf(" ");
+                                                        d--;
+
+                                                        for(b = 1; b <= 2 * a -1; b++)
+
+                                                                printf("*");
+
+                                                                printf("\n");
+
+                                                }
+						puts(" \n ");
+                                                puts("Woooaaahhh get ready for Hyper Drive \n");
+                                          return 0;
+                                         }
+
+
+
+
+                                        if(choice == 3)
+                                        {
+                                                puts("You have exited that room");
+                                        }
+                                        else
+                                        {
+                                                puts("Incorrect input, please selecte from the following choices, 1, 2, or 3.\n");
+                                        }
+
+                                        return 0;
+                                }
+                                break;
+
+                        }
+
+
+      
+		case 3:
 			{
 				while(choice != 99)
 				{
@@ -166,9 +326,36 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
-					puts("hello world.");
-					scanf("%d", &choice);
+					FILE *wptr;
+                    			wptr = fopen(argv[2], "w");
+                    
+                    			int totalGuesses = 0;
+                    			int wrongGuesses = 0;
+                    			int *totalPtr = &totalGuesses;
+                    			int *wrongPtr = &wrongGuesses;
+                    			char alphabet[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'z', 'y', 'z', '\0'};
+                    			int codedMessage[10] = {8, 5, 12, 12, 15, 23, 15, 18, 12, 4};
+                    			char message[] = "Hello World";
+                    
+                    			puts("You open the door and walk inside the room.");
+                    			puts("The door locks, and the only way out is to decode a message.");
+                    
+                    			printMessage(codedMessage);
+                    			decodeMessage(alphabet, codedMessage, totalPtr, wrongPtr);
+                    
+                    			fprintf(wptr, "Total Guesses: %d \nWrong Guesses: %d \nDecoded Message: %s \n", totalGuesses, wrongGuesses, message);
+                    
+                    			x = (rand() % (3 + 1 - 1) + 1);
+                    			userFate(x);
+                    
+                    			for(i = 0; name[i] != '\0'; i++)
+                    			{
+                        			name[i] = toupper(name[i]);
+                    			}
+                    
+                    			printf("That's all, %s \n", name);
+                    
+                    			scanf("%d", &choice);
 				}
 				break;
 			}
@@ -649,7 +836,33 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
+					int choice26 = 0;
+					printf("you open the door and find a small room with a door on the other side and a desk with three USB drives equally spread apart, one gree, one blue, one red.\n");
+					printf("You walk over to the desk and see a message above each USB...\n\n");
+
+					do{
+						printf("1) Inspect the Green USB.\n");
+						printf("2) Inspect the Blue USB.\n");
+						printf("3) Inspect the Red USB.\n");
+						printf("4) Walk up to the door on the other side of the room.\n");
+						printf("5) Leave the room and fall into the bottomless pit.\n");
+						printf("Enter choice 1-4: ");
+						scanf("%d", &choice26);
+
+						switch(choice26)
+						{
+							case 1: printf("\nYou are now viewing the green USB\n\n");
+								break;
+							case 2: printf("\nYou are now viewing the blue USB\n\n");
+								break;
+							case 3: printf("\nYou are now viewing the red USB\n\n");
+								break;
+							case 4: printf("You walj over to the door and see a keypad lock on the door.\n\n");
+								break;
+						}
+					}while(choice26 != 5);
+
+					printf("\nChoose another room 1-40 or type 99 to exit the program.\n");
 					scanf("%d",&choice);
 				}
 				break;
@@ -788,7 +1001,7 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
+					puts("you open the door 38 to and found a deadly cake........");
 					scanf("%d",&choice);
 				}
 				break;
@@ -1225,4 +1438,85 @@ int mQparser(void)
 	return 1;
 
 
+}
+
+// Talise
+void printMessage(int msg[])
+{
+	int i = 0;
+    
+    	printf("Message: ");
+    
+    	while(i < 10)
+    	{
+        	printf("%d ", msg[i]);
+        	i++;
+    	}
+    
+    	printf("\n");
+}
+void decodeMessage(char alphabet[], int codedMessage[], int *totalGuesses, int *wrong)
+{
+	int i, x;
+    	char guess;
+    	char c;
+    
+    	puts("Decode the message: ");
+    
+    	for(i = 0; i < 10; i++)
+    	{
+        	printf("Enter lowercase guess for %d: ", codedMessage[i]);
+        	scanf(" %c", &guess);
+        
+        	x = (codedMessage[i] - 1);
+        	c = alphabet[x];
+        
+        	if(guess == c)
+        	{
+            		(*totalGuesses)++;
+        	}
+        
+        	while(guess != c)
+        	{
+            		printf("Try again. Enter lowercase guess for %d: ", codedMessage[i]);
+            		scanf(" %c", &guess);
+            		(*totalGuesses)++;
+            		(*wrong)++;
+        	}
+    	}
+}
+
+void userFate(int x)
+{
+	int i, score;
+    	double avg = 0.0;
+    	double sum = 0.0;
+    
+    	switch(x)
+    	{
+        	case 1:
+        	{
+            		puts("You are free.");
+            		break;
+        	}
+        	case 2:
+        	{
+            		puts("You decoded the message, but now you must enter 3 test scores: ");
+            		break;
+        	}
+    	}
+    
+    	if(x == 2)
+    	{
+        	for(i = 0; i < 3; i++)
+        	{
+            		printf("Enter score: ");
+            		scanf("%d", &score);
+            		sum += score;
+        	}
+        
+        	avg = sum / 3;
+        
+        	printf("Your test score average is: %.2lf \n", avg);
+    	}
 }
