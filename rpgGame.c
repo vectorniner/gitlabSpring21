@@ -416,8 +416,53 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
+					puts("There is a noise in the distance but you can't quite make out what it is");
+					puts("1.Do you open the door that us 50 feet in front of you or..");
+					puts("2. Do you simply stand there and see if the noise gets clearer on it's own?");
+					puts("3. You see an old, oriental gentleman in the corner which is lit up by a torch. Do you approach him?");
 					scanf("%d",&choice);
+					
+					switch(choice)
+					{
+						case 1:
+						{
+							puts("You open the door and actually find out the noise is just Naked in the Rain by the Red Hot Chili Peppers playing on a radio");
+							break;
+						}
+
+						case 2:
+						{
+							puts("The floor fails and you through it into the void");
+							break;
+						}
+
+						case 3:
+						{
+							int i, n;
+							float num[10], sum = 0.0, avg;
+							puts("The gentleman welcomes you into the corner with the light and he asks you to give him some numbers");
+							puts("However you find out that the old man cannot keep track of more than 10 values");
+							printf("Enter the amount of numbers you want to make an average out of \n");
+							scanf("%d",&n);
+
+							while(n>10 || n<1)
+							{
+								printf("Error! Keep it between 1 and 10 values. \n");
+								printf("Enter the amoount of numbers you want to average: ");
+								scanf("%d",&n);
+							}
+
+							for(i=0;i<n;++i)
+							{
+								printf("%d. Enter number: ",i+1);
+								scanf("%f",&num[i]);
+								sum += num[i];
+							}
+
+							avg = sum /n;
+							printf("Average = %.2f \n", avg);
+						}
+					}
 				}
 				break;
 			}
