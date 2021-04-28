@@ -586,7 +586,7 @@ int main(int argc, char *argv[])
 					while(choice != 99)
 					{
 						char *ptr;
-						char randStr[12] = "";
+						char randStr[11] = "";
 						puts("1. Smack the string in the leftmost bit");
 						puts("2. Kick the string in the rightmost bit");
 						puts("99. Exit Room");
@@ -595,8 +595,8 @@ int main(int argc, char *argv[])
 						{
 							case 1:
 								ptr = randomString(randStr);
-								printf("String %s approaches you and you smack it!\n", ptr);
-								printf("The string is confused and altered to %s \n", ptr);
+								printf("String \"%s\" approaches you and you smack it!\n", ptr);
+								printf("The string is confused and altered to \"%s\" \n", ptr);
 								break;
 							case 2:
 								break;
@@ -890,7 +890,7 @@ char *randomString(char *p)
 	}
 	else
 	{
-		while(fgets(p, 12, rfPtr) != NULL)
+		while(fgets(p, 11, rfPtr) != NULL)
 		{
 			if(i == randLine)
 			{
