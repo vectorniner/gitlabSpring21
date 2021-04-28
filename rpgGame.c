@@ -174,8 +174,26 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("This is the 7th door\n");
+					int rollDie;
+					rollDie = rand()%9;
+
+					puts("\n You open the door and all the water drains");
+					puts("In front of you is another door, you look closely at writing on the wall and it says");
+					puts("In order to open this doo you need to roll a random number 1-10");
+					puts("If you roll the correct number the door will open");
+					puts("What number will you choose? (99 will exit the program)");
 					scanf("%d", &choice);
+
+					if(choice == rollDie)
+					{
+						puts("Congrats the door is open");
+					}
+					else
+					{
+						puts("You lose");
+						puts("Returning back to the main menu \n\n");
+						break;
+					}	
 
 				}
 				break;
