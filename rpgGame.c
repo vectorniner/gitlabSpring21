@@ -48,12 +48,86 @@ int main(int argc, char *argv[])
 		{
 			case 1:
 			{
+				int counter = 0;
 				while(choice != 99)
 				{
-					puts("Hello world");
-					scanf("%d",&choice);
+					puts("You open the door and found a lot of people jumping around");
+          				puts("You are almost certain that you have found a hidden civilization");
+          				puts("At this point it seems like you have three options");
+          				puts("Every option you choose has a hidden value related to it..");
+          				puts("Choose wisely to earn enough points to win this game!!");
+          				puts("1. Talk to the poeple and figure out why is everyone jumping!!");
+          				puts("2. Walk further down and explore the place");
+          				puts("3. Go back into the door you came from and drown");
+          				scanf("%d",&choice);
+          				if (choice == 1)
+          				{
+            					puts("You talk to one of the elders and find out that a monster has threatened the city and everyone is panicking");
+            					counter++;
+            					counter++;
 
+            					puts("The monster is a big red dragon that came upon the city to burn its lands");
+            					printf("Once again.. You have 3 options.\n1. You can fight with them\n2. You can run away\n3. You can have a random option be chosen for you.\n");
+            					scanf("%d",&choice);
+            					//switch statement
+            					switch(choice)
+            					{
+              						case 1:
+              						{
+                						puts("GREAT!! You chose to fight!");
+                						counter++;
+                						counter++;
+                						counter++;
+                						break;
+              						}
+              						case 2:
+              						{
+                						puts("WOAH! You chose to be a coward! You do not deserve to play anymore.. GG");
+                						counter--;
+                						break;
+              						}
+              						case 3:
+              						{
+                					//random
+      						 		choice = rand()%2 + 1;
+                						if (choice == 1)
+                						{
+                  							puts("GREAT!! You chose to fight!");
+                  							counter++;
+                  							counter++;
+                  							counter++;
+                  							break;
+                						}
+                						if (choice == 2)
+                						{
+                  							puts("WOAH! You chose to be a coward! You do not deserve to play anymore.. GG");
+                  							counter--;
+                  							break;
+								}
+                						break;
+              						}
+            					}
+            					break;
+          				}
+          				else if (choice == 2)
+          				{
+            					puts("You walk further down the street and you get amazed by how beautiful the city is");
+            					puts("To be continued...");
+            					counter++;
+            					break;
+          				}
+          				else if (choice == 3)
+          				{
+            					puts("You opened the door and the water killed you");
+            					counter++;
+            					break;
+          				}
+          				else
+          				{
+            					puts("Wrong choice!!!");
+          				}
 				}
+ 				printf("Counter = %d. \n \n", counter);
 				break;
 			}
 			case 2:
