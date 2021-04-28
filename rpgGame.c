@@ -269,9 +269,39 @@ int main(int argc, char *argv[])
 			}
 			case 13:
 			{
+				// Norville Amao
 				while(choice != 99)
 				{
-					puts("Norville was here");
+					char name[20];
+					int race = 5;
+
+					puts("\nCHARACTER CREATION");
+					puts("Enter your name:");
+					scanf("%s",name);
+
+					while(race == 5){
+						puts("\nChoose your race");
+						puts("1 - human");
+						puts("2 - elf");
+						puts("3 - ilvyr");
+						puts("4 - ferren");
+						puts("5 - race information");
+						scanf("%d",&race);
+					
+						if(race == 5){
+							puts("\nTHE RACES OF HABREN");
+							puts("HUMANS");
+							puts("Known as Goddess's favorite. The most prosperous of all the races.");
+							puts("ELVES");
+							puts("The racial offpsring of ilvyrs and humans. They often live underground, opposite of their ilvyr ancestors.");
+							puts("ILVYRS");
+							puts("A race of fallen angels who have succumbed to the sin of pride. Identified by their pointed ears and white bird-like wings.");
+							puts("FERRENS");
+							puts("Often mistaken as humans. They are identified by their towering heights, especially those of their women.");
+						}
+					}
+
+					puts("\nType 99 to quit");
 					scanf("%d",&choice);
 				}
 				break;
