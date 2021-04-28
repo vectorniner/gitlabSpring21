@@ -518,7 +518,7 @@ int main(int argc, char *argv[])
 					while(choice != 99)
 					{
 						char *ptr;
-						char randStr[11] = "";
+						char randStr[12] = "";
 						puts("1. Smack the string in the leftmost bit");
 						puts("2. Kick the string in the rightmost bit");
 						puts("99. Exit Room");
@@ -681,7 +681,7 @@ char *randomString(char *p)
 	}
 	else
 	{
-		while(fgets(p, 11, rfPtr) != NULL)
+		while(fgets(p, 12, rfPtr) != NULL)
 		{
 			if(i == randLine)
 			{
