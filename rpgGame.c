@@ -470,7 +470,36 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
+					int x=0;
+					int y;
+					int z=0;
+					srand(time(NULL));
+					puts("You have entered a chamber resembling the ruins of an Ancient Egyptian Temple ");
+					puts("The door to your left shows signs of innocence");
+					puts("while the door to your right emits a dark and powerful energy");
+					puts("You see a dark figure in the distance");
+					puts("He tosses a coin");
+					for (i=0;i<1;i++)
+					{
+			y = rand()%2;
+			if(y==1)
+			{
+				x++;
+					puts("The coin lands on heads");
+					puts("Fate has decided for you to choose the door to your left");
+			}
+			else
+			{
+	
+				z++;
+				puts("the coin lands on tails");
+				puts("???: Fate has decide for you to walk through the door to your right ");
+			}
+
+				printf("???: %s would you ignore fate \n",name);
+				puts("???: Pick a door?!");
+					}
+
 					scanf("%d",&choice);
 				}
 				break;
