@@ -595,8 +595,8 @@ int main(int argc, char *argv[])
 						{
 							case 1:
 								ptr = randomString(randStr);
-								printf("String \"%s\" approaches you and you smack it!\n", ptr);
-								printf("The string is confused and altered to \"%s\" \n", ptr);
+								printf("String %s approaches you and you smack it!\n", ptr);
+								printf("The string is confused and altered to %s \n", ptr);
 								break;
 							case 2:
 								break;
