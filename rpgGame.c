@@ -1,6 +1,8 @@
+
 //Contributors
 //G. Poppe
 //Meredith Quail
+
 
 
 #include <stdlib.h>
@@ -10,7 +12,10 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-void RollArray(int *arr);//LA
+//void RollArray(int *arr);//LA
+void hopScotchPrint(void);
+void monikacase1(char yellowdecision[]);
+void monikacase2(char reddecision[]);
 
 void mQhelpPrompt(void); //mquail
 void mQhelpMenu(void); //mquail
@@ -24,7 +29,7 @@ int main(int argc, char *argv[])
 	int x,y,z,i,h,g,k,choice=0;
 	char name[256];
 	int boxNum=0;
-
+	srand(time(NULL));
 	printf("Please enter your name: "); //Input any number of array inputs
 	scanf("%s",name);
 
@@ -72,41 +77,40 @@ int main(int argc, char *argv[])
 					
 					switch(choice)
 					{
-						case 1:
-						{
+						// case 1:
+						// {
 							
 
-								char a;
+						// 		char a;
+							
 								
-								srand(time(NULL));
+						// 		int DieArr[6];
 								
-								int DieArr[6];
+						// 		for (i=0;i<6;i++)
+						// 		{
+						// 			DieArr[i] = 0;
+						// 		}
 								
-								for (i=0;i<6;i++)
-								{
-									DieArr[i] = 0;
-								}
+						// 		puts("You stumble into a room, and a skeleton behind a counter and holds a die");
+						// 		puts("He asks you with a hollow voice, Hi would you like to roll the dice? [Y]es or [N]o");
+						// 		scanf("%c", &a);
 								
-								puts("You stumble into a room, and a skeleton behind a counter and holds a die");
-								puts("He asks you with a hollow voice, Hi would you like to roll the dice? [Y]es or [N]o");
-								scanf("%c", &a);
-								
-								if(a=='y')
-								{
-									RollArray(DieArr);
+						// 		if(a=='y')
+						// 		{
+						// 			RollArray(DieArr);
 									
-									for (i=0;i<6;i++)
-									{
-										printf("%d = %d\n", i+1 , DieArr);
-									}
-								}
+						// 			for (i=0;i<6;i++)
+						// 			{
+						// 				printf("%d = %d\n", i+1 , DieArr);
+						// 			}
+						// 		}
 								
 
 
 								
 							
-							break;
-						}
+						// 	break;
+						// }
 						case 2:
 						{
 							while(choice != 99)
@@ -135,9 +139,24 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
-					puts("BOOM! arrow to the knee!");
+					puts("you open the door slowly, you hear a click in the distance:");
+					puts("Do you close the door or open it fast? Type 1 for open and 2 for close.");
 					scanf("%d",&choice);
+
+					switch(choice)
+					{
+						case 1:
+						{
+							puts("you get hit with an arrow in the knee!");
+							break;
+						}	
+
+						case 2:
+						{
+							puts("you hear an arrow hit the door");
+							break;
+						}
+					}
 				}
 				break;
 			}
@@ -328,9 +347,39 @@ int main(int argc, char *argv[])
 			}
 			case 13:
 			{
+				// Norville Amao
 				while(choice != 99)
 				{
-					puts("Norville was here");
+					char name[20];
+					int race = 5;
+
+					puts("\nCHARACTER CREATION");
+					puts("Enter your name:");
+					scanf("%s",name);
+
+					while(race == 5){
+						puts("\nChoose your race");
+						puts("1 - human");
+						puts("2 - elf");
+						puts("3 - ilvyr");
+						puts("4 - ferren");
+						puts("5 - race information");
+						scanf("%d",&race);
+					
+						if(race == 5){
+							puts("\nTHE RACES OF HABREN");
+							puts("HUMANS");
+							puts("Known as Goddess's favorite. The most prosperous of all the races.");
+							puts("ELVES");
+							puts("The racial offpsring of ilvyrs and humans. They often live underground, opposite of their ilvyr ancestors.");
+							puts("ILVYRS");
+							puts("A race of fallen angels who have succumbed to the sin of pride. Identified by their pointed ears and white bird-like wings.");
+							puts("FERRENS");
+							puts("Often mistaken as humans. They are identified by their towering heights, especially those of their women.");
+						}
+					}
+
+					puts("\nType 99 to quit");
 					scanf("%d",&choice);
 				}
 				break;
@@ -345,51 +394,72 @@ int main(int argc, char *argv[])
 			}
 			case 15:
 			{
-				while(choice != 99)
-                {
-                    puts("Choose a path:\n 1 (yellow)\n 2 (red)\n 3 (green)\n");
-					puts("Exit (99)");
-                    scanf("%d", &choice);
+				while (choice != 99)
+				{
+					char yellowdecision[2];
+					char reddecision[2];
 
-                    switch(choice)
-                    {
-                        case 1:
-                        {
-                            puts("yellow");
-                            puts("exit (99)");
-                            scanf("%d", &choice);
+					puts("Choose a path:\n 1 (yellow)\n 2 (red)\n 3 (green)\n");
+					scanf("%d", &choice);
 
-                            break;
-                        }
-                        case 2:
-                        {
-                            puts("red");
-                            puts("exit (99)");
-                            scanf("%d", &choice);
+					switch (choice)
+					{
+						case 1:
+						{
+							monikacase1(yellowdecision);
+							break;
+						}
+						case 2:
+						{
+							monikacase2(reddecision);
+							break;
+						}
+						case 3:
+						{
+							puts("green");
+							puts("exit (99)");
+							scanf("%d", &choice);
 
-                            break;
-                        }
-                        case 3:
-                        {
-                            puts("green");
-                            puts("exit (99)");
-                            scanf("%d", &choice);
-
-                            break;
-                        }
-                        break;
-                    }
-				break;
+							break;
+						}
+					}
 				}
 			}
 			case 16:
 			{
 				while(choice != 99)
 				{
-					puts("hello world");
-					puts("the door is stuck");
+					puts("The room is dark and cold");
+					puts("You look at the empty room with empty Shelves..");
+					puts("You think to yourself, there's nothing of value in here..");
+					puts("What should you do?");
+					puts("1. Move and advance to the next room");
+					puts("2. Examine the room a little more carefully");
+					puts("3. Go back to the last room");
 					scanf("%d", &choice);
 
+					if(choice == 1)
+					{
+						puts("You go towards the door, but the handle is locked..");
+						puts("*Maybe you should examine the room..");
+						break;
+					}
+
+					else if(choice == 2)
+					{
+						puts("You look at the very top of the shelf and find a old brass key");
+						break;
+					}
+					
+					else if(choice = 3)
+					{
+						puts("You back out slowly towards the previous room... but it's locked!");
+					}
+
+					else
+					{
+						puts("Try again");
+					}
 				}
 				break;
 			}
@@ -426,8 +496,53 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
+					puts("There is a noise in the distance but you can't quite make out what it is");
+					puts("1.Do you open the door that us 50 feet in front of you or..");
+					puts("2. Do you simply stand there and see if the noise gets clearer on it's own?");
+					puts("3. You see an old, oriental gentleman in the corner which is lit up by a torch. Do you approach him?");
 					scanf("%d",&choice);
+					
+					switch(choice)
+					{
+						case 1:
+						{
+							puts("You open the door and actually find out the noise is just Naked in the Rain by the Red Hot Chili Peppers playing on a radio");
+							break;
+						}
+
+						case 2:
+						{
+							puts("The floor fails and you through it into the void");
+							break;
+						}
+
+						case 3:
+						{
+							int i, n;
+							float num[10], sum = 0.0, avg;
+							puts("The gentleman welcomes you into the corner with the light and he asks you to give him some numbers");
+							puts("However you find out that the old man cannot keep track of more than 10 values");
+							printf("Enter the amount of numbers you want to make an average out of \n");
+							scanf("%d",&n);
+
+							while(n>10 || n<1)
+							{
+								printf("Error! Keep it between 1 and 10 values. \n");
+								printf("Enter the amoount of numbers you want to average: ");
+								scanf("%d",&n);
+							}
+
+							for(i=0;i<n;++i)
+							{
+								printf("%d. Enter number: ",i+1);
+								scanf("%f",&num[i]);
+								sum += num[i];
+							}
+
+							avg = sum /n;
+							printf("Average = %.2f \n", avg);
+						}
+					}
 				}
 				break;
 			}
@@ -435,7 +550,36 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
+					int x=0;
+					int y;
+					int z=0;
+					srand(time(NULL));
+					puts("You have entered a chamber resembling the ruins of an Ancient Egyptian Temple ");
+					puts("The door to your left shows signs of innocence");
+					puts("while the door to your right emits a dark and powerful energy");
+					puts("You see a dark figure in the distance");
+					puts("He tosses a coin");
+					for (i=0;i<1;i++)
+					{
+			y = rand()%2;
+			if(y==1)
+			{
+				x++;
+					puts("The coin lands on heads");
+					puts("Fate has decided for you to choose the door to your left");
+			}
+			else
+			{
+	
+				z++;
+				puts("the coin lands on tails");
+				puts("???: Fate has decide for you to walk through the door to your right ");
+			}
+
+				printf("???: %s would you ignore fate \n",name);
+				puts("???: Pick a door?!");
+					}
+
 					scanf("%d",&choice);
 				}
 				break;
@@ -463,6 +607,7 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
+					puts("Hello World");
 					puts("you open the door and find ........");
 					scanf("%d",&choice);
 				}
@@ -513,21 +658,23 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
+					puts("This is Sean.");
 					puts("you open the door and find ........");
 					scanf("%d",&choice);
 				}
 				break;
 			}
 
-			case 30:
+			case 30://Markease's room of "why did you do this?"
+		       	{
+			while(choice != 99)
 			{
-				while(choice != 99)
-				{
-					puts("you open the door and find ........");
-					scanf("%d",&choice);
-				}
-				break;
-			}
+				puts("you open the door and find ........");
+				puts("Some guy screaming hello world. You panic and press 99!");
+				scanf("%d",&choice);
+		       	}
+			break;
+																                }
 
 			case 31:
 			{
@@ -659,19 +806,160 @@ int main(int argc, char *argv[])
 	return EXIT_SUCCESS;
 }
 
-void RollArray(int *arr)//LA
-{
-	int i;
-	int y;
-	int *ptr;
-	ptr = arr;
+// void RollArray(int *arr)//LA
+// {
+// 	int i;
+// 	int y;
+// 	int *ptr;
+// 	ptr = arr;
 	
-	for (i=0;i<1;i++)
+// 	for (i=0;i<1;i++)
+// 	{
+// 		y= rand()%6;
+// 		*(arr+y) = *(arr+y)+1;
+// 		arr=ptr;
+// 	}
+// }
+
+
+
+void hopScotchPrint()
+{
+	puts("       ______       ");
+	puts("      |   1  |      ");
+	puts(" _____|______|_____ ");
+	puts("|  2  |   3  |  4  |");
+	puts("|_____|______|_____|");
+	puts("      |   5  |      ");
+	puts(" _____|______|_____ ");
+	puts("|  6  |   7  |  8  |");
+	puts("|_____|______|_____|");
+	puts("      |   9  |      ");
+	puts("      |______|      ");
+	puts("      |  10  |      ");
+	puts("      |______|      \n");
+
+	puts("do you want to play with it?\ny or n\n");
+}
+
+void monikacase1(char yellowdecision[])
+{
+	puts("You chose the yellow path, as you walk you see a hop scotch drawn on the floor\n");
+	hopScotchPrint();
+	scanf(" %s", yellowdecision);
+	//prints hopscotch
+
+	if (strcmp(yellowdecision, "y") == 0)
+	//if its equal to each other
+	//0 = true, !0 == false
 	{
-		y= rand()%6;
-		*(arr+y) = *(arr+y)+1;
-		arr=ptr;
+		int jumps = 0;
+		int i = 0;
+		char anotherRoll[2];
+		srand(time(NULL));
+
+		int yellowTries = 0;
+		while (jumps != 6)
+		{
+			yellowTries++;
+			if (yellowTries > 2)
+			{
+				puts("\nYou ran out of attempts, good bye\n");
+				break;
+			}
+			//left off in trying to create limit of attempts but it doesnt work
+			//try to fix when possible
+
+			//create a dice that goes
+			//from 1-6 for the amount of spaces the person jumps
+
+			puts("You stand infront of the first box, and you find a 6 sided die\nnext to the die theres a note that says to roll the die in order to jump.\nDo you want to roll again? (y or n)\n");
+			scanf(" %s", anotherRoll);
+			//while the choices are wrong, do the below
+			//but if its right it will exit and move forward
+
+			if (strcmp(anotherRoll, "y") == 0)
+			{
+				jumps = (rand() % 6) + 1;
+				//printf("Random : %d\n", jumps);
+				//above prints one int
+				if (jumps != 6)
+				{
+					printf("You got %d from the die, it wasnt enough to go to the other side, re-roll.\n", jumps);
+				}
+				else
+				{
+					printf("You got %d, you can pass\n", jumps);
+					break;
+				}
+			}
+		}
 	}
+
+	else if (strcmp(yellowdecision, "n") == 0)
+	{
+		printf("Youre taken back to your previous path\n");
+	}
+}
+
+void monikacase2(char reddecision[])
+{
+	char key[20], usertry[50], pressF[2];
+	FILE *monikaoutput, *Deciphered;
+	monikaoutput = fopen("output.txt", "w");
+	Deciphered = fopen("Deciphered.txt", "r");
+
+	puts("Youve chosen the red road, and you see a blue tunnel. You enter and you\nsee a wall with a code pad on it, its asking if you\nwant to see the prompt to move forward. Do you say yes or no? (y or n)\n");
+	scanf(" %c", reddecision);
+	//create a text thing where we show the user the file and we make them
+	//deciper the code and if its right they will move forward
+	int keepLooping = 1;
+	while (strcmp(reddecision, "y") == 0 && keepLooping == 1)
+	{
+		printf("\nDecipher the following text: \nOnce you have an answer, input it below\n");
+		puts("\n71 97 114 114 101 116 116 66 108 117 80 111 112 112 101\n"); //text file to decipher
+		puts("Need a hint? Ask the key\n");
+		scanf(" %s", usertry);
+		//if yes then we will prompt the text and ask to deciper
+
+		fscanf(Deciphered, " %s", key);
+		if (strcmp(usertry, key) == 0) //check if the same then continue
+		{
+			puts("user try worked\n");
+			puts("You can see your previous attempts in the output.txt file\n");
+			keepLooping = 0;
+		}
+		else
+		{
+			fprintf(monikaoutput, "Failed Attempt: %s\n", usertry);
+		}
+		//im trying to compare user input with a key txt file I have
+		//then print the key file answer and say it was correct
+		//if its correct then it will move forward
+
+		//i was able to compare the user input to contents inside
+		fprintf(monikaoutput, "\n");
+	}
+		rewind(monikaoutput);
+		fclose(monikaoutput);
+
+		if (strcmp(reddecision, "n") == 0)
+		{
+			puts("You said no\n");
+
+			puts("You tried going back to the entrance and fell through a dirt hole and died, press f to pay respects\n");
+			scanf(" %c", pressF);
+
+			if (strcmp(pressF, "f") == 0)
+			{
+				exit(1);
+			}
+			else
+			{
+				puts("fine then, dont pay respects\n");
+				exit(1);
+			}
+		}
 }
 
 void mQhelpPrompt(void)
