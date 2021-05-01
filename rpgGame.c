@@ -38,6 +38,11 @@ void printMessage(int msg[]);
 void decodeMessage(char alphabet[], int codedMessage[], int *totalGuesses, int *wrong);
 void userFate(int x);
 
+// Tien Tran Functions Start
+void room_37_read_instructions_from_file();
+int room_37_guess_number(int);
+int room_37_prompt_guess(int, int);
+// Tien Tran Functions End
 
 int main(int argc, char *argv[])
 {
@@ -1286,7 +1291,48 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
+					room_37_read_instructions_from_file();
+					scanf("%d",&choice);
+					while(!(choice>=1 && choice <=3)) {
+						puts("You have selected an incorrect choice Please choose again.\n");
+						scanf("%d",&choice);
+					}
+					switch(choice) {
+						case 1:
+							puts("You have selected to fight Godzilla.\n");
+							puts("Godzilla's signature weapon is his distinctive atomic breath. Godzilla's dorsal spines glow ominously, and then he lets loose with a concentrated blast of radiation from his mouth\n");
+							puts("In addition to his deadly atomic breath, Godzilla can also emit atomic energy in all directions from every inch of his body in a short-range pulse called the nuclear pulse\n");
+							puts("Godzilla displays an uncanny ability to resist injury. Not even the pressure and cold of deep sea trenches can kill him.\n");
+							puts("Godzilla is vulnerable to electricity\n");
+							break;
+						case 2:
+							puts("You have selected to fight King Ghidorah\n");
+							puts("When Ghidorah becomes the alpha, he lets out an extremely loud and powerful call that could be heard by the other Titans all around the world\n");
+							puts("Ghidorah has an electro-receptor molecular biology, and his skin is covered with traces of gold that acts as a conductor that carries bioelectrical currents throughout his body.\n");
+							puts("Ghidorah can drain energy and electricity directly into himself by biting down on power sources.\n");
+							break;
+						case 3:
+							puts("You have selected to fight King Kong\n");
+							puts("Kong is also remarkably intelligent. He makes use of environmental objects like trees or rocks when fighting, and even when overwhelmed by more powerful or more numerous opponents he can think on his feet and find a way to win.\n");
+							puts("Kong also demonstrates durability when he is able to continue fighting against airplanes and even destroy some of them after being riddled with bullets.\n");
+							break;
+						default:
+							break;
+					}
+					puts("Good Luck Hero. The fate of earth depends on you.\n");
+
+					puts("For hitting the target you have to guess a number between 1 and 30 inclusive\n");
+					puts("You will have 10 chances to guess it\n");
+					number = (rand() % 30) + 1;
+					int firstRound = room_37_guess_number(number);
+					if(firstRound == 0) {
+						puts("Sorry :( You guess is incorrect. But don't worry as you have a second round too.\n");
+					}
+					else {
+						puts("Congrats :) You guess is correct, now you need to win the second round as well.\n");
+					}
+
+					puts("Enter 99 to exit this room or enter any other number to repeat this room\n");
 					scanf("%d",&choice);
 				}
 				break;
@@ -1878,3 +1924,60 @@ void printRules(int rollsPerTurn, int pointsToLoose)
 	puts("- After each turn, you will get an opportunity to roll again or stop rolling.");
 	puts("- If you choose to stop rolling, you can no longer roll for the rest of the game.");
 } // Manuel Castaneda
+
+// Tien Tran Function
+void room_37_read_instructions_from_file() {
+	int bufferLength = 255;
+	char buffer[bufferLength];
+	FILE *rptr;
+	rptr=fopen("instructions_room_37","r");
+	if (rptr == NULL) {
+		puts("You open a door and you find 3 monsters standing right in front of you.\n\n");
+		puts("You must take on one monster to prove your authority over them.\n");
+		puts("You can\n");
+		puts("-> Press 1 to tackle Godzilla\n");
+		puts("-> Press 2 to tackle King Ghidorah\n");
+		puts("-> Press 3 to tackle King Kong\n\n");
+		puts("Unlike the movies just defeating one of them will show your courage to others and they will back out.\n\n");
+		puts("What is your choice Hero?\n");
+	}
+	else {
+		while(fgets(buffer, bufferLength, rptr)) {
+			printf("%s", buffer);
+		}
+	}
+}
+// Tien Tran Function
+int room_37_guess_number(int number) {
+	int guess;
+	int guesses_remaining = 10;
+	while(guesses_remaining != 0) {
+		guess = room_37_prompt_guess(1, 30);
+		if(guess ==  number) {
+			puts("You guessed right. Congrats\n");
+			break;
+		}
+		else if(guess > number) {
+			puts("Your guess is greater than the number");
+		}
+		else {
+			puts("Your guess is less than the number");
+		}
+		guesses_remaining--;
+	}
+	if(guesses_remaining != 0) {
+		return 1;
+	}
+	return 0;
+}
+// Tien Tran Function
+int room_37_prompt_guess(int minimum, int maximum) {
+	printf("Enter your guess between %d and %d inclusive\n", minimum, maximum);
+	int guess;
+	scanf("%d", &guess);
+	while(!(guess >=minimum && guess <= maximum)) {
+        printf("Enter your guess between %d and %d inclusive\n", minimum, maximum);
+        scanf("%d", &guess);
+    }
+	return guess;
+}
