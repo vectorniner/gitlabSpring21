@@ -1291,6 +1291,8 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
+					char monster[20] = "";
+					char action[1000];
 					room_37_read_instructions_from_file();
 					scanf("%d",&choice);
 					while(!(choice>=1 && choice <=3)) {
@@ -1304,17 +1306,20 @@ int main(int argc, char *argv[])
 							puts("In addition to his deadly atomic breath, Godzilla can also emit atomic energy in all directions from every inch of his body in a short-range pulse called the nuclear pulse\n");
 							puts("Godzilla displays an uncanny ability to resist injury. Not even the pressure and cold of deep sea trenches can kill him.\n");
 							puts("Godzilla is vulnerable to electricity\n");
+							strcpy(monster, "Godzilla");
 							break;
 						case 2:
 							puts("You have selected to fight King Ghidorah\n");
 							puts("When Ghidorah becomes the alpha, he lets out an extremely loud and powerful call that could be heard by the other Titans all around the world\n");
 							puts("Ghidorah has an electro-receptor molecular biology, and his skin is covered with traces of gold that acts as a conductor that carries bioelectrical currents throughout his body.\n");
 							puts("Ghidorah can drain energy and electricity directly into himself by biting down on power sources.\n");
+							strcpy(monster, "King Ghidorah");
 							break;
 						case 3:
 							puts("You have selected to fight King Kong\n");
 							puts("Kong is also remarkably intelligent. He makes use of environmental objects like trees or rocks when fighting, and even when overwhelmed by more powerful or more numerous opponents he can think on his feet and find a way to win.\n");
 							puts("Kong also demonstrates durability when he is able to continue fighting against airplanes and even destroy some of them after being riddled with bullets.\n");
+							strcpy(monster, "King Kong");
 							break;
 						default:
 							break;
@@ -1330,8 +1335,23 @@ int main(int argc, char *argv[])
 					}
 					else {
 						puts("Congrats :) You guess is correct, now you need to win the second round as well.\n");
-					}
+						puts("Now the plasma beam is fully charged up. Type fire\n");
+						scanf("%s", action);
+						for(i=0;i<strlen(action);i++) {
+							action[i] = tolower(action[i]);
+						}
+						while(strcmp(action, "fire") != 0) {
+							puts("Type fire to fire the plasma beam\n");
+							scanf("%s", action);
+							for(i=0;i<strlen(action);i++) {
+								action[i] = tolower(action[i]);
+							}
+						}
+						printf("%s has suffered a fatal blow from plasma beam\n", monster);
 
+					}
+					
+					
 					puts("Enter 99 to exit this room or enter any other number to repeat this room\n");
 					scanf("%d",&choice);
 				}
