@@ -911,9 +911,49 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
-					puts("another door blocking the door");
-					scanf("%d",&choice);
+					puts("\nYou open the door and find ........");
+					puts("Yourself inside of JoJos Bizarre Dungeon. \n");
+					
+					puts("Select your stand");
+					puts("1. Star Platinum");
+					puts("2. Golden Experience.");
+					puts("3. Mr. President ");
+					scanf(" %d", &choice);
+					
+						switch(choice)
+					{
+						case 1:
+						{
+							puts("\nDIO, the arch nemesis of the Joestar family bloodline, has successfully killed your grandpa and drank his blood achieving an incredible power buff.");
+							puts("You must defeat DIO to revive your uncle and save humanity.");
+							x = 100;
+							y = 100;
+							a = 1;
+							z = dpsCalc(x, y, a);
+							printResults(z, a);
+							
+							break;
+						}
+						case 2:
+						{
+							puts("\nDiavolo, the head of an italian mafia that sells drugs to kids, is about to acquire a requiem arrow that will allow him to upgrade his stand and become the strongest stand user in existance.");
+							puts("You must get to the arrow before him in order to upgrade your stand and become head of the mafia and stop the flow of drugs to the kids.");
+							x = 100;
+							y = 100;
+							a = 2;
+							z = dpsCalc(x, y, a);
+							printResults(z, a);
+
+							break;
+						}
+						case 3:
+						{
+							puts("Not finished \n");
+							break;
+						}
+					}
+					puts("Thank you for playing.");
+					exit(0);	
 				}
 				break;
 			}
