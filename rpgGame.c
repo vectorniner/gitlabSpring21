@@ -270,6 +270,7 @@ int main(int argc, char *argv[])
 				while(choice != 99)
 				{
 					puts("you open the door and find ........");
+					printf("Hello World");
 					scanf("%d",&choice);
 				}
 				break;
