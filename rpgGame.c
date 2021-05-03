@@ -31,6 +31,7 @@ double averageM(int rolls[], int numberOfRolls);										 // Manuel Castaneda
 double sumM(double sums[], int maxSums);														 // Manuel Castaneda
 void printRollResults(int rolls[], int numberOfRolls, int isUser); // Manuel Castaneda
 
+int patrickInitialPrompt(void); // Patrick Woods
 
 void play(void);//josue
 // Talise
@@ -707,53 +708,195 @@ int main(int argc, char *argv[])
 			}
 			case 20:
 			{
+				puts("There is a noise in the distance but you can't quite make out what it is");
 				while(choice != 99)
 				{
-					puts("There is a noise in the distance but you can't quite make out what it is");
-					puts("1.Do you open the door that us 50 feet in front of you or..");
-					puts("2. Do you simply stand there and see if the noise gets clearer on it's own?");
-					puts("3. You see an old, oriental gentleman in the corner which is lit up by a torch. Do you approach him?");
-					scanf("%d",&choice);
-					
-					switch(choice)
+					patrickInitialPrompt();
+					scanf("%d",&choice);			
+					if(choice == 1)
 					{
-						case 1:
+						puts("You open the door and actually find out the noise is just Naked in the Rain by the Red Hot Chili Peppers playing on a radio");
+						puts("You actually see a guitar next to the radio. Do you pick it up? 1 for yes, 2 for no");
+						scanf("%d",&choice);
+						switch(choice)
 						{
-							puts("You open the door and actually find out the noise is just Naked in the Rain by the Red Hot Chili Peppers playing on a radio");
-							break;
+							case 1:
+							{
+								puts("You pick it up and suddenly feel a change in your body. Maybe it's the 5G everyone jokes about");
+								break;
+							}
+							case 2:
+							{
+								puts("Someone comes out of the shadows and hits you over the head with it. You died.");
+							}
 						}
+					}
 
-						case 2:
-						{
-							puts("The floor fails and you through it into the void");
-							break;
-						}
+					else if (choice == 2)
+					{
+						puts("The floor fails and you through it into the void");
+					}
 
-						case 3:
+					else if(choice == 3)
+					{
+						int i, n;
+						float num[10], sum = 0.0, avg;
+						puts("The gentleman welcomes you into the corner with the light and he asks you to give him some numbers");
+						puts("However you find out that the old man cannot keep track of more than 10 values");
+						printf("Enter the amount of numbers you want to make an average out of \n");
+						scanf("%d",&n);
+
+						while(n>10 || n<1)
 						{
-							int i, n;
-							float num[10], sum = 0.0, avg;
-							puts("The gentleman welcomes you into the corner with the light and he asks you to give him some numbers");
-							puts("However you find out that the old man cannot keep track of more than 10 values");
-							printf("Enter the amount of numbers you want to make an average out of \n");
+							printf("Error! Keep it between 1 and 10 values. \n");
+							printf("Enter the amoount of numbers you want to average: ");
 							scanf("%d",&n);
+						}
 
-							while(n>10 || n<1)
+						for(i=0;i<n;++i)
+						{
+							printf("%d. Enter number: ",i+1);
+							scanf("%f",&num[i]);
+							sum += num[i];
+						}
+
+						avg = sum /n;
+						printf("Average = %.2f \n", avg);
+					}
+					else if(choice == 4)
+					{
+						puts("Why does this person say they're your 4th grade English teacher? You don't even remember them");
+						puts("They say their catchphrase and you realize this person is the real deal");
+						puts("The teacher asks if you want to see the grade for the test that he never gave back to you. 1 to see, 2 to not see");
+						scanf("%d",&choice);
+						if(choice == 1)
+						{
+							srand(time(NULL));
+							int i;
+							for(i=0;i<1;i++)
 							{
-								printf("Error! Keep it between 1 and 10 values. \n");
-								printf("Enter the amoount of numbers you want to average: ");
-								scanf("%d",&n);
+								printf("Ok, your score was %d \n", rand()%101);
+								printf("Are you satisfied with that? You better be cause that's your final score \n");
+							}
+						}
+						else if(choice == 2)
+						{
+							printf("Well it's ok you don't want to see. You probably failed anyway \n");
+							puts("There is one thing you can try to do so you can redeem yourself though. A simple test that is \n");
+							puts("Press 1 to try one test, 2 to do the other");
+							scanf("%d",&choice);
+							if(choice == 1)
+							{
+								char string[25];
+								int i;
+								printf("\n Enter one really long word in all uppercase letters please, no spaces: ");
+								scanf("%s",string);
+
+								for(i=0;string[i]!='\0';i++)
+								{
+									if(string[i] >= 'A' && string[i] <='Z')
+									{
+										string[i] = string[i]+32;
+									}
+								}
+								printf("\n The really long word you entered is now in lowercase = %s \n", string);
+								puts("The only reason I had you do this was because I wanted to make sure you were paying attention.");
+							}
+							else if(choice == 2)
+							{
+								char strin[25];
+								int i;
+								printf("\n Enter one really long word in all lowercase letters please, no spaces");
+								scanf("%s",strin);
+
+								for(i=0;strin[i]!='\0';i++)
+								{
+									if(strin[i]>= 'a' && strin[i] <= 'z')
+									{
+										strin[i] = strin[i]-32;
+									}
+								}
+								printf("\n The really long word you entered in upper case = %s \n",strin);
+								puts("The only reason I had you do this was because I wanted to make sure that you were paying attention.");
+							}
+						}
+					}
+					else if (choice == 5)
+					{
+						char checkin[250];
+						FILE *kbr;
+						printf("Select a #1-4 and you will be given a question to answer. Your answer will be in a seperate file you can check \n");
+						puts("Be aware though. The first questions writes to a file while the other 3 append to it.");
+						puts("For best results, start with question 1 and go on down from there.");
+						scanf("%d",&choice);
+						if(choice == 1)
+						{
+
+							kbr = fopen("goodfeel.txt","w");
+
+
+							if(kbr == NULL)
+							{
+								printf("There is an error. Cannot open file");
+								exit(1);
 							}
 
-							for(i=0;i<n;++i)
+							printf("How is your day going so far? \n");
+							scanf("%d",checkin);
+							fgets(checkin,sizeof(checkin),stdin);
+							fprintf(kbr, "%10s", checkin);
+							fclose(kbr);
+				
+						}
+
+						else if(choice == 2)
+						{
+
+							kbr = fopen("goodfeel.txt","a");
+
+							if(kbr == NULL)
 							{
-								printf("%d. Enter number: ",i+1);
-								scanf("%f",&num[i]);
-								sum += num[i];
+								printf("There is an error. Cannot find file");
+								exit(1);
 							}
 
-							avg = sum /n;
-							printf("Average = %.2f \n", avg);
+							printf("What is your favorite ice cream flavor? \n");
+							scanf("%d",&checkin);
+							fgets(checkin,sizeof(checkin),stdin);
+							fprintf(kbr,"\n%10s",checkin);
+							fclose(kbr);
+						}
+						else if(choice == 3)
+						{
+							kbr = fopen("goodfeel.txt","a");
+
+							if(kbr == NULL)
+							{
+								printf("There is an error. Cannot find file");
+								exit(1);
+							}
+
+							printf("What is your favorite car? \n");
+							scanf("%d",&checkin);
+							fgets(checkin,sizeof(checkin),stdin);
+							fprintf(kbr,"\n%10s",checkin);
+							fclose(kbr);
+						}
+						else if(choice == 4)
+						{
+							kbr = fopen("goodfeel.txt","a");
+
+							if(kbr == NULL)
+							{
+								printf("There is an error. Cannot find file");
+								exit(1);
+							}
+
+							printf("Who is your favorite celebrity? \n");
+							scanf("%d",&checkin);
+							fgets(checkin,sizeof(checkin),stdin);
+							fprintf(kbr,"\n%10s",checkin);
+							fclose(kbr);
 						}
 					}
 				}
@@ -1878,3 +2021,13 @@ void printRules(int rollsPerTurn, int pointsToLoose)
 	puts("- After each turn, you will get an opportunity to roll again or stop rolling.");
 	puts("- If you choose to stop rolling, you can no longer roll for the rest of the game.");
 } // Manuel Castaneda
+
+int patrickInitialPrompt(void)
+{
+	puts("1. Do you open the door that is 50 feet in front of you or..");
+	puts("2. Do you simply stand there and see if the noise gets clearer on its own?");
+	puts("3. You see an old, oriental gentleman in the corner which is lit up by a torch. Do you approach him?");
+	puts("4. Your 4th grade English teacher says they can help you with something. Select this option to see what they're talking about");
+	puts("5. Answer some basic questions");
+	puts("You can also enter 99 to exit!");
+}
