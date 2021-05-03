@@ -2424,19 +2424,222 @@ int room_37_prompt_guess(int minimum, int maximum) {
 
 void printResults(int z, int a)
 {
-	//Carlos Gonzalez
+		//Carlos Gonzalez
 	int i;
 	FILE *wpointer;
 
-
-	printf("fix");
-
 	wpointer = fopen("output.txt", "a");
+ 		
+	if(a == 1)
+	{
+		if(z == 1)
+		{
+			puts("\nYou reverse the time stop on DIO for 9 seconds.");
+			puts("You find a road roller, crush him with it, and throw a flurry of punches at it.");
+			puts("After the 9 seconds pass the road roller explodes killing DIO, you win.");
+			printf("Check your ouput file for your win screen\n");
+
+			for(i = 0; i <= 99; i++)
+			{
+				fprintf(wpointer, "ORA ORA ORA\n");
+			}
+		}
+		if(z == 0)
+		{
+
+			printf("\nYour health drops below zero and DIO crushes you with a road roller, you are dead\n");
+			printf("Check your ouput file for your lose screen\n");
+
+			for(i = 0; i <= 99; i++)
+			{
+				fprintf(wpointer, "GAME OVER GAME OVER GAME OVER\n");
+			}
+		}
+	}
+
+	if(a == 2)
+	{
+		if(z == 1)
+		{
+			puts("\nYou acquire the requiem arrow and undergo a transformation making you the strongest on earth.");
+			puts("Diavolo attempts to use epitaph to attack, but has his attack is automatically deflected by Golden Experience Requiem.");
+			puts("You place him in an infinite death loop and become the ultimate gang star.");
+			printf("Check your ouput file for your win screen\n");
+			for(i = 0; i <= 99; i++)
+			{
+				fprintf(wpointer, "MUDA MUDA MUDA\n");
+			}
+
+		}
+		if(z == 0)
+		{
+			printf("\nYour health drops below zero and King Crimson punches you straight through the chest, you are dead\n");
+			printf("Check your ouput file for your lose screen\n");
+
+			for(i = 0; i <= 99; i++)
+			{
+				fprintf(wpointer, "GAME OVER GAME OVER GAME OVER\n");
+			}
+		}
+	}
+
+
+	fclose(wpointer);
+
+
 }
 int dpsCalc(int x, int y, int a)
 {
-	printf("fix");
-	return 0;
+		//Carlos Gonzalez
+	double avg = 0;
+	int i = 0, select = 0, dmg = 0, enemyDmg = 0;
+
+
+	if(a == 1)
+	{
+		while(y > 0 && x > 0)
+		{
+			puts("\nAttacks: ");
+			puts("1. ORA Rush");
+			puts("2. Star Finger");
+			puts("3. Block");
+			puts("Choose a move");
+			scanf("%d", &select);
+
+			switch(select)
+			{
+				case 1:
+				{
+					dmg = (rand() % 20) + 15;
+					enemyDmg = (rand() % 20) + 9;
+					y = y - dmg;
+					x = x - enemyDmg;
+					avg += dmg;
+					i++;
+					puts("You and DIO trade close range consecutive blows\n");
+					printf("You deal %d points of damage\n", dmg);
+					printf("You take %d points of damage\n", enemyDmg);
+					printf("Your health %d, DIO health %d\n", x, y);
+					break;	
+				}
+				case 2:
+				{
+					dmg = (rand() % 20) + 10;
+					enemyDmg = (rand() % 20) + 5;
+					y = y - dmg;
+					x = x - enemyDmg;
+					avg += dmg;
+					i++;
+					puts("You extend your forefinger to attack DIO, and he counters with a knife throw\n");
+					printf("You deal %d points of damage\n", dmg);
+					printf("You take %d points of damage\n", enemyDmg);
+					printf("Your health %d, DIO health %d\n", x, y);
+					break;		
+				}
+				case 3:
+				{
+					enemyDmg = (rand() % 20) + 80;
+					printf("DIO stops time for 3 seconds and throws enough knives to surround you from all sides, this is equivalent to %d points of damage. \n", enemyDmg);
+					puts("Luckily you and DIO have the same type of stand and you are able to deflect all the knives at the last second");
+					puts("You take no points of damage");
+					break;		
+				}
+				default:
+				{
+					puts("invalid input, try again.");
+					break;
+				}
+			}
+		}
+	}
+
+
+	if(a == 2)
+	{	
+		while(y > 0 && x > 0)
+		{
+			puts("\nAttacks:");
+			puts("1. MUDA Rush");
+			puts("2. Create life");
+			puts("3. Life shot");
+			scanf("%d", &select);
+
+			switch(select)
+			{	
+				case 1:
+				{
+					dmg = (rand() % 20) + 15;
+					enemyDmg = (rand() % 20) + 9;
+					y = y - dmg;
+					x = x - enemyDmg;
+					avg += dmg;
+					i++;
+					puts("You and Diavola trade close range consecutive blows\n");
+					printf("You deal %d points of damage\n", dmg);
+					printf("You take %d points of damage\n", enemyDmg);
+					printf("Your health %d, DIO health %d\n", x, y);
+					break;	
+				}
+				case 2:
+				{	
+					dmg = (rand() % 20) + 10;
+					enemyDmg = (rand() % 20) + 5;
+					y = y - dmg;
+					x = x - enemyDmg;
+					avg += dmg;
+					i++;
+					puts("You create a piranha out of some rocks next to you and they seek out Diavolo, he counters with a time erase followed by a devastating punch\n");
+					printf("You deal %d points of damage\n", dmg);
+					printf("You take %d points of damage\n", enemyDmg);
+					printf("Your health %d, DIO health %d\n", x, y);
+					break;		
+				}
+				case 3:
+				{
+
+
+					dmg = (rand() % 20) + 20;
+					enemyDmg = (rand() % 20) + 11;
+					y = y - dmg;
+					x = x - enemyDmg;
+					avg += dmg;
+					i++;
+					puts("You punch Diavolo and imbue him with life energy, this puts him into an out of body mindstate making him vulnerable to taking more damage. \n");
+					printf("The attack lands and deals %d points of damage\n", dmg);
+					puts("Upon exiting this state, Diavolo responds with Epitaph allowing him to move into the future and land a devasting blow of his own. ");
+					printf("You take %d points of damage\n", enemyDmg);
+					printf("Your health %d, DIO health %d\n", x, y);
+					break;		
+				}
+				default:
+				{	
+					puts("invalid input, try again.");
+					break;
+				}
+			}
+		}
+	}
+
+
+	avg = avg / (double)i;
+	printf("\nYour average damage was %.2f\n", avg);
+	
+	
+	if(x > 0 && y <= 0 )
+	{
+		return 1;
+	}
+	
+	if(x <= 0 && y > 0)
+	{
+		return 0;
+	}
+	if(x <= 0 && y <=0)
+	{
+		printf("You both kill eachother");
+		return 0;
+	}	
+
 
 }
 
