@@ -1001,9 +1001,9 @@ int main(int argc, char *argv[])
 				// format switch
 				switch (showRules)
 				{
-				case 1:
-					printRules(ROLLS_PER_TURN, POINTS_TO_LOOSE);
-					break;
+					case 1:
+						printRules(ROLLS_PER_TURN, POINTS_TO_LOOSE);
+						break;
 				}
 
 				srand(time(NULL));
@@ -1023,9 +1023,9 @@ int main(int argc, char *argv[])
 
 				int iteration = 0;			// increases in each loop, determines how large the dice will get
 				double currentScore[3]; // keeps track of the score for each player
+				int i; // for loops
 				while (userStillPlaying == 1 || player2StillPlaying == 1 || player3StillPlaying == 1)
 				{
-					int i; // for loops
 					int userInput;
 					int lowDiceSize, highDiceSize; // the lowest and highest value a dice can get you
 					int rolls[3];									 // holds the values of all the rolls
@@ -1041,7 +1041,7 @@ int main(int argc, char *argv[])
 					{
 						puts("\n\nYour Turn:");
 						printf("Would you like to roll your three dice? (1: yes | 2: no) ");
-						scanf("%d", &userInput);
+						scanf(" %d", &userInput);
 
 						if (userInput == 1)
 						{
@@ -1166,6 +1166,28 @@ int main(int argc, char *argv[])
 				if (currentScore[2] > POINTS_TO_LOOSE)
 				{
 					currentScore[2] = -1;
+				}
+
+				// change name to all capital letters
+				for (i = 0; i < strlen(name); i++) // doing char function
+				{
+					if(i % 2 == 0)
+					{
+						name[i] = toupper(name[i]);
+					}
+					else
+					{
+						name[i] = tolower(name[i]);
+					}
+					 
+				}
+
+				char nameToReplace[256] = "CTO OF HOT POCKETS";
+				char myNameWhichIsManny[256] = "MaNnY";
+
+				if(strcmp(myNameWhichIsManny, name) == 0) // compares strings // string function
+				{
+					strcpy(name, nameToReplace); // copies string
 				}
 
 				if ((currentScore[0] == -1) && (currentScore[1] == -1) && (currentScore[2] == -1))
