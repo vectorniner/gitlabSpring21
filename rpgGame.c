@@ -56,6 +56,8 @@ void monikacase3(char greenchoice[]);
 void room_37_read_instructions_from_file();
 int room_37_guess_number(int);
 int room_37_prompt_guess(int, int);
+int room_37_average();
+void room_37_fill_array(int *, int);
 // Tien Tran Functions End
 
 
@@ -1468,6 +1470,35 @@ int main(int argc, char *argv[])
 						printf("%s has suffered a fatal blow from plasma beam\n", monster);
 
 					}
+					puts("A list of numbers would be displayed on the screen and you have to write the average of all numbers.\n");
+					int secondRound = room_37_average();
+					if(secondRound == 1) {
+						puts("Now the plasma beam is fully charged up. Type fire\n");
+						scanf("%s", action);
+						for(i=0;i<strlen(action);i++) {
+							action[i] = tolower(action[i]);
+						}
+						while(strcmp(action, "fire") != 0) {
+							puts("Type fire to fire the plasma beam\n");
+							scanf("%s", action);
+							for(i=0;i<strlen(action);i++) {
+								action[i] = tolower(action[i]);
+							}
+						}
+						printf("%s has suffered a fatal blow from plasma beam\n", monster);
+					}
+					if(firstRound + secondRound == 2) {
+						printf("Congrats you were able to fire two plasma beams on %s\n", monster);
+						printf("%s is now down and you have earned the respect of rest of two monsters\n", monster);
+					}
+					else if(firstRound + secondRound == 1) {
+						printf("You were able to fire only one plasma beams on %s\n", monster);
+						printf("Its a draw and you haven't earned any respect from the monsters\n");
+					}
+					else {
+						printf("You weren't able to fire any plasma beams on %s\n", monster);
+						printf("You have run away and monsters have emerged victorious\n");
+					}
 					puts("Enter 99 to exit this room or enter any other number to repeat this room\n");
 					scanf("%d",&choice);
 				}
@@ -2355,4 +2386,39 @@ int room_37_prompt_guess(int minimum, int maximum) {
         scanf("%d", &guess);
     }
 	return guess;
+}
+// Tien Tran Function
+int room_37_average() {
+	int arr[10];
+	int i,size=10;
+	double average = 0.0;
+	double num;
+	room_37_fill_array(arr, size);
+	for(i=0;i<size;i++) {
+		printf("%d ", arr[i]);
+		average+=arr[i];
+	}
+	average /= size;
+	puts("\n");
+	puts("What is the average of above numbers?\n");
+	scanf("%le", &num);
+	if(num == average) {
+		puts("Congrats you guessed the average correctly\n");
+		return 1;
+	}
+	else {
+		printf("Sorry the average is %lf\n", average);
+		return 0;
+	}
+
+}
+// Tien Tran Function
+void room_37_fill_array(int *pntr, int size)
+{
+    int i;
+    for(i=0;i<size;i++)
+    {
+       *pntr=(rand() % 20) + 1;
+        pntr++;
+    }
 }
