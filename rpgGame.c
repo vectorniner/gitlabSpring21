@@ -1295,8 +1295,48 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door 38 to and found a deadly cake........");
+					int grade;
+					int aCount = 0;
+					int bCount = 0;
+					int cCount = 0;
+					while((grade = getchar()) != 'q')
+					{
+						switch(grade)
+						{
+							case 'a':
+							case 'A':
+								++aCount;
+								break;
+							case 'b':
+							case 'B':
+								++bCount;
+							case 'c':
+							case 'C':
+								++cCount;
+								break;
+							case '\n':
+							case '\t':
+							case ' ':
+							default:
+								printf("%s","Incorrect letter grade entered.");
+								puts("Enter a new grade.");
+								break;
+						}
+						printf("Enter a letter grade (press q to quit): ");
+						scanf("%d",grade);
+					}
+					printf("\nThere are ");
+					printf("%u", aCount);
+					printf(" A's, %u", bCount);
+					printf(" B's, %u", cCount);
+					printf(" C's");
+					printf("\nThe class average is %.1f\n",(aCount+bCount+cCount)/3.0);
+				
+				
+					//puts("you open the door 38 to and found a deadly cake........");
+					
 					scanf("%d",&choice);
+
 				}
 				break;
 			}
