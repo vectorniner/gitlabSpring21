@@ -590,49 +590,34 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					int i, j, n=10;
-
-    					for(i=n/2; i<=n; i+=2)
- 					{
-        					for(j=1; j<n-i; j+=2)
-        					{
-            						printf(" ");
-       						}
-
-        					for(j=1; j<=i; j++)
-        					{
-            						printf("*");
-        					}
-
-        					for(j=1; j<=n-i; j++)
-        					{
-            						printf(" ");
-        					}
+					int x, y, z, i, j, k, priceActual, priceGuess;
+					char guess;
+					char upperName[28];
+					srand(time(NULL));
 	
-        					for(j=1; j<=i; j++)
-        					{
-            						printf("*");
-        					}
+					for(i = 0; i<28; i++)
+					{
+						upperName[i] = toupper(name[i]);
+					}
+	
+					printf("\n$$$$$$ %s COME ON DOWN!! YOU'RE ON THE PRICE IS RIGHT!! $$$$$$\n", upperName);
+					puts(" : : doo dooo dooooOoOoOo, doo dooooo DoooOooooooo : :\n");
+					puts("\nBob Barker: Welcome contestants, let me show you the first item up for bid on the Price Is Right...\n");
+					puts("\nJohnny Olsen: It's a new stove! A gas stove designed for your pleasure by LG Electronics. It is 6.3 cu. ft., has a Smart Wi-Fi enabled fan, and a convection electric oven range with AirFry and EasyClean in Stainless Steel.\n");
+					printf("\nBob Barker: Contestants please bid on it in dollars because we round off our retail prices to the nearest dollar.. %s what do you bid? ", name);
+					scanf("%d", &priceGuess);
+					
+					priceActual = (rand() %400) + 600;
+	
+					if(priceActual - priceGuess <= 200)
+					{
+						printf("\nBob Barker; The actual retail price is $%d, that means %s, you are the winner!\n", priceActual, name);
+					}
+					else
+					{
+						printf("\nBob Barker: The actual retail price is $%d, that means %s, you are not the winner, let's try again...\n", priceActual, name);
+					}
 
-        					printf("\n");
-    					}
-
-    					for(i=n; i>=1; i--)
-    					{
-        					for(j=i; j<n; j++)
-        					{
-            						printf(" ");
-        					}
-
-        					for(j=1; j<=(i*2)-1; j++)
-        					{
-            						printf("*");
-        					}
-
-        						printf("\n");
-   					}
-					puts("you open the door and find ........");
-					scanf("%d",&choice);
 				}
 				break;
 			}
