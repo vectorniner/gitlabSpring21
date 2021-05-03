@@ -60,13 +60,17 @@ int room_37_average();
 void room_37_fill_array(int *, int);
 // Tien Tran Functions End
 
+//Carlos Gonzalez
+int dpsCalc(int x, int y, int a);
+void printResults(int z, int a);
+
 
 
 
 
 int main(int argc, char *argv[])
 {
-	int x,y,z,i,h,g,k,choice=0;
+	int a,x,y,z,i,h,g,k,choice=0;
 	char name[256];
 	int boxNum=0;
 	int sum = 0;
@@ -2430,6 +2434,27 @@ int room_37_prompt_guess(int minimum, int maximum) {
     }
 	return guess;
 }
+
+
+
+void printResults(int z, int a)
+{
+	//Carlos Gonzalez
+	int i;
+	FILE *wpointer;
+
+
+	printf("fix");
+
+	wpointer = fopen("output.txt", "a");
+}
+int dpsCalc(int x, int y, int a)
+{
+	printf("fix");
+	return 0;
+
+}
+
 // Tien Tran Function
 int room_37_average() {
 	int arr[10];
