@@ -1439,7 +1439,7 @@ int main(int argc, char *argv[])
 								break;
 						}
 						printf("Enter a letter grade (press q to quit): ");
-						scanf("%d",grade);
+						scanf("%d",&grade);
 					}
 					printf("\nThere are ");
 					printf("%u", aCount);
