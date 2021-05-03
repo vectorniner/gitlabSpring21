@@ -1453,9 +1453,23 @@ int main(int argc, char *argv[])
 					}
 					else {
 						puts("Congrats :) You guess is correct, now you need to win the second round as well.\n");
-						
+						puts("Now the plasma beam is fully charged up. Type fire\n");
+						scanf("%s", action);
+						for(i=0;i<strlen(action);i++) {
+							action[i] = tolower(action[i]);
+						}
+						while(strcmp(action, "fire") != 0) {
+							puts("Type fire to fire the plasma beam\n");
+							scanf("%s", action);
+							for(i=0;i<strlen(action);i++) {
+								action[i] = tolower(action[i]);
+							}
+						}
+						printf("%s has suffered a fatal blow from plasma beam\n", monster);
 
 					}
+					puts("Enter 99 to exit this room or enter any other number to repeat this room\n");
+					scanf("%d",&choice);
 				}
 				break;
 			}
