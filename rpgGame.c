@@ -842,7 +842,7 @@ int main(int argc, char *argv[])
 							}
 
 							printf("How is your day going so far? \n");
-							scanf("%d",checkin);
+							scanf("%c",checkin);
 							fgets(checkin,sizeof(checkin),stdin);
 							fprintf(kbr, "%10s", checkin);
 							fclose(kbr);
@@ -861,7 +861,7 @@ int main(int argc, char *argv[])
 							}
 
 							printf("What is your favorite ice cream flavor? \n");
-							scanf("%d",&checkin);
+							scanf("%c",&checkin);
 							fgets(checkin,sizeof(checkin),stdin);
 							fprintf(kbr,"\n%10s",checkin);
 							fclose(kbr);
@@ -877,7 +877,7 @@ int main(int argc, char *argv[])
 							}
 
 							printf("What is your favorite car? \n");
-							scanf("%d",&checkin);
+							scanf("%c",&checkin);
 							fgets(checkin,sizeof(checkin),stdin);
 							fprintf(kbr,"\n%10s",checkin);
 							fclose(kbr);
@@ -893,7 +893,7 @@ int main(int argc, char *argv[])
 							}
 
 							printf("Who is your favorite celebrity? \n");
-							scanf("%d",&checkin);
+							scanf("%c",&checkin);
 							fgets(checkin,sizeof(checkin),stdin);
 							fprintf(kbr,"\n%10s",checkin);
 							fclose(kbr);
