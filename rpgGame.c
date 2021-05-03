@@ -695,10 +695,12 @@ int main(int argc, char *argv[])
 				break;
 			}
 			case 14:
+
 			{
 				while(choice != 99)
 				{
-
+					puts("hello world! welcome to room 14. spoooky..");
+					break;
 				}
 				break;
 			}
