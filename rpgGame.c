@@ -12,7 +12,12 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-//void RollArray(int *arr);//LA
+int RollArray(int arr[]);//LA
+void Prt(int arr[]);//LA
+void nV(char a[]);//LA
+void BBGprnt();//LA
+void BagTossed(int *arr);//lA
+void TossBag(int *arr);//lA
 
 
 
@@ -246,59 +251,134 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					int choice2;
-					puts("you open the door and find a mysterious man saying: 'Wendy, darling, Light of my Life! I'm not gonna hurt ya \n");
-					puts("He looks at you menancingly and starts to run to you with a knife, there are multiple doors behind you and the door you came from. \n which door do you pick? \n you may quit anytime by selecting option:99");
+					
+					puts("You open the door and find a mysterious man saying: \n'Wendy, darling, Light of my Life! I'm not gonna hurt ya \n");
+					puts("He looks at you menancingly and starts to run to you with a knife, there are multiple doors behind you and the door you came from.\n ");
+					puts("QUICK! which door do you pick?");
+					puts("you may quit anytime by selecting option:99");
+					
 					scanf("%d",&choice);
 					
-					switch(choice)
+					if(choice==1)
 					{
-						// case 1:
-						// {
-							
-
-						// 		char a;
-							
-								
-						// 		int DieArr[6];
-								
-						// 		for (i=0;i<6;i++)
-						// 		{
-						// 			DieArr[i] = 0;
-						// 		}
-								
-						// 		puts("You stumble into a room, and a skeleton behind a counter and holds a die");
-						// 		puts("He asks you with a hollow voice, Hi would you like to roll the dice? [Y]es or [N]o");
-						// 		scanf("%c", &a);
-								
-						// 		if(a=='y')
-						// 		{
-						// 			RollArray(DieArr);
-									
-						// 			for (i=0;i<6;i++)
-						// 			{
-						// 				printf("%d = %d\n", i+1 , DieArr);
-						// 			}
-						// 		}
-								
-
-
-								
-							
-						// 	break;
-						// }
-						case 2:
+						
+						int DieArr[1]={0};
+						int q,f=0,c=0;
+						double l=0.00;
+						printf("your average is %d \n", l);
+						
+						puts("You stumble into a room, and a skeleton behind a counter and holds a 6 sided die");
+						puts("He asks you with a hollow voice, Hi would you like to roll the dice? you cannot leave the room without rolling 6 times.");
+						puts("Depending on ur average you will get a prize or punishment");
+						puts("[1] for Yes or [2] for No");
+						scanf("%d",&x);
+						
+						if(x == 1)
 						{
-							while(choice != 99)
+							
+							for (i=0;i<6;i++)
 							{
+								q=RollArray(DieArr);	
+								f=f+q;								
+								Prt(DieArr);
+							}
+							l=f/(float)6; //average
+							printf("your average is %lf \n", l);
+							
+							if (l<3)
+							{
+								puts("you will fall into the abyss once you exit this room");
+								choice=99;
+							}
+							else if (l<4)
+							{
+								puts("I have looked at your name");
+								nV(name);
 								
 							}
-							break;
+							else if (l<5)
+							{
+								puts("Good job");
+							}
+							else if (l<6)
+							{
+								puts("you will now exit the room");
+								break;
+							}
+						}
+						else
+						{
+							puts("Alright good bye");
+							
 						}
 						
+						puts("You turn around and go back outside");
+						puts("ONCE AGAIN");
+						
 					}
-					
-					
+					if(choice==2)
+					{
+						char pic[42];
+						FILE *wptr;
+						wptr = fopen("squirrel.txt","w");
+						
+						FILE *rptr;
+						rptr = fopen("pic.txt","r");
+						puts("Enjoy a picture of a Camel");
+						while(!feof(rptr))
+						{
+							if(rptr)
+							{
+								
+								fscanf(rptr,"%s",pic);
+								printf("%s \n",pic);
+								fprintf(wptr,"%s \n",pic);
+								
+							}
+						}
+						
+						fclose(wptr);
+						fclose(rptr);
+						
+						puts("You turn around and go back outside");
+						puts("ONCE AGAIN");
+					}
+					if (choice==3)
+					{
+						
+						int holes[3];
+						for (i=0;i<3;i++)
+						{
+							holes[i]=0;
+						}
+						
+						puts("you are suddenly teleported outside and there you see an angled plank with 3 holes and 3 bags beside it\n");
+						
+						puts("a voice above asked if you want to play bean bag toss");
+
+						puts("[1] for Yes or [2] for No");
+						scanf("%d",&x);
+						
+						if (x==1)
+						{
+							puts("The voice above says: 'for you to win, you must put at least 2 bags into 2 of the 3 holes'");
+							
+							BBGprnt();
+							TossBag(holes);
+							BagTossed(holes);
+							
+							puts("now wasnt that fun?");
+							puts("you can come back here whenever you want\n");
+						}
+						else
+						{
+							puts("Alright good bye");
+						}
+						
+						puts("You turn around and go back outside");
+						puts("ONCE AGAIN");
+						
+					}
 				}
 				break;
 			}
@@ -1433,20 +1513,83 @@ int main(int argc, char *argv[])
 	return EXIT_SUCCESS;
 }
 
-// void RollArray(int *arr)//LA
-// {
-// 	int i;
-// 	int y;
-// 	int *ptr;
-// 	ptr = arr;
+int RollArray(int arr[])//lA
+{
+	int y;
+
+	y= rand()%6+1;
+	arr[1]=y;
 	
-// 	for (i=0;i<1;i++)
-// 	{
-// 		y= rand()%6;
-// 		*(arr+y) = *(arr+y)+1;
-// 		arr=ptr;
-// 	}
-// }
+	return y;
+	
+}
+void Prt(int arr[])//LA
+{
+	printf("roll = %d\n", arr[1]);
+}
+void nV(char a[])
+{
+	int i,counter=0;
+	
+	for(i=0;i<21;i++)
+	{
+		switch(a[i])
+		{
+			case 'A':
+			case 'a':
+			case 'E':
+			case 'e':
+			case 'I':
+			case 'i':
+			case 'O':
+			case 'o':
+			case 'U':
+			case 'u':
+			case 'Y':
+			case 'y':
+			{
+				counter++;
+				break;
+			}
+			default:
+			{
+				break;
+			}
+		}
+	}
+	printf("\nNumber of Vowels in your name: %d \n",counter);
+}
+
+void BBGprnt()
+{
+	puts("  [you]         / 1  /  2  /  3  /");
+}
+void TossBag(int *arr)//LA
+{
+	
+	int i;
+	int y;
+	int *ptr;
+	ptr = arr;
+	
+	for (i=0;i<3;i++)
+	{
+		y= rand()%3;
+		*(arr+y) = *(arr+y)+1;
+		arr=ptr;
+	}
+}
+void BagTossed(int *arr)//lA
+{
+	int i;
+	
+	for (i=0;i<3;i++)
+		{
+			printf("hole #%d, has %d bag(s) in it\n", i+1 , *arr);
+			arr++;
+		}
+}
+
 void play(void)
 {
 	int i;
