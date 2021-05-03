@@ -10,6 +10,7 @@
 #include <stdio.h>
 
 
+
 int main(int argc, char *argv[])
 {
 	int x,y,z,i,h,g,k,choice=0;
@@ -178,10 +179,14 @@ int main(int argc, char *argv[])
 			}
 			case 18:			
 			{
+			
 				while(choice != 99)
 				{
-					puts("you open the door and find ....");
-					printf("A expansive candlelit cavern; in the center is  a wizen, old wizard shuffling cards at a card table.");
+				
+					
+					puts("Welcome to Door 18\n");
+					puts("'Have a seat...if you dare', beckons an old Wizened Man siting in the center of the cavern at a small card table.\n");
+					printf("\n You can either (sit) down, (look) around, or (leave) back to where you came..like a coward. ");		
 					scanf("%d",&choice);
 				}
 				break;
