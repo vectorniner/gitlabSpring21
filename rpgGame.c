@@ -340,8 +340,8 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					FILE *wptr;
-                    			wptr = fopen(argv[2], "w");
+					FILE *wptrTalise;
+                    			wptrTalise = fopen(argv[2], "w");
                     
                     			int totalGuesses = 0;
                     			int wrongGuesses = 0;
@@ -357,7 +357,7 @@ int main(int argc, char *argv[])
                     			printMessage(codedMessage);
                     			decodeMessage(alphabet, codedMessage, totalPtr, wrongPtr);
                     
-                    			fprintf(wptr, "Total Guesses: %d \nWrong Guesses: %d \nDecoded Message: %s \n", totalGuesses, wrongGuesses, message);
+                    			fprintf(wptrTalise, "Total Guesses: %d \nWrong Guesses: %d \nDecoded Message: %s \n", totalGuesses, wrongGuesses, message);
                     
                     			x = (rand() % (3 + 1 - 1) + 1);
                     			userFate(x);
@@ -369,6 +369,8 @@ int main(int argc, char *argv[])
                     
                     			printf("That's all, %s \n", name);
                     
+					fclose(wptrTalise);
+					printf("Enter 1-40 to go to another room or 99 to quit. \n");
                     			scanf("%d", &choice);
 				}
 				break;
