@@ -79,6 +79,12 @@ void printResults(int z, int a);
 int urGuess(void);//AndyV
 int Anumber(int a[], int urGuess);//AndyV
 
+void noteFromRick(void);//Berenis Castruita
+void stars(void);//Berenis Castruita
+void flurbos(void);//Berenis Castruita
+void planets(void);//Berenis Castruita
+void goodBye(void);//Berenis Castruita
+
 
 
 int main(int argc, char *argv[])
@@ -206,73 +212,48 @@ int main(int argc, char *argv[])
                                         if(choice == 1)
                                         {
                                                 puts("Hi I'm Mr Meeseeks look at me.\n");
-                                                puts("Okay are you ready to go to Blips?\n");
-                                                puts("First you need Fleurbos.\n");
-                                                puts("Please enter how many games you want to play.\n");
-                                                scanf("%d", &x);
-
-                                                puts("Enter the amount of Fleurbos that you will need for that game, one by one\n");
-                                                for(y = 0; y < x; ++y)
-                                                {
-                                                        scanf("%d", &number);
-                                                        sum = sum + number;
-                                                }
-                                                average = sum / y;
-
-                                                printf("You will need an average of  %.2f Fleurbos, for your first time at Blips\n",average);
-
+                                                printf("Okay %s are you ready to go to Blips?\n", name);
+                                                puts("First you need Flurbos.\n");
+                                                
+                                                flurbos();
                                                 return 0;
                                         }
 
-
-
                                         if(choice == 2)
                                         {
-
-                                                int a,b,c,d;
-                                                printf("Hey its Morty, hurry get in, Rick isn't watching, let go on a adventure\n");
-                                                printf("How old are you by the way?\n");
-                                                scanf("%d",&c);
-                                                // int z = (rand()%10)+1;
-
-                                                d = c;
-
-                                                for(a = 1; a <= c; a++)
-                                                {
-                                                        for(b = 1; b < d; b++)
-
-                                                                printf(" ");
-                                                        d--;
-
-                                                        for(b = 1; b <= 2 * a -1; b++)
-
-                                                                printf("*");
-
-                                                                printf("\n");
-
-                                                }
-											puts(" \n ");
-                                                puts("Woooaaahhh get ready for Hyper Drive \n");
-                                          return 0;
-                                         }
-
-
-
-
+ 
+                                                printf("Hey %s its Morty, hurry get in, Rick isn't watching, let go on a adventure\n",name);
+                                                
+                                                stars();
+                                          
+                                                puts("I will let you choose what plannet we go to \n");
+                                                planets();
+                                        }
+                                                
                                         if(choice == 3)
                                         {
-                                                puts("You have exited that room");
+                                                puts("You selected to exit.\n");
+                                                goodBye();
+                                                return 0;
                                         }
                                         else
                                         {
                                                 puts("Incorrect input, please selecte from the following choices, 1, 2, or 3.\n");
                                         }
 
-                                        return 0;
-                }
-                    break;
+                                   } 
+                                
+                                break;
 
-            }
+          		}
+      
+		
+
+
+
+
+                                       
+	
 			case 3:
 			{
 				while(choice != 99)
@@ -3264,4 +3245,160 @@ int Anumber(int a[], int urGuess)
         }
 
 
+void stars(void)
+{
+  
+  int n,m,i,k,j;
+  
+    
+      //printf("how old are you by the way?\n");
+      //scanf("%d",&n);
+      int z = (rand()%50)+1;
 
+      m = z;
+
+      for(i = 1; i <= z; i++)
+      {
+        for(j = 1; j <= m-1; j++)
+        {
+            printf(" ");
+        }
+        for(k = 1; k <= 2 * i - 1; k++)
+        {
+            printf("*");
+        }
+
+          m--;
+
+           printf("\n");
+        }
+						
+      puts("Woooaaahhh get ready for Hyper Drive \n");
+}
+void flurbos(void)
+{   
+   int sum = 0;
+   int number;
+   int test;
+   float average;
+   int x,y;
+
+   puts("Please enter how many games you want to play.\n");
+   scanf("%d", &x);
+
+   puts("Enter the amount of Flurbos that you will need for that game, one by one\n");
+   for(y = 0; y < x; ++y)
+   {
+   	scanf("%d", &number);
+   	sum = sum + number;
+   }
+    	average = sum / y;
+
+    	printf("You will need an average of  %.2f Flurbos, for your first time at Blips\n",average);
+}
+void planets(void)
+{ 
+  int planet = 0;
+  char keyword[] = "Red";
+  char input[3];
+  
+  puts("your choices are 1.Alphabetrum, 2.Bird World, or 3.Unity's Planet");
+  scanf("%d", &planet);
+  puts("\n");
+
+  switch (planet)
+	{
+	case 1:
+	{     
+          puts("Morty Narrating.... \n");
+          puts("Cool, we are heading to Alphabetrum \n");
+          puts("This planet is  inhabited by an ancient race who resemble giant letters of various alphabets. It's ruled by a council, which consists of Helium-Q, Magnesium-J, and Hydrogen-F");
+          puts("\n");
+          puts("It's the homeworld of Ice-T, an exiled native of Alphabetrium who became a well known rapper on Earth. After Ice-T saved Earth from being destroyed by the Cromulons, the elders of Alphabetrium received word from across the galaxy of Ice-T's heroism and relieved him of his exile, granting him of his true form Water-T.\n");
+    
+          puts("\n");
+          puts("Wait what is that noise?     Oh wait I think there is something wrong with the space cruiser \n");
+          puts("Quick we need to fix these warnings, please type Red to cancel all the warining buttons that are going off \n");
+                                                    
+          	while(strcmp(input,"Red"))
+          	{
+            		scanf("%s", input); 
+              		if(strcmp(input, "Red") == 0)
+              		{
+                  		printf("\n");
+                  		printf("Great you fix all the warnings !! \n");
+                  		printf("We can continue our jouney \n");
+                  		printf("Lets hope Rick does not find out about this\n");
+              		break;
+              		}
+              else
+              {
+               	printf("Hurry, please type Red to cancel all the warining buttons that are going off \n");
+              }
+           	}
+                                             
+              break;
+       	}
+                                           
+	case 2:
+	{
+		puts("Morty Narrating.... \n");
+                puts("Cool, we are heading to Bird World \n");
+                puts("Bird World is the planet where Birdperson lives. TV-signals from Earth take 20 years to reach this planet, meaning it's 20 light-years away from Earth, although in the season 2 finale The wedding squanchers, Rick claims that Bird world is over 6,000 light years away. \n");
+                puts("\n");
+                puts("Bird People live in wooden structures often incorporated into trees, but do possess technology like TV. They primarily eats worms and have worm ranches around on the planet. When sending messages they may tend to use robotic eggs with hologram messages, or it is technology by Tammy. In Bird culture, mate-melding is the equivalent of marriage on Earth.");
+                puts("\n");
+                puts("Seems like we are having some engine problems we are going to have to stay here untill we can get it fix. \n");
+                puts("Whats this, looks like rick left us a note lets sees what it says\n");
+
+                noteFromRick();
+	break;
+	}   
+	case 3:
+	{
+         puts("Morty Narrating.... \n");
+         puts("Cool, we are heading to Unity's Planet \n");
+         puts("\n");
+         puts("The planet Unity was entirely assimilated, and plans to use to assimilate the Galactic Federation. However, Unity left the planet with its people following certain events with Rick. \n");
+         puts("\n");
+         puts("The inhabitants are blue-skinned humanoids with three yellow-tipped protrusions on their heads. There are differences in nipple structure as some have flat concentric nipple rings, and others have cone nipples. In the absence of Unity's control, the inhabitants instantly devolve into starting a race war based on their nipple differences. The unassimilated crew of the S.S. Independence do not exhibit this, but they may have all been of a similar nipple-type. The entire planet's population disappeared after Unity decided to leave Rick, and went to stay with Beta-Seven.");
+         puts("\n");
+
+                                                
+	break;
+	} 
+ 	}
+}
+void goodBye(void)
+{ 
+   int i;
+   char message[] = {"Good Bye"};
+   char *m = message;
+
+   for(i = 0; i<sizeof(message);i++)
+   {
+     printf("%c",*m);
+     m++;
+   }
+}
+void noteFromRick(void)//Berenis Castruita
+{
+
+  FILE *wptr;
+  char read;
+  char rs[100];
+  wptr = fopen("note.txt", "r");
+
+  if(wptr == NULL)
+  {
+    printf("Oh never mind, it wasn't a note\n");
+    exit(1);
+  }
+
+  while((read = fgetc(wptr)) != EOF)
+        printf("%c", read);
+
+  fclose(wptr);
+
+
+}
