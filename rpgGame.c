@@ -41,6 +41,8 @@ void printRollResults(int rolls[], int numberOfRolls, int isUser); // Manuel Cas
 
 
 void play(void);//josue
+void story(void);//josue
+void elf(void);//josue
 // Talise
 void printMessage(int msg[]);
 void decodeMessage(char alphabet[], int codedMessage[], int *totalGuesses, int *wrong);
@@ -281,7 +283,7 @@ int main(int argc, char *argv[])
 						int DieArr[1]={0};
 						int q,f=0,c=0;
 						double l=0.00;
-						printf("your average is %d \n", l);
+						printf("your average is %f \n", l);
 						
 						puts("You stumble into a room, and a skeleton behind a counter and holds a 6 sided die");
 						puts("He asks you with a hollow voice, Hi would you like to roll the dice? you cannot leave the room without rolling 6 times.");
@@ -923,7 +925,7 @@ int main(int argc, char *argv[])
 						break;
 					}
 					
-					else if(choice = 3)
+					else if(choice == 3)
 					{
 						puts("You back out slowly towards the previous room... but it's locked!");
 					}
@@ -1818,10 +1820,9 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
-					puts("A gambling machine, and it says, If you average is even, you win, but if your average is odd, you lose");
-					puts("You decide to play");
-					play();
+					story();
+					elf();
+				//	play();;
 					scanf("%d",&choice);
 				}
 				break;
@@ -1872,6 +1873,55 @@ int main(int argc, char *argv[])
 	}
 	return EXIT_SUCCESS;
 }
+
+void play(void) // Josue Carrillo
+{
+	int i;
+	int total = 0;
+	int numbers[4] = {0};
+	int avg;
+	for(i = 0; i < 4; i++)
+	{
+		numbers[i] = rand() % 100;
+		total = total + numbers[i];
+	}
+	avg = total / 5;
+
+	if(avg % 2 == 0)
+	{
+		printf("The number is even you win!!");
+	}
+	else
+	{
+		printf("You lose");
+	}
+
+}
+
+void story(void)//Josue
+{
+	puts("You find yourself on the outskirts of an unknown city.");
+	puts("You look back and there is a barrier that prevents anyone from leaving or entering this place");
+	puts("Having no other choice, you begin to enter the city, and from a distance, you see a huge tower at the center of this city.");
+	puts("As you walk towards this tower, the city seems to be getting brighter with lights. You begin to see the residents of this city playing games against each other.");
+	puts("Seeing people around, you begin to ask people, 'Where is this place?'");
+	puts("You ask many people, yet no one knows");
+	puts("Everyone seems to have the same experience, they opened a door, and you found yourself at the outskirts of this city, no way out.");
+	puts("Yet everyone explains that playing games is the most important thing in this city.");
+	puts("Not knowing what to do, you begin to wander around, and then find yourself in front of something familiar, a SunBucks.");
+	puts("You enter and notice a person with pointy ears sitting near the corner of the store.");
+	puts("You give in into your curiosity and decide to sit next to this person.");
+
+}
+void elf(void)//Josue
+{
+	puts("As you are sit next to this person, she says: 'What do you want?'");
+	puts("You say, 'I was just curious, never seen a person with pointy ears'");
+	puts("She says, 'Are you new here'");
+	puts("You say, 'yes, just got here couple of hours ago'");
+	puts("She says, 'Ah ok, I am an elf that has lived in this city for many years. My name is Lia.'");
+}
+
 
 int RollArray(int arr[])//lA
 {
@@ -1950,29 +2000,6 @@ void BagTossed(int *arr)//lA
 		}
 }
 
-void play(void)
-{
-	int i;
-	int total = 0;
-	int numbers[4] = {0};
-	int avg;
-	for(i = 0; i < 5; i++)
-	{
-		numbers[i] = rand() % 100;
-		total = total + numbers[i];
-	}
-	avg = total / 5;
-
-	if(avg % 2 == 0)
-	{
-		printf("The number is even you win!!");
-	}
-	else
-	{
-		printf("You lose");
-	}
-	
-}
 
 
 //Monika
