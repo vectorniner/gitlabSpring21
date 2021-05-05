@@ -19,6 +19,9 @@ void BBGprnt();//LA
 void BagTossed(int *arr);//lA
 void TossBag(int *arr);//lA
 
+void demondoor(void);
+void angeldoor(char name[]);
+void broomcloset(void);
 
 
 char *randomString(char *p);
@@ -623,18 +626,37 @@ int main(int argc, char *argv[])
 			}
 			case 11:
 			{
+					int doorChoice;
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
-					puts("3 closed doors");
-					printf("The first door is made of rock with cracks that seem to have orange lava flowing from them and fire comming out from the edges");
-					printf("The second door seems to be an ornage rock door with vines covering it and light bleeding from the edges with mist flowing from underneath");
-					printf("The final door seems to be an ordinary old wooden door of a broom closet");
-					printf("Which door will you choose?");
-					printf("1 for the fire door");
-					printf("2 for the mysterious glowing door");
-					printf("3 for the broom closet");
-					scanf("%d",&choice);
+					puts("you open the door and find ........\n");
+					puts("3 closed doors\n");
+					printf("The first door is made of rock with cracks that seem to have orange lava flowing from them and fire comming out from the edges\n");
+					printf("The second door seems to be an ornage rock door with vines covering it and light bleeding from the edges with mist flowing from underneath\n");
+					printf("The final door seems to be an ordinary old wooden door of a broom closet\n");
+					printf("Which door will you choose?\n");
+					printf("1 for the fire door\n");
+					printf("2 for the mysterious glowing door\n");
+					printf("3 for the broom closet\n");
+					scanf("%d",&doorChoice);
+					
+					switch(doorChoice)
+					{
+						case 1:
+						demondoor();
+						break;
+					
+						case 2:
+						angeldoor(name);	
+						break;
+					
+						case 3:
+						broomcloset();
+						break;
+					
+						default:
+						printf("That isn't a valid door\n");
+					}
 				}
 				break;
 			}
@@ -2474,4 +2496,156 @@ void room_37_fill_array(int *pntr, int size)
        *pntr=(rand() % 20) + 1;
         pntr++;
     }
+}
+
+//Richard Vela, demondoor, angelicdoor, broomcloset are for door 11
+void demondoor(void)
+{
+int choice;
+char chararray[10];
+
+printf("You chose the demonic looking door\n");
+printf("The stone door budges open slowly to reveal a sinsiter cave with what looks like lava cracks lining the walls dimly lighing up the cave");
+printf("The cave is very sketchy so you decide that if you feel threatened you will simply run back out the door and you can start over.\n");
+printf("If you wish to leave now press 777, otherwise enter any other number\n");
+	scanf("%d",&choice);
+	while (choice != 777)
+	{
+	
+	printf("After walking for a while you stumble upon a weird reflective crystal wall. Every time you touch it, the area that was touched glowed like a weird finger painting wall.\n");
+	printf("You start drawing and after writing words realize it inverses the capitalization of letters.\n");
+	
+	printf("You decide to write a lowercase word and see what happens\n");
+	printf("Insert text:\n");
+	scanf("%s", chararray);
+	printf("The wall repeats back: ");
+	for(int i=0;i<10;i++)
+	{
+		chararray[i] = toupper(chararray[i]);
+	}
+	printf("%s",chararray);
+	printf("\n");
+	
+	printf("You then decide to try writing an uppercase word\n");
+	printf("Insert text:\n");
+	scanf("%s", chararray);
+	printf("The wall repeats back: ");
+	for(int i=0;i<10;i++)
+	{
+		chararray[i] = tolower(chararray[i]);
+	}
+	printf("%s",chararray);
+	printf("\n");
+	
+	printf("It's a neat novelty but it gets old quickly so you continue on.\n");
+	printf("You keep going into a cave when suddently around a corner you see a deep gorge with a lava river at the bottom.\n");
+	printf("You find a  bridge and decide to cross it despite how unstable it is, like the one they cross over the lava moat in shrek\n");
+	printf("You cross it and immidetly it colaspes into the lava, and you find that foreward is only a dead end, oh no.\n");
+	printf("You look around and realize up ahead is just a dead end without a way out. You turn back to see theres no way to get off of this small cave in front of the");
+	printf("Just as panic begins to set in, you suddently wake up and find yourself at home in bed. You realize everything was just a dream. Or was it really?\n");
+	exit(0);
+	break;
+	}
+
+}
+//Richard Vela, demondoor, angelicdoor, broomcloset are for door 11
+void angeldoor(char name[])
+{
+int choice=0;
+int i,x,y;
+int sum = 0;
+char idolnote;
+float average;
+FILE *rptr;
+rptr = fopen("idolnote.txt", "r");
+srand(time(NULL));
+
+printf("You chose the ancient angelic door\n");
+printf("You walk in and all of a sudden find yourself in a peaceful rainforest next to a waterfall.\n");
+printf("You walk forward into the forest and find a temple, in the middle of which is an altar with a pair of golden die on the altar.\n");
+printf("A loud and deep disembodied voice begins to speak and says:\n");
+printf("Welcome, %s, to the temple of Shangri-La.\n",name);
+printf("I noticed your name is %ld letters long, very well.\n", strlen(name));
+printf("This temple contains a pair of ancient die used to decide the fates of people each year in the ancient civilization that used to be here, but since the civilization died out centuries ago, the die have sat here waiting for another person to use them.\n");
+printf("Roll the die, if you get an even tally, you get good fortune, however, roll an odd tally, you will die instantly.\n");
+printf("press 1 to roll die\n");
+scanf("%d",&choice);
+if (choice == 1)
+	{
+	printf("*rolls die*\n");
+		for(i=0;i<2;i++)
+		{	
+			y = rand()%6+1;
+			x = rand()%6+1;
+		}
+		sum = x + y;
+		printf("First dice was %d and the second one was %d\n",x,y);
+		printf("Your total number is %d\n", sum);
+		average = (float)(x + y)/2;
+		printf("The average of that roll was %.2f\n",average);
+		
+		
+		switch (sum)
+		{
+		case 3:
+		case 5:
+		case 9:
+		case 11:
+			printf("%s, unfortunately you have recieved an odd total.\n",name);
+			printf("You Died\n");
+			exit(0);
+		break;
+		
+		case 7:
+		printf("%s, you got a 7, but unfortunately in this case it is not a lucky number\n",name);
+			printf("You Died\n");
+			exit(0);
+		break;
+		case 2:
+		case 4:
+		case 6:
+		case 8:
+		case 10:
+		case 12:
+			printf("Congratulation, %s, you have been chosen by the ancient gods to recieve a gift from the heavens.\n",name);
+			printf("That gift is being able to go home alive. You probably don't want to stay here for the rest of your life despite it's beauty, and you would have a hard time making it home seeing that the door disapeared right as you stepped through it.\n");
+			printf("Even if you expected to get some great super power or riches, the true blessing is being able to go home after taking such a risk as rolling those dice, so i shall send you back home. Goodbye.\n");
+			printf("\n");
+			printf("\n");
+			printf("You suddently collapse on the ground unconscious. After an unknown amount of time, you awake in your bed at home and find a golden idol similar to the one from Indiana Jones on your nightstand next to you. There is a note that reads:\n");
+			idolnote = fgetc(rptr);
+			while(!feof(rptr))
+			{
+			printf("%c", idolnote);
+			idolnote = fgetc(rptr);
+			}
+			fclose(rptr);
+		break;
+		}
+	}
+else 
+	{
+	printf("You did not choose 1\n");
+	}
+exit(0);	
+}
+//Richard Vela, demondoor, angelicdoor, broomcloset are for door 11
+void broomcloset(void)
+{
+char usertext[100];
+FILE *fptr = fopen("leatherjournal.txt", "w");
+
+printf("You chose the broom closet. Great.\n");
+printf("You walk in and see it is a dim and dank medium sized room full of old wooden barrels and cleaning supplies\n");
+printf("On one of the barrels you find an old leather journal\n");
+printf("'It's blank' you think to yourself\n");
+printf("Inside the cover is a pen, you decide to write in it to see if the pen still works\n");
+
+printf("Enter a word:\n");
+scanf("%s", usertext);
+fprintf(fptr, "%s", usertext);
+puts("Check leatherjournal.txt to see what you've written");
+fclose(fptr);
+printf("Theres literally nothing but boring barrels and old janitorial supplies in here. I should go see what the other doors do.\n");
+printf("You decide to go back to the closet door and prepare to reopen it,\n");
 }
