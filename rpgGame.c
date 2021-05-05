@@ -1093,10 +1093,70 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("This is Sean.");
+					int portalChoice = 5;
+
 					puts("you open the door and find ........");
-					scanf("%d",&choice);
+					puts("Four portals right next to each other. A voice tells you to enter one.");
+					puts("The first portal is blue, second is red, third is yellow, fourth is black.");
+					puts("1 = First Portal | 2nd = Second Portal | 3rd = Third Portal | 4th = Fourth Portal");
+					scanf("%d",&portalChoice);
+
+					if(portalChoice == 0)
+					{
+						puts("Seriously?! That wasn't any of the options!");
+						puts("Since you cannot follow the directions, you have died.");
+						puts("GAME OVER.");
+					}
+
+					if(portalChoice == 1)
+					{
+						int guideChoice = 0;
+
+						puts("You have entered portal number 1. A man walks up to you and says: ");
+						puts("Greetings! I see you are a new arrival to this land. My job is to welcome all new visitors.");
+						puts("You think to yourself. You've read that before somewhere. A long time ago but you're not 100% sure where you have.");
+						puts("As the man continues talking you look around your surroundings and realize you're in Gielinor, from the MMORPG RuneScape.");
+						puts("You interrupt the man, yelling you don't belong here and that you belong on Earth! The man continues without skipping a beat.");
+						puts("You're not sure whether or not to just run away or hit the guy. You choose to: ");
+						puts("1 to run away | 2 to hit the guide");
+
+						scanf("%d", &guideChoice);
+						
+						if(guideChoice == 1)
+						{
+							puts("You run out of the building and see a woman training people how to cut logs off trees and fish for shrimp.");
+						}	
+						
+						if(guideChoice == 2)
+						{
+							puts("You hit the guide. He replies with: You can't do that here. And now, you have to pay.");
+							puts("Suddednly an explosion rocks your world and you die instantly.");
+							puts("Seriously though, why did you hit him?");
+							puts("Game Over.");
+						}
+						
+					}
+					if(portalChoice == 2)
+					{
+						puts("You wake up on a cart.");
+					}
+
+					if(portalChoice == 3)
+					{
+						puts("You wake up in your bed.");
+					}
+					
+					if(portalChoice == 4)
+					{
+						puts("You have entered portal number 4. You're suddendly teleported onto a stage with a microphone. There is no audience.");
+						puts("You walk up to the microphone in curiosity and say: ");
+					}
+					
+					return EXIT_SUCCESS;
 				}
+
+				
+		
 				break;
 			}
 
