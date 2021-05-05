@@ -2,7 +2,12 @@
 //Contributors
 //G. Poppe
 //Meredith Quail
+
+//Benjamin Lozano
+
+
 //Room 19: Jonathan Chua
+
 
 
 #include <stdlib.h>
@@ -76,6 +81,16 @@ void room_37_fill_array(int *, int);
 int dpsCalc(int x, int y, int a);
 void printResults(int z, int a);
 
+
+//Benjamin Lozano
+void greenUSB26(int arrInt26[], int size);
+void blueUSB26();
+void redUSB26();
+void lockedDoor26();
+//Benjamin Lozano
+
+int urGuess(void);//AndyV
+int Anumber(int a[], int urGuess);//AndyV
 
 
 
@@ -1017,47 +1032,53 @@ int main(int argc, char *argv[])
 					puts("There is a noise in the distance but you can't quite make out what it is");
 					patrickInitialPrompt();
 					scanf("%d",&choice);
-					
-					switch(choice)
+					if(choice == 1)
 					{
-						case 1:
+						puts("You open the door and actually find out the noise is just Naked in the Rain by the Red Hot Chili Peppers playing on a radio");
+						puts("You actually see a guitar next to the radio. Do you pick it up? 1 for yes, 2 for no");
+						scanf("%d",&choice);
+						switch(choice)
 						{
-							puts("You open the door and actually find out the noise is just Naked in the Rain by the Red Hot Chili Peppers playing on a radio");
-							break;
+							case 1:
+							{
+								puts("You pick up the guitar and suddenly feel a change in your body. Maybe its the 5G everyone jokes about");
+								break;
+							}
+							case 2:
+							{
+								puts("Someone comes out of the shadows and hits you over the head with it. You died.");
+							}
 						}
+					}
+					else if (choice == 2)
+					{
+						puts("The floor fails and you through it into the void");
+					}
+					else if (choice == 3)
+					{
+						int i, n;
+						float num[10], sum = 0.0, avg;
+						puts("The gentleman welcomes you into the corner with the light and he asks you to give him some numbers");
+						puts("However you find out that the old man cannot keep track of more than 10 values");
+						printf("Enter the amount of numbers you want to make an average out of \n");
+						scanf("%d",&n);
 
-						case 2:
+						while(n>10 || n<1)
 						{
-							puts("The floor fails and you through it into the void");
-							break;
-						}
-
-						case 3:
-						{
-							int i, n;
-							float num[10], sum = 0.0, avg;
-							puts("The gentleman welcomes you into the corner with the light and he asks you to give him some numbers");
-							puts("However you find out that the old man cannot keep track of more than 10 values");
-							printf("Enter the amount of numbers you want to make an average out of \n");
+							printf("Error! Keep it between 1 and 10 values. \n");
+							printf("Enter the amoount of numbers you want to average: ");
 							scanf("%d",&n);
-
-							while(n>10 || n<1)
-							{
-								printf("Error! Keep it between 1 and 10 values. \n");
-								printf("Enter the amoount of numbers you want to average: ");
-								scanf("%d",&n);
-							}
-
-							for(i=0;i<n;++i)
-							{
-								printf("%d. Enter number: ",i+1);
-								scanf("%f",&num[i]);
-								sum += num[i];
-							}
-
-							avg = sum /n;
-							printf("Average = %.2f \n", avg);
 						}
+
+						for(i=0;i<n;++i)
+						{
+							printf("%d. Enter number: ",i+1);
+							scanf("%f",&num[i]);
+							sum += num[i];
+						}
+
+						avg = sum /n;
+						printf("Average = %.2f \n", avg);
 					}
 				}
 				break;
@@ -1198,9 +1219,39 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("Hello World");
-					puts("you open the door and find ........");
-					scanf("%d",&choice);
+					 puts("you open the door and find ........");
+                                        puts("press 1 to start");
+                                        scanf("%d",&choice);
+
+                                        int arr[1] = {0};
+                                        int y, z;
+
+                                        y =urGuess();
+                                        z = Anumber(arr, y);
+
+
+
+                                                if(z != 0 && z != -1)
+                                                {
+                                                        puts("yes");
+                                                }
+
+                                                else if(z == -1)
+                                                {
+                                                        puts("sorry");
+                                                }
+
+                                                else if(z >= 11 && z <= 98)
+                                                {
+                                                        puts("not valid");
+                                                }
+
+                                                else if (z == 99)
+                                                {
+                                                        break;
+                                                        return 0;
+                                                }
+
 				}
 				break;
 			}
@@ -1221,7 +1272,11 @@ int main(int argc, char *argv[])
 				while(choice != 99)
 				{
 					int choice26 = 0;
-					printf("you open the door and find a small room with a door on the other side and a desk with three USB drives equally spread apart, one gree, one blue, one red.\n");
+					int arrInt26[9] = {7,3,5,6,9,1,3,2,6};
+					int randomGame26;
+					printf("\nYou open the door and find a small room with a door on the other side and a desk with a laptop and three USB drives equally spread apart, one gree, one blue, one red.\n");
+					printf("The door behind you slams shut. You open the door again to see a bottomless pit.\n");
+					printf("You are now realizing there is no immediate way out, so you decide to find your own way out...\n");
 					printf("You walk over to the desk and see a message above each USB...\n\n");
 
 					do{
@@ -1230,18 +1285,18 @@ int main(int argc, char *argv[])
 						printf("3) Inspect the Red USB.\n");
 						printf("4) Walk up to the door on the other side of the room.\n");
 						printf("5) Leave the room and fall into the bottomless pit.\n");
-						printf("Enter choice 1-4: ");
+						printf("Enter choice 1-5: ");
 						scanf("%d", &choice26);
 
 						switch(choice26)
 						{
-							case 1: printf("\nYou are now viewing the green USB\n\n");
+							case 1: greenUSB26(arrInt26, 9);
 								break;
-							case 2: printf("\nYou are now viewing the blue USB\n\n");
+							case 2: blueUSB26();
 								break;
-							case 3: printf("\nYou are now viewing the red USB\n\n");
+							case 3: redUSB26();
 								break;
-							case 4: printf("You walj over to the door and see a keypad lock on the door.\n\n");
+							case 4: lockedDoor26();
 								break;
 						}
 					}while(choice26 != 5);
@@ -3207,6 +3262,96 @@ printf("Theres literally nothing but boring barrels and old janitorial supplies 
 printf("You decide to go back to the closet door and prepare to reopen it,\n");
 }
 
+
+//Benjamin Lozano Functions start
+void greenUSB26(int arrInt26[], int size)
+{
+	int greenChoice = 0; 
+	int targetCoulumn;
+	int targetRow;
+	int i,j;
+
+	printf("\nAs you walk closer to the green USB, you read the message above, it states...\n");
+	printf("\t#2\n");
+
+	printf("There are two options you consider\n");
+	printf("1) plug the green USB into the laptop.\n");
+	printf("2) Step back and view the room again.\n");
+	printf("Enter choice 1-2: ");
+	scanf("%d", &greenChoice);
+
+	if(greenChoice == 1)
+	{
+		printf("You plug the green USB into the laptop and a window pops up\n");
+
+		targetCoulumn = rand()%3 + 1;
+		targetRow = rand()%3 + 1;
+
+		for(i = 0; i < 3; i++)
+		{
+			for(j = 0; j < 3; j++)
+			{
+				printf("%d ", arrInt26[j]);
+			}
+			printf("\n");
+		}
+	}
+	else
+	{
+		printf("You step back and view the room again.\n");
+	}
+}
+void blueUSB26()
+{
+	int blueChoice;
+
+	printf("\nAs you walk closer to the blue USB, you read the message above, it states...\n");
+	printf("\t#3\n");
+
+	printf("There are two options you consider\n");
+	printf("1) Plug the blue USB into the laptop.\n");
+	printf("2) Step back and view the room again.\n");
+	printf("Enter choice 1-2: ");
+	scanf("%d", &blueChoice);
+
+	if(blueChoice == 1)
+	{
+		printf("blue USB game\n");
+	}
+	else
+	{
+		printf("You step back and view the room again");
+	}
+}
+void redUSB26()
+{
+	int redChoice;
+
+	printf("\nAs you walk closer to the red USB, you read the message above, it states...\n");
+	printf("\t#1");
+
+	printf("There are two options you consider\n");
+	printf("1) Plug the red USB into the laptop.\n");
+	printf("2) Step back and look at the room again.\n");
+	printf("Enter choice 1-2: ");
+	scanf("%d", &redChoice);
+
+	if(redChoice == 1)
+	{
+		printf("Red USB game\n");
+	}
+	else
+	{
+		printf("You step back and view the room again.\n");
+	}
+}
+void lockedDoor26()
+{
+	printf("As you walk closer to the door on the other side you see a keypad lock...\n");
+	printf("The numbers range from 0-9...\n");
+}
+//Benjamin Lozano end functions
+
 /* Start of Room 19 (Jonathan Chua) Function Definitions */
 void room19_readFile(FILE *readPtr)
 { /* Criteria : Pointers and While Loop */
@@ -3241,7 +3386,44 @@ void patrickInitialPrompt(void)
 	puts("3. There is an old, oriental gentleman in the corner which is lit up by a torch. Do you approach him?");
 }
 
+
 int coolGuysInteract(void)//Markease Harris 
 {
-	
+
 }
+
+//AndyV
+int urGuess(void)
+{
+        int y;
+        puts("Pick a number between 1 and 10");
+        scanf("%d", &y);
+
+        return y;
+}
+//AndyV
+int Anumber(int a[], int urGuess)
+{
+        int i, x;
+        for(i = 0; i < 2; i++)
+        {
+                x = (rand() %10 + 1);
+                a[i] = x;
+        }
+
+        if(urGuess < 1 || urGuess > 10)
+        {
+                return 0;
+        }
+
+        if(a[i] == urGuess)
+                {
+                        return i;
+                }
+                 return -1;
+}
+
+
+
+
+
