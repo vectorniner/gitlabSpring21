@@ -2,7 +2,7 @@
 //Contributors
 //G. Poppe
 //Meredith Quail
-
+//Room 19: Jonathan Chua
 
 
 #include <stdlib.h>
@@ -11,6 +11,7 @@
 #include <time.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <unistd.h> /* Room 19 additional includes */
 
 int RollArray(int arr[]);//LA
 void Prt(int arr[]);//LA
@@ -19,7 +20,10 @@ void BBGprnt();//LA
 void BagTossed(int *arr);//lA
 void TossBag(int *arr);//lA
 
-
+/* Start of Room 19 Function Prototypes */
+int doorDecision(void);
+void room19_readFile(FILE*);
+/* End of Room 19 Function Prototyping */
 
 char *randomString(char *p);
 
@@ -278,7 +282,7 @@ int main(int argc, char *argv[])
 						int DieArr[1]={0};
 						int q,f=0,c=0;
 						double l=0.00;
-						printf("your average is %d \n", l);
+						printf("your average is %f \n", l);
 						
 						puts("You stumble into a room, and a skeleton behind a counter and holds a 6 sided die");
 						puts("He asks you with a hollow voice, Hi would you like to roll the dice? you cannot leave the room without rolling 6 times.");
@@ -790,14 +794,36 @@ int main(int argc, char *argv[])
 				}
 				break;
 			}
-			case 19:
+			case 19: /* Room 19 */
 			{
+				FILE *readPtr0, *readPtr1, *readPtr2;
+				readPtr0 = fopen("./room19/room19_D.txt", "r");
+				readPtr1 = fopen("./room19/room19_O.txt", "r");
+				readPtr2 = fopen("./room19/room19_M.txt", "r");
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
-					puts("a computer science goblin student !");
-					scanf("%d",&choice);
+					printf("\n\n");
+					room19_readFile(readPtr0);
+					printf("\n\nOur brave hero %s approaches the door\n\n", name);
+					choice = doorDecision();
+					switch(choice) /* Criteria : Case Statement */
+					case 1:
+					{
+						room19_readFile(readPtr1);
+						puts("\nyou open the door and find ........\n");
+						sleep(3);
+						room19_readFile(readPtr2);
+						scanf("%d",&choice);
+						break;
+					}
+					default:
+					{
+						printf("\nOur not-so brave hero %s slowly backs away from door 19 and decides to pick another door\n\n", name);
+					}
 				}
+				fclose(readPtr0);
+				fclose(readPtr1);
+				fclose(readPtr2);
 				break;
 			}
 			case 20:
@@ -2475,3 +2501,29 @@ void room_37_fill_array(int *pntr, int size)
         pntr++;
     }
 }
+
+/* Start of Room 19 (Jonathan Chua) Function Definitions */
+void room19_readFile(FILE *readPtr)
+{ /* Criteria : Pointers and While Loop */
+	system("clear");
+	char string[256];
+	while(fgets(string,sizeof(string),readPtr) != NULL)
+	{
+		printf("%s",string);
+	}    
+}
+
+int doorDecision(void)
+{ /* Criteria : Character Function */
+	char choice;
+	printf("Do you open the door? [Y]es [N]o : ");
+	scanf(" %c", &choice);
+	if(tolower(choice) == 'n')
+	{
+		return 99;
+	}
+	else
+	{
+		return 1;
+	}
+/* End of Room 19 Function Definitions */
