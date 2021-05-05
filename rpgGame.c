@@ -20,6 +20,8 @@ void BBGprnt();//LA
 void BagTossed(int *arr);//lA
 void TossBag(int *arr);//lA
 
+void patrickInitialPrompt(void);
+
 void demondoor(void);
 void angeldoor(char name[]);
 void broomcloset(void);
@@ -1013,9 +1015,7 @@ int main(int argc, char *argv[])
 				while(choice != 99)
 				{
 					puts("There is a noise in the distance but you can't quite make out what it is");
-					puts("1.Do you open the door that us 50 feet in front of you or..");
-					puts("2. Do you simply stand there and see if the noise gets clearer on it's own?");
-					puts("3. You see an old, oriental gentleman in the corner which is lit up by a torch. Do you approach him?");
+					patrickInitialPrompt();
 					scanf("%d",&choice);
 					
 					switch(choice)
@@ -3187,3 +3187,10 @@ int doorDecision(void)
 	}
 }
 /* End of Room 19 Function Definitions */
+
+void patrickInitialPrompt(void)
+{
+	puts("1. Do you open the door that is 50 feet in fron of you?");
+	puts("2. Do you simplay stand there and wait for the noise to get clearer on it's own?");
+	puts("3. There is an old, oriental gentleman in the corner which is lit up by a torch. Do you approach him?");
+}
