@@ -858,7 +858,12 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
+					
+
+
 					puts("hello world! welcome to room 14. spoooky..");
+					puts("then a giant spider fell on your face");
+					puts("RUNNN!");
 					break;
 				}
 				break;
