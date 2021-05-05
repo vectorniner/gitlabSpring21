@@ -861,6 +861,7 @@ int main(int argc, char *argv[])
 					int x=0;
 					int y;
 					int z=0;
+					
 					srand(time(NULL));
 					puts("You have entered a chamber resembling the ruins of an Ancient Egyptian Temple ");
 					puts("The door to your left shows signs of innocence");
@@ -885,9 +886,44 @@ int main(int argc, char *argv[])
 
 					printf("???: %s would you ignore fate \n",name);
 					puts("???: Pick a door?!");
+					puts("1. Innocent door");
+					puts("2.Door towards a powerful Energy");	
+						
 					}
 
 					scanf("%d",&choice);
+					switch(choice)
+					{
+						case 1:
+						{
+							if(x==1)
+							{
+							printf("reveal code HEADS\n"); //use file heads
+							}
+							puts("Intersting choice");	
+							scanf("%d",&choice);
+							break;		
+						}
+						case 2:
+						{
+							if(z==1)
+							{
+							printf("reveal code TAILS \n"); // use file tails
+							puts("Intersting choice");
+							scanf("%d",&choice);
+							}
+						
+							break;
+						
+						
+						}
+						
+						
+					}
+					
+					
+					
+
 				}
 				break;
 			}
