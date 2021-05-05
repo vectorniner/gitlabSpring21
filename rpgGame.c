@@ -2,7 +2,11 @@
 //Contributors
 //G. Poppe
 //Meredith Quail
+
 //Benjamin Lozano
+
+
+//Room 19: Jonathan Chua
 
 
 
@@ -12,6 +16,7 @@
 #include <time.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <unistd.h> /* Room 19 additional includes */
 
 int RollArray(int arr[]);//LA
 void Prt(int arr[]);//LA
@@ -20,10 +25,16 @@ void BBGprnt();//LA
 void BagTossed(int *arr);//lA
 void TossBag(int *arr);//lA
 
+void patrickInitialPrompt(void);
+
 void demondoor(void);
 void angeldoor(char name[]);
 void broomcloset(void);
 
+/* Start of Room 19 Function Prototypes */
+int doorDecision(void);
+void room19_readFile(FILE*);
+/* End of Room 19 Function Prototyping */
 
 char *randomString(char *p);
 
@@ -42,6 +53,8 @@ void printRollResults(int rolls[], int numberOfRolls, int isUser); // Manuel Cas
 
 
 void play(void);//josue
+void story(void);//josue
+void elf(void);//josue
 // Talise
 void printMessage(int msg[]);
 void decodeMessage(char alphabet[], int codedMessage[], int *totalGuesses, int *wrong);
@@ -68,12 +81,18 @@ void room_37_fill_array(int *, int);
 int dpsCalc(int x, int y, int a);
 void printResults(int z, int a);
 
+
 //Benjamin Lozano
 void greenUSB26(int arrInt26[], int size);
 void blueUSB26();
 void redUSB26();
 void lockedDoor26();
 //Benjamin Lozano
+
+int urGuess(void);//AndyV
+int Anumber(int a[], int urGuess);//AndyV
+
+
 
 
 int main(int argc, char *argv[])
@@ -286,7 +305,7 @@ int main(int argc, char *argv[])
 						int DieArr[1]={0};
 						int q,f=0,c=0;
 						double l=0.00;
-						printf("your average is %d \n", l);
+						printf("your average is %f \n", l);
 						
 						puts("You stumble into a room, and a skeleton behind a counter and holds a 6 sided die");
 						puts("He asks you with a hollow voice, Hi would you like to roll the dice? you cannot leave the room without rolling 6 times.");
@@ -863,7 +882,12 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
+					
+
+
 					puts("hello world! welcome to room 14. spoooky..");
+					puts("then a giant spider fell on your face");
+					puts("RUNNN!");
 					break;
 				}
 				break;
@@ -928,7 +952,7 @@ int main(int argc, char *argv[])
 						break;
 					}
 					
-					else if(choice = 3)
+					else if(choice == 3)
 					{
 						puts("You back out slowly towards the previous room... but it's locked!");
 					}
@@ -963,13 +987,41 @@ int main(int argc, char *argv[])
 				}
 				break;
 			}
-			case 19:
+			case 19: /* Room 19 */
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
-					puts("a computer science goblin student !");
-					scanf("%d",&choice);
+					FILE *readPtr0, *readPtr1, *readPtr2;
+					readPtr0 = fopen("./room19/room19_D.txt", "r");
+					readPtr1 = fopen("./room19/room19_O.txt", "r");
+					readPtr2 = fopen("./room19/room19_M.txt", "r");
+					while(choice != 99)
+					{
+						printf("\n\n");
+						room19_readFile(readPtr0);
+						printf("\n\nOur brave hero %s approaches the door\n\n", name);
+						choice = doorDecision();
+						switch(choice) /* Criteria : Case Statement */
+						{
+							case 1:
+							{
+								room19_readFile(readPtr1);
+								puts("\nyou open the door and find ........\n");
+								sleep(4);
+								room19_readFile(readPtr2);
+								scanf("%d",&choice);
+								break;
+							}
+							default:
+							{
+								printf("\nOur not-so brave hero %s slowly backs away from door 19 and decides to pick another door\n\n", name);
+								break;
+							}
+						}
+					}
+					fclose(readPtr0);
+					fclose(readPtr1);
+					fclose(readPtr2);	
 				}
 				break;
 			}
@@ -978,51 +1030,55 @@ int main(int argc, char *argv[])
 				while(choice != 99)
 				{
 					puts("There is a noise in the distance but you can't quite make out what it is");
-					puts("1.Do you open the door that us 50 feet in front of you or..");
-					puts("2. Do you simply stand there and see if the noise gets clearer on it's own?");
-					puts("3. You see an old, oriental gentleman in the corner which is lit up by a torch. Do you approach him?");
+					patrickInitialPrompt();
 					scanf("%d",&choice);
-					
-					switch(choice)
+					if(choice == 1)
 					{
-						case 1:
+						puts("You open the door and actually find out the noise is just Naked in the Rain by the Red Hot Chili Peppers playing on a radio");
+						puts("You actually see a guitar next to the radio. Do you pick it up? 1 for yes, 2 for no");
+						scanf("%d",&choice);
+						switch(choice)
 						{
-							puts("You open the door and actually find out the noise is just Naked in the Rain by the Red Hot Chili Peppers playing on a radio");
-							break;
+							case 1:
+							{
+								puts("You pick up the guitar and suddenly feel a change in your body. Maybe its the 5G everyone jokes about");
+								break;
+							}
+							case 2:
+							{
+								puts("Someone comes out of the shadows and hits you over the head with it. You died.");
+							}
 						}
+					}
+					else if (choice == 2)
+					{
+						puts("The floor fails and you through it into the void");
+					}
+					else if (choice == 3)
+					{
+						int i, n;
+						float num[10], sum = 0.0, avg;
+						puts("The gentleman welcomes you into the corner with the light and he asks you to give him some numbers");
+						puts("However you find out that the old man cannot keep track of more than 10 values");
+						printf("Enter the amount of numbers you want to make an average out of \n");
+						scanf("%d",&n);
 
-						case 2:
+						while(n>10 || n<1)
 						{
-							puts("The floor fails and you through it into the void");
-							break;
-						}
-
-						case 3:
-						{
-							int i, n;
-							float num[10], sum = 0.0, avg;
-							puts("The gentleman welcomes you into the corner with the light and he asks you to give him some numbers");
-							puts("However you find out that the old man cannot keep track of more than 10 values");
-							printf("Enter the amount of numbers you want to make an average out of \n");
+							printf("Error! Keep it between 1 and 10 values. \n");
+							printf("Enter the amoount of numbers you want to average: ");
 							scanf("%d",&n);
-
-							while(n>10 || n<1)
-							{
-								printf("Error! Keep it between 1 and 10 values. \n");
-								printf("Enter the amoount of numbers you want to average: ");
-								scanf("%d",&n);
-							}
-
-							for(i=0;i<n;++i)
-							{
-								printf("%d. Enter number: ",i+1);
-								scanf("%f",&num[i]);
-								sum += num[i];
-							}
-
-							avg = sum /n;
-							printf("Average = %.2f \n", avg);
 						}
+
+						for(i=0;i<n;++i)
+						{
+							printf("%d. Enter number: ",i+1);
+							scanf("%f",&num[i]);
+							sum += num[i];
+						}
+
+						avg = sum /n;
+						printf("Average = %.2f \n", avg);
 					}
 				}
 				break;
@@ -1034,6 +1090,7 @@ int main(int argc, char *argv[])
 					int x=0;
 					int y;
 					int z=0;
+					
 					srand(time(NULL));
 					puts("You have entered a chamber resembling the ruins of an Ancient Egyptian Temple ");
 					puts("The door to your left shows signs of innocence");
@@ -1058,9 +1115,44 @@ int main(int argc, char *argv[])
 
 					printf("???: %s would you ignore fate \n",name);
 					puts("???: Pick a door?!");
+					puts("1. Innocent door");
+					puts("2.Door towards a powerful Energy");	
+						
 					}
 
 					scanf("%d",&choice);
+					switch(choice)
+					{
+						case 1:
+						{
+							if(x==1)
+							{
+							printf("reveal code HEADS\n"); //use file heads
+							}
+							puts("Intersting choice");	
+							scanf("%d",&choice);
+							break;		
+						}
+						case 2:
+						{
+							if(z==1)
+							{
+							printf("reveal code TAILS \n"); // use file tails
+							puts("Intersting choice");
+							scanf("%d",&choice);
+							}
+						
+							break;
+						
+						
+						}
+						
+						
+					}
+					
+					
+					
+
 				}
 				break;
 			}
@@ -1127,9 +1219,39 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("Hello World");
-					puts("you open the door and find ........");
-					scanf("%d",&choice);
+					 puts("you open the door and find ........");
+                                        puts("press 1 to start");
+                                        scanf("%d",&choice);
+
+                                        int arr[1] = {0};
+                                        int y, z;
+
+                                        y =urGuess();
+                                        z = Anumber(arr, y);
+
+
+
+                                                if(z != 0 && z != -1)
+                                                {
+                                                        puts("yes");
+                                                }
+
+                                                else if(z == -1)
+                                                {
+                                                        puts("sorry");
+                                                }
+
+                                                else if(z >= 11 && z <= 98)
+                                                {
+                                                        puts("not valid");
+                                                }
+
+                                                else if (z == 99)
+                                                {
+                                                        break;
+                                                        return 0;
+                                                }
+
 				}
 				break;
 			}
@@ -1827,10 +1949,9 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("you open the door and find ........");
-					puts("A gambling machine, and it says, If you average is even, you win, but if your average is odd, you lose");
-					puts("You decide to play");
-					play();
+					story();
+					elf();
+				//	play();;
 					scanf("%d",&choice);
 				}
 				break;
@@ -1881,6 +2002,55 @@ int main(int argc, char *argv[])
 	}
 	return EXIT_SUCCESS;
 }
+
+void play(void) // Josue Carrillo
+{
+	int i;
+	int total = 0;
+	int numbers[4] = {0};
+	int avg;
+	for(i = 0; i < 4; i++)
+	{
+		numbers[i] = rand() % 100;
+		total = total + numbers[i];
+	}
+	avg = total / 5;
+
+	if(avg % 2 == 0)
+	{
+		printf("The number is even you win!!");
+	}
+	else
+	{
+		printf("You lose");
+	}
+
+}
+
+void story(void)//Josue
+{
+	puts("You find yourself on the outskirts of an unknown city.");
+	puts("You look back and there is a barrier that prevents anyone from leaving or entering this place");
+	puts("Having no other choice, you begin to enter the city, and from a distance, you see a huge tower at the center of this city.");
+	puts("As you walk towards this tower, the city seems to be getting brighter with lights. You begin to see the residents of this city playing games against each other.");
+	puts("Seeing people around, you begin to ask people, 'Where is this place?'");
+	puts("You ask many people, yet no one knows");
+	puts("Everyone seems to have the same experience, they opened a door, and you found yourself at the outskirts of this city, no way out.");
+	puts("Yet everyone explains that playing games is the most important thing in this city.");
+	puts("Not knowing what to do, you begin to wander around, and then find yourself in front of something familiar, a SunBucks.");
+	puts("You enter and notice a person with pointy ears sitting near the corner of the store.");
+	puts("You give in into your curiosity and decide to sit next to this person.");
+
+}
+void elf(void)//Josue
+{
+	puts("As you are sit next to this person, she says: 'What do you want?'");
+	puts("You say, 'I was just curious, never seen a person with pointy ears'");
+	puts("She says, 'Are you new here'");
+	puts("You say, 'yes, just got here couple of hours ago'");
+	puts("She says, 'Ah ok, I am an elf that has lived in this city for many years. My name is Lia.'");
+}
+
 
 int RollArray(int arr[])//lA
 {
@@ -1959,29 +2129,6 @@ void BagTossed(int *arr)//lA
 		}
 }
 
-void play(void)
-{
-	int i;
-	int total = 0;
-	int numbers[4] = {0};
-	int avg;
-	for(i = 0; i < 5; i++)
-	{
-		numbers[i] = rand() % 100;
-		total = total + numbers[i];
-	}
-	avg = total / 5;
-
-	if(avg % 2 == 0)
-	{
-		printf("The number is even you win!!");
-	}
-	else
-	{
-		printf("You lose");
-	}
-	
-}
 
 
 //Monika
@@ -3069,6 +3216,7 @@ printf("Theres literally nothing but boring barrels and old janitorial supplies 
 printf("You decide to go back to the closet door and prepare to reopen it,\n");
 }
 
+
 //Benjamin Lozano Functions start
 void greenUSB26(int arrInt26[], int size)
 {
@@ -3157,3 +3305,72 @@ void lockedDoor26()
 	printf("The numbers range from 0-9...\n");
 }
 //Benjamin Lozano end functions
+
+/* Start of Room 19 (Jonathan Chua) Function Definitions */
+void room19_readFile(FILE *readPtr)
+{ /* Criteria : Pointers and While Loop */
+	system("clear");
+	char string[256];
+	while(fgets(string,sizeof(string),readPtr) != NULL)
+	{
+		printf("%s",string);
+	}    
+}
+
+int doorDecision(void)
+{ /* Criteria : Character Function */
+	char choice;
+	printf("Do you open the door? [Y]es [N]o : ");
+	scanf(" %c", &choice);
+	if(tolower(choice) == 'n')
+	{
+		return 99;
+	}
+	else
+	{
+		return 1;
+	}
+}
+/* End of Room 19 Function Definitions */
+
+void patrickInitialPrompt(void)
+{
+	puts("1. Do you open the door that is 50 feet in fron of you?");
+	puts("2. Do you simplay stand there and wait for the noise to get clearer on it's own?");
+	puts("3. There is an old, oriental gentleman in the corner which is lit up by a torch. Do you approach him?");
+}
+
+//AndyV
+int urGuess(void)
+{
+        int y;
+        puts("Pick a number between 1 and 10");
+        scanf("%d", &y);
+
+        return y;
+}
+//AndyV
+int Anumber(int a[], int urGuess)
+{
+        int i, x;
+        for(i = 0; i < 2; i++)
+        {
+                x = (rand() %10 + 1);
+                a[i] = x;
+        }
+
+        if(urGuess < 1 || urGuess > 10)
+        {
+                return 0;
+        }
+
+        if(a[i] == urGuess)
+                {
+                        return i;
+                }
+                 return -1;
+}
+
+
+
+
