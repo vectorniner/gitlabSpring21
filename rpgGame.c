@@ -883,6 +883,7 @@ int main(int argc, char *argv[])
 					scanf("%d",&choice);
 
 					if(choice == 1)
+						puts("You contemplate your current options");
 					{
 						puts("You: Hey! How are you? This world seems pretty nic...");
 						puts("Fairy: Shut up and give me ALL you've got!!");
@@ -965,13 +966,63 @@ int main(int argc, char *argv[])
 				break;
 			}
 
-			case 30://Markease's room of "why did you do this?"
+			case 30:
 		       	{
 			while(choice != 99)
 			{
+				//int nextChoice = 0;
 				puts("you open the door and find ........");
-				puts("Some guy screaming hello world. You panic and press 99!");
-				scanf("%d",&choice);
+				puts("Some guy screaming that he is the coolest in the universe!");
+				puts("You stand in shock as it is said in your precense.");
+				puts("You contemplate your current options");
+				printf("Which do you choose? 1: Acknowledge that You are truly the coolest \n");
+				printf("2:Acknowledge he is the coolest \n");
+				scanf(" %d",&choice);
+			//	while(choice != 1 ||  choice != 2)
+			//	{
+					if(choice == 1)
+					{
+						printf("Your claim has been ignored.\n");
+						printf("You challenge him to a cool contest. \n");
+					//	break;
+					}
+					else if(choice == 2)
+					{
+						printf("Your claim has been taken as sarcasim. \n");
+						printf("He challenges you to a cool contest. \n");
+					//	break;
+					}
+					else
+					{
+						printf("You can't think that fast\n");
+						break;
+					}
+			//	}
+				/*switch(choice) 
+				{
+					case 1:
+					{
+						printf("Your claim has been ignored.\n");
+						printf("You challenge him to a cool contest. \n");
+						break;
+					}
+					case 2:
+					{
+						printf("Your acknowledgement has been taken as sarcasim. \n");
+						printf("You are challenged to a cool contest. \n");
+						break;
+					}
+					default:
+					{
+						puts("You can't think that fast");
+						break;
+					}
+				}
+			}*/
+				printf("Play again? Enter 99 to quit\n");
+				scanf(" %d",&choice);
+
+
 		       	}
 			break;
 																                }
@@ -1878,3 +1929,8 @@ void printRules(int rollsPerTurn, int pointsToLoose)
 	puts("- After each turn, you will get an opportunity to roll again or stop rolling.");
 	puts("- If you choose to stop rolling, you can no longer roll for the rest of the game.");
 } // Manuel Castaneda
+
+int coolGuysInteract(void)//Markease Harris 
+{
+	
+}
