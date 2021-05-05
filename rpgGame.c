@@ -271,6 +271,7 @@ int main(int argc, char *argv[])
 				{
 					puts("you open the door and find ........");
 					printf("Hello World");
+					printf("Turn back");
 					scanf("%d",&choice);
 				}
 				break;
