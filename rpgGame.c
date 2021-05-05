@@ -472,27 +472,114 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					int rollDie;
+					
+					char ladder;
+					int rollDie, door1;
+					float numbers[50], average, sum = 0.0;
+					FILE *rptr;
 					rollDie = rand()%9;
 
-					puts("\n You open the door and all the water drains");
-					puts("In front of you is another door, you look closely at writing on the wall and it says");
-					puts("In order to open this doo you need to roll a random number 1-10");
-					puts("If you roll the correct number the door will open");
-					puts("What number will you choose? (99 will exit the program)");
+					puts("\nYou open the door and all the water drains");
+					puts("In front of you are five doors");
+					puts(" -----   -----   -----   -----   ----- ");
+					puts("|     | |     | |     | |     | |     | ");
+					puts("|  1  | |  2  | |  3  | |  4  | |  5  | ");
+					puts("|     | |     | |     | |     | |     | ");
+					puts(" -----   -----   -----   -----   -----  ");
+					puts("Which door will you choose? (99 will exit the program)");
 					scanf("%d", &choice);
-
-					if(choice == rollDie)
+					
+					switch(choice)
 					{
-						puts("Congrats the door is open");
+						case 1:
+						{	
+							puts("\nYou picked the first door");
+							puts("You look and see a small figure in the distance");
+							puts("As you walk closer you see that it's a skeleton running straight towards you!");
+							puts("There is another door to your right and written on the door says: ");
+							puts("In order to move escape the skeleton you need to add up 5 numbers averaging at least 10");
+							printf("\nEnter 5 numbers\n");							
+							
+							for(i = 0; i < 5; i++)
+							{
+
+								printf("Number %d : ",i+1);
+								scanf("%f", &numbers[i]);
+								sum += numbers[i];
+							}
+							average = sum / 5;
+							printf("Your average is = %.2f \n", average);	
+						
+							if(average < 10)
+							{
+								printf("\n\nPlease try again \n");
+								printf("Retutning to the main menu\n\n");
+							
+								break;	
+							}
+							else if (average > 10)
+							{
+								printf("\n\nCongrats! You escaped the skeleton!\n");
+								printf("Returning to the main menu\n\n");
+								break;	
+							}
+						case 2:
+						{
+							puts("You enter door number 2 and find a man rolling dice");
+							puts("You approach the man");
+							puts("The man says to you, if you roll the correct number I will give you this gold ingot but if you lose then you'll be stuck down here forever");
+						       	printf("\nWould you like to roll? [1] = yes, [2] = no\n");
+							scanf("%d", &choice);
+
+							if(choice == 1)
+							{
+								puts("The man says to pick a number 1 - 10");
+								printf("Enter a number: ");
+								printf("%d", rollDie);//Random number appears to test the correct guess
+
+								scanf("%d", &choice);
+								
+								if(choice == rollDie)
+								{
+									puts("Congrats you won the gold ingot!");
+									break;
+								}
+								else
+								{
+									puts("You lose");
+									puts("Returning back to the main menu");
+									break;
+								}
+
+							}
+							else if(choice == 2)
+							{
+								printf("\nYou choose 2\n");
+							}
+							
+						}
+						case 3:
+						{
+
+							rptr = fopen("mSkullPic.txt", "r");
+							if(rptr == NULL)
+							{
+								printf("Cannot open");
+							}
+							else
+							{
+								if(choice != 3)
+								{
+									puts("You found a computer in the door what");
+									scanf("%d", &choice);
+								}
+							}
+						}
+
+						
+					}					
+						
 					}
-					else
-					{
-						puts("You lose");
-						puts("Returning back to the main menu \n\n");
-						break;
-					}	
-
 				}
 				break;
 			}
