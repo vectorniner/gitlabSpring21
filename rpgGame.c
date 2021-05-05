@@ -670,8 +670,67 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
+					long balance = 100.00;
+					long betAmount = 0.0;
+					char bjRules = 'x';
+					char bjPlay = 'y';
+
 					puts("cl");
-					puts("you open the door and find ........");
+					puts("You open the door and find yourself in an eery, dark room.");
+					puts("You shut the door behind you and inspect the room. You spot a stool with a note placed on top of it and walk towards it.");
+					puts("You then pick up the note, but before you can begin reading it, you are startled by the sound of a footstep.");
+					puts("Before you can even process what you just heard, you are hit in the head with a shovel by a myseroius man, knocking you unconscious.");
+					puts("You wake up in the back of the man's car, scared for your life. He notices that you're awake.");
+					puts("'You've been out for a while', he says. 'Listen here and listen good because your life depends on it. I'm in need of some serious money, and you're gonna help me.");
+					puts("'Huh? Why me? I only have 100 dollars on me.' you explain to him.");
+					puts("'You were the only person dumb enough to walk into that room I was hiding in. Seriously, you wouldn't believe how long I waited in there for somebody.' he says.");
+					puts("'Any how, there's no getting out of this for you. Unless you pay with your life, but you don't want that to happen do you? So here's the plan...'");
+					puts("'I hope you're a good gambler, because I'm going to drop you off at the local casino. There you can play any game you want, but I'd suggest sticking with what you're good at'");
+					puts("'You're going to win me lots of money and I'll set you free. Easy enough, right?'");
+					puts("'But what happens if I lose my $100?' you ask him.");
+					puts("'Well kid, you better pray you don't lose that money. Because the only way you're getting out of this in one piece is if you come back to me with a bag full of cash!'");
+					puts("'And don't think you can contact the police while you're in there. If any of this gets back to me I will make sure your entire family is killed. I know people...'");
+					puts("As he finishes explaining what you are to do, you arrive at the casino.");
+					puts("'Good luck, I know you'll make me happy.', he says to you as you exit his car.");
+					puts("You enter the casino and exchange your $100 for chips.");
+					puts("You spot a blackjack table and decide to try your luck");
+
+					puts("'Welcome to the blackjack table! Would you like me to explain the rules? (Enter Y or N)");
+					scanf(" %c",&bjRules);
+					switch(bjRules)
+					{
+						case 'y':
+						case 'Y':
+						{
+							puts("Each participant attempts to beat the dealer by getting a count as close to 21 as possible, without going over 21.");
+							puts("It is up to each individual player if an Ace is worth 1 or 11. Face cards are 10 and any other card is its pip value.");
+							puts("Before the deal begins, each player places a bet, in chips, in front of them in the designated area.");
+							puts("When all the players have placed their bets, the dealer gives each player in the rotation a single card, including one to the dealer. This is repeated once more until everyone has 2 cards.");
+							puts("Each player must then decide whether to 'stand' (not ask for another card) or 'hit' (ask for another card in an attempt to get closer to a count of 21.");
+							puts("Player(s) may 'hit' as many times as they'd like during their turn.");
+							puts("If the player goes over 21, their round is over and they lose their bet. If, instead, the player decides to stand (therefore under 21), it is the dealer's turn.");
+							puts("The dealer then reveals his/her cards to the table. If the total of the dealer's cards is 17 or more, the dealer must stand. If the total is 16 or under, they must take a card.");
+							puts("The dealer must continue to take cards until the total is 17 or more, at which point the dealer must stand.");
+							puts("If the dealer goes over 21, any remaining player(s) automatically win. If the dealer does not go over 21, player(s) compare their cards to the dealers. Closes to 21 wins.");
+							puts("If there is a tie between dealer and player(s), both dealer and player(s) then draw a single card from the top of the deck. Whoever has the higher value card wins!");
+							break;	
+						}
+						case 'n':
+						case 'N':
+						{
+							break;
+						}
+						default:
+						{
+							puts("Invalid input.");
+							break;
+						}
+
+							
+					}
+					
+					
+					
 					scanf("%d",&choice);
 				}
 				break;
