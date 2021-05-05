@@ -1017,47 +1017,53 @@ int main(int argc, char *argv[])
 					puts("There is a noise in the distance but you can't quite make out what it is");
 					patrickInitialPrompt();
 					scanf("%d",&choice);
-					
-					switch(choice)
+					if(choice == 1)
 					{
-						case 1:
+						puts("You open the door and actually find out the noise is just Naked in the Rain by the Red Hot Chili Peppers playing on a radio");
+						puts("You actually see a guitar next to the radio. Do you pick it up? 1 for yes, 2 for no");
+						scanf("%d",&choice);
+						switch(choice)
 						{
-							puts("You open the door and actually find out the noise is just Naked in the Rain by the Red Hot Chili Peppers playing on a radio");
-							break;
+							case 1:
+							{
+								puts("You pick up the guitar and suddenly feel a change in your body. Maybe its the 5G everyone jokes about");
+								break;
+							}
+							case 2:
+							{
+								puts("Someone comes out of the shadows and hits you over the head with it. You died.");
+							}
 						}
+					}
+					else if (choice == 2)
+					{
+						puts("The floor fails and you through it into the void");
+					}
+					else if (choice == 3)
+					{
+						int i, n;
+						float num[10], sum = 0.0, avg;
+						puts("The gentleman welcomes you into the corner with the light and he asks you to give him some numbers");
+						puts("However you find out that the old man cannot keep track of more than 10 values");
+						printf("Enter the amount of numbers you want to make an average out of \n");
+						scanf("%d",&n);
 
-						case 2:
+						while(n>10 || n<1)
 						{
-							puts("The floor fails and you through it into the void");
-							break;
-						}
-
-						case 3:
-						{
-							int i, n;
-							float num[10], sum = 0.0, avg;
-							puts("The gentleman welcomes you into the corner with the light and he asks you to give him some numbers");
-							puts("However you find out that the old man cannot keep track of more than 10 values");
-							printf("Enter the amount of numbers you want to make an average out of \n");
+							printf("Error! Keep it between 1 and 10 values. \n");
+							printf("Enter the amoount of numbers you want to average: ");
 							scanf("%d",&n);
-
-							while(n>10 || n<1)
-							{
-								printf("Error! Keep it between 1 and 10 values. \n");
-								printf("Enter the amoount of numbers you want to average: ");
-								scanf("%d",&n);
-							}
-
-							for(i=0;i<n;++i)
-							{
-								printf("%d. Enter number: ",i+1);
-								scanf("%f",&num[i]);
-								sum += num[i];
-							}
-
-							avg = sum /n;
-							printf("Average = %.2f \n", avg);
 						}
+
+						for(i=0;i<n;++i)
+						{
+							printf("%d. Enter number: ",i+1);
+							scanf("%f",&num[i]);
+							sum += num[i];
+						}
+
+						avg = sum /n;
+						printf("Average = %.2f \n", avg);
 					}
 				}
 				break;
