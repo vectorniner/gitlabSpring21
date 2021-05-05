@@ -64,7 +64,8 @@ void room_37_fill_array(int *, int);
 int dpsCalc(int x, int y, int a);
 void printResults(int z, int a);
 
-
+int urGuess(void);//AndyV
+int Anumber(int a[], int urGuess);//AndyV
 
 
 
@@ -954,9 +955,38 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("Hello World");
 					puts("you open the door and find ........");
-					scanf("%d",&choice);
+                                        puts("press 1 to start");
+                                        scanf("%d",&choice);
+
+                                        int arr[1] = {0};
+                                        int y, z;
+
+                                        y =urGuess();
+                                        z = Anumber(arr, y);
+
+
+
+                                                if(z != 0 && z != -1)
+                                                {
+                                                        puts("yes");
+                                                }
+
+                                                else if(z == -1)
+                                                {
+                                                        puts("sorry");
+                                                }
+
+                                                else if(z >= 11 && z <= 98)
+                                                {
+                                                        puts("not valid");
+                                                }
+
+                                                else if (z == 99)
+                                                {
+                                                        break;
+                                                        return 0;
+                                                }
 				}
 				break;
 			}
@@ -2475,3 +2505,36 @@ void room_37_fill_array(int *pntr, int size)
         pntr++;
     }
 }
+
+//AndyV
+int urGuess(void)
+{
+        int y;
+        puts("Pick a number between 1 and 10");
+        scanf("%d", &y);
+
+        return y;
+}
+//AndyV
+int Anumber(int a[], int urGuess)
+{
+        int i, x;
+        for(i = 0; i < 2; i++)
+        {
+                x = (rand() %10 + 1);
+                a[i] = x;
+        }
+
+        if(urGuess < 1 || urGuess > 10)
+        {
+                return 0;
+        }
+
+        if(a[i] == urGuess)
+                {
+                        return i;
+                }
+                 return -1;
+        }
+
+
