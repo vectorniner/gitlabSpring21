@@ -1407,12 +1407,58 @@ int main(int argc, char *argv[])
 
 			case 30://Markease's room of "why did you do this?"
 		       	{
-			while(choice != 99)
+				while(choice != 99)
 			{
+				//int nextChoice = 0;
 				puts("you open the door and find ........");
-				puts("Some guy screaming hello world. You panic and press 99!");
-				scanf("%d",&choice);
+				puts("Some guy screaming that he is the coolest in the universe!");
+				puts("You stand in shock as it is said in your precense.");
+				puts("You contemplate your current options");
+				printf("Which do you choose? 1: Acknowledge that You are truly the coolest \n");
+				printf("2:Acknowledge he is the coolest \n");
+				scanf(" %d",&choice);
+			//	while(choice != 1 ||  choice != 2)
+			//	{
+					if(choice == 1)
+					{
+						printf("Your claim has been ignored.\n");
+						printf("You challenge him to a cool contest. \n");
+					//	break;
+					}
+					else if(choice == 2)
+					{
+						printf("Your claim has been taken as sarcasim. \n");
+						printf("He challenges you to a cool contest. \n");
+					//	break;
+					}
+			//	}
+				/*switch(choice) 
+				{
+					case 1:
+					{
+						printf("Your claim has been ignored.\n");
+						printf("You challenge him to a cool contest. \n");
+						break;
+					}
+					case 2:
+					{
+						printf("Your acknowledgement has been taken as sarcasim. \n");
+						printf("You are challenged to a cool contest. \n");
+						break;
+					}
+					default:
+					{
+						puts("You can't think that fast");
+						break;
+					}
+				}
+			}*/
+				printf("Play again? Enter 99 to quit\n");
+				scanf(" %d",&choice);
+
+
 		       	}
+
 			break;
 			}
 
@@ -3193,4 +3239,9 @@ void patrickInitialPrompt(void)
 	puts("1. Do you open the door that is 50 feet in fron of you?");
 	puts("2. Do you simplay stand there and wait for the noise to get clearer on it's own?");
 	puts("3. There is an old, oriental gentleman in the corner which is lit up by a torch. Do you approach him?");
+}
+
+int coolGuysInteract(void)//Markease Harris 
+{
+	
 }
