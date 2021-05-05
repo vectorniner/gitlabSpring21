@@ -1247,9 +1247,45 @@ int main(int argc, char *argv[])
 				{
 					puts("you open the door and find ........");
 					puts("You are in a small dark room");
-					puts("You start to hear noises but cannot see what it is");
-					puts("You panic and start running for your life");
+					puts("You turn the lights on and see 3 doors");
+					puts("You have to choose what door to go through");
+					puts("1.Go through the red door");
+					puts("2.Go through the blue door");
+					puts("3.Go through the green door");
+					printf("Please enter a number 1-3 or press 99 to exit the program:");
 					scanf("%d",&choice);
+
+					if (choice == 1)
+					{
+						puts("\nWoah! Wow! You really chose the red door");
+						puts("Very brave of you, but what a stupid choice to make");
+						puts("Really?! Who choses a red door over a green and blue door");
+						puts("Anyways! Prepare to meet your doom! HAHA!");
+						puts("You died!\n");
+					}
+
+					if (choice == 2)
+					{
+						puts("\nYou enter the room and close the door");
+						puts("You realize you have seen this room before");
+						puts("You are confused");
+						puts("You see a mirror and go to it");
+						puts("You see yourself in the mirro and see a 10 year old kid");
+						puts("THAT'S YOU!");
+						puts("You are confused and scared");
+						puts("You realize this room is your room");
+						puts("You see your bed and decide to take a nap\n");
+					}
+
+					if (choice == 3)
+					{
+						puts("\nYou go through the green door and the door slams behind you!");
+						puts("You cannot see what is happening");
+						puts("You start walking foward, but fall off a cliff!");
+						puts("SPLAT!");
+						puts("You fell to your death\n");
+					}
+
 				}
 				break;
 			}
