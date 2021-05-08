@@ -980,126 +980,123 @@ int main(int argc, char *argv[])
 				{
 					FILE *readPtr;
 					readPtr = fopen("./room19/room19_Door.txt", "r");
-					while(choice != 99)
+					printf("\n\n");
+					room19_readFile(readPtr);
+					printf("\n\nOur brave hero %s approaches the fabled door to Room 19\n\n", name);
+					choice = room19_doorDecision();
+					switch(choice) /* Criteria : Case Statement */
 					{
-						printf("\n\n");
-						room19_readFile(readPtr);
-						printf("\n\nOur brave hero %s approaches the fabled door to Room 19\n\n", name);
-						choice = room19_doorDecision();
-						switch(choice) /* Criteria : Case Statement */
+						case 1:
 						{
-							case 1:
-							{
-								readPtr = fopen("./room19/room19_openDoor.txt", "r");
-								room19_readFile(readPtr);
-								puts("\nYou open the door and enter........\n");
-								sleep(4);
-								readPtr = fopen("./room19/room19_Dragon.txt", "r");
-								room19_readFile(readPtr);
-								puts("\n\n.......to find A dragon!\n");
-								printf("%s, what do you choose to do?\n", name);
-								choice = room19_heroChoice();
-								if(choice != 99)
-								{	
-									int arrayCriteria1[10] = {0};
-									int arrayCriteria2[10] = {0};
-									int *ptrCriteria;
-									float hero, dragon;
-									ptrCriteria = arrayCriteria1;
-									room19_criteriaBomb(ptrCriteria);
-									hero = room19_getAvg(ptrCriteria);
-									ptrCriteria = arrayCriteria2;
-									room19_criteriaBomb(ptrCriteria);
-									dragon = room19_getAvg(ptrCriteria);
-									/* dragon bonus modifier */
-									dragon += 0.75;
-									printf("Hero Avg D10 Roll: %.2f\n", hero);
-									printf("Dragon Avg D10 Roll: %.2f\n", dragon);
-									sleep(3);
-									if(choice == 1)
+							readPtr = fopen("./room19/room19_openDoor.txt", "r");
+							room19_readFile(readPtr);
+							puts("\nYou open the door and enter........\n");
+							sleep(4);
+							readPtr = fopen("./room19/room19_Dragon.txt", "r");
+							room19_readFile(readPtr);
+							puts("\n\n.......to find A dragon!\n");
+							printf("%s, what do you choose to do?\n", name);
+							choice = room19_heroChoice();
+							if(choice != 99)
+							{	
+								int arrayCriteria1[10] = {0};
+								int arrayCriteria2[10] = {0};
+								int *ptrCriteria;
+								float hero, dragon;
+								ptrCriteria = arrayCriteria1;
+								room19_criteriaBomb(ptrCriteria);
+								hero = room19_getAvg(ptrCriteria);
+								ptrCriteria = arrayCriteria2;
+								room19_criteriaBomb(ptrCriteria);
+								dragon = room19_getAvg(ptrCriteria);
+								/* dragon bonus modifier */
+								dragon += 0.75;
+								printf("Hero Avg D10 Roll: %.2f\n", hero);
+								printf("Dragon Avg D10 Roll: %.2f\n", dragon);
+								sleep(3);
+								if(choice == 1)
+								{
+									readPtr = fopen("./room19/room19_Charm.txt", "r");
+									room19_readFile(readPtr);
+									sleep(6);
+									if(hero >= dragon)
 									{
-										readPtr = fopen("./room19/room19_Charm.txt", "r");
+										readPtr = fopen("./room19/room19_Ending2.txt", "r");
 										room19_readFile(readPtr);
-										sleep(6);
-										if(hero >= dragon)
-										{
-											readPtr = fopen("./room19/room19_Ending2.txt", "r");
-											room19_readFile(readPtr);
-											printf("\nMuch wow! You must be a bard, for you have successfully wooed the dragon!\n");
-											char stringCriteria[14] = {' ','t','h','e',' ','C','h','a','r','m','i','n','g','\0'};
-											strcat(name, stringCriteria);
-											sleep(4);
-										}
-										else
-										{
-											room19_dragonRAWRS(readPtr);
-											printf("\nThe dragon finds your face repulsing\n");
-											sleep(4);
-											room19_heroToast(readPtr);
-											printf("\nSo he responds to your advances with FIRE\n");
-											sleep(4);
-											room19_ending3(readPtr);
-											char stringCriteria[15] = {' ','t','h','e',' ','R','e','p','u','l','s','i','v','e','\0'};
-											strcat(name, stringCriteria);
-											printf("\nBetter luck next time\n");
-											sleep(4);
-										}
+										printf("\nMuch wow! You must be a bard, for you have successfully wooed the dragon!\n");
+										char stringCriteria[14] = {' ','t','h','e',' ','C','h','a','r','m','i','n','g','\0'};
+										strcat(name, stringCriteria);
+										sleep(4);
 									}
 									else
-									{	
-										readPtr = fopen("./room19/room19_toBattle.txt", "r");
-										room19_readFile(readPtr);
-										printf("\nYou gotta ask yourself a question, 'Do I feel lucky?'. Well, do you punk?\n");
+									{
+										room19_dragonRAWRS(readPtr);
+										printf("\nThe dragon finds your face repulsing\n");
 										sleep(4);
-										if(hero > dragon)
-										{
-											readPtr = fopen("./room19/room19_Ending1.txt", "r");
-											room19_readFile(readPtr);
-											char stringCriteria[18] = {' ','t','h','e',' ','D','r','a','g','o','n','s','l','a','y','e','r','\0'};
-											strcat(name, stringCriteria);
-											printf("\nLike the stud you are, you slayed the dragon!\n");
-											sleep(4);
-										}
-										else
-										{
-											room19_dragonRAWRS(readPtr);
-											printf("\nto which the dragon responds,'I do feel lucky'\n");
-											sleep(4);
-											room19_heroToast(readPtr);
-											printf("\nThe dragon releases a massive fireball, hitting you right on the face!\n");
-											sleep(4);
-											room19_ending3(readPtr);
-											printf("\nMaybe, next time, you don't taunt the dragon.");
-											char stringCriteria[13] = {' ','t','h','e',' ','u','n','l','u','c','k','y','\0'};
-											strcat(name, stringCriteria);
-											sleep(4);
-										}
+										room19_heroToast(readPtr);
+										printf("\nSo he responds to your advances with FIRE\n");
+										sleep(4);
+										room19_ending3(readPtr);
+										char stringCriteria[15] = {' ','t','h','e',' ','R','e','p','u','l','s','i','v','e','\0'};
+										strcat(name, stringCriteria);
+										printf("\nBetter luck next time\n");
+										sleep(4);
 									}
-									choice = 99;
 								}
 								else
-								{
-									room19_dragonRAWRS(readPtr);
-									printf("\nAs %s attempts to flee, the dragon attacks!\n", name);
+								{	
+									readPtr = fopen("./room19/room19_toBattle.txt", "r");
+									room19_readFile(readPtr);
+									printf("\nYou gotta ask yourself a question, 'Do I feel lucky?'. Well, do you punk?\n");
 									sleep(4);
-									room19_heroToast(readPtr);
-									puts("\ncaught unprepared, you burst into flames");
-									sleep(4);
-									room19_ending3(readPtr);
-									printf("\nThus, a fitting end for %s, for turning ye back on a dragon\n\n", name);
-									sleep(4);
-									char stringCriteria[18] = {' ','t','h','e',' ','S','t','u','p','i','d','\0'};
-									strcat(name, stringCriteria);
+									if(hero > dragon)
+									{
+										readPtr = fopen("./room19/room19_Ending1.txt", "r");
+										room19_readFile(readPtr);
+										char stringCriteria[18] = {' ','t','h','e',' ','D','r','a','g','o','n','s','l','a','y','e','r','\0'};
+										strcat(name, stringCriteria);
+										printf("\nLike the stud you are, you slayed the dragon!\n");
+										sleep(4);
+									}
+									else
+									{
+										room19_dragonRAWRS(readPtr);
+										printf("\nto which the dragon responds,'I do feel lucky'\n");
+										sleep(4);
+										room19_heroToast(readPtr);
+										printf("\nThe dragon releases a massive fireball, hitting you right on the face!\n");
+										sleep(4);
+										room19_ending3(readPtr);
+										printf("\nMaybe, next time, you don't taunt the dragon.");
+										char stringCriteria[13] = {' ','t','h','e',' ','u','n','l','u','c','k','y','\0'};
+										strcat(name, stringCriteria);
+										sleep(4);
+									}
 								}
-								break;
+								choice = 99;
 							}
-							default:
+							else
 							{
-								printf("\nOur, not-so, brave hero %s slowly backs away from the door to room 19 and decides to pick another door\n", name);
-								char stringCriteria[18] = {' ','t','h','e',' ','C','o','w','a','r','d','\0'};
+								room19_dragonRAWRS(readPtr);
+								printf("\nAs %s attempts to flee, the dragon attacks!\n", name);
+								sleep(4);
+								room19_heroToast(readPtr);
+								puts("\ncaught unprepared, you burst into flames");
+								sleep(4);
+								room19_ending3(readPtr);
+								printf("\nThus, a fitting end for %s, for turning ye back on a dragon\n\n", name);
+								sleep(4);
+								char stringCriteria[18] = {' ','t','h','e',' ','S','t','u','p','i','d','\0'};
 								strcat(name, stringCriteria);
-								break;
 							}
+							break;
+						}
+						default:
+						{
+							printf("\nOur, not-so, brave hero %s slowly backs away from the door to room 19 and decides to pick another door\n", name);
+							char stringCriteria[18] = {' ','t','h','e',' ','C','o','w','a','r','d','\0'};
+							strcat(name, stringCriteria);
+							break;
 						}
 					}
 					printf("\nYou are bestowed the title : %s\n", name);
