@@ -95,10 +95,10 @@ void wordGame(char *pointer);
 
 
 //Benjamin Lozano
-void greenUSB26(int arrInt26[], int size);
-void blueUSB26();
-void redUSB26();
-void lockedDoor26();
+int greenUSB26(int *arrPtr26);
+int blueUSB26(int *arrPtr26);
+int redUSB26();
+void lockedDoor26(int targetNumber1, int targetNumber2, int targetNumber3);
 //Benjamin Lozano
 
 //Cristian Lopez
@@ -2476,37 +2476,54 @@ case 14:
 			{
 				while(choice != 99)
 				{
-					int choice26 = 0;
-					int arrInt26[9] = {7,3,5,6,9,1,3,2,6};
-					int randomGame26;
-					printf("\nYou open the door and find a small room with a door on the other side and a desk with a laptop and three USB drives equally spread apart, one gree, one blue, one red.\n");
-					printf("The door behind you slams shut. You open the door again to see a bottomless pit.\n");
-					printf("You are now realizing there is no immediate way out, so you decide to find your own way out...\n");
+						int choice26 = 0;
+						int arrInt26[9] = {7,3,5,6,9,1,3,2,6};
+						int randomGame26;
+						int randomPlayerNumber26;
+						int randomSurvivalNumber26;
+						int *arrPtr26;
+						int targetNumber1 = 0;
+						int targetNumber2 = 0;
+						int targetNumber3 = 0;
+						int gameWinner = 0;
+
+						arrPtr26 = arrInt26;
+
+						randomPlayerNumber26 = rand()%3000 + 1000;
+						randomSurvivalNumber26 = rand()%randomPlayerNumber26 + 1;
+					printf("\nYou open the door and find a small room with a door on the other side and a desk with a laptop and three USB drives equally spread apart, one green, one blue, one red.\n");
+					printf("\nThe door behind you slams shut...\n");
+        				printf("\nYou hear static coming from a speaker in the room, then suddenly a deep voice comes through the speaker...\n");
+					printf("\n\t'Welcome to the game...you are player number %d'\n ", randomPlayerNumber26);
+					printf("\t'Unfortunately for you...only %d players have survived the game...'\n", randomSurvivalNumber26);
+					printf("\t'But don't worry...oh wait you should worry because there is no way out now...GOOD LUCK!!'\n");
+					printf("\nYou open the door you came in from again to see a bottomless pit.\n");
+					printf("You are now realizing there is no immediate way out, so you decide to play the game and find your own way out...\n");
 					printf("You walk over to the desk and see a message above each USB...\n\n");
 
 					do{
-						printf("1) Inspect the Green USB.\n");
-						printf("2) Inspect the Blue USB.\n");
-						printf("3) Inspect the Red USB.\n");
-						printf("4) Walk up to the door on the other side of the room.\n");
-						printf("5) Leave the room and fall into the bottomless pit.\n");
-						printf("Enter choice 1-5: ");
-						scanf("%d", &choice26);
+					printf("1) Inspect the Green USB.\n");
+					printf("2) Inspect the Blue USB.\n");
+					printf("3) Inspect the Red USB.\n");
+					printf("4) Walk up to the door on the other side of the room.\n");
+					printf("5) Leave the room and fall into the bottomless pit.\n");
+					printf("Enter choice 1-5: ");
+					scanf("%d", &choice26);
 
 						switch(choice26)
 						{
-							case 1: greenUSB26(arrInt26, 9);
+							case 1: targetNumber2 = greenUSB26(arrPtr26);
 								break;
-							case 2: blueUSB26();
+							case 2: targetNumber3 = blueUSB26(arrPtr26);
 								break;
-							case 3: redUSB26();
+							case 3: targetNumber1 = redUSB26();
 								break;
-							case 4: lockedDoor26();
+							case 4: lockedDoor26(targetNumber1, targetNumber2, targetNumber3);
 								break;
-						}
+						}			
 					}while(choice26 != 5);
 
-					printf("\nChoose another room 1-40 or type 99 to exit the program.\n");
+					printf("\nEnter 99 to exit the program.\n");
 					scanf("%d",&choice);
 				}
 				break;
@@ -4767,73 +4784,175 @@ printf("You decide to go back to the closet door and prepare to reopen it,\n");
 
 
 //Benjamin Lozano Functions start
-void greenUSB26(int arrInt26[], int size)
+int greenUSB26(int *arrPtr26)
 {
 	int greenChoice = 0; 
-	int targetCoulumn;
+	int targetColumn;
 	int targetRow;
 	int i,j;
+	int targetNumber = 0;
+	
+	
+	printf("\n\nAs you walk closer to the green USB, you read the message above, it states...\n");
+	printf("*******************************************************************************\n");
+	printf("*                                     # 2                                     *\n");
+	printf("*******************************************************************************\n");
 
-	printf("\nAs you walk closer to the green USB, you read the message above, it states...\n");
-	printf("\t#2\n");
-
-	printf("There are two options you consider\n");
-	printf("1) plug the green USB into the laptop.\n");
+	printf("\nThere are two options you consider\n");
+	printf("1) Plug the green USB into the laptop.\n");
 	printf("2) Step back and view the room again.\n");
 	printf("Enter choice 1-2: ");
 	scanf("%d", &greenChoice);
 
 	if(greenChoice == 1)
 	{
-		printf("You plug the green USB into the laptop and a window pops up\n");
+		printf("\nYou plug the green USB into the laptop and a window pops up...\n");
 
-		targetCoulumn = rand()%3 + 1;
+		targetColumn = rand()%3 + 1;
 		targetRow = rand()%3 + 1;
 
+		if(targetColumn == 1)
+		{
+			if(targetRow == 1)
+			{
+				targetNumber = 7;
+			}
+			else if(targetRow == 2)
+			{
+				targetNumber = 6;
+			}
+			else
+			{
+				targetNumber = 3;
+			}
+		}
+		else if(targetColumn == 2)
+		{
+			if(targetRow == 1)
+			{
+				targetNumber = 3;
+			}
+			else if(targetRow == 2)
+			{
+				targetNumber = 9;
+			}
+			else
+			{
+				targetNumber = 2;
+			}
+		}
+		else
+		{
+			if(targetRow == 1)
+			{
+				targetNumber = 5;
+			}
+			else if(targetRow == 2)
+			{
+				targetNumber = 1;
+			}
+			else
+			{
+				targetNumber = 6;
+			}
+		}
+		
+		printf("\n\nYou are looking for the number in Column #%d and Row #%d\n\n", targetColumn, targetRow);
+
+
+		printf("\t*******\n");
 		for(i = 0; i < 3; i++)
 		{
+			printf("\t ");
 			for(j = 0; j < 3; j++)
 			{
-				printf("%d ", arrInt26[j]);
+				printf("%d ", *arrPtr26++);
 			}
 			printf("\n");
 		}
+		printf("\t*******\n");
+
+		printf("\n\n  'I suggest that you keep that number in mind'\n\n");
+		return targetNumber;
 	}
 	else
 	{
-		printf("You step back and view the room again.\n");
+		printf("\nYou step back and view the room again.\n");
+		return targetNumber;
 	}
 }
-void blueUSB26()
+
+int blueUSB26(int *arrPtr26)
 {
 	int blueChoice;
+	int targetNumber = 6;
+	int i;
+	int sumOfArray = 0;
+	double averageOfArray = 0.0;
 
-	printf("\nAs you walk closer to the blue USB, you read the message above, it states...\n");
-	printf("\t#3\n");
+	printf("\n\nAs you walk closer to the blue USB, you read the message above, it states...\n");
+	printf("*******************************************************************************\n");
+	printf("*                                     # 3                                     *\n");
+	printf("*******************************************************************************\n");
 
-	printf("There are two options you consider\n");
+
+	printf("\nThere are two options you consider\n");
 	printf("1) Plug the blue USB into the laptop.\n");
 	printf("2) Step back and view the room again.\n");
 	printf("Enter choice 1-2: ");
 	scanf("%d", &blueChoice);
-
+	
 	if(blueChoice == 1)
 	{
-		printf("blue USB game\n");
+		for(i = 0; i < 9; i++)
+		{
+			sumOfArray += *arrPtr26;
+			arrPtr26++;
+		}	
+	
+		
+		averageOfArray = (double)sumOfArray/9.0;
+	
+		printf("\nYou plug in the blue USB and a calculator application pops up along with a set of numbers...\n");
+		printf("\nOver the loud speaker you hear, 'it looks like youre an AVERAGE person HAHAHAHA'\n");
+		printf("\nThe word AVERAGE sticks in your head as it was the emphasized word \n");
+		printf("\nThe set of numbers is...\n");
+		printf("\n7 3 5 6 9 1 3 2 6\n");
+	
+		printf("\nYou add all of those number up in the calculator to get %d", sumOfArray);
+		printf("\nYou then divide by 9 in order to calculate the average\n");
+		printf("\nYou are looking for the number that appears the most in the solution\n");
+		printf("\nThe calculator reads...\n");
+		printf("\t*********\n");
+		printf("\t%f\n", averageOfArray);
+		printf("\t*********\n\n");
+
+		printf("\n\n  'I suggest that you keep that number in mind'\n\n");
+		return targetNumber;
+		
 	}
 	else
 	{
-		printf("You step back and view the room again");
+		printf("\nYou step back and view the room again");
+		return targetNumber;
 	}
 }
-void redUSB26()
+int redUSB26()
 {
 	int redChoice;
+	char prompt[15] = "Room26Password";
+	char message[65] = "All You have 2 Do 1s C0unt the Number 0f digits in Th1s Sentence";
+	char copyPrompt[15];
+	int index;
+	int guess;
+	int targetNumber = 0;
 
-	printf("\nAs you walk closer to the red USB, you read the message above, it states...\n");
-	printf("\t#1");
+	printf("\n\nAs you walk closer to the red USB, you read the message above, it states...\n");
+	printf("*******************************************************************************\n");
+	printf("*                                     # 1                                     *\n");
+	printf("*******************************************************************************\n");
 
-	printf("There are two options you consider\n");
+	printf("\nThere are two options you consider\n");
 	printf("1) Plug the red USB into the laptop.\n");
 	printf("2) Step back and look at the room again.\n");
 	printf("Enter choice 1-2: ");
@@ -4841,18 +4960,108 @@ void redUSB26()
 
 	if(redChoice == 1)
 	{
-		printf("Red USB game\n");
+		printf("\nYou plug in the red USB and two screens side by side pop up...");
+		printf("\nThe screen looks identical, except for one thing missing...");
+		printf("\nThere is a paragraph missing on the second page");
+
+		printf("\nOn the left side it reads...\n");
+		printf("\n\t%s\n\n", prompt);
+
+		printf("\nNow you do what any person would...you copy the missing paragraph into the screen on the right\n");
+		printf("Enter the string: ");
+		scanf("%s", copyPrompt);
+
+		if(strcmp(prompt, copyPrompt) == 0)
+		{
+		
+			printf("\nA new window pops up and over the speaker you hear...\n");
+			printf("\t'Congratulations you can copy me, but can you count correctly? HAHAHA'\n");
+			printf("\nA brand new window pops up on the laptop with one sentence...\n");
+
+			printf("\n\t%s\n\n", message);
+
+			index = 0;
+			while(message[index])
+			{
+				if(isdigit(message[index]))
+				{
+					targetNumber++;
+				}
+				index++;
+			}
+
+			printf("\n\n  'I suggest that you keep that number in mind'\n\n");
+			return targetNumber;
+		}
+		else
+		{
+			printf("\nOh im sorry you cant follow my instructions...I guess you will have to try again to get the answer...\n\n");
+			return targetNumber;
+		}
 	}
 	else
 	{
-		printf("You step back and view the room again.\n");
+		printf("\nYou step back and view the room again.\n");
+		return targetNumber;
 	}
 }
-void lockedDoor26()
+
+void lockedDoor26(int targetNumber1, int targetNumber2, int targetNumber3)
 {
-	printf("As you walk closer to the door on the other side you see a keypad lock...\n");
-	printf("The numbers range from 0-9...\n");
+	int lockedDoorChoice;
+	int lockedDoorGuess;
+	int password;
+
+	password = ((targetNumber1 * 100) + (targetNumber2 * 10) + targetNumber3);
+	
+	printf("\nAs you walk closer to the door on the other side you see a high-tech keypad lock...\n");
+	printf("\nAgain you hear the scary deep voice...\n");
+	printf("\t'This could be your great escape...but wait...do you know the password...MUAHAHAHAHAHA'\n");
+	printf("\nYou view the keypad lock again...");
+	printf("\nThe numbers range from 0-9...\n");
+	printf("\nYou see slots for only three numbers so suddenly you realize the importance of the messages above each USB drive\n");
+
+	printf("\nThere are two options you consider\n");
+	printf("1) Enter the three digit passcode.\n");
+	printf("2) Step back and view the room again.\n");
+	printf("Enter choice 1-2: ");
+	scanf("%d", &lockedDoorChoice);
+
+	if(lockedDoorChoice == 1)
+	{
+		printf("\n\n%d\n\n", password);
+		printf("\nYou are nervous as you walk closer to the keypad...\n\n");
+		printf("*************\n");
+		printf("* 1 | 2 | 3 *\n");
+		printf("* 4 | 5 | 6 *\n");
+		printf("* 7 | 8 | 9 *\n");
+		printf("*   | 0 |   *\n");
+		printf("*************\n");
+
+		printf("Enter your three digits (Format: 000)\n");
+		scanf("%d", &lockedDoorGuess);
+
+		if(lockedDoorGuess == password)
+		{
+			printf("\nYou hear the door unlock and it creeps open...\n");
+			printf("\nThe sunlight floods the room, and you realize that you have won...");
+			printf("\n 'Congratulations you live to see another day out in the world'\n");
+			printf("\nFreedom at last!\n");
+			printf("\n\n\nYOU HAVE WON THE GAME AND ARE NOW FREE TO GO THROUGH THE DOOR AS A SHEET OF GLASS NOW COVERS THE BOTTOMLESS PIT.\n\n\n");
+		}
+		else
+		{
+			printf("\nYou hear a siren go off and the room starts to light up red indicating that you have not given the correct password...\n");
+			printf("\nThe deep voice comes back... 'It looks like you have not won the game yet, why don't you go back and study more...or else...'\n\n");
+		}
+	}
+	else
+	{
+		printf("\nYou step back and view the room again.\n");
+	}
 }
+
+		
 //Benjamin Lozano end functions
 
 /* Start of Room 19 (Jonathan Chua) Function Definitions [Bookmark2]*/
