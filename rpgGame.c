@@ -47,6 +47,7 @@ void room19_ending3(FILE*);
 /* End of Room 19 Function Prototyping */
 
 char *randomString(char *p);
+char *shiftString(char *p, int choice);
 
 void mQhelpPrompt(void); //mquail
 void mQhelpMenu(void); //mquail
@@ -3234,6 +3235,8 @@ case 14:
 			{
 				while(choice != 99)
 				{
+					int total, countA, countB;
+					double avg;
 					puts("You are safe from the water, but strange random strings start to attack. What do you do?");
 					while(choice != 99)
 					{
@@ -3248,9 +3251,22 @@ case 14:
 							case 1:
 								ptr = randomString(randStr);
 								printf("String %s approaches you and you smack it!\n", ptr);
+								ptr = shiftString(ptr, 1);
 								printf("The string is confused and altered to %s \n", ptr);
+								countA++;
+								total++;
+								avg = (double)countA/(double)total;
+								printf("Your average choice for smacking strings is %.2f \n", avg);
 								break;
 							case 2:
+								ptr = randomString(randStr);
+								printf("String %s approaches you and you kick it!\n", ptr);
+								ptr = shiftString(ptr, 2);
+								printf("The string is confused and altered to %s \n", ptr);
+								countB++;
+								total++;
+								avg = (double)countB/(double)total;
+								printf("Your average choice for kicking strings is %.2f \n", avg);
 								break;
 							case 99:
 								break;
@@ -4032,6 +4048,26 @@ char *randomString(char *p)
 			}
 		}
 		fclose(rfPtr);
+	}
+	return p;
+}
+
+char *shiftString(char *p, int choice)
+{
+	int i;
+	if(choice == 1)
+	{
+		for(i = 0; i < strlen(p); i++)
+		{
+			p[i] = p[i] + 4;
+		}
+	}
+	if(choice == 2)
+	{
+		for(i = 0; i < strlen(p); i++)
+		{
+			p[i] = p[i] - 4;
+		}
 	}
 	return p;
 }
