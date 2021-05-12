@@ -90,6 +90,8 @@ void room_37_fill_array(int *, int);
 //Carlos Gonzalez
 int dpsCalc(int x, int y, int a);
 void printResults(int z, int a);
+void wordGame(char *pointer);
+
 
 
 //Benjamin Lozano
@@ -121,6 +123,8 @@ int main(int argc, char *argv[])
 {
 	int a,x,y,z,i,h,g,k,choice=0;
 	char name[256];
+	char tech[256];
+	char *pointer = tech;
 	int boxNum=0;
 	int sum = 0;
         int number;
@@ -1811,10 +1815,10 @@ int main(int argc, char *argv[])
 					puts("\nYou open the door and find ........");
 					puts("Yourself inside of JoJos Bizarre Dungeon. \n");
 					
-					puts("Select your stand");
+					puts("Select your path");
 					puts("1. Star Platinum");
 					puts("2. Golden Experience.");
-					puts("3. Mr. President ");
+					puts("3. Joesph Joestar ");
 					scanf(" %d", &choice);
 					
 						switch(choice)
@@ -1845,11 +1849,20 @@ int main(int argc, char *argv[])
 						}
 						case 3:
 						{
-							puts("Not finished \n");
+							printf("\nKars, a 100,000 year old vampire, has attained the Red Stone Aja allowing him to conquer the sun and achieve immense power.");
+							printf("\nTo defeat him you will have to play the last ace up your sleeve, the Joestar family secret technique ...");
+							printf("\nEnter the name of the technique: ");
+						
+							fgets(tech, sizeof(tech), stdin);
+							fgets(tech, sizeof(tech), stdin);
+							
+							wordGame(pointer);
+
 							break;
+
 						}
 					}
-					puts("Thank you for playing.");
+					puts("\nThank you for playing.");
 					exit(0);	
 				}
 				break;
@@ -4463,3 +4476,77 @@ void noteFromRick(void)//Berenis Castruita
 
 
 }
+
+
+void wordGame(char *pointer)
+{
+
+
+
+	if(strcmp(pointer, "run away\n") == 0)
+	{
+		puts("\nYou use the Joestar Family secret technique successfully and run away from kars toward the ocean.");
+		puts("Kars transforms his arms into those of a bird and chases after you.");
+		printf("\nIn the distance you see an airplane or a gun, which do you choose: ");
+	}
+	else
+	{
+		printf("\nYou choose to %s, but to no avail Kars kills you instantly", pointer);
+		exit(0);
+	}
+
+	fgets(pointer, 10, stdin);
+
+
+	if(strcmp(pointer, "airplane\n") == 0)
+	{
+		puts("\nYou jump into the airplane and take off, this catches Kars by suprise and allows you to get a head start on your next move.");
+		printf("\nYou need to come up with a plan to defeat Kars, will you fly to the nearby military base or volcano: ");
+	}
+	else
+	{
+		puts("\nYou head toward the gun and choose to fire at Kars, however the bullets have no affect on the ultimate life form and he kills you instantly");
+		exit(0);	
+	}
+
+	fgets(pointer, 20, stdin);
+	
+	if(strcmp(pointer, "volcano\n") == 0)
+	{
+		puts("\nYou fly toward the volcano in a last ditch effort to kill kars");
+		puts("However he launches an attack, piranhas rain down into the cabin and a squid rips apart the plane propellors.");
+		puts("You are forced to crash land into the volcano.");
+		puts("In that very moment, a hand pins Kars to the nose of the plane. It is your parnter Rudol Von Stroheim who was hiding in the plane..");
+		puts("You are both successfully able to crash land Kars into the lava, it seems as though you have won but this is not enough to stop Kars.");
+		puts("He is able to harden his skin enough to survive being in the lava, and launches a suprise attack of his own.");
+		puts("He cuts off one of your arms");
+		printf("\nYou are running out of options as you lie on the ground awaiting your death, will you try to launch an attack with hamon or the red stone of aja: ");
+	}
+	else
+	{
+		puts("\nYou fly to the nearby military base hoping to be able to defeat him but Kars is able to quickly murder everyone including yourself.");
+		exit(0);
+	}
+
+	fgets(pointer, 30, stdin);
+
+	if(strcmp(pointer, "the red stone of aja\n") == 0)
+	{
+		puts("\nKars confident that he is about to finally kill you with one last hamon strike is suprised to see you use the red stone of aja to counter his attack.");
+		puts("The red stone of aja amplifies the amount of hamon Kars used to attack you with and causes the volcano to erupt with a force equal to the escape velocity of earth.");
+		puts("The force is enough to launch him into space where he freezes over and turns to stone. ");
+		puts("You have successfully defeated Kars and saved the Earth.");
+	}
+	else
+	{
+		puts("\nYou try and attack with hamon but fail miserably, Kars' hamon is hundred of times stronger than yours and so he melts you with a flurry of attacks.");
+		exit(0);
+	}
+
+
+
+}
+
+
+
+
