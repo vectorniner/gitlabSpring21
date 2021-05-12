@@ -10,6 +10,10 @@
 
 
 
+
+//Cristian Lopez - Room 9
+
+
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
@@ -94,6 +98,12 @@ void blueUSB26();
 void redUSB26();
 void lockedDoor26();
 //Benjamin Lozano
+
+//Cristian Lopez
+_Bool cLopezValidBet(double amount, double bal);
+void cLopezFillFlipArray(int *pntr);
+_Bool cLopezScanFlipArray(int *pntr, int userPick);
+//Cristian Lopez
 
 int urGuess(void);//AndyV
 int Anumber(int a[], int urGuess);//AndyV
@@ -679,70 +689,493 @@ int main(int argc, char *argv[])
 			} //case 8 ends
 			case 9:
 			{
+				char yN;
+				double balance = 100.00;
+				double betAmount = 0.0;
+				int welcome = 0;
+				char rWelcome;
+
+				int betsWon = 0;
+				int betsLost = 0;
+				double totalBets = 0.0;
+				double net = 0.0;
+
+				int roulBet = 0;
+				int roulRoll = 0;
+				int roulResult = 0; 
+				int roulInd = 0;
+				_Bool vBet;
+					
+				char *pntr;
+				char userFlip;
+				int userFlipInt = 0;
+				int flip = 0;
+				int nGFlip = 0;
+				int userScoreFlip = 0;
+				int houseScoreFlip = 0;
+				int resultFlip;
+
 				while(choice != 99)
 				{
-					long balance = 100.00;
-					long betAmount = 0.0;
-					char bjRules = 'x';
-					char bjPlay = 'y';
 
-					puts("cl");
-					puts("You open the door and find yourself in an eery, dark room.");
-					puts("You shut the door behind you and inspect the room. You spot a stool with a note placed on top of it and walk towards it.");
-					puts("You then pick up the note, but before you can begin reading it, you are startled by the sound of a footstep.");
-					puts("Before you can even process what you just heard, you are hit in the head with a shovel by a myseroius man, knocking you unconscious.");
-					puts("You wake up in the back of the man's car, scared for your life. He notices that you're awake.");
-					puts("'You've been out for a while', he says. 'Listen here and listen good because your life depends on it. I'm in need of some serious money, and you're gonna help me.");
-					puts("'Huh? Why me? I only have 100 dollars on me.' you explain to him.");
-					puts("'You were the only person dumb enough to walk into that room I was hiding in. Seriously, you wouldn't believe how long I waited in there for somebody.' he says.");
-					puts("'Any how, there's no getting out of this for you. Unless you pay with your life, but you don't want that to happen do you? So here's the plan...'");
-					puts("'I hope you're a good gambler, because I'm going to drop you off at the local casino. There you can play any game you want, but I'd suggest sticking with what you're good at'");
-					puts("'You're going to win me lots of money and I'll set you free. Easy enough, right?'");
-					puts("'But what happens if I lose my $100?' you ask him.");
-					puts("'Well kid, you better pray you don't lose that money. Because the only way you're getting out of this in one piece is if you come back to me with a bag full of cash!'");
-					puts("'And don't think you can contact the police while you're in there. If any of this gets back to me I will make sure your entire family is killed. I know people...'");
-					puts("As he finishes explaining what you are to do, you arrive at the casino.");
-					puts("'Good luck, I know you'll make me happy.', he says to you as you exit his car.");
-					puts("You enter the casino and exchange your $100 for chips.");
-					puts("You spot a blackjack table and decide to try your luck");
+					FILE *rptr;
 
-					puts("'Welcome to the blackjack table! Would you like me to explain the rules? (Enter Y or N)");
-					scanf(" %c",&bjRules);
-					switch(bjRules)
+					rptr = fopen("clopezWelcome.txt", "r");
+					rWelcome = fgetc(rptr);
+					//READ FROM A FILE
+					while(rWelcome != EOF)
 					{
-						case 'y':
-						case 'Y':
+						printf("%c", rWelcome);
+						rWelcome = fgetc(rptr);
+					}
+					fclose(rptr);
+	
+
+					puts("\n\nWhat would you like to play? (1 for Coin Flip, 2 for Roulette, 3 for Sports Betting, 99 to exit)");
+					scanf(" %d",&choice);
+
+					
+					//COIN FLIP
+					while(choice == 1)
+					{
+						puts("\n\n*-*-*- COIN FLIP -*-*-*");
+						puts("Choose: (1) Best of 1 -- (3) Best of 3");
+						scanf(" %d",&nGFlip);
+
+						//BEST OF 1
+						if(nGFlip == 1)
 						{
-							puts("Each participant attempts to beat the dealer by getting a count as close to 21 as possible, without going over 21.");
-							puts("It is up to each individual player if an Ace is worth 1 or 11. Face cards are 10 and any other card is its pip value.");
-							puts("Before the deal begins, each player places a bet, in chips, in front of them in the designated area.");
-							puts("When all the players have placed their bets, the dealer gives each player in the rotation a single card, including one to the dealer. This is repeated once more until everyone has 2 cards.");
-							puts("Each player must then decide whether to 'stand' (not ask for another card) or 'hit' (ask for another card in an attempt to get closer to a count of 21.");
-							puts("Player(s) may 'hit' as many times as they'd like during their turn.");
-							puts("If the player goes over 21, their round is over and they lose their bet. If, instead, the player decides to stand (therefore under 21), it is the dealer's turn.");
-							puts("The dealer then reveals his/her cards to the table. If the total of the dealer's cards is 17 or more, the dealer must stand. If the total is 16 or under, they must take a card.");
-							puts("The dealer must continue to take cards until the total is 17 or more, at which point the dealer must stand.");
-							puts("If the dealer goes over 21, any remaining player(s) automatically win. If the dealer does not go over 21, player(s) compare their cards to the dealers. Closes to 21 wins.");
-							puts("If there is a tie between dealer and player(s), both dealer and player(s) then draw a single card from the top of the deck. Whoever has the higher value card wins!");
-							break;	
+							
+
+							printf("Please enter your desired bet amount (Balance: $%.2lf): $", balance);
+							scanf(" %lf",&betAmount);
+							vBet = cLopezValidBet(betAmount, balance); //
+							if(vBet == 1)
+							{
+								puts("Heads or Tails? (h/t)");
+								scanf(" %c",&userFlip);
+
+								switch(userFlip)
+								{
+									case 'h':
+									case 'H':
+									{
+										userFlipInt = 1;
+										break;
+									}
+
+									case 't':
+									case 'T':
+									{
+										userFlipInt = 0;
+										break;
+									}
+									default:
+									{
+										puts("Invalid input.");
+									}
+								}
+
+								flip = (rand() % 2);
+
+								if(flip == 0)
+								{
+									puts("\nThe coin landed on TAILS!");
+								}
+								else if(flip == 1)
+								{
+									puts("\nThe coin landed on HEADS!");
+								}
+
+								//WIN
+								if(userFlipInt == flip)
+								{
+									printf("\nCongrats! You win $%.2lf ", betAmount * 2);
+									balance += (betAmount * 2);
+									printf("Your new balance is $%.2lf", balance);
+									betsWon++;
+									totalBets++;
+									net += (betAmount * 2);
+								}	
+								//LOSE
+								else if(userFlipInt != flip)
+								{
+									printf("I'm sorry, you lose. ");
+									balance -= betAmount;
+									printf("Your new balance is $%.2lf", balance);
+									betsLost++;
+									totalBets++;
+									net -= betAmount;
+								}
+							}	
+							else if(vBet == 0)
+							{
+								printf("You do not have enough funds to place this bet.");
+							}				
+							
 						}
-						case 'n':
-						case 'N':
+						else if(nGFlip == 3)
 						{
-							break;
-						}
-						default:
-						{
-							puts("Invalid input.");
-							break;
-						}
+							//BEST OF 3
+							_Bool x;
+							int flipArray[3] = {0};
+							int *pntr;
+							pntr = flipArray;
 
 							
+
+
+							printf("Please enter your desired bet amount (Balance: $%.2lf): $", balance);
+							scanf(" %lf",&betAmount);
+							vBet = cLopezValidBet(betAmount, balance);
+							if(vBet == 1)
+							{	
+								puts("Heads or Tails? (h/t)");
+								scanf(" %c",&userFlip);
+
+								switch(userFlip)
+								{
+									case 'h':
+									case 'H':
+									{
+										userFlipInt = 1;
+										break;
+									}
+
+									case 't':
+									case 'T':
+									{
+										userFlipInt = 0;
+										break;
+									}
+									default:
+									{
+										puts("Invalid input.");
+									}
+								}
+
+								cLopezFillFlipArray(pntr);
+								x = cLopezScanFlipArray(pntr,userFlipInt);
+
+								//WIN
+								if (x == 1)
+								{
+									printf("\nCongrats! You win $%.2lf ", betAmount * 2);
+									balance += (betAmount * 2);
+									printf("Your new balance is $%.2lf", balance);
+									betsWon++;
+									totalBets++;
+									net += (betAmount * 2);
+								}
+								//LOSE
+								else if(x == 0)	
+								{
+									printf("I'm sorry, you lose. ");
+									balance -= betAmount;
+									printf("Your new balance is $%.2lf", balance);
+									betsLost++;
+									totalBets++;
+									net -= betAmount;
+								}			
+							}	
+							else if(vBet == 0)
+							{
+								printf("You do not have enough funds to place this bet.");
+							}
+		
+						}
+
+						printf("\n\nBalance: $%.2lf\n",balance);
+						printf("Bets Won: %d\n",betsWon);
+						printf("Bets Lost: %d\n",betsLost);
+						printf("Net: $%.2lf\n",net);
+						//CALCULATE AN AVERAGE
+						printf("Profit/loss per bet: $%.2lf" , (net / totalBets));
+
+						puts("\nPlay again? (y/n)");
+						scanf(" %c",&yN);
+
+						if(yN == 'n' || yN == 'N')
+						{
+							break;
+						}
+		
 					}
+					//ROULETTE
+					while(choice == 2)
+					{
+						puts("\n\nWelcome to the roulette table!");
+						puts("\n---RULES---");
+						puts("The roulette wheel consists of 36 pockets, numbered 1, 2, ..., 36. ");
+						puts("Dealer spins a ball on the table, and players place bets on which pocket they believe the ball will land on.");
+						puts("Bets can be placed on even numbers, odd numbers, or on an individual number.");
+						puts("Successful bet on ODD or EVEN number pays out 1.5x your bet. Successful bet on an individual number pays out 37x your bet");
+
+							printf("Would you like to bet on (1) Evens, (2) Odds, or (3) Individual number. Enter 1, 2, or 3: ");
+							scanf(" %d",&roulBet);
+							if(roulBet == 3)
+							{
+								printf("What individual number would you like to bet on? (0-36)");
+								scanf(" %d", &roulInd);
+							}
+
+
+							printf("Please enter your desired bet amount (Balance: $%.2lf): $", balance);
+							scanf(" %lf",&betAmount);
+							vBet = cLopezValidBet(betAmount, balance);
+							if(vBet == 1)
+							{
+								printf("\nOkay! Here we go!! Rolling... rolling... rolling... \n");
+								
+								roulRoll = (rand() % 36) + 1;
+								printf("THE BALL LANDED ON: %d\n",roulRoll);
+
+								
+								if(roulRoll %2 == 0)
+								{
+									roulResult = 2;
+								}
+								else if(roulRoll %2 == 1)
+								{
+									roulResult = 3;
+								}
+
+								//WIN
+								if(roulBet == 1 && roulResult == 2)
+								{
+									printf("\nCongrats! You win $%.2lf ", betAmount * 2);
+									balance += (betAmount * 2);
+									printf("Your new balance is $%.2lf", balance);
+									betsWon++;
+									totalBets++;
+									net += (betAmount * 2);
+								}
+								else if(roulBet == 2 && roulResult == 3)
+								{
+									printf("\nCongrats! You win $%.2lf ", betAmount * 2);
+									balance += (betAmount * 2);
+									printf("Your new balance is $%.2lf", balance);
+									betsWon++;
+									totalBets++;
+									net += (betAmount * 2);
+								}
+								else if(roulInd == roulRoll)
+								{
+									printf("\nCongrats! You win $%.2lf ", betAmount * 37.00);
+									balance += (betAmount * 37.00);
+									printf("Your new balance is $%.2lf", balance);
+									betsWon++;
+									totalBets++;
+									net += (betAmount * 2);
+								}
+								//LOSE
+								else if(roulBet == 1 && (roulResult == 3 || roulResult == 1))
+								{
+									printf("\nI'm sorry, you lose. ");
+									balance -= betAmount;
+									printf("Your new balance is $%.2lf", balance);
+									betsLost++;
+									totalBets++;
+									net -= betAmount;
+								}
+								else if(roulBet == 2 && (roulResult == 2 || roulResult == 1))
+								{
+									printf("\nI'm sorry, you lose. ");
+									balance -= betAmount;
+									printf("Your new balance is $%.2lf", balance);
+									betsLost++;
+									totalBets++;
+									net -= betAmount;
+								}
+								else if(roulBet == 3 && (roulResult == 2 || roulResult == 3))
+								{
+									printf("\nI'm sorry, you lose. ");
+									balance -= betAmount;
+									printf("Your new balance is $%.2lf", balance);
+									betsLost++;
+									totalBets++;
+									net -= betAmount;
+								}
+
+						
+							}
+							else if(vBet == 0)
+							{
+								printf("You do not have enough funds to place this bet.");
+							}
+
+
+							printf("\n\nBalance: $%.2lf\n",balance);
+							printf("Bets Won: %d\n",betsWon);
+							printf("Bets Lost: %d\n",betsLost);
+							printf("Net: $%.2lf\n",net);
+							//CALCULATE AN AVERAGE
+							printf("Profit/loss per bet: $%.2lf" , (net / totalBets));
+
+							puts("\nPlay again? (y/n)");
+							scanf(" %c",&yN);
+
+							if(yN == 'n' || yN == 'N')
+							{
+								break;
+							}
+
+					}
+
+					//SPORTS BETTING
+					while(choice == 3)
+					{
+						char mlbTeam[25];
+						char userTeam[25];
+						char win[] = {'W','I','N'};
+						char lose[] = {'L','O','S','E'};
+						int userTeamScore = 0;
+						int mlbTeamScore = 0;
+						int userPick;
+
+
+						puts("\n\nHi! I'm the casino's bookie. Currently there is only one MLB game going on.");
+						puts("The available bets is -- Dodgers(-145) vs Padres(+120) --\n");
+						printf("Which team would you like to bet on? (1) Dodgers, (2) Padres\n");
+						scanf(" %d",&userPick);
+
+						if(userPick == 1)
+						{
+							char userTeam[25] = {'D','O','D','G','E','R','S',' ', '\0'};
+
+							printf("Please enter your desired bet amount (Balance: $%.2lf): $", balance);
+							scanf(" %lf",&betAmount);
+							vBet = cLopezValidBet(betAmount, balance);
+							if(vBet == 1)
+							{
+								userTeamScore = (rand() % 13);
+								mlbTeamScore = (rand() % 10);
+
+								if(userTeamScore == mlbTeamScore) 
+								{
+									userTeamScore = (rand() % 10);
+									mlbTeamScore = (rand() % 10);
+								}
+								
+								puts("\nThe results are in...");
+								
+								
+								if(userTeamScore > mlbTeamScore) 
+								{
+									strncat(userTeam,win,3);
+									printf("%s", userTeam);
+								}
+								else if(userTeamScore < mlbTeamScore)
+								{
+									strncat(userTeam,lose,4);
+									printf("%s", userTeam);
+								}
+								printf(" %d - %d!\n", userTeamScore, mlbTeamScore);
+								
+								if(userTeamScore > mlbTeamScore)
+								{
+									printf("\nCongrats! You win $%.2lf ", betAmount * 1.689);
+									balance += (betAmount * 1.689);
+									printf("Your new balance is $%.2lf", balance);
+									betsWon++;
+									totalBets++;
+									net += (betAmount * 1.689);
+								}
+								else if(mlbTeamScore > userTeamScore)
+								{
+									printf("\nI'm sorry, you lose. ");
+									balance -= betAmount;
+									printf("Your new balance is $%.2lf", balance);
+									betsLost++;
+									totalBets++;
+									net -= betAmount; 
+								}
+								
+							}
+							else if(vBet == 0)
+							{
+								printf("You do not have enough funds to place this bet.");
+							}
+						}
+						else if(userPick == 2)
+						{
+							char userTeam[25] = {'P','A','D','R','E','S',' ', '\0'};
+
+							printf("Please enter your desired bet amount (Balance: $%.2lf): $", balance);
+							scanf(" %lf",&betAmount);
+							vBet = cLopezValidBet(betAmount, balance);
+							if(vBet == 1)
+							{
+								userTeamScore = (rand() % 13);
+								mlbTeamScore = (rand() % 10);
+
+								if(userTeamScore == mlbTeamScore) 
+								{
+									userTeamScore = (rand() % 10);
+									mlbTeamScore = (rand() % 10);
+								}
+								
+								puts("\nThe results are in...");
+								
+								
+								if(userTeamScore > mlbTeamScore) 
+								{
+									strncat(userTeam,win,3);
+									printf("%s", userTeam);
+								}
+								else if(userTeamScore < mlbTeamScore)
+								{
+									strncat(userTeam,lose,4);
+									printf("%s", userTeam);
+								}
+								printf(" %d - %d!\n", userTeamScore, mlbTeamScore);
+								
+								if(userTeamScore > mlbTeamScore)
+								{
+									printf("\nCongrats! You win $%.2lf ", betAmount * 2.2);
+									balance += (betAmount * 2.2);
+									printf("Your new balance is $%.2lf", balance);
+									betsWon++;
+									totalBets++;
+									net += (betAmount * 2.2);
+								}
+								else if(mlbTeamScore > userTeamScore)
+								{
+									printf("\nI'm sorry, you lose. ");
+									balance -= betAmount;
+									printf("Your new balance is $%.2lf", balance);
+									betsLost++;
+									totalBets++;
+									net -= betAmount;
+								}
+								
+							}
+							else if(vBet == 0)
+							{
+								printf("You do not have enough funds to place this bet.");
+							}
+						}
+
+			
+
+						printf("\n\nBalance: $%.2lf\n",balance);
+						printf("Bets Won: %d\n",betsWon);
+						printf("Bets Lost: %d\n",betsLost);
+						printf("Net: $%.2lf\n",net);
+						//CALCULATE AN AVERAGE
+						printf("Profit/loss per bet: $%.2lf" , (net / totalBets));
+						
+						puts("\nPlay again? (y/n)");
+						scanf(" %c",&yN);
+
+						if(yN == 'n' || yN == 'N')
+						{
+							break;
+						}
+
+					}
+
 					
-					
-					
-					scanf("%d",&choice);
 				}
 				break;
 			}
@@ -2692,7 +3125,60 @@ void monikacase3(char greenchoice[])
 }
 //Monika
 
+//Cristian Lopez
+_Bool cLopezValidBet(double amount, double bal)
+{
+	if(amount > bal)
+	{
+		return 0;
+	}
+	else if(amount <= bal)
+	{
+		return 1;
+	}
+}
+//Cristian Lopez
+void cLopezFillFlipArray(int *pntr)
+{
+	int i;
+	for(i = 0; i < 3; i++)
+	{
+		*pntr = (rand() % 2);
+		pntr++;
+	}
 
+}
+//Cristian Lopez
+_Bool cLopezScanFlipArray(int *pntr, int userPick)
+{
+	int i;
+	int userScore;
+	int houseScore;
+	for(i = 0; i < 3; i++)
+	{
+		if(*pntr == userPick)
+		{
+			userScore++;
+		}
+		else if(*pntr != userPick)
+		{
+			houseScore++;
+		}
+
+		//WIN
+		if(userScore == 2)
+		{
+			return 1;
+			
+		}
+		//LOSE
+		else if(houseScore == 2)
+		{
+			return 0;
+			
+		}
+	}
+}
 
 
 char *randomString(char *p)
