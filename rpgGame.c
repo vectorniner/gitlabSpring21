@@ -1061,6 +1061,133 @@ int main(int argc, char *argv[])
 						avg = sum /n;
 						printf("Average = %.2f \n", avg);
 					}
+					else if (choice == 4)
+					{
+						puts("Why does this person say they're your 4th grade English teacher? You don't even remember them.");
+						puts("They say their catchphrase and you realize this person is the real deal");
+						puts("The teacher asks if you want to see the grade for the test that he never gave back to you. 1 to see, 2 to not see");
+						scanf("%d",&choice);
+						if (choice == 1)
+						{
+							srand(time(NULL));
+							int i;
+							for(i=0;i<1;i++)
+							{
+								printf("Ok, your score was %d \n",rand()%101);
+								printf("Are you satisfied with that? You better be cause that's your final score \n");
+							}
+						}
+						else if (choice == 2)
+						{
+							printf("Well it's ok you don't want to see. You probably failed anyway \n");
+							puts("There is one thing you can try to do so you can redeem yourself though. A simple test that is \n");
+							puts("Press 1 to try one test, 2 to do the other");
+							scanf("%d",&choice);
+							if(choice == 1)
+							{
+								char string[25];
+								int i;
+								printf("\n Enter one really long word in all uppercase letters please, no spaces: ");
+								scanf("%s",string);
+
+								for(i=0;string[i]!='\0';i++)
+								{
+									if(string[i] >= 'A' && string[i] <= 'Z')
+									{
+										string [i] = string[i]+32;
+									}
+								}
+								printf("\n The really long word you entered is now in lowercase = %s \n",string);
+								puts("The only reason I had you do this was because I wanted to make sure you were paying attention.");
+							}
+							else if (choice == 2)
+							{
+								char strin[25];
+								int i;
+								printf("\n Enter one really long word in all lowercase letters please, no spaces");
+								scanf("%s",strin);
+
+								for(i=0;strin[i]!='\0';i++)
+								{
+									if(strin[i] >= 'a' && strin[i] <= 'z')
+									{
+										strin[i] = strin[i]-32;
+									}
+								}
+								printf("\n The really long word you entered is now in uppercase = %s \n",strin);
+								puts("The only reason I had you do this was because I wanted to make sure that you were paying attention");
+							}
+						}
+					}
+					else if (choice == 5)
+					{
+						char checkin[250];
+						FILE *kbr;
+						printf("Enter a #1-4 and you will be given a question to answer. Your answer will be located in a seperate file you can check \n");
+						puts("For best results, do questions 1-4 in order but it is not necessary to do so");
+						scanf("%d",&choice);
+						if (choice == 1)
+						{
+							kbr = fopen("goodfeel.txt","w");
+
+							if(kbr == NULL)
+							{
+								printf("There is an error. Cannot open file");
+								exit(1);
+							}
+							printf("How is your day going so far?");
+							scanf("%c",checkin);
+							fgets(checkin,sizeof(checkin),stdin);
+							fprintf(kbr,"%10s",checkin);
+							fclose(kbr);
+						}
+						else if (choice == 2)
+						{
+							kbr = fopen("goodfeel.txt","a");
+
+							if(kbr == NULL)
+							{
+								printf("There is an error. Cannot find file");
+								exit(1);
+							}
+							printf("What is your favorite ice cream flavor?");
+							scanf("%c",checkin);
+							fgets(checkin,sizeof(checkin),stdin);
+							fprintf(kbr,"\n%10s",checkin);
+							fclose(kbr);
+						}
+						else if (choice == 3)
+						{
+							kbr = fopen("goodfeel.txt","a");
+
+							if(kbr == NULL)
+							{
+								printf("There is an error. Cannot open file");
+								exit(1);
+							}
+							printf("What is your favorite car? \n");
+							scanf("%c",checkin);
+							fgets(checkin,sizeof(checkin),stdin);
+							fprintf(kbr,"\n%10s",checkin);
+							fclose(kbr);
+						}
+						else if (choice == 4)
+						{
+							kbr = fopen("goodfeel.txt","a");
+
+							if(kbr == NULL)
+							{
+								printf("There is an error. Cannot open file");
+								exit(1);
+							}
+							printf("Who is your favorite celebrity? \n");
+							scanf("%c",checkin);
+							fgets(checkin,sizeof(checkin),stdin);
+							fprintf(kbr,"\n%10s",checkin);
+							fclose(kbr);
+						}
+					}
+
 				}
 				break;
 			}
@@ -3401,6 +3528,9 @@ void patrickInitialPrompt(void)
 	puts("1. Do you open the door that is 50 feet in fron of you?");
 	puts("2. Do you simplay stand there and wait for the noise to get clearer on it's own?");
 	puts("3. There is an old, oriental gentleman in the corner which is lit up by a torch. Do you approach him?");
+	puts("4. Your 4th grade English teacher says they can help you with something. Select this option to see what they're talking about");
+	puts("5. Answer some basic questions");
+	puts("You can also enter 99 to exit!");
 }
 
 
