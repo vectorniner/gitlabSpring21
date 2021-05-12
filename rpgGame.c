@@ -4,7 +4,7 @@
 //Meredith Quail
 
 //Benjamin Lozano
-
+//Room 1: Mohammad Karahassan
 
 //Room 19: Jonathan Chua
 
@@ -116,10 +116,16 @@ void flurbos(void);//Berenis Castruita
 void planets(void);//Berenis Castruita
 void goodBye(void);//Berenis Castruita
 
+
+int averageMk(int x, int y); //mkarahassan room#1
+void ggPromtMk(int x); //mkarahassan room#1
+
+
 //Fernando Rodriguez
 int Coinflip21(int x ,int z);
 void codeH(void);
 void codeT(void);
+
 
 int main(int argc, char *argv[])
 {
@@ -149,86 +155,236 @@ int main(int argc, char *argv[])
 		{
 			case 1:
 			{
+				int i = 0, length = 0;
+				char c;
+				//arrays
+				int value[10] = {2,4,6,1,8,20,9,0,7,35};
+				char string[100]="";
 				int counter = 0;
+				int denom = 0;
+				int calc = 0;
+				//pointers
+				FILE *wrptr, *wptr;
+				//File manipulation
+				wptr = fopen("stravo.txt","w+");
+				wrptr = fopen("newStravo.txt","w");
 				while(choice != 99)
 				{
-					puts("You open the door and found a lot of people jumping around");
-          				puts("You are almost certain that you have found a hidden civilization");
-          				puts("At this point it seems like you have three options");
-          				puts("Every option you choose has a hidden value related to it..");
-          				puts("Choose wisely to earn enough points to win this game!!");
-          				puts("1. Talk to the poeple and figure out why is everyone jumping!!");
-          				puts("2. Walk further down and explore the place");
-          				puts("3. Go back into the door you came from and drown");
-          				scanf("%d",&choice);
-          				if (choice == 1)
-          				{
-            					puts("You talk to one of the elders and find out that a monster has threatened the city and everyone is panicking");
-            					counter++;
-            					counter++;
+					puts("You open the door and find a lot of people jumping around");
+					puts("You are almost certain that you have found a hidden civilization");
+					fprintf(wptr, "You open the door and find a lot of people jumping around..\nYou are almost certain that you have found a hidden civilization.\nEvery option you choose has a hidden value related to it..\nChoose wisely to earn enough points to win this game!!\n");
+					puts("At this point it seems like you have three options");
+					puts("Every option you choose has a hidden value related to it..");
+					puts("Choose wisely to earn enough points to win this game!!");
+					puts("1. Talk to the poeple and figure out why is everyone jumping!!");
+					puts("2. Walk further down and explore the place");
+					puts("3. Go back into the door you came from and drown");
+					scanf("%d",&choice);
+					if (choice == 1)
+					{
+						puts("You talk to one of the elders and find out that a monster has threatened the city and everyone is panicking");
+						fprintf(wptr, "You talk to one of the elders and find out that a monster has threatened the city and everyone is panicking.\nThe monster is a big red dragon that came upon the city to burn its lands and steal its princess.\n");
+						counter+=2;
+						denom ++;
+						puts("The monster is a big red dragon that came upon the city to burn its lands and steal its princess");
+						printf("Once again.. You have 3 options.\n1. You can fight with them\n2. You can run away\n3. You can have a random option be chosen for you.\n");
+						scanf("%d",&choice);
+						//switch statement
+						switch(choice)
+						{
+							case 1:
+							{
+								puts("GREAT!! You chose to fight!");
+								fprintf(wptr, "GREAT!! You chose to fight!\n");
+								counter+=3;
+								denom ++;
 
-            					puts("The monster is a big red dragon that came upon the city to burn its lands");
-            					printf("Once again.. You have 3 options.\n1. You can fight with them\n2. You can run away\n3. You can have a random option be chosen for you.\n");
-            					scanf("%d",&choice);
-            					//switch statement
-            					switch(choice)
-            					{
-              						case 1:
-              						{
-                						puts("GREAT!! You chose to fight!");
-                						counter++;
-                						counter++;
-                						counter++;
-                						break;
-              						}
-              						case 2:
-              						{
-                						puts("WOAH! You chose to be a coward! You do not deserve to play anymore.. GG");
-                						counter--;
-                						break;
-              						}
-              						case 3:
-              						{
-                					//random
-      						 		choice = rand()%2 + 1;
-                						if (choice == 1)
-                						{
-                  							puts("GREAT!! You chose to fight!");
-                  							counter++;
-                  							counter++;
-                  							counter++;
-                  							break;
-                						}
-                						if (choice == 2)
-                						{
-                  							puts("WOAH! You chose to be a coward! You do not deserve to play anymore.. GG");
-                  							counter--;
-                  							break;
+								puts("1. Meet the princess and tell her not to worry.... You will protect her");
+								puts("2. Pick up a weapon and go straight to the battlefield.");
+
+								scanf("%d",&choice);
+								if (choice == 1)
+								{
+									printf("You meet the princess and promise her that you will protect her\nShe tells you that she would marry you if you save the city.\nYou pick up your sword and fight the dragon.\nThe fight gets intense as the dragon breathes fire everywhere.\nHe flies at you and you swing your sword and cut his neck.\nThe city starts sheering your name!!\nThe princess comes up to you and gives you a kiss\nFinally, you get married with the princess and become the prince of the city\nEveryone lives happily ever after\n\nThank you for playing. GG\n");
+
+									fprintf(wptr,"You meet the princess and promise her that you will protect her\nShe tells you that she would marry you if you save the city.\nYou pick up your sword and fight the dragon.\nThe fight gets intense as the dragon breathes fire everywhere.\nHe flies at you and you swing your sword and cut his neck.\nThe city starts sheering your name!!\nThe princess comes up to you and gives you a kiss\nFinally, you get married with the princess and become the prince of the city.\nEveryone lives happily ever after.\n\nThank you for playing. GG..\n");
+									counter+=4;
+									denom ++;
 								}
-                						break;
-              						}
-            					}
-            					break;
-          				}
-          				else if (choice == 2)
-          				{
-            					puts("You walk further down the street and you get amazed by how beautiful the city is");
-            					puts("To be continued...");
-            					counter++;
-            					break;
-          				}
-          				else if (choice == 3)
-          				{
-            					puts("You opened the door and the water killed you");
-            					counter++;
-            					break;
-          				}
-          				else
-          				{
-            					puts("Wrong choice!!!");
-          				}
+								if (choice == 2)
+								{
+									printf("You pick up your weapon and go straight to the battlefield\nThe dragon is breathing fire everywhere! He is killing a lot of people!!\nYou start swinging your sword at the dragon and that gets him angry\nHe flies at you and you find a chance to cut his neck with your sword.\nThe city sheers your name! You are now the hero of the city.\nThe princess comes up to you and gives you a kiss\nEver since then, you became the protector of the city and everyone respects you!\n\nThank you for playing. GG\n");
+
+									fprintf(wptr,"You pick up your weapon and go straight to the battlefield..\nThe dragon is breathing fire everywhere! He is killing a lot of people!!\nYou start swinging your sword at the dragon and that gets him angry.\nHe flies at you and you find a chance to cut his neck with your sword.\nThe city sheers your name! You are now the hero of the city.\nThe princess comes up to you and gives you a kiss.\nEver since then, you became the protector of the city and everyone respects you!\n\nThank you for playing. GG..\n");
+									counter+=3;
+									denom ++;
+								}
+								break;
+							}
+							case 2:
+							{
+								puts("WOAH! You chose to be a coward! You do not deserve to play anymore.. GG");
+								fprintf(wptr, "WOAH! You chose to be a coward! You do not deserve to play anymore.. GG\n");
+								counter--;
+								denom ++;
+								break;
+							}
+							case 3:
+							{
+								//random
+      								choice = rand()%2 + 1;
+								if (choice == 1)
+								{
+									puts("GREAT!! You chose to fight!");
+									fprintf(wptr, "GREAT!! You chose to fight!\n");
+                							counter+=3;
+									denom ++;
+
+									puts("1. Meet the princess and tell her not to worry.... You will protect her");
+									puts("2. Pick up a weapon and go straight to the battlefield.");
+									scanf("%d",&choice);
+									if (choice == 1)
+									{
+										printf("You meet the princess and promise her that you will protect her\nShe tells you that she would marry you if you save the city.\nYou pick up your sword and fight the dragon.\nThe fight gets intense as the dragon breathes fire everywhere.\nHe flies at you and you swing your sword and cut his neck.\nThe city starts sheering your name!!\nThe princess comes up to you and gives you a kiss\nFinally, you get married with the princess and become the prince of the city\nEveryone lives happily ever after\n\nThank you for playing. GG\n");
+
+										fprintf(wptr,"You meet the princess and promise her that you will protect her\nShe tells you that she would marry you if you save the city.\nYou pick up your sword and fight the dragon.\nThe fight gets intense as the dragon breathes fire everywhere.\nHe flies at you and you swing your sword and cut his neck.\nThe city starts sheering your name!!\nThe princess comes up to you and gives you a kiss\nFinally, you get married with the princess and become the prince of the city.\nEveryone lives happily ever after\n\nThank you for playing. GG..\n");
+										counter+=4;
+										denom ++;
+										break;
+									}
+									if (choice == 2)
+									{
+										printf("You pick up your weapon and go straight to the battlefield\nThe dragon is breathing fire everywhere! He is killing a lot of people!!\nYou start swinging your sword at the dragon and that gets him angry\nHe flies at you and you find a chance to cut his neck with your sword.\nThe city sheers your name! You are now the hero of the city.\nThe princess comes up to you and gives you a kiss\nEver since then, you became the protector of the city and everyone respects you!\n\nThank you for playing. GG\n");
+
+										fprintf(wptr,"You pick up your weapon and go straight to the battlefield\nThe dragon is breathing fire everywhere! He is killing a lot of people!!\nYou start swinging your sword at the dragon and that gets him angry.\nHe flies at you and you find a chance to cut his neck with your sword.\nThe city sheers your name! You are now the hero of the city.\nThe princess comes up to you and gives you a kiss.\nEver since then, you became the protector of the city and everyone respects you!\n\nThank you for playing. GG..\n");
+										counter+=3;
+										denom ++;
+										break;
+									}
+								}
+								if (choice == 2)
+								{
+									puts("WOAH! You chose to be a coward! You do not deserve to play anymore.. GG");
+									fprintf(wptr, "WOAH! You chose to be a coward! You do not deserve to play anymore.. GG\n");
+									counter--;
+									denom ++;
+								}
+								break;
+							}
+						}
+						break;
+					}
+					else if (choice == 2)
+					{
+						puts("You walk further down the street and you get amazed by how beautiful the city is");
+						puts("However, you notice that people are panicking!!");
+						puts("It seems like a big scary dragon is coming to attack the city and take the princess away!");
+						fprintf(wptr, "You walk further down the street and you get amazed by how beautiful the city is.\nHowever, you notice that people are panicking!!\nIt seems like a big scary dragon is coming to attack the city and take the princess away!\n");
+						counter++;
+						denom ++;
+
+						printf("Once again.. You have 3 options.\n1. You can offer any help\n2. You can pick a number (0-9) that has a hidden value (The value will determine if you win or lose the game) Try your luck?\n3. You can flee the city and never come back.\n");
+						scanf("%d",&choice);
+
+						if (choice == 1)
+						{
+							printf("You ask the citizens if they need any help.\nPeople tell you that they need a fearless fighter to get rid of this monster that is threatening their beautiful city \n");
+							fprintf(wptr, "You ask the citizens if they need any help.\nPeople tell you that they need a fearless fighter to get rid of this monster that is threatening their beautiful city. \n");
+							counter+=3;
+							denom ++;
+
+							puts("1. Meet the princess and tell her not to worry.... You will protect her");
+							puts("2. Pick up a weapon and go straight to the battlefield.");
+							scanf("%d",&choice);
+							if (choice == 1)
+							{
+								printf("You meet the princess and promise her that you will protect her\nShe tells you that she would marry you if you save the city.\nYou pick up your sword and fight the dragon.\nThe fight gets intense as the dragon breathes fire everywhere.\nHe flies at you and you swing your sword and cut his neck.\nThe city starts sheering your name!!\nThe princess comes up to you and gives you a kiss\nFinally, you get married with the princess and become the prince of the city\nEveryone lives happily ever after\n\nThank you for playing. GG\n");
+
+								fprintf(wptr,"You meet the princess and promise her that you will protect her\nShe tells you that she would marry you if you save the city.\nYou pick up your sword and fight the dragon.\nThe fight gets intense as the dragon breathes fire everywhere.\nHe flies at you and you swing your sword and cut his neck.\nThe city starts sheering your name!!\nThe princess comes up to you and gives you a kiss\nFinally, you get married with the princess and become the prince of the city.\nEveryone lives happily ever after\n\nThank you for playing. GG..\n");
+								counter+=4;
+								denom ++;
+							}
+							else if (choice == 2)
+							{
+								printf("You pick up your weapon and go straight to the battlefield\nThe dragon is breathing fire everywhere! He is killing a lot of people!!\nYou start swinging your sword at the dragon and that gets him angry\nHe flies at you and you find a chance to cut his neck with your sword.\nThe city sheers your name! You are now the hero of the city.\nThe princess comes up to you and gives you a kiss\nEver since then, you became the protector of the city and everyone respects you!\n\nThank you for playing. GG\n");
+
+								fprintf(wptr,"You pick up your weapon and go straight to the battlefield\nThe dragon is breathing fire everywhere! He is killing a lot of people!!\nYou start swinging your sword at the dragon and that gets him angry\nHe flies at you and you find a chance to cut his neck with your sword.\nThe city sheers your name! You are now the hero of the city.\nThe princess comes up to you and gives you a kiss.\nEver since then, you became the protector of the city and everyone respects you!\n\nThank you for playing. GG..\n");
+								counter+=3;
+								denom ++;
+							}
+						}
+						else if (choice == 2)
+						{
+							puts("You chose to pick a number (0-9)");
+							puts("I hope you are lucky enough to win. GG");
+							fprintf(wptr, "You chose to pick a number (0-9)\nI hope you are lucky enough to win. GG\n");
+							scanf("%d",&y);
+							//Arrays
+							counter = value[y];
+							denom ++;
+						}
+						else if (choice == 3)
+						{
+							puts("You chose to flee the city.. You are a coward.. GG");
+							fprintf(wptr, "You chose to flee the city.. You are a coward.. GG..\n");
+							counter--;
+							denom ++;  
+						}
+						break;
+					}		
+					else if (choice == 3)
+					{
+						puts("You opened the door and the water killed you.. GG");
+						fprintf(wptr, "You opened the door and the water killed you.. GG..\n");
+						counter++;
+						denom ++;
+						break;
+					}
+					else
+					{
+						puts("Wrong choice!!!");
+					}
 				}
- 				printf("Counter = %d. \n \n", counter);
+				calc = averageMk(counter, denom);
+				printf("Average = %d / %d = %d. \n \n", counter,denom,calc);
+				ggPromtMk(calc);
+
+				printf("\n\nYour whole progress in the story has been saved to a file called (stravo.txt)\nYou can modify this file into a new file called (newStravo.txt)\n\n1. Change the whole story to uppercase letters.\n2. Change the whole story to lowercase letters.\n");
+				scanf("%d",&x);
+
+				//File manipulation
+				if (x == 1)
+				{
+					rewind(wptr);
+					//while loop
+					while(fscanf(wptr,"%s",&string) != EOF)
+					{
+						//string function
+						length = strlen(string);
+						//for loop
+						for(i=0;i<length;i++)
+						{
+							// character function
+							string[i] = toupper(string[i]);
+						}
+						fprintf(wrptr,"%s ",string);
+					}
+				}
+				else if (x == 2)
+				{
+					rewind(wptr);
+					while(fscanf(wptr,"%s",&string) != EOF)
+					{
+						length = strlen(string);
+						for(i=0;i<length;i++)
+						{
+							string[i] = tolower(string[i]);
+						}
+						fprintf(wrptr,"%s ",string);
+					}
+				}
+				fclose(wptr);
+				fclose(wrptr);
 				break;
 			}
 			case 2:
@@ -4731,6 +4887,27 @@ void noteFromRick(void)//Berenis Castruita
 
 }
 
+//separate functions mkarahassan room#1
+int averageMk(int x,int y)
+{
+  int average = 0;
+  average = x/y;
+  return average;
+}
+//separate functions mkarahassan room#1
+void ggPromtMk(int x)
+{
+  if (x > 1)
+  {
+    puts("Congrats!!! You won the game!! You are a brave fighter!!");
+  }
+  else
+  {
+    puts("Ooof!! You lost the game!! Better luck next time");
+  }
+}
+
+
 int Coinflip21(int x,int z) //Fernando Rodriguez
 {
 	int y,i;
@@ -4868,6 +5045,7 @@ void wordGame(char *pointer)
 
 
 }
+
 
 
 
