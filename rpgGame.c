@@ -98,8 +98,10 @@ void flurbos(void);//Berenis Castruita
 void planets(void);//Berenis Castruita
 void goodBye(void);//Berenis Castruita
 
-
-
+//Fernando Rodriguez
+int Coinflip21(int x ,int z);
+void codeH(void);
+void codeT(void);
 
 int main(int argc, char *argv[])
 {
@@ -1069,46 +1071,222 @@ int main(int argc, char *argv[])
 				while(choice != 99)
 				{
 					int x=0;
-					int y;
+					int y=1;
 					int z=0;
+					int r=0;
+					int CC=0;
+					int AA=0;
+					int BB=0;
+					int DD=0;
 					
+					double toys=0;
+					double bin=21;
+					double bed=10;
+					double desk =15;
+					double sofa =25;
+					double check =0;
+					double ave;
+					char entry = 'x';
+					char Thename[10];
+					char string[10] = "Atem";
+					char *pntr;
+					pntr = Thename;
 					srand(time(NULL));
 					puts("You have entered a chamber resembling the ruins of an Ancient Egyptian Temple ");
 					puts("The door to your left shows signs of innocence");
 					puts("while the door to your right emits a dark and powerful energy");
-					puts("You see a dark figure in the distance");
+					puts("You see a dark figure in the distance resembling a clock");
 					puts("He tosses a coin");
-					for (i=0;i<1;i++)
-					{
-						y = rand()%2;
-						if(y==1)
-						{
-							x++;
-								puts("The coin lands on heads");
-								puts("Fate has decided for you to choose the door to your left");
-						}
-						else
-						{
-						z++;
-						puts("the coin lands on tails");
-						puts("???: Fate has decide for you to walk through the door to your right ");
-						}
-
+					r= Coinflip21(x,z);
+					
 					printf("???: %s would you ignore fate \n",name);
 					puts("???: Pick a door?!");
 					puts("1. Innocent door");
 					puts("2.Door towards a powerful Energy");	
-						
-					}
 
 					scanf("%d",&choice);
 					switch(choice)
 					{
 						case 1:
 						{
-							if(x==1)
+							if(r==1)
 							{
-							printf("reveal code HEADS\n"); //use file heads
+							printf("reveal code HEADS\n"); 
+							codeH();
+							
+							puts("A child appears he asks you to choose a door");
+							puts("1. The Room is filled with toys");
+							puts("2. The Room is filled with Books");
+							scanf("%d",&choice);
+							switch(choice)
+							{
+								case 1:
+								{
+									puts("???: My names Yugi can you help me count my toys");
+									printf("%s : Sure \n",name);
+									puts("A: Check bin");
+									puts("B: Check under bed");
+									puts("C: Check under the sofa");
+									puts("D: Check the desk");
+									puts("s: to take average");
+									
+									for(i = 0; i<y;i++ )
+									{
+										scanf("%s",&entry);
+									switch(entry)
+									{
+										case 'a':
+										case 'A':
+										{
+											if(AA == 0)
+											{
+											bin = 21;
+											printf("You find %lf toys \n",bin);
+											
+											toys = bin + toys;
+											check++;
+											AA++;
+											y++;
+											break;
+											}
+											else if( AA == 1)
+											{
+												printf("bin: already checked: it had %d\n",bin);
+												y++;
+												break;
+											}
+											
+										}
+										case 'b':
+										case 'B':
+										{
+											if( BB == 0)
+											{
+											
+											printf("you find %lf toys\n",bed);
+											
+											toys = bed + toys;
+											BB++;
+											y++;
+											check++;
+											break;
+											}
+											else if(BB == 1)
+											{
+												printf("bed: already checked: it had %lf \n",bed);
+												y++;
+												break;
+											}
+											
+										}
+										case 'c':
+										case 'C':
+										{
+											if(CC == 0)
+											{
+											
+											printf("you find %lf toys \n",sofa);
+											
+											toys= sofa+toys;
+											y++;
+											CC++;
+											check++;
+											break;
+											}
+											else if (CC==1)
+											{
+												printf("Sofa: already checked: it had %lf \n",sofa);
+												y++;
+												break;
+											}
+											
+										}
+										case 'd':
+										case 'D':
+										{
+											if(DD == 0)
+											{
+											
+											printf("you find %lf toys \n",desk);
+											
+											toys = desk+ toys;
+											DD++;
+											y++;
+											check++;
+											break;
+											}
+											else if(DD == 1)
+											{
+												printf("desk: already checked: it had %lf\n",desk);
+												y++;
+												break;
+											}
+											
+											
+										}
+										
+										case 's':
+										{
+											puts("Yugi: Lets find the Average");
+												ave = (toys)/check;
+												printf("%s: THe average is %lf",ave,name);
+											puts("Yugi thanks you for your time and shows you the exit");
+											puts("You leave a better person");
+											puts("karma++");
+											puts("yugi finds You worthy");
+											puts("99 to continue");
+											
+											break;
+										}
+										default:
+										{
+											y--;
+											
+										}
+									}
+									
+									
+									}
+									puts("Intresting choice");
+									scanf("%d",&choice);
+								
+								}
+								case 2:
+								{
+									puts("You are given the keyblade");
+									puts("You study for 10 years and can now weild the keyblade as a master");
+									puts("Congradulations(Exit 99)");
+									break;
+								}
+								case 21:
+								{
+									puts("You have enter the land of Pokemon");
+									puts("A Charazard appears");
+									puts("He burns you alive for not having a pure soul (Exit: 99)");
+									
+									break;
+								}
+								default:
+								{
+									puts("???: You dare ignore Yugi!");
+									puts("The pharaoh Turns you into a skull servant");
+									puts("as you are being turned into bones the young boy asks the Pharaoh to leave you alone and give you mercy");
+									puts("You have been spared and leave the dungeon");
+									puts("Mercy(99 to Quit)");
+									scanf("%d",&choice);
+									
+									break;
+								}
+								
+							}
+								
+							}
+							else
+							{
+								puts("The pharaoh: I did not allow you to meet Yugi.");
+								puts("You fall into a cavern where you meet Eli Shane");
+								puts("You join the Shane gang and help fight crime across slug terra");
+								puts("Exit: 99");
 							}
 							puts("Intersting choice");	
 							scanf("%d",&choice);
@@ -1116,17 +1294,93 @@ int main(int argc, char *argv[])
 						}
 						case 2:
 						{
-							if(z==1)
+							if(r==2)
 							{
-							printf("reveal code TAILS \n"); // use file tails
-							puts("Intersting choice");
-							scanf("%d",&choice);
+							printf("The code will be revealed:\n");
+							codeT();
+							printf("what is the name of the man who owns the temple?(Enter Exactly as written)\n");
+							scanf("%29s",Thename);
+							if(strcmp(string ,Thename)== 0)
+								{
+									printf("you have met the king of games \n");
+									printf("He gives you 999,999,999 doge coin \n");
+									puts("1. Enter the code to the next door");
+									puts("2. You leave the dungeon with a fortune ");
+									scanf("%d", &choice);
+									switch(choice)
+									{
+										case 1:
+										{
+											puts("???: Red eyes black Dragon , Inferno Fire Blast");
+											puts("Fatality");
+											puts("Joey Wheeler Wins");
+											break;
+										}
+										case 2:
+										{
+											puts("You sell your doge coin");
+											puts("You regret it immediatly since over night Elon Musk makes it the currency of space");
+											break;
+											
+										}
+										case 25:
+										{
+											puts("You have gained power beyond comprehenshion");
+											puts("You have become a servent of the Pharaoh");
+											puts("You are know as Palladium Orcle Mahad");
+											puts("You live a happy life");
+											break;
+										}
+										default:
+										{
+											puts("you fell down a Hole");
+											break;
+											
+										}
+										
+									}
+									
+								}
+								else
+								{
+									printf("???: Blue Eyes White dragon \n White lightning!");
+									printf("Fatality \n");
+									printf("Seto Kaiba wins (99 to Quit) \n");
+									
+								}
+							
 							}
+						else
+						{
+							puts("???: Time magic");
+							puts("The Door was locked and the temple starts to crumble");
+							puts("Debree falls on your head and you fall unconscious");
+							puts("A young boy helps you. you find your self in the innocent door");
+							puts("I should have believed in the heart of the cards");
+							puts("your wounds were to severe you die of head trauma in the boys arms");
+							puts("Fatality");
+							puts("Time wizard Wins");
+						}	
+							puts("\n Intersting choice(99 to quit)");
+							scanf("%d",&choice);	
+								
+								
+							
 						
 							break;
 						
 						
-						}
+					}
+					default:
+					{
+						printf("That wasn't an option \n");
+						puts("???: Dark Magician, Dark Magic Attack ");
+						puts("Fatality");
+						puts("Yugi Muto Wins");
+						puts("99 to quit");
+						scanf("%d",&choice);
+						
+					}
 						
 						
 					}
@@ -3600,3 +3854,69 @@ void noteFromRick(void)//Berenis Castruita
 
 
 }
+int Coinflip21(int x,int z) //Fernando Rodriguez
+{
+	int y,i;
+	for (i=0;i<1;i++)
+		{
+			y = rand()%2;
+				if(y==1)
+				{
+					x =1;
+					puts("The coin lands on heads");
+					puts("Fate has decided for you to choose the door to your left");
+					return x;
+				}
+				else
+				{
+				z=2;
+				puts("the coin lands on tails");
+				puts("???: Fate has decide for you to walk through the door to your right ");
+				return z;
+				}	
+		}
+	
+}
+void codeH(void)
+{
+	FILE *wptr;
+	
+	char unlock;
+	wptr = fopen("codeH.txt","r");
+	
+	if(wptr == NULL)
+	{
+		printf("An ancient pharaoh destroyed the code \n");
+		exit(1);
+	}
+	else
+	{
+		while((unlock = fgetc(wptr)) != EOF)
+			printf("%c", unlock);
+		
+		
+	} 
+	
+}
+void codeT(void)
+{
+	FILE *wptr;
+	char unlock;
+	wptr = fopen("codeT.txt","r");
+	if(wptr == NULL)
+	{
+		printf("An ancient pharaoh destroyed the code.\n");
+		exit(1);
+		
+	}
+	else
+	{
+		while((unlock = fgetc(wptr)) != EOF)
+			printf("%c",unlock);
+	}
+	
+}
+
+	
+	
+	
