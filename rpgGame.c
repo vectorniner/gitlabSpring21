@@ -192,7 +192,7 @@ int main(int argc, char *argv[])
               						}
             					}
             					break;
-          				}
+          			}
           				else if (choice == 2)
           				{
             					puts("You walk further down the street and you get amazed by how beautiful the city is");
