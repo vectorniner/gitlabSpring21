@@ -129,8 +129,14 @@ void cLopezFillFlipArray(int *pntr);
 _Bool cLopezScanFlipArray(int *pntr, int userPick);
 //Cristian Lopez
 
-int urGuess(void);//AndyV
-int Anumber(int a[], int urGuess);//AndyV
+//AndyV
+int p(void);
+int strikes(int p);
+int weapon(int a[], int strikes, int wpn);
+int totalHits(int a[], int strikes);
+double avgHitPower(int totalHits, int strikes);
+
+
 
 void noteFromRick(void);//Berenis Castruita
 void stars(void);//Berenis Castruita
@@ -2523,40 +2529,101 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					 puts("you open the door and find ........");
-                                        puts("press 1 to start");
+					puts("you open the door and find ........");
+                                        puts("A Zombie running towards you");
+					puts("Press 1 to look around for a weapon to defend yourself!");
+					puts("Enter 99 to run away!");
                                         scanf("%d",&choice);
+					
+					if(choice == 1)
+					{
+						puts("The room is dark but you are able to see a broom, a hammer, a fire extinguisher, and a knife");
+						puts("You are starting to hesitate!\n");
+						puts("press 1 to risk your life");
+						puts("Press 2 to run away and die another day");
+						scanf("%d", &choice);
 
-                                        int arr[1] = {0};
-                                        int y, z;
+						switch(choice)
+						{
+							case 1:
+							{
+								int arr[100] = {0};
+								char c[1000];
+								int x, y, i, z;
+								double h;
+													
+								x = p();
+								y = strikes(x);
+								weapon(arr, y, x);
+								i = weapon(arr, y, x);
+								z = totalHits(arr, y);
+								h = avgHitPower(z, y);
 
-                                        y =urGuess();
-                                        z = Anumber(arr, y);
+								printf("%s,You were able to land \n%d out of %d strikes\n",name, z, x * y);
+								printf("Your average hit power was %.1f\n", h);
+								puts("You close your eyes......\n");
 
+								if(z > (i * y) * .50)
+								{
+									FILE *wptr, *rptr;
 
+									wptr = fopen("doutput.txt", "w");
+									rptr = fopen("zombieDead.txt", "r");
 
-                                                if(z != 0 && z != -1)
-                                                {
-                                                        puts("yes");
-                                                }
+									while(!feof(rptr))
+									{
+										if(rptr)
+										{
+											fscanf(rptr, "%s   \n" , c);
+											fprintf(wptr, "%s   \n" , c);
+										}
+									}
+									puts("open doutput.txt\n");
 
-                                                else if(z == -1)
-                                                {
-                                                        puts("sorry");
-                                                }
+								
 
-                                                else if(z >= 11 && z <= 98)
-                                                {
-                                                        puts("not valid");
-                                                }
+									fclose(rptr);
+									fclose(wptr);
 
-                                                else if (z == 99)
-                                                {
-                                                        break;
-                                                        return 0;
-                                                }
+									break;
+								}
 
-				}
+								else if(z < (i * y) * .51)
+								{
+									FILE *wptr, *rptr;
+
+									wptr = fopen("deadout.txt", "w");
+									rptr = fopen("youDead.text", "r");
+
+									while(!feof(rptr))
+									{
+										if(rptr)
+										{
+											fscanf(rptr,"%s \n", c);
+											fprintf(wptr,"%s   \n",c);
+										}
+									}
+									puts("open deadout.txt\n");
+
+									fclose(rptr);
+									fclose(wptr);
+									
+									break;
+								}
+								break;
+							}
+															
+							case 2:
+								{
+								puts("You attempted to run away but tripped and fell.....Zombie is now feasting on your flesh while you scream\n");
+								break;
+								}
+									
+							}
+							break;
+						}
+					}
+				
 				break;
 			}
 			case 25:
@@ -6409,34 +6476,120 @@ int coolGuysInteract(void)//Markease Harris
 }
 
 //AndyV
-int urGuess(void)
+int p(void)
 {
-        int y;
-        puts("Pick a number between 1 and 10");
-        scanf("%d", &y);
-
-        return y;
+	int x;
+	printf("Select your weapon \n");
+	puts("1. Broom");
+	puts("2. Hammer");
+	puts("3. Fire Extinguisher");
+	puts("4. Knife");
+	scanf("%d", &x);
+	
+	while(x > 0 && x < 5)
+	{
+		if(x == 1)
+		{
+			x = 4;
+			break;
+		}
+		if(x == 2)
+		{
+			x = 8;
+			break;
+		}
+		if(x == 3)
+		{
+			x = 10;
+			break;
+		}
+		if(x == 4)
+		{
+			x = 12;
+			break;
+		}
+	}
+		
+	return x;
 }
 //AndyV
-int Anumber(int a[], int urGuess)
+int strikes(int p)
 {
-        int i, x;
-        for(i = 0; i < 2; i++)
-        {
-                x = (rand() %10 + 1);
-                a[i] = x;
-        }
+	
+	int y;
+	puts("The zombie gets closer as you stand with your weapon ready to strike....");
+	
+	if(p == 4)
+	{
+		y = 10;
+	}
+	if(p == 8)
+	{
+		y = 12;
+	}
+	if(p== 10)
+	{
+		y = 14;
+	}
+	if(p == 12)
+	{
+		y = 20;
+	}
+	
+	return y;
+}
+//AndyV
+int weapon(int a[], int strikes, int wpn)
+{
+	int i, x;
+	for(i = 0; i <= strikes; i++)
+	{
+		if(wpn == 4)
+		{
+			x = (rand() %4) + 1;
+			a[i] = x ;
+			
+		}
 
-        if(urGuess < 1 || urGuess > 10)
-        {
-                return 0;
-        }
+		if(wpn == 8)
+		{
+			x = (rand() %8) + 1;
+			a[i] = x;
+		}
 
-        if(a[i] == urGuess)
-                {
-                        return i;
-                }
-                 return -1;
+		if(wpn == 10)
+		{
+			x = (rand() %10) + 1;
+			a[i] = x;
+		}
+
+		if(wpn == 12)
+		{
+			x = (rand() %12) + 1;
+			a[i] = x;
+		}
+	}
+
+	return x;
+}
+//AndyV					
+int totalHits(int a[], int strikes)
+{
+	int i;
+	int total ;
+	for(i = 0; i < strikes; i++)
+	{
+		total += a[i]; 
+	}
+		
+	return total;	
+}
+
+double avgHitPower(int totalHits, int strikes)
+{
+	double h = totalHits / strikes;
+
+	return h;
 }
 
 
