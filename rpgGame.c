@@ -1593,14 +1593,16 @@ int main(int argc, char *argv[])
 				}
 				break;
 			}
-case 14:
+			case 14:
 			// Dave Yee
 			{
 				while(choice != 99)
 				{
-					int x,y,z,i,temp = 0, budget = 10000;
-					double average, sum = 0, wallet = 0, marketPlace[5] = {50000, 4000, 110, .50};
-					char filename[100], ch, menu_option, item_option;
+					int x,y,z,i,temp = 0;
+					double average, sum = 0, wallet = 0, budget = 100000;
+					char marketOptions[5] = {'A', 'B', 'C', 'D'};
+				       	int marketPlace[5] = {50000, 4000, 110, .50};
+					char filename[100], ch, menu_option, item_option, item_option2;
 					FILE *fptr;
 
 					puts("\n-----------------------------------------------------------------------------------------");
@@ -1611,6 +1613,8 @@ case 14:
 
 					switch(menu_option){
 						case '1':
+
+							// double marketPlace [5] = {50000, 4000, 110, .5};
 							// Menu
 							printf("type ROOM14_MENU.txt: ");
 							scanf(" %c", filename);
@@ -1627,82 +1631,86 @@ case 14:
 
 							while (ch != EOF)
 							{
-								printf("%c", ch);
+								printf(" %c", ch);
 								ch = fgetc(fptr);
 							}
-
 							
-							
-							printf("You have a budget of $%d. What would you like to buy? (type Q to quit):\n", &budget);
-							scanf(" %c", item_option);
-
-							while(item_option != 'Q' || item_option != 'q')
+						
+							printf("You have a budget of $%lf. What would you like to buy? (type Q to quit):\n", budget);
+							for (i = 0; i < 4; i++)
 							{
-								printf("You have a budget of $%d left. What would you like to buy? (type Q to quit):\n", &budget);
-								printf("A - BTC($50000)\n");
-								printf("B - ETH($4000)\n");
-								printf("C - ETC($110)\n");
-								printf("D - DOGE($0.50)\n");
-								scanf(" %c", &item_option);
+								for(z = i; z <= i; z++)
+								{
+									printf("%c. ", marketOptions[z]);
+									printf("$%d\n", marketPlace[i]);
+								}
+							}
+							scanf(" %c", &item_option);
 
-								if(item_option == 'a' || item_option == 'A')
+							while(item_option != 'Q' || item_option != 'q' || item_option2 != 'Q' || item_option2 != 'q')
+							{	 							
+								printf("You have a budget of $%lf left. What would you like to buy? (type Q to quit):\n", budget);
+								printf("A. BTC($50000)\n");
+								printf("B. ETH($4000)\n");
+								printf("C. ETC($110)\n");
+								printf("D. DOGE($0.50)\n");
+								
+								scanf(" %c", &item_option2);
+
+								if(item_option2 == 'a' || item_option2 == 'A')
 								{
 									wallet += 50000;
-									budget -= wallet;
+									budget -= 50000;
 									temp++;
 								}
-								else if(item_option == 'b' || item_option == 'C')
+								else if(item_option2 == 'b' || item_option2 == 'C')
 								{
 									wallet += 4000;
-									budget -= wallet;
+									budget -= 4000;
 									temp++;
 								}
-								if(item_option == 'c' || item_option == 'C')
+								else if(item_option2 == 'c' || item_option2 == 'C')
 								{
 									wallet += 110;
-									budget -= wallet;
+									budget -= 110;
 									temp++;
 								}
-								if(item_option == 'd' || item_option == 'D')
+								else if(item_option2 == 'd' || item_option2 == 'D')
 								{
 									wallet += .5;
-									budget -= wallet;
+									budget -= .5;
 									temp++;
 								}
-								else
+								else if(item_option2 == 'q' || item_option2 == 'Q')
 								{
-									printf("Invalid Option");
+									printf("Thank you for shopping. Please come again\n");
+									average = wallet/temp;
+									printf("You spent $%lf amount.\n", wallet);
+									printf("You have $%ld left.\n", budget);
+									printf("You averaged $%lf per cyrpto. Congates!", average);
+									exit(0);
 								}
+								
+								if(budget <=0)
+								{
+									printf("You spent all your buying power!\n");
 							
+									average = wallet/temp; 
+									printf("You spent $%lf amount.\n", wallet);
+									printf("You have $%lf left.\n", budget);
+									printf("You averaged $%lf per crypto. Congrats!", average);
+									exit(0);	
+								}
 							}
-							
-							
-							average = wallet/temp; 
-
-							printf("You spent $%d amount.\n", &wallet);
-							printf("You have $%d left.\n", &budget);
-							printf("You averaged $%d per crypto. Congrats!", &average);
-						
 							fclose(fptr);
 							
 						break;
 						case '2':						
 						default:
-							printf("Thank you! Come again");
+							printf("\nThank you! Come again");
 							exit(0);
 
 					}
-					
-
-
-
-
-
-
-
-
-
-
 
 				}
 				break;
