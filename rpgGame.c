@@ -267,12 +267,132 @@ int main(int argc, char *argv[])
 			}
 			case 28:
 			{
+				char c[200];
+				char ch;
 				while(choice != 99)
 				{
 					puts("you open the door and find ........");
-					printf("Hello World");
-					printf("Turn back");
+					puts("another set of doors");
+					puts("\n1:BLUE\n2:RED");
 					scanf("%d",&choice);
+					if(choice ==1)
+					{
+						puts("you open the blue door to find five envelopes on the floor");
+						puts("Choose one of the envelopes 1-5");
+						scanf("%d",&choice);
+						switch(choice){
+							case 1:
+							       	puts("You can never leave");
+								break;
+							case 2:
+								puts("If you want to see something amazing say polo");
+								char a[] = "polo";
+								scanf("%s" , &c);
+								if( strcmp(a,c) ==0)
+								{
+									puts("Suddenly above a spaceship comes by and an aliwn waves ay you");
+									puts("Zaps you and erases your memory");
+								}
+								break;
+							case 3:
+								puts("Don't step in the green tile");
+								puts("Type yes to step or no to not step");
+								char b[] = "yes";
+								char d[] = "no";
+								scanf("%s", &c);
+								if(strcmp(b,c) ==0)
+								{
+									puts("The tile falls below and you go down a hole");
+									puts("Never to be seen again");
+
+								}
+								else if( strcmp(d,c) == 0)
+								{
+									puts("Nothing happens");
+								}
+								break;
+							case 4:
+								puts("Do you want to play a game?");
+								puts("yes or no");
+								char e[] = "yes";
+								char f[] = "no";
+								scanf("%s", &c);
+								if(strcmp(e,c) ==0) 
+								{
+									puts("The lights turn off and you are chained by your leg to the wall");
+									puts("The walls have spikes and they are coming closer");
+									puts("There is an axe next to you");
+									puts("Make a choice");
+									puts("1: cut off leg with axe\n2: do nothing");
+									
+									scanf("%d", &choice);
+
+									if(choice == 1)
+									{
+										puts("You make it to the door and escape");
+									}
+									else if(choice ==2)
+									{
+										puts("Your screams can be heard");
+										for (int i =0; i <10; i++);
+										{
+											printf("Aaaa");
+											i++;
+
+										}
+
+									}
+
+								}
+								else if(strcmp(f,c)==0)
+								{
+									puts("You leave");
+								}
+								break;
+							case 5:
+								puts("You are going on a trip back to the begining");
+								break;
+
+
+						}
+
+					}
+					else if( choice == 2)
+					{
+						puts("You have entered the doom room");
+						puts("Be prepared");
+						puts("A giant cookie come up to you");
+						puts("1:run\n2:talk to it");
+						scanf("%d", &choice);
+						while(choice == 1)
+						{
+							puts("You keep running forever with the cookie following you");
+							puts("1:keep running\n2:Talk");
+							scanf("%d",&choice);
+
+
+						}
+						if (choice == 2)
+						{
+							puts("The cookie asks you if you eat cookies");
+							puts("1:yes\n2:no");
+							scanf("%d",&choice);
+							if(choice == 1)
+							{
+								puts("The cookie eats you");
+
+							}
+							else if(choice == 2)
+							{
+								puts("The cookie becomes your best friend");
+							}
+
+						}
+
+
+
+					}
+
 				}
 				break;
 			}
