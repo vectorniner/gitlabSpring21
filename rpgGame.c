@@ -858,18 +858,117 @@ int main(int argc, char *argv[])
 				}
 				break;
 			}
-			case 14:
-
+case 14:
+			// Dave Yee
 			{
 				while(choice != 99)
 				{
+					int x,y,z,i,temp = 0, budget = 10000;
+					double average, sum = 0, wallet = 0, marketPlace[5] = {50000, 4000, 110, .50};
+					char filename[100], ch, menu_option, item_option;
+					FILE *fptr;
+
+					puts("\n-----------------------------------------------------------------------------------------");
+					puts("HELLO FELLOW SHOPPERS! WELCOME TO MARKET 14, WHERE YOU COULD BUY ANYTHING YOU WANT!!");
+					puts("MARKET 14 HAS ALL THE LATEST STOCKS AND CRYPTOS YOU CAN FIND.");
+					puts("*TO LOOK AT THE ITEM MENU PLEASE PRESS 1 (ANY OTHER KEY TO CANCEL SHOP): *");
+					scanf(" %c", &menu_option);
+
+					switch(menu_option){
+						case '1':
+							// Menu
+							printf("type ROOM14_MENU.txt: ");
+							scanf(" %c", filename);
+
+							fptr = fopen("ROOM14_MENU.txt", "r");
+							//fptr = fopen(filename, "r");
+							if(fptr == NULL)
+							{
+								printf("EMPTY FILE\n");
+								exit(0);
+							}
+
+							ch = fgetc(fptr);
+
+							while (ch != EOF)
+							{
+								printf("%c", ch);
+								ch = fgetc(fptr);
+							}
+
+							
+							
+							printf("You have a budget of $%d. What would you like to buy? (type Q to quit):\n", &budget);
+							scanf(" %c", item_option);
+
+							while(item_option != 'Q' || item_option != 'q')
+							{
+								printf("You have a budget of $%d left. What would you like to buy? (type Q to quit):\n", &budget);
+								printf("A - BTC($50000)\n");
+								printf("B - ETH($4000)\n");
+								printf("C - ETC($110)\n");
+								printf("D - DOGE($0.50)\n");
+								scanf(" %c", &item_option);
+
+								if(item_option == 'a' || item_option == 'A')
+								{
+									wallet += 50000;
+									budget -= wallet;
+									temp++;
+								}
+								else if(item_option == 'b' || item_option == 'C')
+								{
+									wallet += 4000;
+									budget -= wallet;
+									temp++;
+								}
+								if(item_option == 'c' || item_option == 'C')
+								{
+									wallet += 110;
+									budget -= wallet;
+									temp++;
+								}
+								if(item_option == 'd' || item_option == 'D')
+								{
+									wallet += .5;
+									budget -= wallet;
+									temp++;
+								}
+								else
+								{
+									printf("Invalid Option");
+								}
+							
+							}
+							
+							
+							average = wallet/temp; 
+
+							printf("You spent $%d amount.\n", &wallet);
+							printf("You have $%d left.\n", &budget);
+							printf("You averaged $%d per crypto. Congrats!", &average);
+						
+							fclose(fptr);
+							
+						break;
+						case '2':						
+						default:
+							printf("Thank you! Come again");
+							exit(0);
+
+					}
 					
 
 
-					puts("hello world! welcome to room 14. spoooky..");
-					puts("then a giant spider fell on your face");
-					puts("RUNNN!");
-					break;
+
+
+
+
+
+
+
+
+
 				}
 				break;
 			}
