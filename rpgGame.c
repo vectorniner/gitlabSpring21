@@ -98,8 +98,9 @@ void flurbos(void);//Berenis Castruita
 void planets(void);//Berenis Castruita
 void goodBye(void);//Berenis Castruita
 
-
-
+//Matthew Bunma
+void mbchoice(void);
+void mbchoice2(void);
 
 int main(int argc, char *argv[])
 {
@@ -484,7 +485,6 @@ int main(int argc, char *argv[])
 					char ladder;
 					int rollDie, door1;
 					float numbers[50], average, sum = 0.0;
-					FILE *rptr;
 					rollDie = rand()%9;
 
 					puts("\nYou open the door and all the water drains");
@@ -493,7 +493,7 @@ int main(int argc, char *argv[])
 					puts("|     | |     | |     | |     | |     | ");
 					puts("|  1  | |  2  | |  3  | |  4  | |  5  | ");
 					puts("|     | |     | |     | |     | |     | ");
-					puts(" -----   -----   -----   -----   -----  ");
+					puts(" -----   -----   -----   -----   ----- ");
 					puts("Which door will you choose? (99 will exit the program)");
 					scanf("%d", &choice);
 					
@@ -533,7 +533,7 @@ int main(int argc, char *argv[])
 							}
 						case 2:
 						{
-							puts("You enter door number 2 and find a man rolling dice");
+							puts("\nYou enter door number 2 and find a man rolling dice");
 							puts("You approach the man");
 							puts("The man says to you, if you roll the correct number I will give you this gold ingot but if you lose then you'll be stuck down here forever");
 						       	printf("\nWould you like to roll? [1] = yes, [2] = no\n");
@@ -541,7 +541,7 @@ int main(int argc, char *argv[])
 
 							if(choice == 1)
 							{
-								puts("The man says to pick a number 1 - 10");
+								puts("\nThe man says to pick a number 1 - 10");
 								printf("Enter a number: ");
 								printf("%d", rollDie);//Random number appears to test the correct guess
 
@@ -550,6 +550,7 @@ int main(int argc, char *argv[])
 								if(choice == rollDie)
 								{
 									puts("Congrats you won the gold ingot!");
+									mbchoice();
 									break;
 								}
 								else
@@ -563,27 +564,79 @@ int main(int argc, char *argv[])
 							else if(choice == 2)
 							{
 								printf("\nYou choose 2\n");
+								mbchoice();
+								break;
+								break;
 							}
 							
 						}
 						case 3:
 						{
+							char welp[200];
+							FILE *mbrptr;
+							mbrptr = fopen("mwrongdoor.txt", "r");
+							
 
-							rptr = fopen("mSkullPic.txt", "r");
-							if(rptr == NULL)
+							printf("WRONG DOOR YOU CHOOSE WRONG \n");
+							while(!feof(mbrptr))
 							{
-								printf("Cannot open");
+								if(mbrptr)
+								{
+									fscanf(mbrptr, "%s",welp);
+									printf("%s \n", welp);
+								}
+							}
+							fclose(mbrptr);
+							
+							printf("Returning to the Main Menu \n");
+							break;
+						}
+						case 4:
+						{
+							puts("\nYou have chosen the 4th door, this door leads you to riches");
+							puts("Walking down the hallway you see a paper on the ground");
+							puts("You pick up the paper and on it says PASSWORD: Lakers");
+							puts("You continue on and make a sharp left down the hallway and find yourself staring at a sophisticated keypad");
+							mbchoice2();
+							break;
+						}
+
+						case 5:
+						{
+							puts("This door will test your ability to count");
+							puts("Enter a word and after will ask you how many letters are in the word");
+							char mbstr[100];
+							int i = 0;
+							int count = 0;
+					    		int mbletters;
+							printf("Please enter a word:  ");
+							scanf("%s", mbstr);
+								            
+							while (mbstr[i] != '\0')
+							{
+								i++;
+							}
+							for(int i = 0; i < strlen(mbstr); i++);
+							{
+								if(mbstr[i] != ' ')
+									count++;
+							}
+							printf("Enter the amount of letters: ");
+							scanf("%d", &mbletters);
+
+							if(i == mbletters)
+							{
+								printf("You have guessed correctly\n");
+								printf("Exiting the game\n");
 							}
 							else
 							{
-								if(choice != 3)
-								{
-									puts("You found a computer in the door what");
-									scanf("%d", &choice);
-								}
+								printf("Does not equal\n");
+								printf("You cant count sending you back to the main menu\n\n");
+								break;
 							}
+							return 0;
 						}
-
 						
 					}					
 						
@@ -1263,7 +1316,7 @@ int main(int argc, char *argv[])
 					{
 						puts("\nYou enter the room and close the door");
 						puts("You realize you have seen this room before");
-						puts("You are confused");
+					}				puts("You are confused");
 						puts("You see a mirror and go to it");
 						puts("You see yourself in the mirro and see a 10 year old kid");
 						puts("THAT'S YOU!");
@@ -1283,7 +1336,7 @@ int main(int argc, char *argv[])
 
 				}
 				break;
-			}
+			
 			case 26:
 			{
 				while(choice != 99)
@@ -3600,3 +3653,66 @@ void noteFromRick(void)//Berenis Castruita
 
 
 }
+//Matthew Bunma
+void mbchoice(void)
+{
+	int numberToGuess = 65;
+	int mbguesses;
+	int mbguess1;
+        int mbremainingGuesses = 10;
+	
+	puts("You are walking down a hallway and at the end you see a light");
+	puts("you walk toward the light and see one final door");
+	puts("in order to unlock the door you need to guess a number 1-100");
+	
+
+        while (mbremainingGuesses != 0)
+      	{
+		printf("Enter a guess: ");
+        	scanf("%d",&mbguess1);
+	    		if (mbguess1 > numberToGuess) 
+			{
+	    			printf("Lower \n");
+				mbremainingGuesses--;
+				continue;
+			}
+	   		else if (mbguess1 < numberToGuess)
+			{
+	    			printf("Higher \n");
+				mbremainingGuesses--;
+				continue;
+			}
+	    		else (mbguess1 == numberToGuess);
+	    			printf("Congrats you have escaped! \n");
+				printf("Returning to the main menu \n");
+	    		break;
+	    		}
+	    
+}
+//Matthew Bunma
+void mbchoice2(void)
+{
+	char mbstring[30] = "Lakers";
+	char mbstring2[30];
+
+	printf("In order to exit enter the password given to you correctly \n");
+	printf("Hint: Password was given earlier in the game\n");
+	printf("Enter the password: ");
+	scanf("%s", &mbstring2);
+
+	if(strcmp(mbstring, mbstring2) == 0)
+	{
+		printf("Password Accepted! \n");
+		printf("You have escaped! \n");
+		printf("\nReturning to the main menu\n");
+	}
+	else
+	{
+		printf("Password not accepted \n");
+		printf("\nYou are trapped down here FOREVER\n");
+	}
+
+}
+
+
+	
