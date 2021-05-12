@@ -62,9 +62,25 @@ double sumM(double sums[], int maxSums);														 // Manuel Castaneda
 void printRollResults(int rolls[], int numberOfRolls, int isUser); // Manuel Castaneda
 
 
-void play(void);//josue
+void play(int *ptr);//josue
 void story(void);//josue
 void elf(void);//josue
+void results(int *ptr);//Josue
+double avgElf(int a[]);//Josue
+void outcome(double x, double y);//Josue
+void afterElf(void);//Josue
+void vendingMachine(void);//Josue
+void door(void);//Josue
+void secondGame(void);//Josue
+int game21Opponent();//Josue
+int game21(int d[]);//Josue
+void cardgameResult(int o, int y);//Josue
+void afterSecond(void);//Josue
+int  theFinale(int f[]);//Josue
+int theAngel(int f[]);//Josue
+void lastResult(int a, int o);//Josue
+void finalization(void);//Josue
+
 // Talise
 void printMessage(int msg[]);
 void decodeMessage(char alphabet[], int codedMessage[], int *totalGuesses, int *wrong);
@@ -2761,9 +2777,61 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
+					int deck[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+					int fdeck[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}; 
+					int die[10] = {0};
+					int *ptr;
+					double elfA, playerA;
+					int scare, you, you1, angel;
+					srand(time(NULL));
+					ptr = die;
 					story();
+					system("PAUSE");
 					elf();
-				//	play();;
+					printf("The Elf Rolls first.. \n");
+					play(ptr);
+					results(ptr);
+					elfA = avgElf(die);
+					printf("The elfs average:%.2lf \n", elfA);
+					printf("You roll... \n");
+					play(ptr);
+					results(ptr);
+					playerA = avgElf(die);
+					printf("Your average: %.2lf \n", playerA);
+					outcome(elfA, playerA);
+					afterElf();
+					vendingMachine();
+					door();
+					secondGame();
+					scare = game21Opponent();
+					printf("Opponent: %d\n", scare);
+					you = game21(deck);
+					printf("You got: %d\n", you);
+					while(scare == you)
+					{	
+						printf("TiE, aNoThER RoUnD\n");
+						scare = game21Opponent();
+						printf("Opponent: %d\n", scare);
+						you = game21(deck);
+						printf("You got: %d\n", you);
+					}
+					cardgameResult(scare, you);
+					afterSecond();
+					angel = theAngel(fdeck);
+				        printf("Card Selected by Angel: %d \n", angel);	
+					you1 = theFinale(fdeck);
+					printf("Card selected by you: %d \n", you1);
+					while(angel == you1)
+					{
+						printf("ANGEL: It's a tie, again.\n");
+						angel = theAngel(fdeck);
+						printf("Caqard Selected by Angel: %d\n", angel);
+						you1 = theFinale(fdeck);
+						printf("Card selected by you: %d\n", you1);
+					}
+					lastResult(angel, you1);
+					finalization();
+					puts("Press 99 to quit:");
 					scanf("%d",&choice);
 				}
 				break;
@@ -2815,31 +2883,18 @@ int main(int argc, char *argv[])
 	return EXIT_SUCCESS;
 }
 
-void play(void) // Josue Carrillo
+void play(int *ptr) // Josue Carrillo
 {
 	int i;
-	int total = 0;
-	int numbers[4] = {0};
-	int avg;
-	for(i = 0; i < 4; i++)
+	for(i = 0; i < 10; i++)
 	{
-		numbers[i] = rand() % 100;
-		total = total + numbers[i];
+		*ptr = (rand() % 6) + 1;
+		ptr++;
 	}
-	avg = total / 5;
-
-	if(avg % 2 == 0)
-	{
-		printf("The number is even you win!!");
-	}
-	else
-	{
-		printf("You lose");
-	}
-
+	
 }
 
-void story(void)//Josue
+void story(void) //Josue Carrillo
 {
 	puts("You find yourself on the outskirts of an unknown city.");
 	puts("You look back and there is a barrier that prevents anyone from leaving or entering this place");
@@ -2850,17 +2905,345 @@ void story(void)//Josue
 	puts("Everyone seems to have the same experience, they opened a door, and you found yourself at the outskirts of this city, no way out.");
 	puts("Yet everyone explains that playing games is the most important thing in this city.");
 	puts("Not knowing what to do, you begin to wander around, and then find yourself in front of something familiar, a SunBucks.");
-	puts("You enter and notice a person with pointy ears sitting near the corner of the store.");
+	puts("You enter and notice a girl  with pointy ears sitting near the corner of the store.");
 	puts("You give in into your curiosity and decide to sit next to this person.");
 
 }
-void elf(void)//Josue
+void elf(void) // Josue Carrillo
 {
-	puts("As you are sit next to this person, she says: 'What do you want?'");
-	puts("You say, 'I was just curious, never seen a person with pointy ears'");
-	puts("She says, 'Are you new here'");
-	puts("You say, 'yes, just got here couple of hours ago'");
-	puts("She says, 'Ah ok, I am an elf that has lived in this city for many years. My name is Lia.'");
+	puts("As you sit down, this girl asks you if you want to play a game.");
+	puts("Out of interest you say yes.");
+	puts("She takes out a dice, and she begins to explain the rules.");
+	puts("Each play rolls the die, 10 times, and whoever's average is greater wins.");
+}
+
+void results(int *ptr) //Josue Carrillo
+{
+	int i,j;
+	for(i = 0; i < 10; i++)
+	{
+		printf("Roll[%d] = %d \n", i + 1, *ptr);
+		ptr++;
+	}
+	
+}
+
+double  avgElf(int a[]) //Josue Carrillo
+{
+	int i;
+	double avg;
+	int equals = 0;
+	for(i = 0; i < 10; i++)
+	{
+		equals = equals + a[i];
+	}
+
+//	printf("%d \n", equals);
+	avg = (double) equals / 10;
+//	printf("%.2lf \n", avg);
+	return avg;
+}
+
+void outcome(double x, double y) // Josue Carrillo
+{
+	if(x > y)
+	{
+		printf("ELF: My skills are too good, you lose!!");
+		printf("But I feel bad for you so I'll give you this \n");
+	}
+	else
+	{
+		printf("ELF: Lucky Punk (Xp)");
+		printf("But it does seem you have some skill, here I'll give you this. \n");
+	}
+}
+
+void afterElf(void) // Josue Carrillo
+{
+	printf("You see her give you a card and you ask her, 'What is this?'\n");
+	printf("She responds, if you want to escape this city, you will need this card.\n");
+	printf("This card will let you play the other person who has a similar card.\n");
+	printf("If you can beat him at his game, he will give you his card.\n");
+	printf("You ask, where is he?\n");
+	printf("You will meet him at the Casino. He loves playing card games, but beware, his cards are not normal.\n");
+	printf("That said, you decide to pay the Casino a visit.\n");
+}
+
+void vendingMachine(void) //Josue Carrillo
+{
+	int choice;
+	printf("After walking 45 minutes, you got thirsty and decided to geet something from the vending machine.\n");
+	printf(" RayRay's Vending Machine\n ");
+	printf("   What do you want?\n");
+	printf("       Drink Menu\n");
+	printf("1  Gatorade\n");
+	printf("2. Coke\n");
+	printf("3. Pepsi\n");
+	printf("4. Powerade\n");
+	printf("5. Dr. Pepper\n");
+
+	printf("Choice: ");
+	scanf("%d", &choice);
+	switch(choice)
+	{
+		case 1:
+			printf("You got Gatorade\n");
+			break;
+		case 2:
+			printf("You got Coke\n");
+			break;
+		case 3:
+			printf("You got Pepsi\n");
+			break;
+		case 4:
+			printf("You got Powerade\n");
+			break;
+		case 5:
+			printf("You got Dr. Pepper\n");
+			break;
+	}
+
+	printf("As you are opening your drink, through the reflection of the Vending Machine, you see bright red eyes staring at you menacingly.");
+	printf("As you look back, you see no one there.");
+	printf("You start to worry a bit, and decide to look for this person with the second card.");
+}
+
+void door(void) // Josue Carrillo
+{	
+	FILE *rptr, *rptr1;
+	char answer[9];
+	char yourAnswer[9];
+	int x,i;
+	char letter[9];
+	rptr = fopen("riddleDoor.txt", "r");
+	fgets(answer,9, rptr);
+	printf("As you are looking around the Casino, you find a ominous looking door\n");
+ 	printf("As you approach the door it says, if you want to pass, answer this riddle.\n");
+	printf("I am an instrument whose music always comes form the heart. What am I?    .... answer(an organ)\n ");
+//	printf("You answer: ");
+	fgets(yourAnswer, 9, stdin);
+	for(i = 0; i < 9; i++)
+	{
+		letter[i] = toupper(yourAnswer[i]);
+	}
+	x = strcmp(answer, letter);
+
+	while(x != 0)
+	{
+	//	printf("I am an instrument whose music always comes from the heart. What am I?\n");
+		printf("You answer: ");
+		fgets(yourAnswer, 9, stdin);
+		for(i = 0; i < 9; i++)
+		{
+			letter[i] = toupper(yourAnswer[i]);
+		}
+		x = strcmp(answer, letter);
+		if(x == 0)
+		{
+			printf("You may enter\n");
+		}
+	}
+	fclose(rptr);
+}
+
+void secondGame(void)//Josue
+{
+	puts("As the door opens, you see stairs that head down, but can't see further than a few steps because it's really dark.");
+	puts("You decide to go through, and for a good while you can't see anything until you see that the red eyes again in the distance.");
+	puts("Having no other choice than to go towards the eyes, you keep walking until you get close.");
+	puts("As you get close, strong red lights turn on, and the figure of the man looks like a scarecrow.");
+	puts("In front of the scarecrow, there is a table and a deck on cards.");
+	puts("He says 'SiT dOwn, lEtS pLaY.....'");
+	puts("He explains the rules, we are going to play 21. But in this deck there is no face cards. The numbers are 1 through 10");
+	puts("I'll give you three chances to beat me.");
+	puts("yOu WiN, i'LL gIvE yOu mY CaRd, i WiN, yOu bEcOme VicTiM numBeR 100... evil smirk.");
+}
+
+int game21Opponent(void)//Josue
+{
+	int number, i;
+
+	
+	number = (rand() % 10) + 12;
+//	printf("%d ", number);
+
+	return number;
+}
+
+int game21(int d[])//Josue
+{
+	int i;
+	int card;
+       	int sum;	
+	char choice;
+	i = (rand() % 10);
+	sum = d[i];
+	printf("You got a %d\n ", sum);
+	printf("Would you like to draw another card? y or n\n");
+	printf("Choice: ");
+	scanf(" %c",&choice);
+	while(choice != 'n')
+	{
+		i = (rand() % 10);
+		sum = sum + d[i];
+		printf("Total: %d\n", sum);
+		if(sum > 21 || sum == 21)
+		{
+			return sum;
+		}
+		printf("Would you like to draw another card? y or n\n");
+		printf("choice: ");
+		scanf(" %c", &choice);
+	}
+	return sum;
+}
+
+void cardgameResult(int o, int y)//Josue Carrillo
+{
+	if(o > y || y > 21)
+	{
+		printf("Red eyed dude wins\n");
+		printf("hEheHe, TimE tO meEt YoUr NeW CelLmAtEs heHeheHehe.....");
+		printf("You failed to escape, Game Over");
+		exit(1);
+	}
+	else
+	{
+		printf("You win\n");
+		printf("Run you card bro!");
+	}
+}
+
+void afterSecond(void)//Josue Carrillo
+{
+	puts("After you beat Mr. Scarecrow, he gives you his card and tells you the location of the last card.");
+	puts("He tells you that the last person you have to beat is in the center of the city.");
+	puts("At the big tower you saw when entering the city.");
+	puts("Without haste, you decide to leave the creepy place and go to the tower.");
+	puts("You get there and there is no one, just one elevator that goes up.");
+	puts("You get into the elevator and it takes you to the top of the tower.");
+	puts("You get there but there is no one, there is just a huge crystal with a panel in front of it.");
+	puts("The panel has three card slot in it. You decide to put in the cards.");
+	puts("When you put the cards in, the crystal begins to open.");
+	puts("Inside the crystal, there is an angel with 7 wings.");
+	puts("When the crystal fully opened, the angel then flies towards you.");
+	puts("He says, 'Are you the one who awakened me?");
+	puts("You answer yes");
+	puts("ANGEL: Seems like you defeated the other two and now want to play me");
+	puts("ANGEL: Fine, you beat me and you can leave.");
+	puts("ANGEL: The game is simple, I have a deck of 15 cards.");
+	puts("ANGEL: The deck possibly can have cards number 1 - 15");
+	puts("ANGEL: The deck generates its own cards so some of the cards could be missing in the deck.");
+	
+}
+
+int theFinale(int f[])//Josue Carrillo
+{
+	int i, card;
+	int choice;
+	printf("Out of the 15 cards, Which card will you use pick out? ");
+	scanf(" %d",&choice);
+	switch(choice)
+	{
+		case 1:
+			i = (rand() % 16) + 1;
+			card = f[i];
+			break;
+		case 2:
+			i = (rand() % 16) + 1;
+			card = f[i];
+			break;
+		case 3: 
+			i= (rand() % 16) + 1;
+			card = f[i];
+			break;
+		case 4: 
+			i = (rand() % 16) + 1;
+			card = f[i];
+			break;
+		case 5:
+			i = (rand() % 16) + 1;
+			card = f[i];
+			break;
+		case 6: 
+			i = (rand() % 16) + 1;
+			card = f[i];
+			break;
+		case 7: 
+			i = (rand() % 16) + 1;
+			card = f[i];
+			break;
+		case 8:
+		       	i = (rand() % 16) + 1;
+			card = f[i];
+			break;
+		case 9:
+		        i = (rand() % 16) + 1;
+			card = f[i];
+			break;
+		case 10:
+			i = (rand() % 16) + 1;
+			card = f[i];
+			break;
+		case 11: 
+			i = (rand() % 16) + 1;
+			card = f[i];
+			break;
+		case 12:
+			i = (rand() % 16) + 1;
+			card = f[i];
+			break;
+		case 13: 
+			i = (rand() % 16) + 1;
+			card = f[i];
+			break;
+		case 14: 
+			i = (rand() % 16) + 1;
+			card = f[i];
+			break;
+		case 15:
+			i = (rand() % 16) + 1;
+			card = f[i];
+			break;	
+	
+
+	
+	}
+	return card;
+}
+
+int theAngel(int f[])//Josue Carrillo
+{	
+	int i, card;
+	i = (rand() % 16) + 1;
+	card = f[i];
+	return card;
+}
+
+void lastResult(int a, int y)//Josue Carrillo
+{
+	if(a > y)
+	{
+		printf("ANGEL: So close to get out of this place, but you lost. Pity");
+		printf("GAME OVER");
+		exit(1);
+	}
+	else
+	{
+		printf("YOU: YES!!, GIVE ME THAT CARD SON!");
+	}
+}
+
+void finalization(void)//Josue Carrillo
+{
+	printf("You begin to jump with joy as you receive the third card from the Angel.\n");
+	printf("ANGEL: great job. No one has been able to get out of here.\n");
+	printf("ANGEL: You deserve it\n");
+	printf("Thanking the Angel, you decide to get input the final card into the panel.\n");
+	puts("After you insert the card, the three cards merge and the same door appears where you entered in the beginning.");
+	puts("Entering the door, you return back to your home.");
+	puts("YOU: Nice to be back home.");
+	puts("Game over");
 }
 
 
