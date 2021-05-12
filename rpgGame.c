@@ -442,6 +442,7 @@ int main(int argc, char *argv[])
                                           
                                                 puts("I will let you choose what plannet we go to \n");
                                                 planets();
+						break;
                                         }
                                                 
                                         if(choice == 3)
@@ -5245,7 +5246,7 @@ int Anumber(int a[], int urGuess)
 
 
 
-void stars(void)
+void stars(void)//Berenis Castruita
 {
   
   int n,m,i,k,j;
@@ -5261,21 +5262,21 @@ void stars(void)
       {
         for(j = 1; j <= m-1; j++)
         {
-            printf(" ");
+            	printf(" ");
         }
         for(k = 1; k <= 2 * i - 1; k++)
         {
-            printf("*");
+            	printf("*");
         }
 
           m--;
 
-           printf("\n");
-        }
+          printf("\n");
+       }
 						
       puts("Woooaaahhh get ready for Hyper Drive \n");
 }
-void flurbos(void)
+void flurbos(void)//Berenis Castruita
 {   
    int sum = 0;
    int number;
@@ -5296,18 +5297,20 @@ void flurbos(void)
 
     	printf("You will need an average of  %.2f Flurbos, for your first time at Blips\n",average);
 }
-void planets(void)
+void planets(void)//Berenis Castruita
 { 
   int planet = 0;
   char keyword[] = "Red";
   char input[3];
+  char inpt[19];
+  char pharase [] = "How";
   
   puts("your choices are 1.Alphabetrum, 2.Bird World, or 3.Unity's Planet");
   scanf("%d", &planet);
   puts("\n");
 
   switch (planet)
-	{
+  {
 	case 1:
 	{     
           puts("Morty Narrating.... \n");
@@ -5318,7 +5321,7 @@ void planets(void)
     
           puts("\n");
           puts("Wait what is that noise?     Oh wait I think there is something wrong with the space cruiser \n");
-          puts("Quick we need to fix these warnings, please type Red to cancel all the warining buttons that are going off \n");
+          puts("Quick we need to fix these warnings, please type Red to cancel all the warning buttons that are going off \n");
                                                     
           	while(strcmp(input,"Red"))
           	{
@@ -5331,10 +5334,10 @@ void planets(void)
                   		printf("Lets hope Rick does not find out about this\n");
               		break;
               		}
-              else
-              {
-               	printf("Hurry, please type Red to cancel all the warining buttons that are going off \n");
-              }
+              		else
+              		{
+               			printf("Hurry, please type Red to cancel all the warining buttons that are going off \n");
+              		}
            	}
                                              
               break;
@@ -5344,9 +5347,9 @@ void planets(void)
 	{
 		puts("Morty Narrating.... \n");
                 puts("Cool, we are heading to Bird World \n");
-                puts("Bird World is the planet where Birdperson lives. TV-signals from Earth take 20 years to reach this planet, meaning it's 20 light-years away from Earth, although in the season 2 finale The wedding squanchers, Rick claims that Bird world is over 6,000 light years away. \n");
+                puts("Bird World is the planet where Birdperson lives. TV-signals from Earth take 20 years to reach this planet, meaning it's 20 light-years away from Earth, Rick claims that Bird world is over 6,000 light years away. \n");
                 puts("\n");
-                puts("Bird People live in wooden structures often incorporated into trees, but do possess technology like TV. They primarily eats worms and have worm ranches around on the planet. When sending messages they may tend to use robotic eggs with hologram messages, or it is technology by Tammy. In Bird culture, mate-melding is the equivalent of marriage on Earth.");
+                puts("Bird People live in wooden structures often incorporated into trees, but do possess technology like TV. They primarily eats worms and have worm ranches around on the planet. When sending messages they may tend to use robotic eggs with hologram messages. In Bird culture, mate-melding is the equivalent of marriage on Earth.");
                 puts("\n");
                 puts("Seems like we are having some engine problems we are going to have to stay here untill we can get it fix. \n");
                 puts("Whats this, looks like rick left us a note lets sees what it says\n");
@@ -5359,17 +5362,44 @@ void planets(void)
          puts("Morty Narrating.... \n");
          puts("Cool, we are heading to Unity's Planet \n");
          puts("\n");
+	 puts("\n");
          puts("The planet Unity was entirely assimilated, and plans to use to assimilate the Galactic Federation. However, Unity left the planet with its people following certain events with Rick. \n");
          puts("\n");
-         puts("The inhabitants are blue-skinned humanoids with three yellow-tipped protrusions on their heads. There are differences in nipple structure as some have flat concentric nipple rings, and others have cone nipples. In the absence of Unity's control, the inhabitants instantly devolve into starting a race war based on their nipple differences. The unassimilated crew of the S.S. Independence do not exhibit this, but they may have all been of a similar nipple-type. The entire planet's population disappeared after Unity decided to leave Rick, and went to stay with Beta-Seven.");
+         puts("Oh wait something is off...\n");
          puts("\n");
+         puts("Morty starts being worried, freaking out, Oh noooo....\n");
+         puts("\n");
+         puts("Game Host Speaking. Hello and welcome to How Did I Get Here? \n");
+         puts("\n");
+         puts("Welcome guest, now I know you were traveling to a different destination..\n");
+         puts("\n");
+         puts("Now you can find your self on top of a random streetlight.\n");
+         puts("\n");
+         puts("Host hurry please type the key phrase to return back to your destination before your ship falls from the top of the street light");
 
-                                                
-	break;
-	} 
- 	}
+              while(strcmp(inpt,"How"))
+              {
+                    scanf("%s", inpt);
+                    if(strcmp(inpt, "How") == 0)
+                    {
+                        printf("\n");
+                        printf("Great we are out of that Alien Game show !! \n");
+                        puts("\n");
+                        printf("We can continue our jouney \n");
+                        puts("\n");
+                        printf("Lets hope Rick does not find out about this\n");
+			puts("\n");
+                      break;
+                    }
+                    else
+                    {
+                        printf("Hurry I think the phrase is How. \n");
+                    }
+              }
+        } 
+   }
 }
-void goodBye(void)
+void goodBye(void)//Berenis Castruita
 { 
    int i;
    char message[] = {"Good Bye"};
