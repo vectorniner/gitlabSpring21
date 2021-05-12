@@ -1410,8 +1410,16 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					int portalChoice = 5;
+					int portalChoice = 5, guideChoice = 0;
+					int die1 = 0, die2 = 0, die3 = 0, total = 0, yourGuess = 0, random = 0, numbers = 0, count = 0, i, n;
+					float average, sum = 0,arrInt[20];
+					char lastWords[100];
+					
+					FILE *fptr = fopen("saidLast.txt", "w");
+					
+					srand(time(NULL));
 
+					puts("There were 28 doors before this, and you actually chose this one? Well alright then.");
 					puts("you open the door and find ........");
 					puts("Four portals right next to each other. A voice tells you to enter one.");
 					puts("The first portal is blue, second is red, third is yellow, fourth is black.");
@@ -1427,7 +1435,6 @@ int main(int argc, char *argv[])
 
 					if(portalChoice == 1)
 					{
-						int guideChoice = 0;
 
 						puts("You have entered portal number 1. A man walks up to you and says: ");
 						puts("Greetings! I see you are a new arrival to this land. My job is to welcome all new visitors.");
@@ -1439,34 +1446,105 @@ int main(int argc, char *argv[])
 
 						scanf("%d", &guideChoice);
 						
-						if(guideChoice == 1)
+						switch(guideChoice)
 						{
-							puts("You run out of the building and see a woman training people how to cut logs off trees and fish for shrimp.");
-						}	
+							case 1:
+							{
+								puts("You run out of the building and see a woman training people how to cut logs off trees and fish for shrimp.");
+								puts("You deduce that you're already super freaked out and decide to go through all of tutorial island except you just ignore everyone you see.");
+								puts("After running for how long you see the endtrance to the wizards building.");
+								puts("When you finally reach the wizard to teleport you to the mainland he is shocked to see you.");
+								puts("He says: You're not supposed to be here, but I'm sure you know that already. There must have been an issue somehow.");
+								puts("I would like to send you back but unfortunately to do that you must win a contest. Not my laws, it's the God's laws.");
+								puts("If you win you can go back, if you lose then your stay here will be inevitable. Ready to play?");
+								puts("I have 3 six-sided die. I roll them, and you must guess the total I rolled. You have 1 chance to get it. Let's start!");
+										
+
+								die1 = ((rand() %6) + 1);
+								die2 = ((rand() %6) + 1);
+								die3 = ((rand() %6) + 1);
+								total = die1 + die2 + die3;
+
+								printf("I rolled them. What total do you think I got? Remember, I can get 3 to 18. \n");
+								scanf("%d", &yourGuess);
+									
+								if(total == yourGuess)
+								{
+									puts("You actually got the correct answer");
+									puts("With that, you can go home now!");
+									puts("After reciting some gibberish, he sends you home and you wake up on your bed.");
+									puts("You're not sure what to think of that, but hope that if that ever happens again, you choose a different door not marked 29.");
+									break;
+								}
+
+								if(total != yourGuess)
+								{
+									puts("Oh too bad, you're wrong.");
+									printf("The number was actually %d \n" ,total);
+									puts("You instantly get teleported to Lumbridge to live out your life as a RuneScape player.");
+									break;
+								}
+									
+								break;
+							}	
 						
-						if(guideChoice == 2)
-						{
-							puts("You hit the guide. He replies with: You can't do that here. And now, you have to pay.");
-							puts("Suddednly an explosion rocks your world and you die instantly.");
-							puts("Seriously though, why did you hit him?");
-							puts("Game Over.");
+							case 2:
+							{
+								puts("You hit the guide. He replies with: ");
+								printf("You can't do that here. And now, you have to pay. \n");	
+								puts("Suddenly an explosion rocks your nonsensical world and you die instantly.");
+								puts("Seriously though, why on Earth did you hit him?");
+								puts("Game Over.");
+								break;
+							}
 						}
-						
 					}
 					if(portalChoice == 2)
 					{
-						puts("You wake up on a cart.");
+						puts("You end up in a college room, with a whiteboard and a couple markers on it.");
+						puts("The whiteboard says: Enter some numbers for calculation. C to calculate.");
+						puts("You think to yourself, what is this? Some sort of calculator whiteboard?");
+						printf("Enter how many numbers you'd like to put on: \n");  
+						scanf ("%d",&n);
+
+						while(n > 20 || n < 1)
+						{
+							puts("Alright, the whiteboard only do a max of 20.");
+							printf("Enter the amount: ");
+						}
+
+						for(i=0;i<n;i++)
+						{
+							printf("Number order: %d ", i+1);
+							scanf("%f", &arrInt[i]);
+							sum += arrInt[i];
+						}
+						
+						average = sum/n;
+						printf("The average is: %f \n", average);
 					}
 
 					if(portalChoice == 3)
 					{
-						puts("You wake up in your bed.");
+						puts("This portal is under construction, please choose another one.");
+
+
+
 					}
 					
 					if(portalChoice == 4)
 					{
 						puts("You have entered portal number 4. You're suddendly teleported onto a stage with a microphone. There is no audience.");
-						puts("You walk up to the microphone in curiosity and say: ");
+						printf("You walk up to the microphone in curiosity and say: ");
+						scanf("%s", lastWords);
+						puts("You hear as the speakers replay your voice: ");
+						for(int i = 0; i<100; i++)
+						{
+							lastWords[i] =toupper(lastWords[i]);
+						}
+						printf("%s \n", lastWords);
+						puts("Congrats, those were your last words you've said!");
+						puts("You die instantly as your last words are forever recorded.");
 					}
 					
 					return EXIT_SUCCESS;
