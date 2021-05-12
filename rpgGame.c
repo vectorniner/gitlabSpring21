@@ -48,12 +48,17 @@ void room19_ending3(FILE*);
 
 char *randomString(char *p);
 
-void mQhelpPrompt(void); //mquail
 void mQhelpMenu(void); //mquail
 void mQcontinue(void); //mquail
 int mQuserInput(void); //mquail
-int mQparser(void); //mquail
-char uInput[100]; //mquail
+int mQparser1(FILE *writePointer, FILE *readPointer, bool *clearParserPointer); //mquail
+int mQparser2(FILE *writePointer, FILE *readPointer, bool inventory[7]); //mquail
+void mQprintInventory(bool inventory[7]); //mquail
+void mQprintLocations(int noteCount, const char* const locations[10]); //mquail
+char uInput[20]; //mquail
+const char* const locations[10] = {"stove", "fridge", "freezer", "sink", "cabinets", "microwave"}; //mquail
+bool inventory[10] = {false /*[0]tomato*/,false /*[1]onions*/,false /*[2]meat*/,false /*[3]beans*/,false /*[4]spices*/,false /*[5]tortillas*/,false /*[6]GameEnd*/, false /*[7]Can Opener*/, false /*[8]CO used*/, false /*[9]5found*/}; //mquail
+bool clearParser = false; //mquail
 
 void printIntroduction(void);																			 // Manuel Castaneda
 void printRules(int rollsPerTurn, int pointsToLoose);							 // Manuel Castaneda
@@ -850,86 +855,84 @@ int main(int argc, char *argv[])
 				}
 				break;
 			}
-			case 8:
+			case 8: //Meredith Quail
 			{
 				// Declare Variables
-				char *userEntry[256];
+				char userE;
 				char uYes[5] = "yes";
 				char uNo[4] = "no";
-				int gameLevel = 1;
-				bool kitchen1Clear = false;
-				bool lightsOn = false;
+				bool *clearParserPointer = &clearParser;
+				FILE *writePointer = fopen ("recipe.txt", "w"); //write pointer to file recipe.txt, append
+				FILE *readPointer = fopen("recipe.txt", "r"); //read pointer to receipt.txt
 				
-				while(choice != 99)
+				while(inventory[6] == false)
 				{
 					// Opening Narration
-					puts("-------------------------------------------------------------------------------------------------------");
+					system("clear");
+
+					puts("--------------------------------------------------------------------------------------------");
 					puts("\nTwisting the knob and bracing your shoulder, you push against the heavy door with a strained grunt.\n");
 					puts("It slams shut just as you weave your way through. The door is now sealed tightly behind you.\n");
 					puts("A familiar grumble roils from deep within your gut.");
 					puts("Before you conquer that hefty door again, you'll have to vanquish the hunger beast.\n");
-					puts("Do you want to take a look around? (Type 'yes' or 'no') : \n");
-					scanf("%s", *userEntry);
-					
-					// Type yes (replace later with a better method)
-					if (strstr(*userEntry, uYes) != NULL)
+					printf("Do you want to take a look around? (Type y for yes or n for no) :");
+					scanf(" %c", &userE);
+
+				switch(userE)
+				{
+					case 'y' :
 					{
-						puts("\nPatting your stomach in agreement, you decide that going on incredible adventures through other mysterious doors can wait.\n");
-						puts("For now, you have to look around for some food. Eat first, think later.\n");
-						mQcontinue();
+					  puts("\nPatting your stomach in agreement, you decide that going on incredible adventures through other mysterious doors can wait.\n");
+					  puts("For now, you have to look around for some food. Eat first, think later.\n");
+					  break;
 					}
 
-					// Type no
-					else if (strstr(*userEntry, uNo) != NULL)
+					case 'n' :
 					{
-						puts("\n...no?");
-						puts("\nNO?????");
-						printf("\noOOOooo OOO oo lookit me, I'm a silly little adventurer named %s! I dOnT nEeD To eAt!! i'M sO StROnG aN d ClEvEr AnD I'm nEvEr HuNgRYyyyYYH haAHAa heeHEEhoO\n\n", name);
-						puts("You're about as dumb as a bowl of oats. Do you think you can open a heavily sealed door like this?\n");
-						puts("When you're so hungry, you couldn't open a door twice?!\n");
-						puts("Well, too bad - that door isn't budging, and you're looking around for some sustenance, whether you like it or not! Your stomach isn't giving you any other options here!\n");
-						mQcontinue();
-					}					
-					
-					// Level 1 : Kitchen
-					if (gameLevel == 1)
+					  puts("\n...no?");
+					  puts("\nNO?????");
+					  printf("\noOOOooo OOO oo lookit me, I'm a silly little adventurer named %s! I dOnT nEeD To eAt!! i'M sO StROnG aN d ClEvEr AnD I'm nEvEr HuNgRYyyyYYH haAHAa heeHEEhoO\n\n", name);
+					  puts("You're about as dumb as a bowl of oats. Do you think you can open a heavily sealed door like this?\n");
+					  puts("When you're so hungry, you couldn't push a door back open?!\n");
+					  puts("Well, too bad - that door isn't budging, and you're looking around for some sustenance, whether you like it or not! Your stomach isn't giving you any other options here!\n");
+					  break;
+					}
+
+					case 'm' :
 					{
-						mQhelpPrompt();
-						mQhelpMenu();
-						mQcontinue();
-						
-						if (kitchen1Clear == false)
-						{
-							// Lights Off
-							if (lightsOn == false)
-							{
-								puts("----------------------------------------------------------------------------------------------------------------");
-								puts("\nYou were so preoccupied with the door and your appetite that you hadn't noticed the room is completely dark.\n");
-								puts("Fishing your phone out of your pocket, you swipe a few times to activate its flashlight. Suppose that will have to do, until you can get the lights working.\n");
-								puts("You tentatively stretch a hand to the wall next to the door to check for a light switch - no dice.\n");
-								puts("Sweeping the room with your cellphone light, you notice the stainless steel glint of a FRIDGE and FREEZER wedged into the right corner.\n");
-								puts("You make out the red glow of a STOVE clock, blinking 00:00 steadily against the darkness.\n");
+					  puts("\n...what do you mean by 'm'? Maybe??\n\nListen, you gotta be more decisive in life. Don't 'maybe' your way through things anymore. Today's the day you're gonna seize destiny, and you're gonna seize it right here in this kitchen!\n");
+					  break;
+					}
 
-								//Parser Loop begins
-								while (mQuserInput() && mQparser());
-							}
-
-							// Lights On
-							else if (lightsOn == true)
-							{
-								puts("The stainless steel glint of a REFRIDGERATOR and FREEZER glints from the right corner.\n");
-								puts("To the left of the freezer is an old combination STOVE and OVEN.\n");
-								puts("A dirty SINK full of dishes connects to the counter space left of it, with a MICROWAVE on the counter space nearby.");
-								puts("Some CABINETS lay half-open on rusted hinges above the sink space.\n");
-								break;
-							}
-							
-							//break?
-						}
+					default :
+					{
+					  puts("\nWell, whatever you chose, the universe pretended not to hear it. Your fate is dictated by your stomach, so you're being thrown headfirst into this adventure whether you like it or not!\n");
+					  break;
 					}
 				}
-				break;
-			} //case 8 ends
+
+				mQcontinue();
+
+				system("clear");
+				puts("---------------------------------------------------------------------------------");
+				puts("LOST IN THE SAUCE\n\nYOUR GOALS : \nFind the 5 Notes, Complete the Recipe \nCook and eat the food to escape the Kitchen");
+				mQhelpMenu();
+				puts("--------------------------------------------------------------------------------");
+				mQcontinue();
+				puts("\nYou were so preoccupied with the door and your appetite that you hadn't noticed the room is completely dark.\n");
+				puts("Fishing your phone out of your pocket, you swipe a few times to activate its flashlight.\n");
+				puts("Sweeping the room, you notice the stainless steel glint of a FRIDGE and FREEZER wedged into the right corner.\n");
+				puts("You can make out the red glow of a STOVE clock, blinking 00:00 steadily against the darkness.\n");
+			  
+				// Parser Loop 1
+				while (mQuserInput() && mQparser1(writePointer, readPointer, clearParserPointer));
+
+			}
+
+			fclose(writePointer);
+			break;
+
+		} 
 			case 9:
 			{
 				char yN;
@@ -4094,52 +4097,385 @@ char *randomString(char *p)
 	return p;
 }
 
-void mQhelpPrompt(void)
+void mQhelpMenu(void) //mquail
 {
-	puts("-----------------------------------------------------------------------------------------");
-	puts("Type 'help' at any time to see the Help menu, which has a list of commands you can use.\n");
-	puts("-----------------------------------------------------------------------------------------");
+	puts("--------------------------------------------------------------------------------");
+	puts("COMMANDS:\n look, use\n locations, inv, help, exit\n\nType 'look' or 'use' followed by the OBJECT you want to interact with (objects with CAPITAL letters can be interacted with)\nExample: use KEY, look TABLE\n\nType 'help' to view a list of commands.\nType 'locations' to view the places you can go\nType 'inv' to see your inventory\nYou can also type 'use' to put some items in your inventory.");
+	puts("\nType 'exit' to leave the parser");
+	puts("--------------------------------------------------------------------------------");
 }
 
-void mQhelpMenu(void)
+void mQprintInventory(bool inventory[10])
 {
-	puts("--------------------------------------------------------------------------------------------------");
-	puts("Usable Commands: inv, go, look, use, and exit\n");
-	puts("Type 'inv' to see your inventory");
-	puts("Type 'go' followed by a location to move towards it");
-	puts("Type 'look' followed by an object OR location to inspect it.");
-	puts("Type 'use' to use an object from your inventory, OR obtain it and put it in your inventory.");
-	puts("\nType 'exit' to leave the parser.");
-	puts("'Any noun in capital letters - like THIS - can be used with commands (example: use KEY, look TABLE");
-	puts("--------------------------------------------------------------------------------------------------");
+  puts("You have the following items in your inventory: \n");
+  int idx;
+  if(inventory[0] == true)
+  {
+    puts("Tomato\n");
+  }
+
+  if(inventory[1] == true)
+  {
+    puts("Onions\n");
+  }
+
+  if(inventory[2] == true)
+  {
+    puts("Meat\n");
+  }
+
+  if(inventory[3] == true)
+  {
+    puts("Beans\n");
+  }
+
+  if(inventory[4] == true)
+  {
+    puts("Spices\n");
+  }
+
+  if(inventory[5] == true)
+  {
+    puts("Tortillas\n");
+  }
+
+  if(inventory[6] == true)
+  {
+    puts("Beer\n");
+  }
+
+  if(inventory[7] == true)
+  {
+    puts("Can Opener");
+  }
+
 }
 
-void mQcontinue(void)
+void mQprintLocations(int noteCount, const char* const locations[10])
+{
+  int i = 0;
+  puts("You can go to the following locations: \n");
+  if (noteCount < 3)
+  {
+    for (i = 0; i < 3; i++)
+    {
+      printf("%s\n", locations[i]);
+    }
+  }
+
+  else
+  {
+    for (i = 0; i < 6; i++)
+    {
+      printf("%s\n", locations[i]);
+    }
+  }
+
+}
+
+void mQcontinue(void) //mquail
 {
 	printf("(Press 0 and Enter to continue)");
 	fflush(stdout); //do I need this?
 	while(getchar() != '0'){};
 }
 
-int mQuserInput(void)
+void changeboolean(bool *x) //mquail
 {
-	//fflush(stdout);
-	printf(" ");
-	printf("\n------> ");
-	return fgets (uInput, sizeof(uInput), stdin ) != NULL;
+  *x = true;
 }
 
-int mQparser(void)
+int mQuserInput(void) //mquail
+{
+	//fflush(stdout);
+	printf("");
+	printf("\n------> ");
+  return fgets ( uInput, sizeof(uInput), stdin ) != NULL;
+}
+
+int mQparser1(FILE *writePointer, FILE *readPointer, bool *clearParserPointer) //mquail
 {
 	char *word1 = strtok(uInput, " \n");
-	char *word2 = strtok(NULL, " \n");
+	char *word2 = strtok(NULL, "\n");
+
+	char string[20];
+	int noteCounter = 0;
+	rewind(readPointer);
+
+  // check Parser 2 cleared / game end
+  if ( inventory[6]== true )
+  {
+    return 0;
+  }
+
+  if (word1 != NULL)
+  {
+    // command "exit"
+    if (strcmp(word1, "exit") == 0)
+    {
+      return 0;
+    }
+
+    // command "exit1"
+    if (strcmp(word1, "exit1") == 0)
+    {
+      system("clear");            
+      puts("A flash of light cuts across your vision - shielding your eyes with your arm, you squint against the brightness until your eyes adjust.\n\nThe power is back on! Now, you can take a clearer look at your surroundings.\n");
+      puts("--------------------------------------------------------------------------------------------");
+      puts("Not only have more locations opened up to you, but you're now able to add ingredients to your inventory with the 'use' command!\n\nReference 'recipe.txt' in your files, using the clues you collect, to find 5 ingredients.");
+      while (mQuserInput() && mQparser2(writePointer, readPointer, inventory));
+    }
+
+    // command "help"
+    else if (strcmp(word1, "help") == 0)
+    {
+      mQhelpMenu();
+    }
+
+    //command "locations"
+    else if (strcmp(word1, "locations") == 0)
+    {
+      mQprintLocations(noteCounter, locations);
+    }
+
+    // command "inv"
+    else if (strcmp(word1, "inv") == 0)
+    {
+      //put inventory things here
+      puts("The user only has 'updog' in their inventory.\n");
+    }
+
+    // command "look"
+    else if (strcmp(word1, "look") == 0) 
+    {
+      // look stove 
+      if (strcmp(word2, "STOVE") == 0 || strcmp(word2, "stove") == 0)
+      {
+        puts("\nThe oven light is blinking 00:00 in red letters against the darkness, suggesting that the power went out recently, the appliance is broken, or both.");
+      }
+
+      // look fridge
+      else if (strcmp(word2, "FRIDGE") == 0 || strcmp(word2, "fridge") == 0)
+      {
+        puts("\nThe fridge's stainless steel surface is littered with post it notes. You pick one up and angle your cell phone to read it.");
+        puts("\n\'If one more person eats my leftovers without permission, I will *commit a felony*. I mean it!!!!!'");
+        puts("\nFrowning, you turn it over to discover there's more written on the back.");
+        puts("\n'Actually, you know what? Eat them. Go on. I dare you. Eat all of it. I hope you choke on it and die in agony right here on my kitchen floor. You should have never been born!! - J'");
+        puts("\nYou find yourself wondering who the hell this 'J' is, and what made them upset enough to cover their refridgerator with passive aggressive post-its.");
+      }
+
+      // look beer
+      else if (strcmp(word2, "BEER") == 0 || strcmp(word2, "beer") == 0)
+      {
+        puts("There's a post-it note curving around the can. You turn the can to read the note: \n\n'Good luck getting this Natty Lite open - I found it in the basement and I'm pretty sure it's been in there since the 90's. Why would you want to drink this anyway? You might as well drink your own piss. -J");
+      }
+
+      // look leftovers
+      else if (strcmp(word2, "LEFTOVERS") == 0 || strcmp(word2, "leftovers") == 0)
+      {
+        puts("A post-it note sitting on the top reads : 'J's Leftovers - Please, help yourself.' You wonder why this person bothered to personally label their leftovers only to follow up with 'help yourself'...");
+      }
+
+      // look sauce
+      else if (strcmp(word2, "SAUCE") == 0 || strcmp(word2, "sauce") == 0)
+      {
+        puts("Picking up the bottle and turning it in your hand, you notice it's nearly empty; a post-it note on the side hangs by a corner. It reads: 'Stop hitting the sauce'. You turn it over to read: 'Get it?? Because booze is also called 'sauce' but it's also bbq sauce! heh...'-J\n\nAnother post-it note tacked onto the end says: 'Jim, did you seriously just write 'heh' on a post it note? Explaining your own joke?! *Stop* wasting my office supplies!! - H.'\n\nYou find some irony in the fact that 'H' decided to reply with an equally pointless post-it note.");
+      }
+
+      // look freezer
+      else if (strcmp(word2, "FREEZER") == 0 || strcmp(word2, "freezer") == 0)
+      {
+        puts("\nThe freezer's stainless steel surface is littered with post it notes. You pick one up and angle your cell phone to read it.");
+        puts("\n'Jim, I swear to God, if you move the eggs again to put more post-it notes inside, I will buy the dollar store brand of BBQ sauce from now on. Do not try me, young man. - H'");
+        puts("\nAnother post-it note is attached to the end of this one. It reads: ");
+        puts("\n'I do not fear death or dry chicken nuggets, woman! I will *not* be manipulated by the sauce! \nI have an emergency stash of Sweet Baby Rays for just this occasion, anyway. -J'");
+        puts("\nYou are baffled by just how much writing can fit on a post-it note. Your eyes are starting to hurt from squinting at all the tiny writing.\n");
+      }
+
+      // look door
+      else if (strcmp(word2, "DOOR") == 0 || strcmp(word2, "door") == 0)
+      {
+        puts("The door is tightly sealed behind you. In order to open it, you're going to need something to eat first.");
+      }
+
+      // look freezer note (note #1)
+      else if (strcmp(word2, "NOTE#1") == 0 || strcmp(word2, "note#1") == 0 || strcmp(word2, "note1") == 0 || strcmp(word2, "NOTE1") == 0)
+      {
+        puts("You pluck the freezer NOTE from its spot and hold it gingerly between your thumb and forefinger; it must have been here for some time, because it's quite cold. It reads:\n\n'TOMATO - MICROWAVE'\n\nYou're not sure what that means at all, but you place the note in your pocket anyway.");
+        puts("**RECIPE HAS BEEN UPDATED**");
+        fprintf(writePointer, "TOMATO : MICROWAVE @");
+        fflush(writePointer);
+        noteCounter++;
+      }
+
+      // look fridge note (note #2)
+      else if (strcmp(word2, "NOTE#TWO") == 0 || strcmp(word2, "note#two") == 0 || strcmp(word2, "note # two") == 0 || strcmp(word2, "NOTE # TWO") == 0)
+      {
+        puts("Doing your best not to get more sauce underneath your nails, you unfold the saucy note and find it reads: \n\nBEANS - SINK\n\nNot wanting to ruin your pants pocket, you throw the gross note into the nearby trash can, glad to be done away with it.");
+        puts("**RECIPE HAS BEEN UPDATED**");
+        fprintf(writePointer, "BEANS : SINK @");
+        fflush(writePointer);
+      }
+
+      // look stove note (note #3)
+      else if (strcmp(word2, "NOTE3") == 0 || strcmp(word2, "note3") == 0)
+      {
+        puts("Grabbing for the note, you accidentally kick up a little dust; coughing, you wave a hand in front of your face. You brush off the note and read: \n\nONION - CABINETS\n\nYou're not excited to prep onions for a meal, but you're also hungry enough not to care at this point, and press on.");
+        puts("**RECIPE HAS BEEN UPDATED**");
+        fprintf(writePointer, "ONION : CABINET @");
+        fflush(writePointer);
+      }
+
+    }
+
+    // command "use"
+    else if (strcmp(word1, "use") == 0) 
+    {
+      // use stove
+      if (strcmp(word2, "STOVE") == 0 || strcmp(word2, "stove") == 0)
+      {
+        //stove broken / stove fixed condition?
+        puts("\nYou turn a burner knob tentatively, but hear a 'click click click' of a burner failing to light. You smell a faint tinge of gas. Crouching on your heels and sweeping your cell phone light, you can't find anything else wrong with the oven. Looks like you might need matches to get a burner working.\n\nNOTE3, covered in a fine layer of dust and a few hairs, catches the light.");
+      }
+
+      // use fridge
+      else if (strcmp(word2, "FRIDGE") == 0 || strcmp(word2, "fridge") == 0)
+      {
+        puts("\nYou pull gently on the fridge handle, and are greeted with its soft inner glow and a faint whiff of eggs and...old onions?? Ugh.");
+        puts("\nYou spot a container of LEFTOVERS, a bottle of bbq SAUCE, and a can of BEER. There are post-it notes on each.");
+      }
+
+      // use BEER
+      else if (strcmp(word2, "BEER") == 0 || strcmp(word2, "beer") == 0)
+      {
+        puts("You go to pull the metal tab of the BEER to find that it's been removed. Undeterred, you press your thumb into the aluminum divot instead, willing to go the extra mile for the bastion of alcohol.\n\nUnfortunately, the aluminum won't budge. Leveraging the can against your leg, you push in with your thumb with all the force you can muster, but it doesn't yeild.\n\nDefeated, your thumb smarting, you shove the can back into the fridge. You'll have to find a tool later to try to open it.");
+      }
+
+      //use leftovers
+      else if (strcmp(word2, "LEFTOVERS") == 0 || strcmp(word2, "leftovers") == 0)
+      {
+        puts("Holding the container still with one hand, you hook your fingers on the lip of the tupperware and pull eagerly. The lid pries open easily to reveal the contents inside.\n\nWhatever is inside is concealed by a piece of paper towel. Lifting it to get a better look, you find it's suprisingly heavy, and you struggle to steady it. Peeling away the paper towel layer and poking the contents underneath, you find that you're looking at a brick.\n\nThat's...that's definitely a *brick* in a tupperware container.\n\nYou're now absolutely convinced this 'J' person is a definitely psycho for putting a brick in the fridge to bait anyone taking their leftovers. Who does that!?");
+      }
+
+      // use sauce
+      else if (strcmp(word2, "SAUCE") == 0 || strcmp(word2, "sauce") == 0)
+      {
+        puts("You pick up the bottle of bbq SAUCE. You've decided to 'use' it, but what does that mean exactly? Are you just gonna squeeze this thing? Right here??\n\nNot one to question your own motives, you twist off the cap, aim the bottle at the floor, and squeeze with reckless abandon.\n\nYour chaotic choice is rewarded, however, when something not-liquid slips out of the bottle partway, coated in a thick layer of sauce. Undaunted, and with a few more squeezes, you manage to get it out and into the palm of your hand.\n\nYou're now covered in the scent of Sweet Baby Ray's bbq SAUCE, but don't seem to mind as you prod at the item in your hand, letters beneath the smudge of sauce reading NOTE#TWO. (To read it, type 'use note#two') ");
+      }
+
+      // use freezer
+      else if (strcmp(word2, "FREEZER") == 0 || strcmp(word2, "freezer") == 0)
+      {
+        puts("\nThe user pulls swiftly against the hermetic seal of the freezer, and is met with a small puff of chilled air.");
+        puts("\n...followed closely by a much stronger, more decidedly *pungent* whiff of egg.");
+        puts("\nBlinking rapidly to ensure they aren't seeing things, the user realizes the entire fridge is full of decorated frozen easter eggs. A small post-it note on eye-level with the user reads: 'Little Jimmy's Easter Eggs, 1987. Do ***not*** throw away!!!'");
+        puts("\nHorrified, the user sincerely wishes they had found a dead body instead.");
+        puts("\nThere is an additional post it labelled NOTE#1 wedged in between the freezer wall and the awful, awful Egg Pile.");
+      }
+
+      // use freezer note (note #1)
+      else if (strcmp(word2, "NOTE#1") == 0 || strcmp(word2, "note#1") == 0 || strcmp(word2, "note1") == 0 || strcmp(word2, "NOTE1") == 0)
+      {
+        puts("You pluck the freezer NOTE from its spot and hold it gingerly between your thumb and forefinger; it must have been here for some time, because it's quite cold. It reads:\n\n'TOMATO - MICROWAVE'\n\nYou're not sure what that means at all, but you place the note in your pocket anyway.");
+        puts("**RECIPE HAS BEEN UPDATED**");
+        fprintf(writePointer, "TOMATO : MICROWAVE @");
+        fflush(writePointer);
+        noteCounter++;
+      }
+
+      // use fridge note (note #2)
+      else if (strcmp(word2, "NOTE#TWO") == 0 || strcmp(word2, "note#two") == 0 || strcmp(word2, "note # two") == 0 || strcmp(word2, "NOTE # TWO") == 0)
+      {
+        puts("Doing your best not to get more sauce underneath your nails, you unfold the saucy note and find it reads: \n\nBEANS - SINK\n\nNot wanting to ruin your pants pocket, you throw the gross note into the nearby trash can, glad to be done away with it.");
+        puts("**RECIPE HAS BEEN UPDATED**");
+        fprintf(writePointer, "BEANS : SINK @");
+        fflush(writePointer);
+      }
+
+      // use stove note (note #3)
+      else if (strcmp(word2, "NOTE3") == 0 || strcmp(word2, "note3") == 0)
+      {
+        puts("Grabbing for the note, you accidentally kick up a little dust; coughing, you wave a hand in front of your face. You brush off the note and read: \n\nONION - CABINETS\n\nYou're not excited to prep onions for a meal, but you're also hungry enough not to care at this point, and press on.");
+        puts("**RECIPE HAS BEEN UPDATED**");
+        fprintf(writePointer, "ONION : CABINET @");
+        fflush(writePointer);
+      }
+
+      // funny joke
+      else if (strcmp(word2, "updog") == 0)
+      {
+        //check if inventory is empty? implement later if there's time
+        puts("\nNothin, what's up with you, dude?\n");
+        puts(" ( ͡° ͜ʖ ͡°) ");
+      }
+
+    }
+    
+    // dumb parser
+    else
+    {
+      printf("\nI have no idea how to %s, but knock yourself out.\n", word1);
+    }
+
+    //if the readPointer reads 3 lines in recipe.txt, execute
+    while ( fgets (string, 20, readPointer) != NULL )
+    {
+      noteCounter++;
+      if(noteCounter > 3)
+      {
+        puts("------------------------------------------------------------------------");
+        puts("\nYou've found 3 notes! Check recipe.txt to see if you have 3 entries.");
+        puts("If you don't, something probably went wrong. But don't worry : it's a feature, not a bug.");
+        puts("\nYou'll be able to solve the next set of puzzles if you've found 3 notes so far.");
+        puts("If you'd like to advance, type 'exit1'. If not, feel free to continue using this parser until you find all three.");
+        break;
+      }
+    }
+  
+    //user input validation - null strings
+    if (word2 == NULL)
+    {
+      word2 = "(empty)";
+    }
+    if (word1 == NULL)
+    {
+      word1 = "(empty)";
+    }
+
+  }
+	return 1;
+}
+
+// parser 2
+int mQparser2(FILE *writePointer, FILE *readPointer, bool inventory[10])
+{
+  char *word1 = strtok(uInput, " \n");
+	char *word2 = strtok(NULL, "\n");
+  char string[20];
+  char userI[20];
+  int noteCounter = 3;
+  int average = 0;
+  rewind(readPointer);
+  int extraCredit, result = 0;
+  double score = 0.0;
+
+
+  //user input validation - null strings
+  if (word2 == NULL)
+  {
+    word2 = "(empty)";
+  }
+  
+  if (word1 == NULL)
+  {
+    word1 = "(empty)";
+  }
 
 	if (word1 != NULL)
 	{
-		// command "exit"
+    // command "exit"
 		if (strcmp(word1, "exit") == 0)
 		{
-			puts("Insert clever start-over text here. Maybe a little 'are you sure you want to quit?' or whatever");
 			return 0;
 		}
 
@@ -4149,117 +4485,458 @@ int mQparser(void)
 			mQhelpMenu();
 		}
 
+    //command "locations"
+    else if (strcmp(word1, "locations") == 0)
+    {
+      mQprintLocations(noteCounter, locations);
+    }
+
 		// command "inv"
 		else if (strcmp(word1, "inv") == 0)
 		{
-			puts("The user only has 'updog' in their inventory.\n");
+      //put inventory things here
+			mQprintInventory(inventory);
+      puts("------------------------------------------------------------------------");
 		}
 
 		// command "look"
 		else if (strcmp(word1, "look") == 0) 
 		{
-			// look stove 
-			if (strcmp(word2, "STOVE") == 0 || strcmp(word2, "stove") == 0)
-			{
-				puts("\nThe user looks at the stove. The user loves a good stove. This one has electric burners though, so it's not a good stove. The user frowns and wishes they picked another student's door.");
-			}
+      // LOCATIONS
+      
+      //look cabinets
+      if (strcmp(word2, "cabinets") == 0 || strcmp(word2, "CABINETS") == 0)
+      {
+        puts("Sweet jesus, finally - finally!. The place were snacks are kept! You're absolutely convinced there's something edible in there, but knowing these two knobs J and H, there's also a high possibility you'll find something bizarre and unpleasant, too.\n\n");
+      }
 
-			// look fridge
-			else if (strcmp(word2, "FRIDGE") == 0 || strcmp(word2, "fridge") == 0)
-			{
-				puts("\nThe fridge's stainless steel surface is littered with post it notes. You pick one up and angle your cell phone to read it.");
-				puts("\n\n'If one more person eats my leftovers without permission, I will COMMMIT A FELONY. I MEAN IT!!!!!'");
-				puts("\nFrowning, you turn it over to discover there's more written on the back.");
-				puts("\n'Actually, you know what? YOU KNOW WHAT?! Eat them. Go on. I dare you. Eat all of it. I hope you choke on a piece and die in agony right here on my KITCHEN FLOOR. YOU SHOULD HAVE NEVER BEEN BORN. - J'");
-				puts("\nYou find yourself wondering who the hell this 'J' is, and what made them upset enough to cover their refridgerator with passive aggressive post-its.");
-			}
+      //look sink
+      else if (strcmp(word2, "sink") == 0 || strcmp(word2, "SINK") == 0)
+      {
+        puts("A post-it hanging off the lip of the sink catches your eye - the letters are big enough to read from afar:\n\nTAKEOUT TRASH\n\nYou step a bit closer to read the post-it note attached below it: 'Helen, for christ's sake, We are out of trash bags, and I'm not going near the neighbor's fence again! You know their goat *hates* me!! -J\n\nYou wonder who's weirder : the 2 post-it goofs living in this house, or the neighbor who has an (allegedly) rabid goat.");
+      }
 
-			// look freezer
-			else if (strcmp(word2, "FREEZER") == 0 || strcmp(word2, "freezer") == 0)
-			{
-				puts("\nThe freezer's stainless steel surface is littered with post it notes. You pick one up and angle your cell phone to read it.");
-				puts("\n'Jim, I swear to God, if you move the eggs again to put more post-it notes inside, I will buy the dollar store brand of BBQ sauce from now on. Do not try me, young man. - H'");
-				puts("\nAnother post-it note is attached to the end of this one. It reads: ");
-				puts("\n'I DO NOT FEAR DEATH OR DRY CHICKEN NUGGETS! I WILL NOT BE MANIPULATED BY THE SAUCE! \nI have an emergency stash of Sweet Baby Rays for just this occasion, anyway. -J'");
-				puts("\nYou are baffled by just how much writing can fit on a post-it note. Your eyes are starting to hurt from squinting at all the tiny writing.\n");
-			}
-		}
+      //look stove
+      else if (strcmp(word2, "stove") == 0 || strcmp(word2, "STOVE") == 0)
+      {
+        puts("Perhaps the burners will work, now that the lights are on?");
+      }
 
-		// command "go" - CONSIDER REMOVAL
-		else if (strcmp(word1, "go") == 0) 
-		{
-			// go stove
-			if (strcmp(word2, "STOVE") == 0 || strcmp(word2, "stove") == 0)
-			{
-				puts("\nThe user goes to the stove. Good job. You're at the stove. You did it. Wonderful.");
-			}
+      //look fridge
+      else if (strcmp(word2, "fridge") == 0 || strcmp(word2, "FRIDGE") == 0)
+      {
+        puts("\nYou look longingly at the fridge. The distance...it's...still too much. You must get closer...\n\nYou press your cheek against the fridge, straining to wrap your arms around as far as they can reach.\n\nThe fridge does not hug you back, but you somehow feel a brief reprieve from your loneliness, nonetheless.");
+      }
 
-			// go fridge
-			else if (strcmp(word2, "FRIDGE") == 0 || strcmp(word2, "fridge") == 0)
-			{
-				puts("\nThe user approaches the fridge. The distance...it's still too much. You must get closer...");
-				puts("\nThe user presses their cheek against the fridge, wrapping their arms around as far as they can reach.");
-				puts("\nThe fridge does not hug you back, but you somehow feel a brief reprieve from your loneliness, nonetheless.");
-			}
+      //look freezer
+      else if (strcmp(word2, "freezer") == 0 || strcmp(word2, "FREEZER") == 0)
+      {
+        puts("\nYou look over the freezer. You think of a few cold-related puns, but you quickly banish them from your mind. Puns are the lowest form of comedy, of course, and you'd be a shameless wreck before you'd ever entertain one, even in your head.\n\n\n...If thought to yourself just now, 'Now, that's just cold...', you, in fact, did not. You didn't think anything at all. You don't think. Your head is empty.\n\nGo shove your idiot head full of idiot puns in the freezer for idiots.");
+      }
 
-			// go freezer
-			else if (strcmp(word2, "FREEZER") == 0 || strcmp(word2, "freezer") == 0)
-			{
-				puts("\nYou approach the freezer.");
-				puts("\nYou think of a few cold-related puns, but you quickly banish them from your mind. Puns are the lowest form of comedy, of course, and you'd be a shameless wreck before you'd ever entertain one, even in your head.");
-				puts("\nIf thought to yourself just now, 'Now, that's just cold...', you, in fact, did not. You didn't think anything at all. You don't think. Your head is empty. Go shove your stupid head full of puns in the freezer.");
-			}
-		}
+      //look microwave
+      else if (strcmp(word2, "microwave") == 0 || strcmp(word2, "MICROWAVE") == 0)
+      {
+        puts("The microwave has seen better days, but anything that will heat up food for you right now is an appliance from heaven as far as you're concerned.");
+      }
 
-		// command "use"
-		else if (strcmp(word1, "use") == 0) 
-		{
-			// use stove
-			if (strcmp(word2, "STOVE") == 0 || strcmp(word2, "stove") == 0)
-			{
-				puts("\nThe user uses the stove. The stove says 'get the hell out of my kitchen.' The user does not, in fact, get the hell out of the kitchen.");
-			}
+      //look note # 4 : sink note
+      else if (strcmp(word2, "noteFORE") == 0 || strcmp(word2, "notefore") == 0)
+      { 
+        puts("The note is soaked with water, suds, and bits of mushy food, but miraculously, the blurred writing is still somewhat legible.\nIt reads:\n\n'SPICES - STOVE'\n\nYou drop the drenched post-it into the sink disposal, and run it for good measure. You wash your hands several times, but the icky feeling lingers, and you're not sure it'll go away anytime soon.\n\n");
+        puts("**RECIPE HAS BEEN UPDATED**");
+        fprintf(writePointer, "SPICES - STOVE @");
+        fflush(writePointer);
+        noteCounter++;
+      }
 
-			// use fridge
-			else if (strcmp(word2, "FRIDGE") == 0 || strcmp(word2, "fridge") == 0)
-			{
-				puts("\nYou pull gently on the fridge handle, and are greeted with its soft inner glow and a faint whiff of eggs and...old onions? Ugh.");
-				puts("\nYou see a small bowl of LEFTOVERS, a bottle of Sweet Baby Ray's bbq SAUCE, and a can of Natural Light BEER. There are post-it notes on each.");
-			}
+      //look note # 5 : cabinets note
+      else if (strcmp(word2, "n5") == 0 || strcmp(word2, "N5") == 0)
+      { 
+        puts("The note reads:\n\n'MEAT - FREEZER'\n\nYou came up empty in the cupboards, but at least you gained another portion of this recipe.");
+        puts("**RECIPE HAS BEEN UPDATED**");
+        fprintf(writePointer, "MEAT - FREEZER @");
+        fflush(writePointer);
+        noteCounter++; 
+      }
 
-			// use freezer
-			else if (strcmp(word2, "FREEZER") == 0 || strcmp(word2, "freezer") == 0)
-			{
-				puts("\nThe user pulls swiftly against the hermetic seal of the freezer, and is met with a small puff of chilled air.");
-				puts("\n...followed closely by a much stronger, more decidedly *pungent* whiff of egg.");
-				puts("\nBlinking rapidly to ensure they aren't seeing things, the user realizes the entire fridge is full of decorated frozen easter eggs. A small post-it note on eye-level with the user reads: 'Little Jimmy's Easter Eggs, 1987. DO ***NOT*** THROW AWAY!!!'");
-				puts("\nHorrified, the user sincerely wishes they had found a dead body instead.");
-				puts("\nThere is an additional NOTE wedged in between the freezer wall and the awful, awful Egg Pile.");
-			}
+    }
 
-			// funny joke
-			else if (strcmp(word2, "updog") == 0)
-			{
-				puts("\nNothin, what's up with you, man?\n");
-				puts(" ( ͡° ͜ʖ ͡°) ");
-				puts("...");
-				puts("\nThis joke would have been better if I had figured out how to open a webpage to www.updog.com like I had originally planned.");
-			}
+    // command "use"
+    else if (strcmp(word1, "use") == 0)
+    {
+      // LOCATIONS
+      
+      //use cabinets
+      if (strcmp(word2, "cabinets") == 0 || strcmp(word2, "CABINETS") == 0)
+      {
+        puts("Salivating, you nudge open the cupbaoard doors, praying that you find something. Your body slowly deflates from hope to quiet despair when you're met with the rustiest CANOPENER you've ever seen, and - of course - a post it note.\n\nSighing loudly, you pluck it to read the contents : 'In case of BeerMergencies'\n\nYou're not sure you know what a BeerMergency is, but if it's anything like your current crisis, you're probably pretty close to one right now.\n\nExpecting something snarky, you prod at the post-it note to see that it's actually another portion of the recipe, N5.");
+      }
 
-		}
-		
-		// dumb parser
-		else
-		{
-			printf("\nI have no idea how to %s, but knock yourself out.", word1);
-		}
+      //use sink
+      else if (strcmp(word2, "sink") == 0 || strcmp(word2, "SINK") == 0)
+      {
+        puts("Before you can even approach, you can tell by looking that the stench is going to be awful. The nauseating wave that hits you as you step closer to the sink confirms your suspicions.\n\nYou really REALLY don't want to put your hands anywhere near the filthy pile (especially if it does any favors for this 'J' idiot), but notice a sponge and some detergent on the counter. Perhaps if the DISHES were WASHED, you could at least get yourself a glass of water or something?");
+      }
 
-	}
+      //use stove
+      else if (strcmp(word2, "stove") == 0 || strcmp(word2, "STOVE") == 0)
+      {
+        //if items in array, use stove to complete win condition?
+        puts("You try the burner knob again, but get a sad repetitive 'click click click', signaling the stove is still not working.");
+      }
 
-	return 1;
+      //use fridge
+      else if (strcmp(word2, "fridge") == 0 || strcmp(word2, "FRIDGE") == 0)
+      {
+        puts("You open the fridge to spot a lone BEER on the middle tray. You won't be able to get it open by yourself.");
+      }
+
+      //use freezer
+      else if (strcmp(word2, "freezer") == 0 || strcmp(word2, "FREEZER") == 0)
+      {
+        puts("You carefully tug on the handle of the freezer, but nothing you can do prepares you from the queasy wave of stench from the Awful Egg Pile.\n\nIt's subtle enough to stay contained in the freezer and fridge, but not so subtle that your eyes don't water every time you encounter it. Good Lord that's bad.");
+      }
+
+      // use microwave
+      else if (strcmp(word2, "microwave") == 0 || strcmp(word2, "MICROWAVE") == 0)
+      {
+        puts("You prod at the buttons on the microwave, but nothing happens. Angling your body to look behind it, you find that someone has snipped the cord clean in half.\nThe worst part is they just left the cord plugged into the wall, so it still *looks* like it's plugged in.");
+      }
+
+      //use note # 4 : sink note
+      else if (strcmp(word2, "NOTEFORE") == 0 || strcmp(word2, "notefore") == 0)
+      { 
+        puts("The note is soaked with water, suds, and bits of mushy food, but miraculously, the blurred writing is still somewhat legible.\nIt reads:\n\n'Spices - Stove'\n\nYou drop the drenched post-it into the sink disposal, and run it for good measure. You wash your hands several times, but the icky feeling lingers, and you're not sure it'll go away anytime soon.\n\n");
+        puts("**RECIPE HAS BEEN UPDATED**");
+        fprintf(writePointer, "SPICES - STOVE @");
+        fflush(writePointer);
+        noteCounter++;
+      }
+
+      //use note # 5 : cabinets note
+      else if (strcmp(word2, "n5") == 0 || strcmp(word2, "N5") == 0)
+      { 
+        puts("The note reads:\n\n'Meat - Freezer'\n\nYou came up empty in the cupboards, but at least you gained another portion of this recipe.");
+        puts("**RECIPE HAS BEEN UPDATED**");
+        fprintf(writePointer, "MEAT - FREEZER @");
+        fflush(writePointer);
+        noteCounter++;      
+      }
+
+      //use Can Opener
+      else if (strcmp(word2, "canopener") == 0 || strcmp(word2, "CANOPENER") == 0)
+      {
+        //was the can opener already used?
+        if (inventory[8] == false)
+        {
+          puts("If you can't find a good use for this, it'll at least make a terrible souvenir for the time you *didn't* go on an adventure, and picked the worst door in this entire game.\n\n");
+          inventory[7] = true;
+          puts("***CAN OPENER - added to inventory***");   
+          puts("\n\nNOTE: To use the can opener, type CANOPENER followed by the item you want to use it on. If nothing happens...it simply wasn't meant to be.");
+        }  
+
+        else
+        {
+          puts("The can opener was absolutely obliterated in your crazy attempt to skewer and shotgun a beer.\n\nIt had a good life, and died in glory.");
+        } 
+      }
+
+      //use tortillas (hidden item)
+      else if (strcmp(word2, "tortillas") == 0 || strcmp(word2, "TORTILLAS") == 0)
+      {
+        puts("You consider cracking open the tortillas and eating them here and now, but know that it wouldn't do the trick to cure your adventurer's appetite by itself.\n\nYou decide to put it into your inventory, and wait until you assemble the full recipe to eat it.\n\n");
+        inventory[5] = true;
+        puts("***TORTILLAS - added to inventory***");
+        extraCredit++;         
+      }
+
+    }
+
+    // wash
+    else if (strcmp(word1, "wash") == 0 || strcmp(word1, "WASH") == 0)
+    {
+      // wash dishes
+      if (strcmp(word2, "dishes") == 0 || strcmp(word2, "DISHES") == 0)
+      {
+        puts("Rolling up your sleeves and grabbing the moist little blob of sponge from the faucet, you get to work on the mound of dishes in the sink. Hot water on blast, you squeeze a healthy dollop of dish detergent onto the dishes to start; it smells like old oranges on vacation in Florida.\n\nMinutes pass; after dealing with the pungent of whatever food was left on the plates, you sincerely wish you'd looked for gloves first.\n\nYou go to wash the last cup left in the sink when you notice there's a familiar little crumpled note in it: NOTEFORE");
+      }
+    }
+
+    // Takeout
+    else if (strcmp(word1, "takeout") == 0 || strcmp(word1, "TAKEOUT") == 0)
+    {
+      // take out trash
+      if (strcmp(word2, "trash") == 0 || strcmp(word2, "TRASH") == 0)
+      {
+        puts("Out of the goodness of your heart - and, perhaps, the sensitivity of your nose - you tug on the edges of the wastebin to pull the trashbag around the stinking contents. Before you tie the top knot, however, you notice a perfectly good package of TORTILLAS sitting on top; you check the expiration date, and in a stroke of luck, they're fresh!.\n\nSetting the tortillas aside, you finish tying the trash and toss it into a corner.\n\nYou haven't quite 'taken it out', but at least you've covered up the smell for now.");
+      }
+    }
+
+    // Canopener
+    else if (strcmp(word1, "canopener") == 0 || strcmp(word1, "CANOPENER") == 0)
+    {
+      if (inventory[7] == true)
+      {
+        if (strcmp(word2, "beer") == 0 || strcmp(word2, "BEER") == 0)
+        {
+          puts("With all the grace and dexterity of a starving animal, you harpoon the side of the beer can with the can opener and steady the can against your mouth, as the most foul stream of alcohol you've ever tasted slams down your gullet.\n\nIt's still beer, though, so you shotgun it down expertly, determined to put the calories and buzz to good use.\n\nExhaling triumphantly, you indulge the urge to crush the can against your adventurous skull and lob it in an upwards arc towards the trash can:\n\n");
+          int r = rand() % 2;
+          //shot misses
+          
+          if (r == 0)
+          {
+            puts("The crushed can hits the wall and unceremoniously bounces off the lip of the trash can. There were no stakes and no one watching, but you feel disappointed in yourself regardless. This kills your buzz off before it could even take hold, and the shotgunned beer now sits souring in your stomach, offering no solace from your hunger.\n");
+            inventory[7] = false;
+            inventory[8] = true;
+          }
+          //shot makes it
+          else if(r == 1)
+          {
+            puts("As if in slow motion, the can travels in a perfect parabola into the trash can, landing gently into the pile as if being carried by angels.\n\nThere were no stakes and no one watching, but you can hear ecstatic cheers ringing through your ears.\n\nThat, or the buzz is already starting to take effect from all that shotgunned beer. Either way, you're definitely not complaining about the boost in your mood.\n\nYou get the feeling that this event has affected more than just your self-esteem.");
+            inventory[7] = false;
+            inventory[8] = true;
+            extraCredit++;
+          }
+
+          else
+          {
+            puts("Something broke in the RNG machine ¯|_(ツ)_/¯ Try again?");
+          }
+        }
+      }
+    }
+
+    // TOMATO - MICROWAVE
+    else if (strcmp(word1, "tomato") == 0 || strcmp(word1, "TOMATO") == 0)
+    {
+      if (strcmp(word2, "microwave") == 0 || strcmp(word2, "MICROWAVE") == 0)
+      {
+        puts("Tomato was added to your inventory!");
+        inventory[0] = true;
+      }
+    }
+
+    // BEANS - SINK
+    else if (strcmp(word1, "beans") == 0 || strcmp(word1, "BEANS") == 0)
+    {
+      if (strcmp(word2, "sink") == 0 || strcmp(word2, "SINK") == 0)
+      {
+        puts("Beans were added to your inventory! They got jalapenos in em. mmmmm");
+        inventory[3] = true;        
+      }
+    }
+
+    // ONION - CABINETS
+    else if (strcmp(word1, "onion") == 0 || strcmp(word1, "ONION") == 0)
+    {
+      if (strcmp(word2, "cabinets") == 0 || strcmp(word2, "CABINETS") == 0)
+      {
+        puts("Onions were added to your inventory!");
+        inventory[1] = true;       
+      }
+    }
+
+    // SPICES - STOVE
+    else if (strcmp(word1, "spices") == 0 || strcmp(word1, "SPICES") == 0)
+    {
+      if (strcmp(word2, "stove") == 0 || strcmp(word2, "STOVE") == 0)
+      {
+        puts("Spices were added to your inventory! What kind?? The best kind!! All your favorites are here!");
+        inventory[4] = true;        
+      }
+    }
+
+    // MEAT - FREEZER
+    else if (strcmp(word1, "meat") == 0 || strcmp(word1, "MEAT") == 0)
+    {
+      if (strcmp(word2, "freezer") == 0 || strcmp(word2, "FREEZER") == 0)
+      {
+        puts("Meat was added to your inventory - unless you're a vegetarian/vegan, then it's plant-based protein, I promise.");
+        inventory[2] = true;        
+      }
+    }
+
+    // Final Challenge
+    else if (strcmp(word1, "IM") == 0 || strcmp(word1, "im") == 0)
+    {
+      if (strcmp(word2, "READY") == 0 || strcmp(word2, "ready") == 0)
+      {
+        //conditions met - check 5 recipe items are there
+        if(inventory[0] && inventory[1] && inventory[2] && inventory[3] && inventory[4])
+        {
+          system("clear");
+          puts("It's time. You are more than eager to eat this thing, even if the recipe admittedly doesn't look like a very good one.\n\nYou're about to enter an RNG cooking event, so here's a chance at some extra points:\n\n");
+          printf("QUESTION 1: What is 'J's actual name?\n");
+          scanf(" %s", userI);
+          if (strcmp(userI, "Jim") || strcmp(userI, "Him") == 0 || strcmp(userI, "Jim") == 0)
+          {
+            puts("CORRECT\n\nThe fact that you remembered means that you read nearly every post-it note, or you have an amazing memory. 1 point added!");
+            extraCredit++;
+          }
+          else
+          {
+            puts("INCORRECT\n\nHis name is 'Jim', but that's ok. I wouldn't want to read any more of his post-it notes than I have to, either.");
+          }
+
+          printf("QUESTION 2: What is 'H's actual name?\n");
+          scanf(" %s", userI);
+          if (strcmp(userI, "HELEN") == 0 || strcmp(userI, "Helen") == 0 || strcmp(userI, "helen") == 0)
+          {
+            puts("CORRECT\n\nThat was on *1* post-it in the entire game! Excellent work! You're a true sleuther, aren't ya? 3 points added!");
+            extraCredit = extraCredit + 3;
+          }
+          else
+          {
+            puts("INCORRECT - This one was a toughie. Her name is 'Helen', and it was only on one post-it in the entire game. No worries.");
+          }
+
+          printf("QUESTION 3: What's the FIRST NAME of the student who wrote this door's code?\n");
+          scanf(" %s", userI);
+          if (strcmp(userI, "MEREDITH") == 0 || strcmp(userI, "meredith") == 0 || strcmp(userI, "Meredith") == 0)
+          {
+            puts("CORRECT\n\nYou cheated and looked this up, huh? ( ͡° ͜ʖ ͡°) That's ok...you won't forget my name again, right? (≖‿≖)\n\nUnless you're my significant other playtesting this game. Hey Barry. Can you take out the trash please? Thanks <3");
+            extraCredit++;
+          }
+          else
+          {
+            puts("INCORRECT - Did you mispell my name? That's alright, you won't mispell it again, will you? (≖‿≖)\n\nIt's M-E-R-E-D-I, not M-E-R-I-D-E. And my last name is a BIRD, dude! Cmon.");
+          }
+
+          mQcontinue();
+          system("clear");
+          puts("----------------------------------------------");
+          puts("In a fit of Deus Ex Machina, you find some matches in your pocket. You can light the burners on the stove now!\n\nAlright, no more fooling around. Time to cook!\nThe RNG will add a number from 1-10 of your ingredients, then take the average. After that, it will add your extra credit points to your total score.");
+          puts("----------------------------------------------");
+          result = rand() % 10;
+          score  = score + result;
+          printf("You take %d tomato(s) and put them in a bowl with oil.", result);
+          result = rand() % 10;
+          score  = score + result;
+          printf("Next, you dice %d onion(s), strong and tasty. You throw the mixture into a pot and boil on the stove.", result);
+          //printf("Score so far: %lf", score);
+          result = rand() % 10;
+          score  = score + result;
+          printf("Whatever kind of meat this is, it doesn't matter - you add %d to the mixture.", result);
+          result = rand() % 10;
+          score  = score + result;
+          printf("The beans have jalapeno peppers in 'em - mmmm - very necessary for this recipe. You add %d to the pot", result);
+          result = rand() % 10;
+          score  = score + result;
+          printf("Lastly, can't forget the spice!! It's the heart of the art of the cooking, after all. You add %d to the mixture and stir vigorously.", result);
+          if (inventory[5] == true)
+          {
+            puts("\n\nYou warm the tortillas to a crisp on the burner next to the pot, then transfer to a clean plate you procured from the dish rack. They sound really nice when they break.");
+          }
+
+          if (inventory[8] == true)
+          {
+            puts("You wish you had one, or two, or three, or four, or seven beers to wash this down with, but you're realizing now it's probably a godsend you got to shotgun 1 beer, given your circumstances.");
+          }
+
+          puts("--------------------------------------------------------------------");
+          printf("Your RNG score : %lf\n", score);
+          average = (double)score / 5;
+          printf("Your RNG score average : %d\n\n", average);
+          average = average + extraCredit;
+          printf("FINAL SCORE : %d\n\n", average);
+          // endings (not based on score, but based on extra credit ( ͡° ͜ʖ ͡°) )
+          if (extraCredit <= 2)
+          {
+            puts("--------------------------------------------------------------------");
+            puts("You eat the chili con carne with reckless abandon, not even bothering to fish a utensil out of the clean dishes. Your appetite is quickly sated, but you keep eating, feeling a keen sense of spite replacing the space your hunger occupied.\n\nAs you scoop the remnants of the Chili Con Carne out of the pan with your hands, you feel a stomachache set in. This is not a hindrance to your adventurous spirit, however, as you're absolutely determined to pick a better door this time.\n\nYou always hated cooking anyway.\n\n\nLOST IN THE SAUCE : ENDING 1");
+            mQcontinue();
+            inventory[6] = true;
+            return 0;
+          }
+
+          else if (extraCredit == 3)
+          {
+            puts("--------------------------------------------------------------------");
+            puts("You fish a spoon out of the clean dishes pile, and get to work on the Chili Con Carne fresh out of the pan. It's not exactly what you expected, but given these crazy circumstances, you'd say you ended up cooking a pretty decent meal for yourself. Your mom would be so proud.\nWell, she might not be proud that you chose a really lousy door for your adventure, but at least you can get back to it after this.\nYou avoid a stomachache, but feel as if your recipe was lacking somehow...couldn't be the spices, you definitely didn't forget those.\n\nMaybe you'll add more salt next time, you think, as you push through the door you came through with a renewed vigor and 1 less appetite.");
+            puts("\n\n\nLOST IN THE SAUCE : ENDING 2");
+            mQcontinue();
+            inventory[6] = true;
+            return 0;
+          }
+
+          else if (extraCredit >= 4)
+          {
+            puts("--------------------------------------------------------------------");
+            puts("Your palette having been refined by this stressful experience, you take a moment to set the mood. You tuck a napkin into your shirt collar, and procure a bowl, spoon, and tablemat from the clean dish rack. You light the solitary candle on the nearby table with your Deus-Ex-Machina machtes.\n\nNo need to rush this exquisite experience. You're a post-it reading, clue-sleuthing machine in your prime, and so is this Chili Con Carne you're about to eat - and you know you deserve it. Using your crisp tortillas and spoon in tandem, you relish eat bite, taking moments here and there to kiss your fingers like an Italian chef to your cooking expertise.\n\nYou may not be able to get an adventurer buff from this food, but in your heart, you get a buff to your intelligence and charisma.\nThat's right. You're the greatest adventurer there ever was. You can conquer any door, now. You'd conquer ALL of them if you wanted to.\n\nHaving conquered this Chili Con Carne, you're certainly ready for it. Striding through the exit with perfect poise, you're ready to tackle the next door.");
+            puts("\n\n\nLOST IN THE SAUCE : ENDING 3");
+            mQcontinue();
+            inventory[6] = true;
+            return 0;           
+          }
 
 
-}
+        } //end game clear
+
+        //conditions not met
+        else
+        {
+          puts("No, you're not. {ಠ ʖ ಠ}\n\nGo find the 5 ingredients first!");
+        }
+      }
+    }
+
+    // debug - canopener 'true'
+    else if (strcmp(word1, "debug") == 0)
+    {
+      inventory[9] = true;
+      puts("inventory[9] has been set to true.");
+    }
+
+    //debug1 - fill inventory
+    else if (strcmp(word1, "debug1") == 0)
+    {
+      int i;
+      for(i = 0; i<5; i++)
+      {
+        inventory[i] = true;
+      }
+      puts("All items added to inventory.");
+    }
+
+    // dumb parser
+    else
+    {
+      printf("\nI have no idea how to %s, but knock yourself out.\n", word1);
+    }
+
+    //if the readPointer reads 5 lines in recipe.txt, execute
+    if(inventory[0] && inventory[1] && inventory[2] && inventory[3] && inventory[4])
+    {
+      inventory[9] = true;
+    }
+
+
+    if (inventory[9] == true)
+    {
+      rewind(writePointer);
+      fprintf(writePointer, "CHILI CON CARNE\n\nType 'IM READY' when you're ready to cook\n\n");
+      fflush(writePointer);
+      puts("You found all 5 notes, completing the recipe!! Great job!\n\nIf you haven't already - start collecting your ingredients.\nOnce you've collected all 5 ingredients, type:\n\nIM READY\n\nto complete your final challenge!");
+      inventory[9] = false;
+    }
+
+    //user input validation - null strings
+    if (word2 == NULL)
+    {
+      word2 = "(empty)";
+    }
+    
+    if (word1 == NULL)
+    {
+      word1 = "(empty)";
+    }
+
+  }
+
+  return 1;
+
+} //mquail
 
 // Talise
 void printMessage(int msg[])
