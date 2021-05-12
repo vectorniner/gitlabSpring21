@@ -98,12 +98,16 @@ void flurbos(void);//Berenis Castruita
 void planets(void);//Berenis Castruita
 void goodBye(void);//Berenis Castruita
 
-
+int total();//Elizabeth Flores prototype function
+int prompt(void);
+void modArray(int arrInt[], int size);
+void printArray(int arrInt[], int size);
+void eflores(char strings[]);
 
 
 int main(int argc, char *argv[])
 {
-	int a,x,y,z,i,h,g,k,choice=0;
+	int a,x,y,z,i,h,g,k,request,choice=0;
 	char name[256];
 	int boxNum=0;
 	int sum = 0;
@@ -1959,52 +1963,99 @@ int main(int argc, char *argv[])
 				}
 				break;
 			}
+			//Elizabeth Flores
 			case 38:
 			{
-				while(choice != 99)
+				printf( "%s","You have opened the door to school education \n"
+                       			 " Select an option below \n"
+                        		" 1. Calculate your GPA \n"
+          		        	" 2. Take a chance at rolling an 11 sided dices and get random number generations \n"
+          		        	" 3. Create an output file with the data you are entering \n"
+          		        	" 4. Enter a string to determine if you have entered lower cases \n"
+          		        	" 5 - To Quit\nOption #:  " );
+          		scanf("%d",&request);
+				while(request != 5)
 				{
-					int grade;
-					int aCount = 0;
-					int bCount = 0;
-					int cCount = 0;
-					while((grade = getchar()) != 'q')
+					int z,y,i,acct,a;
+					int arrInt[11]={0};
+					int x = 0;
+					a=0;
+                    double balance;
+                    char name[30];
+                    char strings[20];
+					switch (request)
 					{
-						switch(grade)
+                        //GPA calculate an average
+						case 1:
+						printf("This section will allow you to calculate your GPA!!\n");
+                        x = total();
+						if(x > 2)
 						{
-							case 'a':
-							case 'A':
-								++aCount;
-								break;
-							case 'b':
-							case 'B':
-								++bCount;
-							case 'c':
-							case 'C':
-								++cCount;
-								break;
-							case '\n':
-							case '\t':
-							case ' ':
-							default:
-								printf("%s","Incorrect letter grade entered.");
-								puts("Enter a new grade.");
-								break;
+						    printf("Congratulations you have passed the course and you don't have to repeat!\n");
 						}
-						printf("Enter a letter grade (press q to quit): ");
-						scanf("%d",&grade);
-					}
-					printf("\nThere are ");
-					printf("%u", aCount);
-					printf(" A's, %u", bCount);
-					printf(" B's, %u", cCount);
-					printf(" C's");
-					printf("\nThe class average is %.1f\n",(aCount+bCount+cCount)/3.0);
-				
-				
-					//puts("you open the door 38 to and found a deadly cake........");
-					
-					scanf("%d",&choice);
+						else
+						{
+						    printf("Unfortunately you will have to repeat this course!!\n");
+						}
+						break;
+						//Rolling Dice using random generations
+						case 2:
+						z=prompt();
+                        modArray(arrInt,z);
+                        printArray(arrInt,z);
+						break;
+						//File manipulation outfile
+						case 3:
+						while(a != -1)
+						{
+                    		FILE *wptr;
+                    		wptr = fopen("Eflores.txt","a");
+                    		
+                    		printf( "%s", "In this section you will be asked to enter an account number,\n"
+                    		               "name under the account, and the balance for the account \n");
+                            fprintf(wptr, "%s", "In this section you will be asked to enter an account number,\n"
+                                            "name under the account, and the balance for the account \n");
+                    		
+                    		printf("What is the account number? \n");
+                    		scanf("%d", &acct);
+                    		    
+                            printf("What is the account name? \n");
+                            scanf("%29s", name);
+                            
+                            printf("What is the account balance? \n");
+                            scanf("%lf", &balance);
+                            fprintf(wptr,"%d %s %.2lf \n",acct, name, balance);
+                            if ( balance > 0 ) 
+                            {
+                                printf("Awesome you have some money in the bank!\n");
+                                fprintf(wptr,"Awesome you have some money in the bank!\n");
+                            }
+                            else if ( balance == 0 ) 
+                            {
+                                printf("You have no debts!\n");
+                                fprintf(wptr,"You have no debts!\n");
+                            }
+                            else if ( balance < 0 ) 
+                            {
+                                printf("You are so BROKE!! ");
+                                fprintf(wptr,"You are so BROKE!! ");
+                            }
 
+                            printf("\n Hit -1 to quit or 1 to continue. ");
+                            scanf("%d", &a);
+	                    }
+						break;
+						//lower case
+						case 4:
+						printf("This section you will need to enter a string to \n"
+                               				"determine is the letter is a lower case letter.\n"
+					                "Please a string no longer than 19 characters.\n");
+                        scanf("%c", strings);
+                        eflores(strings);
+						break;
+					}//end switch
+					printf("Option #:  " );
+					scanf("%d",&request);
 				}
 				break;
 			}
@@ -3600,3 +3651,110 @@ void noteFromRick(void)//Berenis Castruita
 
 
 }
+
+//Elizabeth Flores
+//prototype function 
+int total()
+{
+    double x;
+    x = 0.0;
+    double y;
+    char grade;
+    double v;
+    float average;
+    int counter;
+    counter = 0;
+    int aCount = 0;//number of A's
+    int bCount = 0;//number of B's
+    int cCount = 0;// number of C's
+    int dCount = 0;//number of D's
+    int fCount = 0;//number of F's
+
+    printf("Enter a letter grade (press q to quit): ");
+    scanf(" %c",&grade);//%c declaring characters
+
+    while(grade != 'q')
+    {
+
+        if(grade == 'A' || grade == 'a')
+        {
+            v = 4.0;
+            aCount++;
+        }
+        else if(grade == 'B' || grade == 'b')
+        {
+            v = 3.0;
+            bCount++;
+        }
+        else if(grade == 'C' || grade == 'c')
+        {
+            v = 2.0;
+            cCount++;
+            
+        }
+        else if(grade == 'D' || grade == 'd')
+        {
+            v = 1.0;
+            dCount++;
+        }
+        else if(grade == 'F' || grade == 'f')
+        {
+            v = 0.0;
+            fCount++;
+        }
+        printf("Enter a letter grade (press q to quit): ");
+        scanf(" %c",&grade);//%c declaring characters
+        x = x + v;
+        counter++;
+    }
+    //Output
+    printf("\nThere are ");
+    printf("%u", aCount);// Display A count
+    printf(" A's, %u", bCount);//B count
+    printf(" B's, %u", cCount);//C count
+    printf(" C's, %u", dCount);//D count
+    printf(" D's, %u", fCount);//F count
+    printf(" F's");//Display F
+    average = x / (double)counter;
+    printf("\nClass average is %.1f\n", average);
+}//end function for case 1
+int prompt(void)
+{
+	int x;
+	printf("How many times would you like to roll the 11 sided dice? ");
+	scanf("%d",&x);
+	return x;
+}
+void modArray(int arrInt[], int size)
+{
+    int i,y,x;   
+    for(i=0;i<size;i++)//roll it by the number of times it is prompt
+	{
+		y= rand()%11;
+		arrInt[y]++;
+	}
+}
+void printArray(int arrInt[], int size)
+{
+    printf("You had : \n %d ones \n %d twos \n %d threes \n %d fours \n %d fives \n %d sixes \n %d sevens \n %d eights \n"
+            " %d nines \n %d tens \n %d elevens \n",arrInt[0],arrInt[1],arrInt[2],arrInt[3],arrInt[4],arrInt[5],arrInt[6],arrInt[7],arrInt[8],arrInt[9],arrInt[10]);
+}//end functions for case 2
+void eflores(char strings[])
+{
+    char string[19] ;
+    int y,b = 0;
+    
+    fgets(string,19,stdin);
+    for(b=0;b<18;b++)
+    {
+        if(islower(string[b]))
+        {
+            printf("%c is lower case \n",string[b]);
+            string[b]=toupper(string[b]);
+        }
+        else
+        {
+            printf("%c is not lower case \n",string[b]);
+        }
+    }
+}//end function case 4 
