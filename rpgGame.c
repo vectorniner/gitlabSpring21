@@ -91,7 +91,10 @@ void printMessage(int msg[]);
 void decodeMessage(char alphabet[], int codedMessage[], int *totalGuesses, int *wrong);
 void userFate(int x);
 
-
+//Anthony Blass
+double abChestAvg(int choice);
+//Anthony Blass
+void abRandRoll(int trapChoice);
 
 //Monika
 void monikawelcome(char name[]);
@@ -7370,6 +7373,23 @@ void wordGame(char *pointer)
 }
 
 //Anthony Blass
+void abRandRoll(int trapChoice)
+{
+	if(trapChoice < 10)
+	{
+		puts("You try to deactivate the trap but failed...\n");
+		puts("You hear a click and an arrow flys and hits you in the knee\n");
+	}
+
+	else if(trapChoice >= 10)
+	{
+		puts("You look at the trap and examine it...\n");
+		puts("You find where the wire connects to the trap..\n");
+		puts("You take out your knife and diconnect it properly, that was close...\n");
+	}
+}
+
+//Anthony Blass
 double abChestAvg(int choice)
 {
 	//have player pick a weapon to see average of damage for each one
@@ -7431,16 +7451,16 @@ double abChestAvg(int choice)
 					printf("Ghost HP: %d\n", ghost);
 				}
 			}
-		else if(choice == 2)
-		{
-			printf("You chose the %s\n", wepArr[1]);
-			printf("==[====-\n");
-		}
-		else if(choice == 3)
-		{
-			printf("You chose the %s \n", wepArr[2]);
-			printf("\t 0=={======-\n");
-		}
+			else if(choice == 2)
+			{
+				printf("You chose the %s\n", wepArr[1]);
+				printf("==[====-\n");
+			}
+			else if(choice == 3)
+			{
+				printf("You chose the %s \n", wepArr[2]);
+				printf("\t 0=={======-\n");
+			}
 		}
 
 	else if(choice == 2)
