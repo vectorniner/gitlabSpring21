@@ -92,7 +92,8 @@ void lockedDoor26();
 int urGuess(void);//AndyV
 int Anumber(int a[], int urGuess);//AndyV
 
-
+//Markease Harris
+int coolGuysInteract(void);
 
 
 int main(int argc, char *argv[])
@@ -1463,60 +1464,130 @@ int main(int argc, char *argv[])
 			case 30://Markease's room of "why did you do this?"
 		       	{
 				while(choice != 99)
-			{
-				//int nextChoice = 0;
-				puts("you open the door and find ........");
-				puts("Some guy screaming that he is the coolest in the universe!");
-				puts("You stand in shock as it is said in your precense.");
-				puts("You contemplate your current options");
-				printf("Which do you choose? 1: Acknowledge that You are truly the coolest \n");
-				printf("2:Acknowledge he is the coolest \n");
-				scanf(" %d",&choice);
-			//	while(choice != 1 ||  choice != 2)
-			//	{
-					if(choice == 1)
-					{
-						printf("Your claim has been ignored.\n");
-						printf("You challenge him to a cool contest. \n");
-					//	break;
-					}
-					else if(choice == 2)
-					{
-						printf("Your claim has been taken as sarcasim. \n");
-						printf("He challenges you to a cool contest. \n");
-					//	break;
-					}
-			//	}
-				/*switch(choice) 
 				{
-					case 1:
+					int nextChoice = 0;
+					FILE *wptr;
+					puts("you open the door and find ........");
+					puts("Some guy screaming that he is the coolest in the universe!");
+					puts("You stand in shock as it is said in your precense.");
+					puts("You contemplate your current options");
+				//	printf("Which do you choose? 1: Acknowledge that You are truly the coolest \n");
+				//		printf("2:Acknowledge he is the coolest \n");
+				//	scanf(" %d",&choice);
+					while(choice != 1 ||  choice != 2)
 					{
-						printf("Your claim has been ignored.\n");
-						printf("You challenge him to a cool contest. \n");
-						break;
+						printf("Which do you choose? 1: Acknowledge that You are truly the coolest \n");
+						printf("2:Acknowledge he is the coolest \n");
+						scanf(" %d",&choice);
+
+						if(choice == 1)
+						{	
+							printf("Your claim has been ignored.\n");
+							printf("You challenge him to a cool contest. \n");
+							break;
+						}
+						else if(choice == 2)
+						{
+							printf("Your claim has been taken as sarcasim. \n");
+							printf("He challenges you to a cool contest. \n");
+							break;
+						}
+						else
+						{
+							printf("You can't think thay fast\n");
+					//		break;
+						}
 					}
-					case 2:
+					puts("The contest consist of 4 games. The games will be played a total of 9 times. After the tenth round the person with the higher score will be declared the winner.");
+				
+					for(i=0;i<9;i++)
 					{
-						printf("Your acknowledgement has been taken as sarcasim. \n");
-						printf("You are challenged to a cool contest. \n");
-						break;
+						printf("current score: P1:  P2: ");
+						puts("Game one is rock, paper, scissors");
+						printf("Which do you choose? 0- and 5+ will pick a game from random.\n");
+						scanf(" %d",&nextChoice);
+						switch(nextChoice)
+						{
+							case 1:
+							{
+								puts("Rules for rock paper scissors: ");
+								puts("You and your opponent will pick either rock paper or scissors.");
+								puts("Rock is #1! It can beat scissors but loses to paper. ");
+								puts("Paper is #2! It can beat rock but loses to scissors. ");
+								puts("Scissors are #3! It can beat paper but loses to rock.");
+								puts("Which do you choose? Keep in mind anything number not listed will count as cheating!.");
+								scanf(" %d",&x);
+								while(x != y)
+								{
+									if(x == 1 && y == 2)
+									{
+										puts("paper beats rock!");
+										coolGuysInteract();
+									}
+									if(x == 1 && y ==3)
+									{
+										puts("Rock beats scissor!");
+										coolGuysInteract();
+									}
+									if(x == 2 && y == 1)
+									{	
+										puts("Paper beats rock!");
+										coolGuysInteract();
+									}
+									if(x == 2 && y == 3)
+									{
+										puts("Scissor beats paper!");
+										coolGuysInteract();
+									}
+									if(x == 3 && y == 1)
+									{
+										puts("rock beats scissors!");
+										coolGuysInteract();
+									}
+									if(x == 3 && y == 2)
+									{
+										puts("Scissor beats paper!");
+										coolGuysInteract();
+									}
+									if(x <= 0 || x >= 4)
+									{
+										puts("cheating isn't cool");
+										coolGuysInteract();
+									}
+								}
+								break;
+							}
+							case 2:
+							{
+								break;
+							}
+							case 3:
+							{
+								break;
+							}
+							case 4:
+							{
+								break;
+							}
+							default:
+							{
+								
+								break;
+							}
+
+						}
 					}
-					default:
-					{
-						puts("You can't think that fast");
-						break;
-					}
-				}
-			}*/
-				printf("Play again? Enter 99 to quit\n");
-				scanf(" %d",&choice);
+					printf("Play again? Enter 99 to quit\n");
+					scanf(" %d",&choice);
 
 
-		       	}
+		       		}
 
-			break;
+				break;
 			}
 
+					
+								
 			case 31:
 			{
 			while (choice != 99)
@@ -3389,9 +3460,11 @@ void patrickInitialPrompt(void)
 
 int coolGuysInteract(void)//Markease Harris 
 {
-
+	int countA;
+	double average = 0.0;	
+	countA+1;
+	return countA;
 }
-
 //AndyV
 int urGuess(void)
 {
