@@ -117,6 +117,16 @@ void planets(void);//Berenis Castruita
 void goodBye(void);//Berenis Castruita
 
 
+
+void mining(int *p,int *tCoin, int it[]) ; //David Ko
+void status(int *p,int tCoin, int it[]);
+void gamble(int *p, char n[]);
+void flipCoin(int *p);
+void shop(int *p, int it[]);
+void VIProom(int *p, char n[]);
+void pause27();
+int fairy(int *p, char n[]);
+
 int total();//Elizabeth Flores prototype function
 int prompt(void);
 void modArray(int arrInt[], int size);
@@ -135,6 +145,7 @@ void codeT(void);
 
 
 
+
 int main(int argc, char *argv[])
 {
 	int a,x,y,z,i,h,g,k,request,choice=0;
@@ -144,6 +155,9 @@ int main(int argc, char *argv[])
 	int boxNum=0;
 	int sum = 0;
         int number;
+	int action=0,totalCoin=0, item[5]={0};// 1 actions 2 pickaxe
+	int *ptr;
+
         float average;
 	srand(time(NULL));
 	printf("Please enter your name: "); //Input any number of array inputs
@@ -2532,72 +2546,91 @@ case 14:
 			{
 				while(choice != 99)
 				{
+					x=0;
+					ptr = item;
+					puts("In late in night, you were working on project, fell sleep, and found a door.");
 					puts("you open the door and find ........");
-					puts("Fantasy world with flying dragons, mystery mythic, magic and rescuing princess... Your dream adventure world! Oh look! The little fairy flew and welcomes you.");
+					printf("Fantasy world with flying dragons, mystery mythic, magic and rescuing princess... Your dream adventure world! \nOh look [%s]! The little fairy flew and welcomes you.",name);
 					puts("Would you like to talk to it (yes=1 no=0)?");
 					scanf("%d",&choice);
 
 					if(choice == 1)
 					{
-						puts("You: Hey! How are you? This world seems pretty nic...");
+						printf("%s: Hey! How are you? This world seems pretty nic...\n",name);
 						puts("Fairy: Shut up and give me ALL you've got!!");
-						puts("You: Wait wha..?");
-						scanf("%c", &name[0]);
+						pause27();
+						printf("%s: Wait wha..?\n",name);
 						puts("Fairy: I need a MONEY!(pulls out of a knife).");
 						puts("\nLooks like that wasn't clever choice.");
+						pause27();
 						puts("\t\t...YOU DIED....");
 						break;
 					}
+					
 					puts("Are you really going to ignore this cute fairy? Come on~ at least saying hi wouldn't hurt anybody.");
 					puts("Talk to the fairy(yes=1 no=0).");
 					scanf("%d",&choice);
 					if(choice == 1)
 					{
-						puts("You: Hi,I was wonder what were you doing he...");
+						printf("%s: Hi,I was wonder what were you doing he...\n",name);
 						puts("Fairy: Were you trying to ignore me huh? (stabs with a knife)");
-						puts("Well... seems like that fairy would hurt anybody here haha. You Die...");
+						pause27();
+						puts("Well... seems like that fairy would hurt anybody here haha.");
+						puts("\t\t...You DIED...");
 						break;
 					}
-					puts("You have safely ranway from that cold blood fairy. Please select your derection to go");
-					puts("1.Mining Mountain  2.Shop  3.Gamble");
+					puts("You have safely ranway from that cold blood fairy.");
+					pause27();
+					puts("Now you are at Village. Please select the places to go.");
+					puts("1.Mining Mountain  2.Shop  3.Casino Dungeon  4.Status   5. Go back to the fairy");
+					
 					scanf("%d",&choice);
-					switch(choice)
-					{
-						case 1:
-						{
-							puts("Entering Mining Mountain");
-							puts("Miner: Welcome to Pitcoin mining! You can mine your Pitcoin as many as you want. But the amount will be random. So GL!");	
-							puts("Mine Pitcoin? (yes=1 no=0)");
-							scanf("%d",&choice);
-							if(choice == 0)
-							{
-								puts("Exiting Mining Mountain");
-								break;
-							}
-							else if(choice == 1)
-							{
-								while(choice != -1)
-								{
-									puts("Let's mining!");
-									scanf("%d",&choice);
-								}
-								break;
 
-							}
-							else
+					while(choice != 99 && x == 0)
+					{
+						switch(choice)
+						{
+							case 1:
 							{
-								puts("Please select again.");
+								mining(ptr,&totalCoin, item);	
+								break;
+							
+							}
+							case 2:
+							{
+								shop(ptr, item);
+
+								break;
+							}
+							case 3:
+							{
+								gamble(ptr, name);
+								break;
+							}
+							case 4:
+							{
+								status(ptr,totalCoin, item);
+								break;
+							}
+							case 5:
+							{
+								x = fairy(ptr, name);
+								choice =99;
+								break;
 							}
 						
 						}
-						puts("reselect case");
-						scanf("%d",&choice);
+						if(x == 0)
+						{
+							puts("\nNow you are at Village. Please select the places to go.");
+							puts("1.Mining Mountain  2.Shop  3.Casino Dungeon  4.Status   5. Go back to the fairy");
 
-
+							scanf("%d",&choice);
+						}
 					}
+
 				}
 				break;
-
 			}
 			case 28:
 			{
@@ -5371,6 +5404,355 @@ void noteFromRick(void)//Berenis Castruita
 }
 
 
+void mining(int *p,int *tCoin, int it[]) // David Ko
+{
+	int ch=-1, earnedCoin, x;
+
+	puts("Entering Mining Mountain...\n");
+	puts("Miner: Welcome to Pitcoin mining! You can mining your Pitcoin as many as you want. But the amount will be random. So GL!");									
+	while(ch != 0)
+	{
+		puts("Please select.\n1. Mining Pitcoin\n0. Exit");
+		scanf("%d",&ch);
+		if(ch == 0)
+		{
+			puts("Exiting Mining Mountain...");
+			ch = 0;
+		}
+		else if(ch == 1)
+		{
+			if(*p < 3 && it[2] == 0)
+			{
+				puts("Miner: You seems like you need some help. Here, take this new Pickaxe.");
+				puts("*Got new Pickaxe!*");
+				it[2] += 1;
+			}	
+			else if(it[2] != 0)
+			{
+				earnedCoin = rand()%6;
+				printf("You earned [%d] Pitcoin!\n",earnedCoin);
+				*p += earnedCoin;
+				//printf("%d",*p);
+				*tCoin += earnedCoin;
+				it[1] += 1;
+				x = rand()%4;
+				if(x == 0)
+				{
+					puts("[!Your pickaxe has been broke!]");
+					it[2] -= 1;
+				}
+			}
+			else
+			{
+				puts("Miner: You don't have any pickaxe left, go to the shop and get one to continue mining.");
+			}
+		}
+		else
+		{
+			puts("Please select again.");
+		}
+	}
+}
+
+void status(int *p,int tCoin, int it[])
+{
+	double avgPit;
+
+	avgPit = tCoin / (double)it[1];
+	puts("----------You Status----------");
+
+	printf("Pitcoin(s): %d\nAverage total Pitcoin earned from mining: %.2lf\n",*p ,avgPit);
+	
+	printf("Number of Pickaxes: %d\n",it[2]);
+}
+void gamble(int *p, char n[])
+{
+	int ch=-1,x=0;
+
+	puts("\nMystery Four Elements Dragon: Hey you! Stop stare like a noob and come here and play the game or something");
+	while(ch != 0)
+	{
+		puts("Here choose your room to go.\n0. Exit  1. Flip a Coin  3. VIP room");
+		scanf("%d",&ch);
+
+		if(ch == 0)
+		{
+			puts("Exiting Casino Dungeon...");
+			ch = 0;
+		}
+		else if(ch == 1)
+		{
+			 flipCoin(p);
+			
+		}
+		else if(ch==3)
+		{
+			VIProom(p, n);
+		}
+		else
+		{
+			puts("Please select again.");
+		}
+	}
+}
+
+void flipCoin(int *p)
+{
+	int bet,x,y;
+
+	puts("Mystery Four Elements Dragon: Good! The rule is simple, if you win, you get double of amounts you bet. But if you lose, you lose your bet.\nHow much Pitcoin are you going to bet?");
+	printf("Pitcoin(s) you have right now: %d\nAmount to bet: ",*p);
+	scanf("%d",&bet);
+	if(bet < 0 || bet ==0)
+	{
+		puts("Mystery Four Elements Dragon: You can't bet negative or zero amount...");
+	}
+	else if(bet > *p || *p == 0)
+	{
+		puts("Mystery Four Elements Dragon: You don't have enough Pitcoins to do that... Go lower or I will blow you off with my wind breath.");
+	}
+	else
+	{
+		x=(rand()%2) + 1;
+		puts("Mystery Four Elements Dragon: Now, pick 1. Head OR 2. Tail");
+		puts("The crowd: LESSSS GOOOOOO!!!");
+		scanf("%d",&y);
+		if(x == y)
+		{
+			puts("Mystery Four Elements Dragon: I hate to say this but... \nYou just doubled your bets. Congrats!");
+			puts("The crowd: Play one more!!!");
+			*p += bet;
+		}
+		else
+		{
+			puts("Mystery Four Elements Dragon: Sorry, you guessed it wrong. I'm melting all those Pitcoins with my fire breath (HooWoo~)");
+			puts("The crowd: Play one more!!!");
+			*p = *p - bet;
+		}
+	}
+}
+
+void shop(int *p, int it[])
+{
+	char str[10] = {} ,shopItem[10] = "Pickaxe", x;
+	int i;
+
+	puts("The Big Golem: Welcome to the GolShop, please look around and buy good ones.");
+	
+	puts("Type the item's name to buy it");
+	puts("Pickaxe - 3 Pitcoins");
+	
+	scanf("%s",str);
+	for(i=0;i<strlen(str);i++)
+	{
+		if(isalpha(str[i]))
+		{
+			if(str[i] != shopItem[i])
+			{
+				puts("Incorrect item name. There must be a typo.");
+				return;
+			}
+		}
+		else
+		{
+			puts("No digits are needed.");
+			return;
+		}
+	}
+	printf("The Big Golem: To confirm your order, you are going to purchase ");
+	for(i=0;i<strlen(str);i++)
+	{
+		printf("%c", toupper(str[i]));
+	}
+	puts("? [y/n] ");
+	scanf(" %c",&x);
+	if(x == 'y')
+	{
+		if(*p < 3)
+		{
+			puts("Not enough Pitcoin to purchase.");
+		}
+		else
+		{
+			puts("You got 1 Pickaxe.");
+			it[2]++;
+			*p -= 3;
+		}
+	}
+	else if(x== 'n')
+	{
+		puts("Cancel the order. Exiting the shop...");
+	}
+	else
+	{
+		puts("Didn't recognize the command. Exiting the shop...");
+	}
+	
+}
+void VIProom(int *p, char n[])
+{
+	char x,str[100],c;
+	FILE *rptr;
+	int ch,y,i;
+
+	puts("Loyal Knight: Stop there, from here you need to pay [100] Pitcoin to enter VIP room for ONE time only.");
+	puts("Do you want to pay to enter the room? ( y or n )");
+	scanf(" %c",&x);
+	if(x == 'y' && *p < 100)
+	{
+		puts("Loyal Knight: Sorry you don't have enough Pitcoin to enter. Please come back after earn enough Pitcoin,");
+	}
+	else if(x == 'n')
+	{
+		puts("Loyal Knight: Hope to see you later with 100 Pitcoin...");
+	}
+	else if(x == 'y')
+	{
+		puts("Loyal Knight: Are those real Pitcoins? Let me count it. 1... 2... 3... and 100!");
+		printf("%s: Yes it is real Pitcoins... Now can I go in?\n",n);
+		puts("Loyal Knight: Yes of course. (Opens the door)");
+		pause27();
+		puts("As soon as I entered, quite a few people were filling the room.");
+		puts("Among them, there were elves, human, orcs, and even undeads talking with each other while drinking alcohol in suits.");
+		puts("As soon as I was surprised by the fact that there is such a place in this world, an elf came to me and spoke.");
+		pause27();
+		puts("Ice Elf: You seems like you are not from here. Do you need help to get out of here my little human?");
+		printf("%s: Yes!... I need to get where I came from. Can you help me out?\n",n);
+		puts("Ice Elf: Mhm, this letter will show what you need to do next.\n");
+		pause27();
+		rptr = fopen("letter27.txt","r");
+		
+		if(rptr == NULL)
+		{
+			printf("File could not open and read.\n");
+		}
+		else
+		{
+			while(fgets(str,sizeof(str),rptr))
+			{
+				printf("%s",str);
+			}
+			rewind(rptr);
+			pause27();
+			printf("%s: Wait... What is it saying?? I can't read this.\n",n);
+			puts("Ice Elf: Oh I see, I guess someone spilled their drinks here. But I can dry it up for you with my fire element.");
+			printf("%s: But aren't you ice elf that uses ice element?\n",n);
+			puts("Ice Elf: Yeah but I can use some basic ones for all elements like how CS major people need to take general English classes lol.");
+			puts("(Drys up with fire)");
+			puts("Ice Elf: Anyhow, it should be all dryed up for now. Here read it again.");
+
+			pause27();
+			while(fgets(str,sizeof(str),rptr))
+			{
+				y = strlen(str);
+				for(i=0;i<y;i++)
+				{	
+					if(str[i] == 'p' || str[i] == '%')
+					{
+
+					}
+					else
+					{
+						printf("%c",str[i]);
+					}
+				}
+
+
+			}
+			pause27();
+			
+			printf("%s: Okay thank you. that letter helped me a lot :)\n",n);
+			puts("Ice Elf: No problem my guy. Good luck and see you if we can later.");
+			puts("Exiting VIP Room...");
+
+			
+		}
+		fclose(rptr);
+
+	}
+	else
+	{
+		puts("Loyal Knight: I don't unterstand what you mean so I'm going to get you out here.");
+	}
+}
+void pause27()
+{
+	char c;
+	puts("(Enter any one character to Continue)");
+	scanf(" %c", &c);
+
+}
+int fairy(int *p, char n[])
+{
+	char c;
+	int x;
+	puts("Are you sure you want to go back to the fairy? [y/n]");
+	scanf(" %c",&c);
+
+	if(c == 'y' || c== 'Y')
+	{
+		printf("%s: Hey... it's me again fairy.\n",n);
+		puts("Fairy: What's up? You know what I want right?");
+		puts("How much Pitcoin(s) are you going to hand it to him?");
+		printf("Pitcoin(s): ");
+		scanf("%d",&x);
+		if (*p < x)
+		{
+			puts("Fairy: You don't have that much of Pitcoin. Please come with enough Pitcoins to offer.");
+		}
+		else
+		{
+			if(x == 27)
+			{
+				puts("Fairy: This... this amount is the exact number that I was looking for!");
+				printf("%s: That's great then. So you are not going to stab this time?\n",n);
+				puts("Fairy: No, why would I? If you give me what I want, at that point we are BFF.");
+				pause27();
+				printf("%s: Ehhhh yeah I guess... But hurry I need to go back to my place to finish my CSC-251 project. That's due soon!\n",n);
+				puts("Fairy: Okay okay. I will sent you where you belong right...");
+				pause27();
+				puts("...");
+				pause27();
+				printf("%s: Umm... are you okay fair..?\n",n);
+				puts("Fairy: NOW!!!");
+				puts("(Time traveling sound)");
+				pause27();
+				printf("%s: Whooooaahhhh~~~\n",n);
+				pause27();
+				puts("The next thing I saw was me sleeping on my desk with my laptop turned on to work on a project from CSC251 all night long.");
+				printf("%s: What the... Looks like I had weird dream just now.\n",n);
+				pause27();
+				printf("%s: But\n",n);
+				pause27();
+				printf("%s: But...\n",n);
+				pause27();
+				printf("%s: But that was pretty awesome dream!! I'm going to make that to my project. (typing keyboard sounds)\n",n);
+				pause27();
+				printf("Therefore, our brave CS student %s safely came to his world and had to stay all night long to code but he was happy because he knew his project will be charming and couldn't wait to turn it in...\n",n);
+				pause27();
+				puts("Thank you for playing room 27 game!");
+				puts("And yes this is the good ending that everyone wanted :)");
+				puts("		-fin-");
+				pause27();
+				return 1;
+			}
+			else
+			{
+				puts("Fairy: That's it? You shouldn't come to me then.");
+				puts("(Ran away before Fairy gets his knife out...)");
+				pause27();
+			}
+		}
+	}
+	else
+	{
+		puts("Going back to the villiage...");
+	}
+	return 0;
+}
+
+
+
 //Elizabeth Flores
 //prototype function 
 int total()
@@ -5636,6 +6018,7 @@ void wordGame(char *pointer)
 
 
 }
+
 
 
 
