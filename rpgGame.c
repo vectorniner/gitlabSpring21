@@ -98,8 +98,11 @@ void flurbos(void);//Berenis Castruita
 void planets(void);//Berenis Castruita
 void goodBye(void);//Berenis Castruita
 
-
-
+//Norville Amao
+int aCharCreator(char charName[], int charRace, int charStats[]);
+int aPartOne(int choice, char charName[], int charRace, int charStats[]);
+int aPartTwoWrong(int nextArea, int charRace, int charStats[]);
+void aPartTwo(char charName[], int charRace, int charStats[]);
 
 int main(int argc, char *argv[])
 {
@@ -821,40 +824,65 @@ int main(int argc, char *argv[])
 			}
 			case 13:
 			{
-				// Norville Amao
+				//Norville Amao
 				while(choice != 99)
 				{
-					char name[20];
-					int race = 5;
+					char charName[20];
+					int charRace = 5;
+					int charStats[3] = {};
+					int nextArea;
+					char continueGame = 'a';
+					int wrongAreaResult;
 
-					puts("\nCHARACTER CREATION");
-					puts("Enter your name:");
-					scanf("%s",name);
+					puts("\nA sudden unknown force jolts you awake. You look around only to find darkness. You have no idea who you are, how you got here, and what you are here for.");
+					puts("Suddenly, a light begins to shine, and before you, something fades into existence. After a few moments, a piece of old yellow parchment appears:");
 
-					while(race == 5){
-						puts("\nChoose your race");
-						puts("1 - human");
-						puts("2 - elf");
-						puts("3 - ilvyr");
-						puts("4 - ferren");
-						puts("5 - race information");
-						scanf("%d",&race);
+					charRace = aCharCreator(charName, charRace, charStats);
+					nextArea = aPartOne(choice, charName, charRace, charStats);
 					
-						if(race == 5){
-							puts("\nTHE RACES OF HABREN");
-							puts("HUMANS");
-							puts("Known as Goddess's favorite. The most prosperous of all the races.");
-							puts("ELVES");
-							puts("The racial offpsring of ilvyrs and humans. They often live underground, opposite of their ilvyr ancestors.");
-							puts("ILVYRS");
-							puts("A race of fallen angels who have succumbed to the sin of pride. Identified by their pointed ears and white bird-like wings.");
-							puts("FERRENS");
-							puts("Often mistaken as humans. They are identified by their towering heights, especially those of their women.");
+					if(nextArea != 99)
+					{
+						puts("\nEnd of Part 1");
+	
+						while(tolower(continueGame) != 'y' && tolower(continueGame) != 'n')
+						{
+							printf("Continue to Part 2 (Y/N)? ");
+							scanf(" %c",&continueGame);
+						
+							continueGame = tolower(continueGame);
+
+							if(continueGame == 'y')
+							{
+								if(nextArea == 1 || nextArea == 3)
+								{
+									wrongAreaResult = aPartTwoWrong(nextArea, charRace, charStats);
+								
+									if(wrongAreaResult == 0)
+									{
+										aPartTwo(charName, charRace, charStats);
+									}
+								}
+
+								else
+								{
+									aPartTwo(charName, charRace, charStats);
+								}
+							}
+
+							else if(continueGame == 'n')
+							{
+								continue;
+							}
+						
+							else
+							{
+								puts("Invalid answer. Try again.");
+							}
 						}
 					}
 
-					puts("\nType 99 to quit");
-					scanf("%d",&choice);
+					choice = 99;
+					
 				}
 				break;
 			}
@@ -3599,4 +3627,630 @@ void noteFromRick(void)//Berenis Castruita
   fclose(wptr);
 
 
+}
+
+//Norville Amao Functions
+int aCharCreator(char charName[], int charRace, int charStats[])
+{
+	int i;
+	int charStatPoints = 20;
+	int pointsAllocated;
+	FILE *wptr;
+
+	wptr = fopen("charactersheet.txt","w");
+	
+	puts("\n _________________________________________________________________");
+	puts("|                                                                 |");
+	puts("|                        CHARACTER CREATION                       |");
+	puts("|                                                                 |");
+	puts("|   NAME                                                          |");
+	printf("|   Enter your name: ");
+	scanf(" %s",charName);
+
+	puts("|                                                                 |");
+
+	while(charRace == 5 || charRace == 6)
+	{
+		puts("|   RACE                                                          |");
+		puts("|                                                                 |");
+		puts("|   Choose your race (Entering a random number randomizes what    |");
+		puts("|   race you get):");
+		puts("|   1. Human                                                      |");
+		puts("|   2. Elf                                                        |");
+		puts("|   3. Ilvyr                                                      |");
+		puts("|   4. Ferren                                                     |");
+		puts("|   5. Race Information                                           |");
+		puts("|   6. Hint                                                       |");
+		printf("|   ");
+		scanf("%d",&charRace);
+		puts("|                                                                 |");
+		
+
+		if(charRace == 1 || charRace == 2 || charRace == 3 || charRace == 4)
+		{
+			continue;
+		}
+
+		else if(charRace == 5)
+		{
+			puts("|   THE RACES OF HABREN                                           |");
+			puts("|                                                                 |");
+			puts("|   1. HUMANS                                                     |");
+			puts("|   Known as The Divine and The Divinity's favorite. The most     |");
+			puts("|   prosperous of all the races. 		                        |");
+			puts("|   2. ELVES                                                      |");
+			puts("|   The racial offpsring of ilvyrs and humans. They often live    |");
+			puts("|   underground, opposite of their ilvyr ancestors.               |");
+			puts("|   ancestors.                                                    |");
+			puts("|   3. ILVYRS                                                     |");
+			puts("|   Fallen angels who have succumbed to the sin of pride. Iden-   |");
+			puts("|   tified by their pointed ears and white bird-like wings.       |");
+			puts("|   4. FERRENS                                                    |");
+			puts("|   Often mistaken as humans. Identified by their towering        |");
+			puts("|   height, especially those of their women.                      |");
+			puts("|                                                                 |");
+		}
+
+		else if(charRace == 6)
+		{
+			puts("|   HINT                                                          |");
+			puts("|   Playing an ilvyr is the faster route. Non-ilvyrs get +1       |");
+			puts("|   Stealth.                                                      |");
+			puts("|                                                                 |");
+		}
+
+		else
+		{
+
+			charRace = rand()%4 + 1;
+		}
+	}
+	
+	puts("|   STATS                                                         |");
+        puts("|                                                                 |");
+	puts("|   You have 20 points to allocate for your stats. The maximum    |");
+	puts("|   amount of points you can assign to one stat is 10. You        |");
+	puts("|   You will have 3 stats: Intimidation, Charm, and Stealth.      |");
+	puts("|   Some dialogue options will require the average of two         |");
+	puts("|   stats, but they will not always lead to better outcomes.      |");
+	puts("|   Choose wisely.                                                |");
+
+	while(charStatPoints != 0)
+	{	
+		puts("|                                                                 |");	
+		puts("|   Please assign your stats:                                     |");
+		for(i = 0;i < 3;i++)
+		{
+			if(i == 0)
+			{
+				printf("|   Intimidation: ");			
+			}
+			
+			else if(i == 1)
+			{
+				printf("|   Charm: ");
+			}	
+
+			else
+			{
+				printf("|   Stealth: ");
+			}
+
+			scanf(" %d",&pointsAllocated);
+
+			if(pointsAllocated > charStatPoints || pointsAllocated < 0)
+			{
+				puts("|                                                                 |");
+				puts("|   Invalid number of points. Assign your stats again.            |");
+				charStatPoints = 20;
+				break;
+			}
+	
+			charStats[i] = pointsAllocated;
+			charStatPoints = charStatPoints - pointsAllocated;
+
+			printf("|   Points Remaining: %2d                                          |\n",charStatPoints);
+
+			if(i == 2 && charStatPoints > 0)
+			{
+				puts("|                                                                 |");
+				puts("|   You have points remaining. Assign your stats again.           |");
+
+				charStatPoints = 20;
+			}
+		}
+	}
+	
+	puts("|                                                                 |");
+	puts("|   Stats assigned! Saving a copy of you character info in an     |");
+	puts("|   external file.                                                |");
+	puts("|                                                                 |");
+	
+	fprintf(wptr," __________________________________________________\n");
+	fprintf(wptr,"|                                                  |\n");
+	fprintf(wptr,"|                  CHARACTER INFO                  |\n");
+	fprintf(wptr,"|                                                  |\n");
+	fprintf(wptr,"|   Name: %-20s\n",charName);
+	fprintf(wptr,"|   Race: ");
+
+	switch(charRace)
+	{
+		case 1:
+			fprintf(wptr,"Human                                    |\n");
+			break;
+
+		case 2:
+			fprintf(wptr,"Elf                                      |\n");
+			break;
+
+		case 3:
+			fprintf(wptr,"Ilvyr                                    |\n");
+			break;
+
+		default:
+			fprintf(wptr,"Ferren                                   |\n");
+	}
+	
+	fprintf(wptr,"|                                                  |\n");
+	fprintf(wptr,"|   CHARACTER STATS                                |\n");
+
+	for(i= 0;i < 3;i++)
+	{
+		if(i == 0)
+		{
+			fprintf(wptr,"|   Intimidation: %2d                               |\n",charStats[i]);
+		}
+
+		else if(i == 1)
+		{
+			fprintf(wptr,"|   Charm: %2d                                      |\n",charStats[i]);
+		}
+
+		else
+		{
+			if(charRace == 3)
+			{
+				fprintf(wptr,"|   Stealth: %2d                                    |\n",charStats[i]);
+			}
+			
+			else
+			{
+				charStats[i] = charStats[i] + 1;
+				fprintf(wptr,"|   Stealth: %2d                                    |\n",charStats[i]);
+
+			}
+		}
+	}
+
+	fprintf(wptr," __________________________________________________\n");
+
+	rewind(wptr);
+	fclose(wptr);
+
+	puts("|   Copy saved in charactersheet.txt!                             |");
+	puts("|                                                                 |");
+	puts("|   You can quit the game anytime by typing 99 during dialogue    |");
+	puts("|   However, your progress will not be saved.                     |");
+	puts("|                                                                 |");
+	puts(" _________________________________________________________________");
+	
+	puts("\nAfter finishing the character creation, the parchment dissipates. You feel your consciousness slipping away as the world around you begins to dim.....\n.\n.\n.\n.\n.");
+
+	return charRace;
+}
+
+int aPartOne(int choice, char charName[], int charRace, int charStats[])
+{
+	int i = 0;
+	int dialogueOption = 0;
+	double lieStatCheck;
+	char response[50];
+	char *responsePntr;
+	const char *code = "tanvivyril";
+
+	lieStatCheck = ((double)charStats[1] + (double)charStats[2]) / 2;
+	
+	puts("You slowly open your eyes...");
+	puts("You look around and realize that you are on a horse-drawn wagon with three other passengers. A middle-aged man with blonde hair and a stubble is");
+	puts("seated in front of you, his head facing left as he stares into the distance. Suddenly, he turns his head around to face you in a motion that");
+	puts("was—for some reason—disturbingly unnatural.");
+	puts("\n\"Hey you! You're finally awake. You were trying to cross the border, right? Walked right in—\"\n");
+	puts("He suddenly cuts himself off and pauses—almost as if he was trying to listen to something.");
+	puts("\n\"Oops. Wrong game.\"\n");
+	puts("You give him a blank stare, and the other two passengers give him a confused look. He clears his throat.");
+	puts("\n\"Glad to see that you're awake. Remember to stick to the plan once we get there. You know the plan by now, yes?\"\n");
+	
+	puts("TUTORIAL: Choose the dialogue option you want by entering the corresponding number. Some dialogue options will succeed or fail depending on your stats.");
+	puts("Choosing an option outside of the ones available chooses a random option for you.");
+	puts("1. Where am I? Who the hell are you?");
+	puts("2. Wait, what plan?");
+	printf("3. (Lie)(Charm/Stealth Avg %.2lf/9) Yes, sir.\n", lieStatCheck);
+	scanf("%d",&dialogueOption);
+
+	if(dialogueOption > 3 && dialogueOption != 99)
+	{
+		dialogueOption = (rand()%3) + 1;
+	}
+	
+	switch(dialogueOption)
+	{
+		case 2:
+			puts("\nThe man glares at you. \"It appears SOMEONE was not listening to the briefing yesterday.\"");
+			puts("\nYou assume that this man is your superior. He taps the shoulders of the white-haired man beside him. You learn that the man you were speaking to is named Commander");
+			puts("McGregor. He grumbles as he takes a piece of rolled parchment from the white-haired man's hands and unrolls it, revealing a map.");
+			break;
+
+		case 3:
+			if(lieStatCheck >= 9)
+			{
+				printf("\n\"Then I wish you luck, %s.\"\n",charName);
+				puts("\nA few hours later, you arrive at the base. A voice booms from the watchtower, \"State your business.\"");
+				
+				if(charRace == 3)
+				{
+					puts("\nNobody in the wagon responds. Since you lied about knowing the plan, you do not know what is going on. Everyone looks at you, as if expecting you to");
+					puts("respond. Suddenly, multiple winged beings clad in armor fly up and reveal themselves from behind the wall. Before you can react, the ilvyrs swoop down on");
+					puts("the wagon. You watch as they slaughter Commander McGregor and the rest of your companions with their golden spears. You feel a sharp pain in your");
+					puts("stomach. You look up, only to find the grinning face of your murderer as blood oozes from where you were impaled. You slowly lose consciousness.");
+					puts("As you take your final breath, you try to think about the life you lived, but you do not remember anything from before you woke up on the wagon.");
+					puts("\nGAME OVER");
+
+					return 99;
+				}
+
+				else
+				{
+					puts("\nThe wagon's coachmen responds with a phrase you do not understand.");
+					puts("The gate opens, and the coachman brings all of you inside the base. The wagon comes to a halt in the central plaza. Two people with bird-like wings walk toward the wagon and order");
+					puts("the passengers to come down. You step down from the wagon. You, along with the two guards and your three companions, begin to walk toward an alley between the barracks.");
+					puts("As soon as we were halfway through the alley, two of your companions begin to launch their attack. One kicks a guard in the stomach, while the other rips the other guard's");
+					puts("heart using magic. Since you lied about knowing the plan, you stood there frozen not knowing what to do. The blonde man yells at you to run, but it was too late.");
+					puts("Swarms of winged people fly towards you and overwhelm you and your comrades. You feel a sharp kick on your head, and you immediately faint.");
+					puts("\nGAME OVER");
+
+					return 99;
+				}
+			}
+
+			else
+			{
+				puts("\n\"You know I can see through your lie right? Alright, I'll go over the plan once more.\"");
+				puts("\nYou assume that this man is your superior. He taps the shoulders of the white-haired man beside him. You learn that the man you were speaking to is named Commander");
+				puts("McGregor. He swiftly takes the piece of rolled parchment from the white-haired man's hands and unrolls it, revealing a map.");
+
+			}
+			break;
+			
+		case 99:
+			return 99;
+
+		default:
+			puts("\nThe three passengers laugh. \"We're headed to an ilvyr base, and that's Commander McGregor, dumbass,\" quips the man sitting beside you.");
+			puts("Commander McGregor then says in a commanding tone. \"Alright gather round. Let's go over the plan one more time.\"");
+			puts("\nCommander McGregor then takes a rolled piece of parchment from the white-haired man sitting beside him and unrolls it.");
+			break;
+	}
+
+	puts("\n\"We are infiltrating one of the ilvyr's military bases. Stationed at Vitan Mountains. In a cave located at the back of the base lies an ancient artifact.");
+	puts("Our spies learned that this is what keeps those arrogant birds strong. The ilvyrs are claiming that this is the last connection they have to the Holy Unity.\"");
+	puts("\nThe man pauses, and his expression shifts to a hopeful one.");
+	puts("\n\"If what they said is true, destroying it means that the we win this war and end the ilvyrs' reign of terror for good.\"");
+	puts("\nThe man points to the map.");
+
+	if(charRace == 3)
+	{
+		puts("\n\"The plan is simple; You will pose as a soldier in the ilvyr army. These two will make sure you attract less attention.\"");
+	}
+
+	else
+	{
+		puts("\n\"The plan is simple; Admittedly, this task will be difficult. You are our best assassin, but you will need more than just your stealth.");
+		puts("That's where the these two come in.\"");
+	}
+
+	puts("\nHe gestures to the other two passengers. The man sitting beside the commander has brown skin, white hair, pointed ears, and a fit but thin build. The other man is flaunting a");
+	puts("long and thick beard the same color as his greyi`ng hair. He appears to be human.");
+	puts("\n\"Fenris and Blackwall will create a commotion while you sneak around the camp and head towards the cave. Once inside, figure out a way to destroy that artifact.\"");
+	puts("The commander pauses, and looks at with a serious expression. \"And by that I mean, destroy it at all costs.\"");
+	puts("\nAfter the commander briefs on you the plan, you ask for the map. While the wagon presses forward, you sit in silence as you diligently study the map. After a few");
+	puts("more hours, you begin to see a glimpse of a mountain range in the distance. On top of the shortest mountain lies the aforementioned ilvyr base.");
+	
+	if(charRace == 3)
+	{
+		printf("\n\"%s, when we get to the gate the guards will ask for the purpose of our arrival. You must reply with a ONE-WORD CODE. SWAP THE SYLLABLES OF THE MOUNTAIN'S",charName);
+		puts("NAME and SWAP THE SYLLABLES OF THE WORD 'ILVYR' then combine the two results together\n\"");
+	}
+
+	
+	puts("The white-haired elf named Fenris takes the map from your hands and burns it with magic in attempt to get rid of the evidence of their plans.");
+	puts(".");
+	puts(".");
+	puts(".");
+	puts(".");
+	puts(".");
+	puts("The wagon reaches the base's wall as the sun is setting in the horizon.");
+	puts("A voice booms from the watchtower. \"State your business.\"");
+
+
+	if(charRace == 3)
+	{
+		printf("\nYou reply:\n");
+		scanf("%s",response);
+
+		for(i = 0;i < strlen(response);i++)
+		{
+			response[i] = tolower(response[i]);
+		}
+
+		responsePntr = response;
+		
+		if(strcmp(responsePntr, code)== 0)
+		{
+			puts("\n\"May the ilvyrs reign forever!\", the guard replies back.");
+		}
+
+		else
+		{
+			puts("\nSuddenly, multiple ilvyrs clad in armor fly up and reveal themselves from behind the wall. Before you can react, the ilvyrs swoop down on the wagon. You watch as they slaughter Commander McGregor and");
+			puts("the rest of your companions with their golden spears. You feel a sharp pain in your stomach. You look up, only to find the grinning face of your murderer as blood oozes from where you were impaled.");
+			puts("You slowly lose consciousness. As you take your final breath, you try to think about the life you lived, but you do not remember anything from before you woke up on the wagon.");
+			puts("\nGAME OVER");
+			return 99;
+		}			
+	}
+
+	else
+	{
+		puts("\n\"Tanvivyril,\" The wagon's coachman answers.");
+	}
+
+	puts("\nThe gate opens, and the coachman brings all of you inside the base. The wagon comes to a halt in the central plaza. Two ilvyrs walk toward the wagon and order");
+	puts("the passengers to come down. You step down from the wagon. You, along with the two guards and your three companions, begin to walk toward an alley between the barracks");
+	puts("in the West side of the base. As soon as we were halfway through the alley, Fenris and Blackwall begin to launch their attack. Blackall kicks a guard in the stomach,");
+	puts("while Fenris rips the other guard's heart using magic.");
+
+	puts("\nYou see that at the back of the camp is a wall of stone where the mountain slopes higher. You figure that you'll most likely find a cave there.");
+	puts("Which area at the back of the base do you want to go?");
+	puts("1. Left");
+	puts("2. Center");
+	puts("3. Right");
+	puts("4. (Choose Randomly) Screw thinking just go somewhere");
+	scanf("%d",&dialogueOption);
+	
+	switch(dialogueOption)
+	{
+		case 1:
+			puts("\nYou move ahead, heading towards the left.");	
+			break;
+
+		case 2:
+			puts("\nYou head towards the center.");
+			break;
+
+		case 3:
+			puts("\nYou head towards the right.");
+			break;
+			
+		case 99:
+			return 99;
+
+		default:
+			dialogueOption = (rand()%3) + 1;
+			puts("\nWithout any sense of direction, you head towards the back of the base.");
+			break;
+	}
+
+	return dialogueOption;
+}
+
+int aPartTwoWrong(int nextArea, int charRace, int charStats[])
+{
+	int dialogueOption;
+	double beatUpStatCheck;
+
+	beatUpStatCheck = ((double)charStats[0] + (double)charStats[1]) / 2;
+
+	if(nextArea == 1)
+	{
+		puts("\nCURRENT LOCATION: West Side of the Back Area");
+	}
+	
+	else
+	{
+		puts("\nCURRENT LOCATION: East Side of the Back Area");
+	}
+
+	
+	if(charRace == 3)
+	{
+		puts("\nYou reach the back area, the disguise being effective so far. You look around and see no sign of a cave entrance in the area. You glance towards the other side of");
+		puts("the base. Sure enough, you see that the cave entrance is at the center of the back area. You head there, trying your best not to draw attention to yourself.");
+		return 0;
+	}
+
+	if(nextArea == 1)
+	{
+		puts("\nYou hide behind some crates under the shade of a barrack's overhanging roof. You look around and see no sign of a cave entrance in the area. You glance towards the east");
+	}
+
+	else
+	{
+		puts("\nYou hide behind some crates under the shade of a barrack's overhanging roof. You look around and see no sign of a cave entrance in the area. You glance towards the west");
+	}
+
+	puts("side of the base. Sure enough, you see that the cave entrance is at the center of the back area. However, it seems that the center of the back area is open area where you");
+	puts("can easily be spotted sneaking around. You notice that the ilvyrs are flying overhead. You notice three ilvyrs flying a little too close for comfort to where you are hiding.");
+	puts("What should you do?");
+	puts("1. *Keep hiding. Wait for them pass by, then sneak out.*");
+	puts("2. *Find a rock to throw as a distraction.*");
+	printf("3. (Stealth %d/8) *Attempt to sneak past them immediately.*\n",charStats[2]);
+	printf("4. (Fight)(Intimidation/Stealth Avg %.2lf/7) *Engage in combat but in a subtle and stealthy way*\n",beatUpStatCheck);
+	scanf("%d",&dialogueOption);
+
+	if(dialogueOption > 4 && dialogueOption != 99)
+	{
+		dialogueOption = (rand()%4) + 1;
+	}
+
+	switch(dialogueOption)
+	{
+		case 2:
+			puts("\nYou find a rock. The darkness hid where the rock was thrown from. While the guards went to investigate the source of the sound, you sneak past the guards and made your way to the");
+			puts("cave entrance.");
+			return 0;
+
+		case 3:
+			if(charStats[2] >= 8)
+			{
+				puts("\nIn the dark of the night, you become one with the shadows as you expertly maneuver around the unsuspecting ilvyrs.");
+				return 0;
+			}
+
+			else
+			{
+				puts("\nAlas! You were not stealthy enough, even when you are known as the United Habrenic Army's best assassin.");
+				puts("\nGAME OVER");
+				return 99;	
+			}
+
+		case 4:
+			if(beatUpStatCheck >= 7)
+			{
+				puts("\nYou jump out of your hiding spot and draw your blade. The startled ilvyrs prepared to attack but it was too late. You already knocked two of them out before they could even blink.");
+				puts("You finished off the third guard and sneaked towards the cave entrance.");
+				return 0;
+			}
+
+			else
+			{
+				puts("\nYou jump from your hiding spot. The startled ilvyrs prepare to attack. You knock one of them out, but you were not stealthy enough. The nearby guards are alerted and join the");
+				puts("fight against you. Outnumbered, you raise your hands and surrender.");
+				puts("\nGAME OVER");
+				return 99;
+			}
+
+		case 99:
+			return 99;
+
+		default:
+			puts("\nYou sneak out way too soon and bump into one of the ilvyrs. They immediately grab your arms tightly and take you to the dungeon.");
+			puts("\nGAME OVER");
+			return 99;		
+	}
+}
+
+void aPartTwo(char charName[], int charRace, int charStats[])
+{
+	int dialogueOption;
+	int rng;	
+	double threatenStatCheck = ((double)charStats[0] + (double)charStats[1]) / 2;
+	double seduceStatCheck = ((double)charStats[1] + (double)charStats[2]) / 2;
+	double threatenTwoStatCheck = ((double)charStats[0] + (double)charStats[2]) / 2;
+
+	if(charRace == 3)
+	{
+		puts("\nYou walk up to the cave entrance. You see an ilvyr guarding the entrance. You greet them, but they only return a blank expression. \"Name or permit please.\"");
+		printf("1. *Say your name* %s\n",charName);
+		printf("2. (Threaten)(Intimidation/Charm Avg %.2lf/6.5) Listen, the Emperor told me to come here on an urgent matter. I do not have time for formalities.\n",threatenStatCheck);
+		printf("3. (Seduce)(Charm/Stealth Avg %.2lf/8) I'm sorry it seems that I forgot my permit. Would you mind getting it for me? It's in Barrack VIII.\n",seduceStatCheck);
+		scanf("%d",&dialogueOption);
+
+		if(dialogueOption > 3 && dialogueOption != 99)
+		{
+			dialogueOption = (rand()%3) + 1;	
+		}
+
+		switch(dialogueOption)
+		{
+			case 2:
+				if(threatenStatCheck < 6.5)
+				{
+					puts("\"Then hand me an official document,\" the guard demands. Without a document in hand, you walk away. You turn around to see the the ilvyrs dragging Commander");
+					puts("McGregor's, Fenris', and Blackwall's corpses to a bonfire.");
+					puts("\nGAME OVER");
+					return;	
+				}
+
+				puts("The guard lets you in out of fear of the ilvyrin Emperor's wrath.");
+				break;
+
+			case 3:
+				if(seduceStatCheck < 8)
+				{
+					puts("\"Now why would I do that? Go get it yourself,\" the guard retorts. You");
+					puts("\nGAME OVER");
+					return;
+				}
+				
+				puts("\nThe guard bashfully looks into your eyes. \"Oh, I see. I'll get it for you then.\"");
+				puts("\nWith the guard long gone, you rush to get inside.");
+				break;
+
+			case 99:
+				return;
+
+			default:
+				rng = (rand()%2) + 1;
+				puts("\nThe guard summons a book out of thin air. He looks for your name.");
+
+				if(rng == 1)
+				{
+					puts("\nHe gives you a grim look, \"I do not see your name here.\" He brings out a horn and blows into it. You are immediately swarmed by ilvyr soldiers.");
+					puts("\nGAME OVER");
+					return;
+				}
+
+				puts("\nHe gives you a smile.\"Looks like you're clear. Go right through.\"");
+				break;
+		}
+	}
+
+	else
+	{
+		puts("You sneak up to the cave entrance. One lone ilvyr is guarding it. Talking to him would just alert the other guards, and it seems like either stealth or violence is the only way.");
+		printf("1. (Threaten)(Intimidation/Stealth %.2lf/6) *Sneak up and put a knife over his neck*\n",threatenTwoStatCheck);
+		puts("2. *Kill him*");
+		scanf("%d",&dialogueOption);
+
+		if(dialogueOption > 3 && dialogueOption != 99)
+		{
+			dialogueOption = (rand()%2) + 1;	
+		}
+
+
+		switch(dialogueOption)
+		{
+			case 1:
+				if(threatenTwoStatCheck < 6)
+				{
+					puts("You hastily try to get behind the guard, but he notices you and knocks the blade out of your hand. The sound of clattering alerts the nearby ilvyr soldiers. They surround you—");
+					puts("leaving you in a hopeless situation with no way of escape");
+					puts("\nGAME OVER");
+					return;
+				}
+
+				puts("In a swift motion, you dash straight behind the guard and place a blade over his neck. \"Don't move. Or it will be the end of you.\"");
+				puts("\nThe guard complies. He does not protest as you enter the cave with the guard in tow. You knock him out before taking a look around.");
+				break;
+
+			case 99:
+				return;
+
+			default:
+				puts("\nYou were told you are an assassin after all. Your body knew exactly how and when to move as you moved in for the kill. You feel a sense of guilt being responsible for his death,");
+				puts("But you were given a task, and that task shall be fulfilled.");
+				
+				break;	
+		}
+
+	}
+
+	puts("\nInside the cave, you find rows of elegant marble pillars and chandeliers glwoing with magical energy. At the back of the cave, a lyre made out of gold lays on top of a pedestal.");
+	puts("You slowly approach it. You draw the hammer that Commander McGregor gave you earlier while you were studying the map. You proceed to shatter the lyre. Suddenly, the magic from chandeliers");
+	puts("die out. The fruits of you labor have paid off.\n.\n.\n.\n.\n.");
+	
+	puts("You slowly open your eyes and let out a long yawn. Your eyesight begins to focus, and you see a shelf with rows of books in front of you. You are sitting on the floor, your back");
+	puts("leaning against another bookshelf. You look down at your lap. You discover a navy blue book. Its title is printed in bright gold letters: THE GENOCIDE OF THE ILVYR");
+
+	puts("\nTHE END");
 }
