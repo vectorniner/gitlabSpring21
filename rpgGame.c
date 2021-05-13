@@ -713,9 +713,6 @@ int main(int argc, char *argv[])
 								else
 								{
 									printf("Unfortunately, you've failed to stop your old self!! Hopefully, you make a better choice next time. \n");
-									puts(" Retruning to main menu ");
-									puts("-----------------------");
-									a = mainC();
 								}
 								
 							}
@@ -729,8 +726,8 @@ int main(int argc, char *argv[])
 								printf("You always wanted to be a ");
 								scanf("%s", x);
 								printf("but with family issues and financial problems, ended up taking the majors that you didn't enjoyed nor indulged yourself into doing anything interesting \n ");
-								puts("But today we are changing it! If you successfully answer both of the answer below, you will be able to believe that you always had that firepower and will push for the things you like \n");
-								puts("1. If you successfully calculate the average of the number, you will be able to move onto the next step \n" );
+								puts("But today we are changing it! If you successfully answer both of the answer below, you will be able to believe that you always had that firepower and will push for the things you like. \n");
+								puts("1. If you successfully calculate the average of the number, you will be able to move onto the next step. \n" );
 								fill(arrt);
 								printer(arrt);
 
@@ -757,10 +754,9 @@ int main(int argc, char *argv[])
 				int choice = 0, year, n;
 				char sname[30],str[100],name[30];
 				char str1;
-				FILE *rptr,*wptr;
+				FILE *rptr;
 				rptr = fopen("arpitinput.txt","r");
-				wptr = fopen("output.txt", "w");
-				if ((rptr = fopen("arpitinput.txt", "r")) == NULL)
+				if ((rptr = fopen("arpitinput.txt", "a")) == NULL)
 				{
 					puts("Couldn't open the file");
 				}
@@ -784,7 +780,8 @@ int main(int argc, char *argv[])
 					str1 = fgetc(rptr);
 				}
 			fclose (rptr);
-			return 0;
+				puts("\nTalking about music works as a really good ice-breaker and the rest of the date goes smoothly. \n");
+				puts("Congratuations, you have completed the game and ended your journey here :)");
 			}
 		}
 	}
@@ -794,7 +791,7 @@ int main(int argc, char *argv[])
 			}
 		
 		case 2:
-		puts("I hope you had a good time trying out this game \n" );
+		puts("I hope you had a good time trying out this game!! \n" );
 		break;
 
 		default:
@@ -4167,7 +4164,7 @@ int printer(float *prntArray)//Arpit
 		if (number==average)
 		{
 			int row, c, x, n;
-			printf("\n Well Done! Lets move onto the next question \n");
+			printf("\n Well Done! Lets move onto the next question.\n");
 			printf("\n For the next question, all you have to type is what shape is the pattern below: \n");
 			for (row = 1; row <= 5; row++)
 			{
@@ -4178,14 +4175,13 @@ int printer(float *prntArray)//Arpit
 
 				printf("\n");
 			}
-			puts("[1] Rectangle \t[2] Circle \t[3] Trinagle \t[4] Square\n");
+			puts("[1] Rectangle \t[2] Circle \t[3] Triangle \t[4] Square\n");
 			scanf("%d", &x);
 
 			if ( x== 3)
 			{
 				puts("You are correct!\n");
 				puts("Congratulations! You have successfully completed this part. You can go to main menu and complete other parts. \n");
-				a = mainC();
 			}
 		       	else
 			{
