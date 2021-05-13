@@ -196,6 +196,13 @@ int aPartOne(int choice, char charName[], int charRace, int charStats[]);
 int aPartTwoWrong(int nextArea, int charRace, int charStats[]);
 void aPartTwo(char charName[], int charRace, int charStats[]);
 
+//Leonel Functions
+void leoNum(int a[]);
+void leoPrint(int a[]);
+void leoRandNum(int *pntr);
+void leoPrintNum(int *pntr);
+void leoAvg(int *pntr);
+
 int main(int argc, char *argv[])
 {
 	FILE *ETrptr,*ETwptr;//18
@@ -2803,6 +2810,20 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
+					int arrInt[1] = {0};
+					int arr[3] = {0};
+					int *ptr;
+					ptr = arr;
+					float num[100], avg, leoTotal = 0;
+					int x, i;
+					char string[201] = {0};
+					char c;
+					int y, z;
+					double a = 0.0;
+					FILE *rptr;
+					char words[30];
+					srand((time(NULL)));
+
 					puts("you open the door and find ........");
 					puts("You are in a small dark room");
 					puts("You turn the lights on and see 3 doors");
@@ -2815,37 +2836,115 @@ int main(int argc, char *argv[])
 
 					if (choice == 1)
 					{
-						puts("\nWoah! Wow! You really chose the red door");
-						puts("Very brave of you, but what a stupid choice to make");
-						puts("Really?! Who choses a red door over a green and blue door");
-						puts("Anyways! Prepare to meet your doom! HAHA!");
-						puts("You died!\n");
+						//while loop
+						while (choice != 3)
+						{
+							puts("\nWOAH! You really chose the red door");
+							puts("Let me introduce myself. I am the Grim Reaper");
+							puts("I did not really expect you to chose this door");
+							puts("Anyways, PREPARE TO MEET ...");
+							puts("Like seriously?! What was going through your head?");
+							puts("You had other options and you chose the red door.");
+							puts("Where was I? Oh yes!");
+							puts("PREPARE TO MEET YOUR DOOM!");
+							puts("Unless you can pass at least one of these or just die");
+							puts("1.Roll a die and it has to be bigger than 50");
+							puts("2.Pick 3 numbers 1-10 and the average will be calculated and see if you can beat the Grim Reaper");
+						        puts("3.Give up and die");
+							printf("Please chose a number: ");
+							scanf("%d", &choice);
+
+							//switch statement
+							switch(choice)
+							{
+								case 1:
+								{
+									leoNum(arrInt);
+									leoPrint(arrInt);
+									
+									if(*arrInt > 50)
+									{
+										puts("YOU WIN!");
+									}
+									else
+									{
+										puts("YOU LOSE!");
+										puts("The Grim Reaper slashed you");
+										puts("You are dead!");
+									}
+									break;
+								}
+
+								case 2:
+								{
+									printf("Please enter 3 numbers from 1-10 so I can calculate the average: ");
+
+									for(i = 0; i < 3; i++)
+									{
+										scanf("%f", &num[i]);
+										leoTotal += num[i];
+									}
+									avg = leoTotal / 3;
+									printf("Average for your 3 numbers is %.2f \n", avg);
+
+									leoRandNum(ptr);
+									leoPrintNum(ptr);
+									leoAvg(ptr);
+
+									if(avg > *arr)
+									{
+										puts("You win and survive!\n");
+									}
+									else 
+									{
+										puts("You lost! The Grim Reaper killed you!");
+										puts("You are dead!");
+									}
+									break;
+								}
+							}
+						
+						//	printf("You took the easy way you. R.I.P.");
+						//	break;
+						}
+						printf("You took the easy way you. R.I.P.\n\n");
+						break;
 					}
 
-					if (choice == 2)
+					else if(choice == 2)
 					{
-						puts("\nYou enter the room and close the door");
-						puts("You realize you have seen this room before");
-					}				puts("You are confused");
-						puts("You see a mirror and go to it");
-						puts("You see yourself in the mirro and see a 10 year old kid");
-						puts("THAT'S YOU!");
-						puts("You are confused and scared");
-						puts("You realize this room is your room");
-						puts("You see your bed and decide to take a nap\n");
+						puts("You enter the room and find a note\n");
+
+						rptr = fopen("meme.txt", "r");
+
+						if(rptr == NULL)
+						{
+							puts("could not open file for reading");
+						}
+						else
+						{
+							while(!feof(rptr))
+							{
+								fscanf(rptr,"%s", words);
+							}
+						}
+						rewind(rptr);
+						fclose(rptr);
 					}
 
-					if (choice == 3)
+					else if(choice == 3)
 					{
-						puts("\nYou go through the green door and the door slams behind you!");
-						puts("You cannot see what is happening");
-						puts("You start walking foward, but fall off a cliff!");
-						puts("SPLAT!");
-						puts("You fell to your death\n");
+						puts("Green door is a trap");
+						puts("You are stuck here until you die!");
+						puts("HAHAHA!");
+						break;
 					}
+
 
 				}
 				break;
+			}
+			
 			
 			case 26:
 			{
@@ -3796,7 +3895,7 @@ int main(int argc, char *argv[])
                         //GPA calculate an average
 						case 1:
 						printf("This section will allow you to calculate your GPA!!\n");
-                        x = total();
+			                        x = total();
 						if(x > 2)
 						{
 						    printf("Congratulations you have passed the course and you don't have to repeat!\n");
@@ -8477,3 +8576,50 @@ void aPartTwo(char charName[], int charRace, int charStats[])
 	puts("\nTHE END");
 }
 
+//Leonel's Start of Functions
+void leoNum(int a[])
+{
+	int i;
+	for(i = 0; i < 1; i++)
+	{
+		a[i] = rand()%100;
+	}
+}
+
+void leoPrint(int a[])
+{
+	int i; 
+	for (i = 0; i < 1; i++)
+	{
+		printf("%d\n", a[i]);
+	}
+}
+
+void leoRandNum(int *pntr)
+{
+	int i;
+	for(i = 0; i < 3; i++)
+	{
+		*pntr = (rand()%10) + 1;
+		pntr++;
+	}
+}
+
+void leoPrintNum(int *pntr)
+{
+	int i;
+	for (i = 0; i < 3; i++)
+	{
+		printf("number[%d] = %d \n", i + 1, *pntr);
+		pntr++;
+	}
+}
+
+void leoAvg(int *pntr)
+{
+	float average, total = 0.0;
+	total = *pntr + *pntr + *pntr;
+	average = total / 3.0;
+	printf("Average is %.2f \n", average);
+}
+//Leonel's end of functions
