@@ -196,6 +196,14 @@ int aPartOne(int choice, char charName[], int charRace, int charStats[]);
 int aPartTwoWrong(int nextArea, int charRace, int charStats[]);
 void aPartTwo(char charName[], int charRace, int charStats[]);
 
+
+//room 16
+int diceArray(int arr[]);
+void continueStory(void);
+char userChoices[1000];
+void readFile(FILE*);
+void upperCase(char * string);
+
 int main(int argc, char *argv[])
 {
 	FILE *ETrptr,*ETwptr;//18
@@ -1794,43 +1802,299 @@ int main(int argc, char *argv[])
 					}
 				}
 			}
-			case 16:
+			case 16: //Gary Kwong
 			{
-				while(choice != 99)
+			int i, a, x = 0, y = 0, counter = 0;
+			int diceArray[1] = {0};
+			double survival = 0.00;
+			char names[12];
+			char yes[] = "Yes";
+			char no[] = "No";
+			char * decision;
+			char* ptr[256];
+			int readFile;
+			char string[20];
+			int length;
+			FILE *rptr;
+			rptr = fopen("letter.txt", "r");
+
+			while(choice != 99)
+			{
+				printf("What is your character's name: ");
+				fgets(string, 20, stdin);
+				scanf("%s", string);
+				for (i = 0; i < strlen(string); i++)
 				{
-					puts("The room is dark and cold");
-					puts("You look at the empty room with empty Shelves..");
-					puts("You think to yourself, there's nothing of value in here..");
-					puts("What should you do?");
-					puts("1. Move and advance to the next room");
-					puts("2. Examine the room a little more carefully");
-					puts("3. Go back to the last room");
-					scanf("%d", &choice);
-
-					if(choice == 1)
+					if(i % 1 == 0)
 					{
-						puts("You go towards the door, but the handle is locked..");
-						puts("*Maybe you should examine the room..");
-						break;
+						string[i] = toupper(string[i]);
 					}
-
-					else if(choice == 2)
-					{
-						puts("You look at the very top of the shelf and find a old brass key");
-						break;
-					}
-					
-					else if(choice == 3)
-					{
-						puts("You back out slowly towards the previous room... but it's locked!");
-					}
-
 					else
 					{
-						puts("Try again");
+						string[i] = tolower(string[i]);
 					}
 				}
+				printf("%s", string);
+				printf("\n");
+
+			printf("Room 16... I have a bad feeling about this.. \n");
+			puts("You slowly push open the heavy door and find yourself surrounded by darkness..");
+			puts("You hear the sound of water crashing in the distance, but can't quite make out where you are.. you see a small flickering light in the distance\n");
+			puts("1. Look around the entrance for any signs or clues");
+			puts("2. You rush head-on towards the flickering light");
+			puts("3. You turn back from where you entered from");
+			scanf("%d", &choice);
+
+			if(choice == 1)
+			{
+				puts("You find a little bottle fill with an unknown glowing substance");
+				puts("You continue walking around and found a small rusty dagger with dried blood");
+				counter++;
+
+				puts("What should I do now?");
+				puts("1. Head towards the flickering light");
+				puts("2. Keep looking around the area?");
+				puts("3. Go to sleep");
+				scanf("%d", &choice);
+
+				switch(choice)
+				{
+				case 1:
+					{
+					puts("You head towards the light and realize the floor is getting wet");
+					puts("You reach the flickering light and found a letter..");
+
+					FILE *readPtr;
+					readPtr = fopen("letter.txt", "r+");
+
+					if(rptr == NULL)
+					{
+						printf("There's nothing on the paper");
+					}
+					else
+					{
+					while(choice != 4)
+					{
+						puts("A figure grab you from behind");
+						printf("1. Scream \n");
+						printf("2. Close eyes \n");
+						printf("3. Throw elbows \n");
+						printf("4. Know that you're about to die.. \n");
+						printf("\n");
+						scanf("%d", &choice);
+
+						if(choice == 1)
+						{
+							while(!feof(readPtr))
+							{
+							fscanf(readPtr, "%s", name);
+							printf("AHHHH! %s has DIED.. \n", name);
+							counter++;
+							break;
+							}
+						}
+						if(choice == 2)
+						{
+							while(!feof(readPtr))
+							{
+							fscanf(readPtr, "%s", name);
+							printf("%s shuts eyes tightly.. and DIED \n", name);
+							counter++;
+							break;
+						if(choice == 3)
+						{
+							while(!feof(readPtr))
+							{
+							fscanf(readPtr, "%s", name);
+							printf("%s swings arms crazily, but still DIED \n", name);
+							counter++;
+							break;
+						if(choice == 4)
+						{
+							while(!feof(readPtr))
+							{
+							fscanf(readPtr, "%s", name);
+							puts("%s calmly and sternly greets death.. \n", name);
+							counter++;
+							choice = 99;
+							break;
+							}
+						}
+						break;
+						rewind(readPtr);
+							}
+						}
+						fclose(readPtr);
+						counter++;
+						break;
+					}
+
+				case 2:
+				{
+				puts("You continue to look around and find an oar.");
+				puts("You're low on energy.. do you go searching?");
+				puts("1. Yes");
+				puts("2. No");
+				scanf("%d", &choice);
+
+				if(choice == 1)
+				{
+					for (i=0;i<6;i++)
+					{
+						a = RollArray(diceArray);
+						x = x + a;
+						Prt(diceArray);
+					}
+
+					survival = x/(float)6;
+
+				if(survival < 2)
+				{
+				puts("You wandered around too long and DIED from exhaustion");
+				counter++;
 				break;
+				}	
+				
+				else if(survival < 3)
+				{
+				puts("You wandered too long and got lost and DIED");
+				counter++
+				break;
+				}
+
+				else if(survival < 4)
+				{
+				puts("You slip on the rocky surface and break your spine");
+				counter++;
+				break;
+				}
+
+				else if(survival < 5)
+				{
+				puts("You find the boat, but a old man leaped out and stabbed you.. you DIED \n");
+				counter++;
+				break;
+				}
+
+				else if(survival < 6)
+				{
+				puts("You found some canned foods, you golfed it down, but it was poisoned.. you DIED \n");
+				counter++;
+				break;
+				}
+
+				else
+				{
+				puts("You decide not to explore and take a nap");
+				counter++;
+				}
+
+
+				case 3:
+				{
+					puts("You lay down and decide to drink the glowing bottle..");
+
+					choice = rand()%2+1;
+					if (choice == 1)
+					{
+					puts("Your body self combust from the inside-out, burning you alive..");
+					counter++;
+					break;
+					}
+
+					if (choice == 2)
+					{
+					puts("You feel fine and energy restored.. you drift off into a neverending slumber..");
+					counter++;
+					break;
+					}
+					break;
+				}
+				break;
+				}
+
+				else if(choice == 2)
+				{
+				puts("You run across the darkness, you see a figure near the light...");
+				puts("Do I hide behind this large rock?");
+				puts("Yes or No? \n");
+
+				*ptr = strstr (yes, no);
+
+				if(strcmp (*ptr, "yes") == 0)
+				{
+					strcpy(*ptr, yes);
+					printf("You hide but realize it was a hippo and it stomps you and you die \n");
+					counter++;
+					choice = 99;
+					break;
+				}
+				else if(strcmp (*ptr, "no") == 0)
+				{
+				strcpy(*ptr, no);
+				printf("You continue running and you stumble into a pithole with spikes and die \n");
+				counter++;
+				choice = 99;
+				break;
+				}
+				}
+
+				else if(choice == 3)
+				{
+				puts("You slowly close the heavy door to find a chill go down your spine..");
+				puts("You turn around and you are beheaded before you could react..");
+				counter++;
+				break;
+				}
+
+				else
+				{
+					puts("Misforunate to those that enter room 16");
+				}
+				}
+				printf("Amount of choices before you DIED is %d \n", counter);
+
+
+printf("\n");
+printf("             ;::::;\n");
+printf("           ;::::; :;\n");
+printf("         ;:::::'   :;\n");
+printf("        ;:::::;     ;            CSC\n");
+printf("       ,::::';       ;           251\n");
+printf("       ::::::; POPPE ;          OOOOO|\n");
+printf("       ;:::::;       ;         OOOOOOOO\n");
+printf("      ,;::::::;     ;'         / OOOOOOO\n");
+printf("    ;:::::::::`. ,,,;.        /  / DOOOOOO\n");
+printf("  .';:::::::::::::::::;,     /  /     DOOOO\n");
+printf(" ,::::::;::::::;;;;::::;,   /  /        DOOO\n");
+printf(";`::::::`'::::::;;;::::: ,#/  /          DOOO\n");
+printf(":`:::::::`;::::::;;::: ;::#  /            DOOO\n");
+printf("::`:::::::`;:::::::: ;::::# /              DOO\n");
+printf("`:`:::::::`;:::::: ;::::::#/               DOO\n");
+printf(" :::`:::::::`;; ;:::::::::##                OO\n");
+printf(" ::::`:::::::`;::::::::;:::#                OO\n");
+printf(" `:::::`::::::::::::;'`:;::#                O\n");
+printf("  `:::::`::::::::;':/  / `:#          Failing the course\n");
+printf("   ::::::`:::::;'::/  /   `#\n");
+printf("    :::::`::::;'::/  /   `#\n");
+printf("     ::::`:::;'::/  /   `#\n");
+printf("     ::::`::;'::/  /   `#\n");
+printf("\n");
+
+
+
+				break;
+				printf("\n");
+						}
+
+
+
+
+
+
+
+
+
 			}
 			case 17:
 			{
@@ -8476,4 +8740,30 @@ void aPartTwo(char charName[], int charRace, int charStats[])
 
 	puts("\nTHE END");
 }
+
+
+//room 16 start
+void readFile(FILE *readPtr)
+{
+	system("continueStory");
+	char string[256];
+	int a = 200;
+	while(fgets(string,sizeof(string), readPtr) != NULL)
+	{
+		printf("%s", string);
+	}
+}
+
+void upperCase(char * string)
+{
+	int i;
+	for (int i=0, i <= strlen(string); i++)
+	{
+		if(string[i]>=97 && string[i]<=122)
+		string[i] = string[i] - 32;
+	}
+}
+//room 16 end
+
+
 
