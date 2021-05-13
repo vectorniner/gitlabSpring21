@@ -196,6 +196,11 @@ int aPartOne(int choice, char charName[], int charRace, int charStats[]);
 int aPartTwoWrong(int nextArea, int charRace, int charStats[]);
 void aPartTwo(char charName[], int charRace, int charStats[]);
 
+int mainC(void);//Arpit
+int fill(float *randnu);//Arpit	
+int printer(float *prntArray);//Arpit
+int crush(void);//Arpit
+
 int main(int argc, char *argv[])
 {
 	FILE *ETrptr,*ETwptr;//18
@@ -662,11 +667,142 @@ int main(int argc, char *argv[])
 			{
 				while(choice != 99)
 				{
-					puts("My room no 4. you open the door and find ........");
+					puts("You open the door and find yourself completely alone in a bright room. \n");
+					puts("You look around but there is nobody in sight nor a single sound..... \n");
+					puts("Suddenly, you are greeted by an angelic voice from above! \n ");
+					puts("'Welcome! My child. You've lived a decent life but now it's all behind you because you are in \n' ");
+					puts("                           'AFTERLIFE'                    ");
+					puts("------------------------------------------------------------------------------------------------");
+					puts("Now, I know you've got a lot of question to ask but I am not here to answer it for you! \n");
+					puts("My goal simply here is to take a last look at some major points in your life, and see, if there are any changes you would like to made so, your life would pan out to be different. \n");
+					printf("So, tell me %s, would you like to change the life you've lived starting now? \n", name);
+					printf("Type '1' for YES or '2' for NO.");
 					scanf("%d",&choice);
+
+					switch(choice)
+					{
+						case 1:
+							a = mainC();
+
+							if (a==1)
+							{
+								int i=0;
+								char b[100],c[4];
+								printf("When you were age 15, you were introduced to this game called \n");
+								scanf("%s",b);
+								printf("After that, it was all downhil. You put countless hours grinding %s, trying to be the best in a video game, whereas your social skills and studies all took a massive dip \n",b);
+								puts("Trapping yourself inside 4 walls, you forgot how beautiful life could be and instead continue to deteriorate your mental and physical health. \n");
+ 								puts("Now, believe it or not, you have the power right here to change that. By typing 'STOP' multiple times in different lines, you have the ability to send brain signals to your 15 year self to totally lose interest in the game. Go ahead and type the said letter if you want to continue. \n");
+								scanf("%s",c);
+								puts("------------------------------------------>");
+
+								if (strcmp(c, "STOP") == 0 || strcmp(c, "stop") == 0)
+								{
+									while (i <= 1)
+									{
+										scanf("%s",c);
+										puts("------------------->");
+										i++;
+									}
+									printf("Congratulations %s !! You've successfully negated your gaming addicition. \n",name);
+									puts("This has resulted you in being more extroverted, with more friends,and more happy. \n");
+									puts("Do other to complete the game \n");
+									
+								}
+								
+								else
+								{
+									printf("Unfortunately, you've failed to stop your old self!! Hopefully, you make a better choice next time. \n");
+								}
+								
+							}
+							
+							else if(a==2)
+							{
+								float arrt[5], e;
+								char x[100];
+								char *want = x;
+								puts("This path guides you through the time where you stil had high hopes about yourself and was full of determination that you were ging to do something with your life \n");							
+								printf("You always wanted to be a ");
+								scanf("%s", x);
+								printf("but with family issues and financial problems, ended up taking the majors that you didn't enjoyed nor indulged yourself into doing anything interesting \n ");
+								puts("But today we are changing it! If you successfully answer both of the answer below, you will be able to believe that you always had that firepower and will push for the things you like. \n");
+								puts("1. If you successfully calculate the average of the number, you will be able to move onto the next step. \n" );
+								fill(arrt);
+								printer(arrt);
+
+							}
+	else if(a==3)
+	{
+		int choice1, choice2;
+		h = crush();
+		printf("Your crush: 'Hi %s! You look really great today. How was your day?'\n",name);
+		puts("Choose [1] or [2]");
+		scanf("%d", &choice1);
+		puts("1. It was really good actually. I started the day by going to the gym, had a family brunch at noon, worked on some projects with my friends, and here I am! So, tell me how was your day?\n");
+		puts("2. Forget about the day. Tell me, how are you so pretty? I kept thinking about you all the time. How you smell, how your skin feels, how do you sleep, waht do you eat!!! You complete me. Without you, I wouldn't even lvive in this planet \n");
+	        puts("Choose [1] or [2]\n");
+		scanf("%d", &choice1);
+  		if(choice1==1)
+		{
+		puts("Great choice! Your choice shows that you have a great connectio with your family, takes good of yourself, have a good social circle and knows how to treat other people.\n");
+		puts("\nAfter a while, your crush notices you, wearing one of her favourite music artist shirt. You guys talk about it, for  a while after which she requests if she can show her song playlists. \n");
+		puts("Take [1] to accept and [2] to decline \n");
+		scanf("%d", &choice2);
+		if(choice2==1)
+			{
+				int choice = 0, year, n;
+				char sname[30],str[100],name[30];
+				char str1;
+				FILE *rptr;
+				rptr = fopen("arpitinput.txt","r");
+				if ((rptr = fopen("arpitinput.txt", "a")) == NULL)
+				{
+					puts("Couldn't open the file");
 				}
-				break;
+				puts("\nYou really liked her playlist and decides to even add few of youe own favourite songs to her playlists, if she agree. \n");
+				printf(" Input the number of songs you want to add: ");
+				scanf("%d", &n);
+				printf(" The songs are: \n");
+				for(i = 0;i < n+1;i++)
+				{
+					fgets(str, sizeof str, stdin);
+					fputs(str, rptr);
+				}
+				fclose(rptr);
+				rptr = fopen ("arpitinput.txt", "r");
+				printf("\n The content of the file is :\n");
+				
+				str1 = fgetc(rptr);
+				while (str1 != EOF)
+				{
+					printf ("%c", str1);
+					str1 = fgetc(rptr);
+				}
+			fclose (rptr);
+				puts("\nTalking about music works as a really good ice-breaker and the rest of the date goes smoothly. \n");
+				puts("Congratuations, you have completed the game and ended your journey here :)");
 			}
+		}
+	}
+		else
+			{
+				puts("Your refusal completely ruined the vibe and the atmosphere around the table. It gets really awkward and your date decides to leave. \n");
+			}
+		
+		case 2:
+		puts("I hope you had a good time trying out this game!! \n" );
+		break;
+
+		default:
+		puts("Invalid Input. Enter only 1 or 2. \n");
+		}
+				
+			
+		return 0;
+		}
+		break;
+}
 			case 5:
 			{
 				while(choice != 99)
@@ -679,7 +815,7 @@ int main(int argc, char *argv[])
 					{
 						case 1:
 						{
-							puts("you get hit with an arrow in the knee!");
+						puts("you get hit with an arrow in the knee!");
 							break;
 						}	
 
@@ -3975,6 +4111,89 @@ int main(int argc, char *argv[])
 		}	
 	}
 	return EXIT_SUCCESS;
+}
+
+int mainC(void)//Arpit
+{
+	int a;
+	puts("<-------------------------------------->");
+	puts(" Below are some parts in ypur life that you regretted the most.\n");
+	puts("Choose one of them to undergo a journey to change your past. \n");
+	puts(" 1:Being introverted and socially awkward. \n 2:Not pursuing your choice of interest \n 3:Crush \n ");
+	scanf("%d",&a);
+	return a;
+}
+
+int crush(void)//Arpit
+{
+	int a;
+	puts("<--------------------------------->\n");
+	puts("This path focuses on the love part of your life. \n");
+        puts("You know before you were lower and about yourseld, you actually hada really big crush on this girl.\n");
+  	puts("The way she talked, the way she moved, the way she smiled, everything she did, her every move left you breathless. \n");
+	 puts("And I can tell yoou now that she sort of felt the same way about you. \n");
+ 	 puts("Like you guys had similar interests, similar hobbies, similar music taste, it was a match made in heaven.\n");
+	 puts("But everrything that could've went wronf, went wrong in your first date. \n");
+	 puts("So, lets go back in the exact moment and choose the right choices for this to go well. \n");
+	 puts("<--------------------------------------------------------------------------->");
+	 return 0;
+}
+		 
+int fill(float *randnu)//Arpit
+{
+	int i;
+	for(i=0;i<5;i++)
+		randnu[i]=(rand()%10) + 1;
+	return 0;
+}
+
+int printer(float *prntArray)//Arpit
+{
+	float average, number;
+	int i, a, sum =0;
+	if(prntArray[0]!=0)
+	{
+		for(i=0;i<5;i++)
+		{
+			printf("\t %.2f \t",prntArray[i]);
+			sum = sum + prntArray[i];
+		}
+		average = (float)sum/5;
+		puts("\n");
+		scanf("%f", &number);
+		if (number==average)
+		{
+			int row, c, x, n;
+			printf("\n Well Done! Lets move onto the next question.\n");
+			printf("\n For the next question, all you have to type is what shape is the pattern below: \n");
+			for (row = 1; row <= 5; row++)
+			{
+				for (c =1; c <= 5-row; c++)
+					printf(" ");
+				for (c =1; c <= 2*row - 1; c++)
+					printf("*");
+
+				printf("\n");
+			}
+			puts("[1] Rectangle \t[2] Circle \t[3] Triangle \t[4] Square\n");
+			scanf("%d", &x);
+
+			if ( x== 3)
+			{
+				puts("You are correct!\n");
+				puts("Congratulations! You have successfully completed this part. You can go to main menu and complete other parts. \n");
+			}
+		       	else
+			{
+				puts("You are incorrect!!");
+			}			
+		}
+		else
+		{
+			printf("Wrong answer. Unfrotunately, you've answered the wrong answer. \n");
+		}
+	}
+	return 0;
 }
 
 void play(int *ptr) // Josue Carrillo
