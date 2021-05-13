@@ -2130,18 +2130,40 @@ int main(int argc, char *argv[])
 					if(choice == 1)
 					{
 						puts("You open the door and actually find out the noise is just Naked in the Rain by the Red Hot Chili Peppers playing on a radio");
-						puts("You actually see a guitar next to the radio. Do you pick it up? 1 for yes, 2 for no");
+						puts("You actually see a guitar next to the radio. Select an option 1,2,or 3 to see what happens next");
 						scanf("%d",&choice);
 						switch(choice)
 						{
 							case 1:
 							{
 								puts("You pick up the guitar and suddenly feel a change in your body. Maybe its the 5G everyone jokes about");
+								puts("You feel like you have superpowers and suddenly can play guitar even though you couldn't play a chord before");
 								break;
 							}
 							case 2:
 							{
+								puts("A voice suddenly announces something over the radio that you can change the song to anything you want, not acknowleding the guitar");
+								char info[250];
+								char dayGo[10];
+								puts("Tell me how your day is going in one word.");
+								fgets(dayGo,10,stdin);// This is meant to cut you off and have no user input.
+								// Like if someone cut you off because they didn't want to hear what you have to say and wanted to get to the point.
+								// So that's why the user input is skipped right there and it goes straight to hearing that song you want to hear.
+
+								puts("Ignore that. Don't tell me. I forgot what I was going to say. Wow, am I a voice now? Anyway, what song do you want to hear now? \n");
+								puts("Enter it like this, for example: The Diary of Jane by Breaking Benjamin");
+								fgets(info,250,stdin);
+								printf("The song now playing on the radio is %s \n",info);
+
+								puts("This isn't so developed with cover songs so there's a chance you might get another version. Sorry about that. \n");
+								break;
+							}
+							case 3:
+							{
 								puts("Someone comes out of the shadows and hits you over the head with it. You died.");
+								puts("The culprit is never caught but you infer in the afterlife that they never actually left the room");
+								puts("Maybe they were a band member in some band who didn't feel like they wanted to hear how you played guitar");
+								break;
 							}
 						}
 					}
@@ -2300,6 +2322,12 @@ int main(int argc, char *argv[])
 							fprintf(kbr,"\n%10s",checkin);
 							fclose(kbr);
 						}
+					}
+					else if (choice == 6)
+					{
+						puts("This is a message to say thank you for selecting my room today!");
+						puts("Please make sure to check out everybody else's rooms as they are awesome!");
+						puts("Thank you and have a nice day");
 					}
 
 				}
@@ -6634,11 +6662,12 @@ float room19_getAvg(int *array)
 
 void patrickInitialPrompt(void)
 {
-	puts("1. Do you open the door that is 50 feet in fron of you?");
-	puts("2. Do you simplay stand there and wait for the noise to get clearer on it's own?");
+	puts("1. Do you open the door that is 50 feet in front of you?");
+	puts("2. Do you simply stand there and wait for the noise to get clearer on it's own?");
 	puts("3. There is an old, oriental gentleman in the corner which is lit up by a torch. Do you approach him?");
 	puts("4. Your 4th grade English teacher says they can help you with something. Select this option to see what they're talking about");
-	puts("5. Answer some basic questions");
+	puts("5. Answer some basic questions that will then get output to a file named goodfeel.txt");
+	puts("6. Input this number to get a message of appreciation from me.");
 	puts("You can also enter 99 to exit!");
 }
 
